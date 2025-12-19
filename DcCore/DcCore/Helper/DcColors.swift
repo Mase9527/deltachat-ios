@@ -5,7 +5,7 @@ public struct DcColors {
     private static let actionCellBackgroundDark               = #colorLiteral(red: 0.1031623408, green: 0.1083367988, blue: 0.1185036376, alpha: 1)
     public static let text1 = UIColor.init(hexString: "141414")
 
-    public static let primary = UIColor.systemBlue
+    public static let primary = UIColor.systemOrange
     public static let highlight = UIColor.themeColor(light: UIColor.yellow, dark: UIColor.systemBlue)
     public static let colorDisabled = UIColor.themeColor(light: UIColor(white: 0.9, alpha: 1), dark: UIColor(white: 0.2, alpha: 1))
     public static let messagePrimaryColor = UIColor.themeColor(light: UIColor.rgb(red: 220, green: 248, blue: 198),
@@ -13,7 +13,9 @@ public struct DcColors {
     public static let messageSecondaryColor = UIColor.themeColor(light: .white,
                                                                  dark: .black)
     public static let contactCellBackgroundColor = UIColor.themeColor(light: .white, dark: .black)
-    public static let defaultBackgroundColor = UIColor.themeColor(light: .white, dark: .black)
+//    public static let defaultBackgroundColor = UIColor.themeColor(light: .white, dark: .black)
+    public static let defaultBackgroundColor = UIColor.themeColor(light: UIColor.init(hexString: "FFF7F2"), dark: UIColor.init(hexString: "FFF7F2"))
+
     public static let defaultTransparentBackgroundColor = DcColors.defaultBackgroundColor.withAlphaComponent(0.5)
     public static let defaultInverseColor = UIColor.themeColor(light: .black, dark: .white)
     public static let profileCellBackgroundColor = UIColor.themeColor(light: white, dark: actionCellBackgroundDark)

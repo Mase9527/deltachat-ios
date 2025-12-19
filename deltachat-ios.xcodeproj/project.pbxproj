@@ -208,6 +208,8 @@
 		B2DF962F2EE328E30037F07F /* TransportListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DF962E2EE328E30037F07F /* TransportListViewController.swift */; };
 		B2DF96312EE3368F0037F07F /* TransportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DF96302EE3368F0037F07F /* TransportCell.swift */; };
 		B2F899E129F96A67003797D5 /* AllMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F899E029F96A67003797D5 /* AllMediaViewController.swift */; };
+		BB6AB32B2EF53C020021318E /* efd257ece330a34525667707e617a16.txt in Resources */ = {isa = PBXBuildFile; fileRef = BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */; };
+		BB6AB33B2EF544B30021318E /* AALoginAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */; };
 		BBBB8A262EF527C800B3B07E /* InstantOnboardingOwnerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBBB89F32EF527C800B3B07E /* InstantOnboardingOwnerVC.xib */; };
 		BBBB8A272EF527C800B3B07E /* AccountInfoPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBBB89F82EF527C800B3B07E /* AccountInfoPopupViewController.xib */; };
 		BBBB8A282EF527C800B3B07E /* OwnerChange.md in Resources */ = {isa = PBXBuildFile; fileRef = BBBB8A062EF527C800B3B07E /* OwnerChange.md */; };
@@ -677,6 +679,8 @@
 		B2DF962E2EE328E30037F07F /* TransportListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportListViewController.swift; sourceTree = "<group>"; };
 		B2DF96302EE3368F0037F07F /* TransportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportCell.swift; sourceTree = "<group>"; };
 		B2F899E029F96A67003797D5 /* AllMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllMediaViewController.swift; sourceTree = "<group>"; };
+		BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = efd257ece330a34525667707e617a16.txt; sourceTree = "<group>"; };
+		BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginAccountTool.swift; sourceTree = "<group>"; };
 		BBBB89E32EF527C800B3B07E /* iFBaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iFBaseAPI.swift; sourceTree = "<group>"; };
 		BBBB89E52EF527C800B3B07E /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		BBBB89E62EF527C800B3B07E /* KeyedDecodingContainer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyedDecodingContainer+Extension.swift"; sourceTree = "<group>"; };
@@ -1386,6 +1390,7 @@
 				BBBB89FE2EF527C800B3B07E /* APIService.swift */,
 				BBBB89FF2EF527C800B3B07E /* AccountAPI.swift */,
 				BBBB8A6B2EF52DE100B3B07E /* AAExportAccountTool.swift */,
+				BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1407,6 +1412,7 @@
 				BBBB8A022EF527C800B3B07E /* Tool */,
 				BBBB8A052EF527C800B3B07E /* Model */,
 				BBBB8A062EF527C800B3B07E /* OwnerChange.md */,
+				BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */,
 			);
 			path = Owner;
 			sourceTree = "<group>";
@@ -1768,6 +1774,7 @@
 				AE1988A723EB382A00B4CD5F /* Help in Resources */,
 				3060119C22DDE24000C1CE6F /* Localizable.strings in Resources */,
 				7A9FB14E1FB061E2001FEA36 /* LaunchScreen.storyboard in Resources */,
+				BB6AB32B2EF53C020021318E /* efd257ece330a34525667707e617a16.txt in Resources */,
 				306011B622E5E7FB00C1CE6F /* Localizable.stringsdict in Resources */,
 				7A9FB14B1FB061E2001FEA36 /* Assets.xcassets in Resources */,
 			);
@@ -2102,6 +2109,7 @@
 				307D822E241669C7006D2490 /* LocationManager.swift in Sources */,
 				B210FF162D83673A00D3A0B4 /* VoIPPushManager.swift in Sources */,
 				21D54500299415B9008B54D5 /* Character+Extentions.swift in Sources */,
+				BB6AB33B2EF544B30021318E /* AALoginAccountTool.swift in Sources */,
 				30238CFF28A5554C00EF14AC /* FileHelper.swift in Sources */,
 				D8A072A02BED0FD8001A4C7C /* InstantOnboardingView.swift in Sources */,
 				AE851AD0227DF50900ED86F0 /* ProfileViewController.swift in Sources */,

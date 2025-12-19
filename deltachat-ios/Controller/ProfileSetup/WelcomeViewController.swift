@@ -14,6 +14,9 @@ class WelcomeViewController: UIViewController {
         return scrollView
     }()
 
+    var newVC = AANewProfileVC()
+
+    var loginTool:AALoginAccountTool?
     var progressAlertHandler: ProgressAlertHandler
 
     private lazy var welcomeView: WelcomeContentView = {
@@ -63,6 +66,8 @@ class WelcomeViewController: UIViewController {
         self.navigationItem.title = String.localized(canCancel ? "add_account" : "welcome_desktop")
 
         progressAlertHandler.dataSource = self
+        
+        self.loginTool = AALoginAccountTool(dcAccounts: dcAccounts, currentVC: self)
     }
 
     required init?(coder: NSCoder) {
@@ -79,16 +84,64 @@ class WelcomeViewController: UIViewController {
         if let accountCode {
             handleQrCode(accountCode)
         }
+        
+        self.configreOwnerUI()
+    }
+    
+    func configreOwnerUI(){
+        self.addChild(self.newVC)
+        
+        self.view.addSubview(self.newVC.view)
+        
+        let title = String.localized(canCancel ? "add_account" : "welcome_desktop")
+        let button = UIButton(type: .custom)
+        button.setTitle(" "+title, for: .normal)
+        button.setImage(UIImage(named: "AA_Top_Logo"), for: .normal)
+        button.sizeToFit()
+        button.setTitleColor(DcColors.text1, for: .normal)
+        self.navigationItem.titleView = button
+        
+        self.newVC.onLogIn = { [weak self] in
+            guard let self else { return }
+            let alert = UIAlertController(title: String.localized("onboarding_alternative_logins"), message: nil, preferredStyle: .safeActionSheet)
+            alert.addAction(UIAlertAction(title: String.localized("multidevice_receiver_title"), style: .default, handler: addAsSecondDevice(_:)))
+            alert.addAction(UIAlertAction(title: String.localized("import_backup_title"), style: .default, handler: restoreBackup(_:)))
+            
+            alert.addAction(UIAlertAction(title: String.localized("扫码登录"), style: .default,handler:  {action in
+//                self.loginTool.im
+                self.addAsImputNewAccount(action)
+            }))
+            
+            alert.addAction(UIAlertAction(title: String.localized("剪切板登录"), style: .default,handler: { action in
+                
+
+                self.loginTool?.importPasteBase64()
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: String.localized("cancel"), style: .cancel))
+            present(alert, animated: true, completion: nil)
+        }
+        
+        self.newVC.onSignUp =  { [weak self] in
+            guard let self else { return }
+            let controller = InstantOnboardingOwnerVC(dcAccounts: dcAccounts)
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         welcomeView.minContainerHeight = view.frame.height - view.safeAreaInsets.top
+        self.newVC.view.frame = self.view.bounds
+
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         welcomeView.minContainerHeight = size.height - view.safeAreaInsets.top
+        self.newVC.view.frame = self.view.bounds
+
      }
 
     private func removeBackupProgressObserver() {
@@ -128,6 +181,14 @@ class WelcomeViewController: UIViewController {
                     addHints: "➊ " + String.localized("multidevice_same_network_hint") + "\n\n"
                         +     "➋ " + String.localized("multidevice_open_settings_on_other_device"),
                     showTroubleshooting: true)
+        qrReader.delegate = self
+        qrCodeReader = qrReader
+        navigationController?.pushViewController(qrReader, animated: true)
+    }
+    
+    private func addAsImputNewAccount(_ action: UIAlertAction) {
+        let qrReader = QrCodeReaderController(title: String.localized("扫描二维码"),
+                                              addHints: "",showTroubleshooting: false)
         qrReader.delegate = self
         qrCodeReader = qrReader
         navigationController?.pushViewController(qrReader, animated: true)
@@ -234,7 +295,15 @@ extension WelcomeViewController: QrCodeReaderDelegate {
         } else if lot.state == DC_QR_BACKUP_TOO_NEW {
             qrErrorAlert(title: String.localized("multidevice_receiver_needs_update"))
         } else {
-            qrErrorAlert(title: String.localized("qraccount_qr_code_cannot_be_used"), message: dcContext.lastErrorString)
+            
+            if let decodedData = Data(base64Encoded: qrCode), let decodedString = String(data: decodedData, encoding: .utf8)
+            {
+                self.loginTool?.importPasteBase64FromQRCode(qrCode: qrCode)
+                
+            }else{
+                qrErrorAlert(title: String.localized("qraccount_qr_code_cannot_be_used"), message: dcContext.lastErrorString)
+            }
+//            qrErrorAlert(title: String.localized("qraccount_qr_code_cannot_be_used"), message: dcContext.lastErrorString)
         }
     }
 

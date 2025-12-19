@@ -81,6 +81,18 @@ class ChatListViewController: UITableViewController {
     private lazy var accountButton: UIBarButtonItem = {
         return UIBarButtonItem(customView: accountButtonAvatar)
     }()
+    
+    private lazy var addButton: UIBarButtonItem = {
+        let add = UIButton(type: .custom)
+        add.addTarget(self, action: #selector(didClickAddButton), for: .touchUpInside)
+        add.setImage(UIImage(named: "AA_Black_Add"), for: .normal)
+        add.tintColor = .black
+        
+        let button = UIBarButtonItem(customView: add)
+        button.tintColor = .black
+
+        return button
+    }()
 
     private var editingConstraints: [NSLayoutConstraint]?
 
@@ -750,6 +762,8 @@ class ChatListViewController: UITableViewController {
             } else {
                 navigationItem.setLeftBarButton(cancelButton, animated: true)
                 navigationItem.setRightBarButtonItems([newButton], animated: true)
+                navigationItem.setRightBarButtonItems([addButton], animated: true)
+
             }
 
         } else if isArchive {
@@ -766,10 +780,10 @@ class ChatListViewController: UITableViewController {
                 updateAccountButton()
 
                 if dcContext.getProxies().isEmpty {
-                    navigationItem.setRightBarButtonItems([newButton], animated: true)
+                    navigationItem.setRightBarButtonItems([addButton], animated: true)
                 } else {
                     updateProxyButton()
-                    navigationItem.setRightBarButtonItems([newButton, proxyShieldButton], animated: true)
+                    navigationItem.setRightBarButtonItems([addButton, proxyShieldButton], animated: true)
                 }
 
                 if dcContext.getConnectivity() >= DC_CONNECTIVITY_CONNECTED {
@@ -1098,5 +1112,117 @@ extension ChatListViewController: ChatListEditingBarDelegate {
         }
 
         return UIMenu(children: actions)
+    }
+}
+
+// MARK: - Owner
+
+extension ChatListViewController{
+    
+    private func addAsImputNewAccount() {
+        let qrReader = QrCodeReaderController(title: String.localized("扫描二维码"),
+                                              addHints: "",showTroubleshooting: false)
+        qrReader.delegate = self
+//        qrCodeReader = qrReader
+        qrReader.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(qrReader, animated: true)
+    }
+    
+    func addAccount(previousAccountId: Int) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        _ = self.dcAccounts.add()
+        reloadAndExit(appDelegate: appDelegate, previousAccountId: previousAccountId)
+    }
+    func reloadAndExit(appDelegate: AppDelegate, previousAccountId: Int) {
+        appDelegate.reloadDcContext()
+        UserDefaults.standard.setValue(previousAccountId, forKey: Constants.Keys.lastSelectedAccountKey)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            self?.dismiss(animated: true)
+        }
+    }
+}
+
+// MARK: - Owner
+
+extension ChatListViewController:UIPopoverPresentationControllerDelegate{
+    
+    // MARK: - actions
+    @objc func didClickAddButton() {
+
+       if let button = self.addButton.customView as? UIButton{
+           self.showAdvancedPopover(button)
+
+        }
+    }
+    @objc private func showAdvancedPopover(_ sender: UIButton) {
+        //plus.circle
+           let options = [
+            PopoverOptionsModel(title: " "+"二维码邀请", image: "AA_QR_Code"),
+            PopoverOptionsModel(title: " "+"添加账号", image: "AA_Add_Account"),
+            PopoverOptionsModel(title:" "+"扫码同步", image: "AA_Scan_Account"),
+
+           ]
+           let popoverVC = AdvancedPopoverViewController(title: "高级菜单", options: options)
+        popoverVC.callback = { [weak self] tag in
+            if tag == 0 {
+                self?.showPopup()
+            }else if tag == 1{
+                let selectedAccountId = self?.dcAccounts.getSelected().id
+                if let selectedAccountId = selectedAccountId {
+                    self?.addAccount(previousAccountId: selectedAccountId)
+                }
+
+            }else if tag == 2{
+                self?.addAsImputNewAccount()
+
+            }
+        }
+           presentPopover(popoverVC, from: sender)
+       }
+    
+    func showPopup() {
+        let popupVC = AccountInfoPopupViewController(dcContext: self.dcContext)
+            
+            // 设置模态样式
+            popupVC.modalPresentationStyle = .overFullScreen
+            popupVC.modalTransitionStyle = .crossDissolve
+
+            // 呈现弹窗
+            present(popupVC, animated: true, completion: nil)
+        }
+    private func presentPopover(_ viewController: UIViewController, from sourceView: UIView) {
+         viewController.modalPresentationStyle = .popover
+         
+         if let popover = viewController.popoverPresentationController {
+             popover.sourceView = sourceView
+             popover.sourceRect = sourceView.bounds
+//             popover.siz
+             popover.permittedArrowDirections = [.up]
+             popover.delegate = self
+             
+             // 通用自定义设置
+             if #available(iOS 13.0, *) {
+                 popover.backgroundColor = .systemBackground
+             }
+         }
+         
+         present(viewController, animated: true)
+     }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+         return .none // 在 iPhone 上也保持 popover 样式
+     }
+     
+     func popoverPresentationController(_ popoverPresentationController: UIPopoverPresentationController,
+                                      willRepositionPopoverTo rect: UnsafeMutablePointer<CGRect>,
+                                      in view: AutoreleasingUnsafeMutablePointer<UIView>) {
+         // 可以在这里动态调整弹窗位置
+     }
+}
+// MARK: - QRCodeDelegate
+extension ChatListViewController: QrCodeReaderDelegate {
+    func handleQrCode(_ qrCode: String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        appDelegate.appCoordinator.coordinate(qrCode: qrCode, from: self)
     }
 }
