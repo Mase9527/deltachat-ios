@@ -5,8 +5,8 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'deltachat-ios' do
-  pod 'SwiftLint'
-  pod 'SwiftFormat/CLI'
+#  pod 'SwiftLint'
+#  pod 'SwiftFormat/CLI'
   # pod 'openssl-ios-bitcode'
   pod 'ReachabilitySwift'
   pod 'SCSiriWaveformView'
@@ -15,7 +15,11 @@ target 'deltachat-ios' do
   pod 'SDWebImageSVGKitPlugin'
   pod 'SVGKit', :modular_headers => true
   pod 'MCEmojiPicker', :git => 'https://github.com/deltachat/MCEmojiPicker', :branch => 'main'
-
+  pod 'SnapKit'
+  pod 'TextFieldEffects'
+  pod 'Moya'
+  pod 'DeviceKit'
+  
 end
 
 target 'DcShare' do

@@ -130,7 +130,6 @@
 		7070FB9B2101ECBB000DC258 /* NewGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7070FB9A2101ECBB000DC258 /* NewGroupController.swift */; };
 		70B8882E2091B8550074812E /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B8882D2091B8550074812E /* ContactCell.swift */; };
 		767CFF56D7ABED1C190A3A8B /* Pods_DcShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF8DFC4D179F4CF1E83D78C9 /* Pods_DcShare.framework */; };
-		7837B64021E54DC600CDE126 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7837B63F21E54DC600CDE126 /* .swiftlint.yml */; };
 		785BE16821E247F1003BE98C /* MessageInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785BE16721E247F1003BE98C /* MessageInfoViewController.swift */; };
 		789E879621D6CB58003ED1C5 /* QrCodeReaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789E879521D6CB58003ED1C5 /* QrCodeReaderController.swift */; };
 		78E45E3A21D3CFBC00D4B15E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E45E3921D3CFBC00D4B15E /* SettingsViewController.swift */; };
@@ -209,6 +208,60 @@
 		B2DF962F2EE328E30037F07F /* TransportListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DF962E2EE328E30037F07F /* TransportListViewController.swift */; };
 		B2DF96312EE3368F0037F07F /* TransportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DF96302EE3368F0037F07F /* TransportCell.swift */; };
 		B2F899E129F96A67003797D5 /* AllMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F899E029F96A67003797D5 /* AllMediaViewController.swift */; };
+		BBBB8A262EF527C800B3B07E /* InstantOnboardingOwnerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBBB89F32EF527C800B3B07E /* InstantOnboardingOwnerVC.xib */; };
+		BBBB8A272EF527C800B3B07E /* AccountInfoPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBBB89F82EF527C800B3B07E /* AccountInfoPopupViewController.xib */; };
+		BBBB8A282EF527C800B3B07E /* OwnerChange.md in Resources */ = {isa = PBXBuildFile; fileRef = BBBB8A062EF527C800B3B07E /* OwnerChange.md */; };
+		BBBB8A292EF527C800B3B07E /* ProgressHUD+CirclePulseMultiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A0E2EF527C800B3B07E /* ProgressHUD+CirclePulseMultiple.swift */; };
+		BBBB8A2A2EF527C800B3B07E /* ProgressHUD+BallVerticalBounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A092EF527C800B3B07E /* ProgressHUD+BallVerticalBounce.swift */; };
+		BBBB8A2B2EF527C800B3B07E /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A1E2EF527C800B3B07E /* ProgressHUD.swift */; };
+		BBBB8A2C2EF527C800B3B07E /* ProgressHUD+Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A222EF527C800B3B07E /* ProgressHUD+Public.swift */; };
+		BBBB8A2D2EF527C800B3B07E /* ProgressHUD+CircleArcDotSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A0B2EF527C800B3B07E /* ProgressHUD+CircleArcDotSpin.swift */; };
+		BBBB8A2E2EF527C800B3B07E /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A232EF527C800B3B07E /* ProgressView.swift */; };
+		BBBB8A302EF527C800B3B07E /* ProgressHUD+HorizontalDotScaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A162EF527C800B3B07E /* ProgressHUD+HorizontalDotScaling.swift */; };
+		BBBB8A312EF527C800B3B07E /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89EB2EF527C800B3B07E /* HttpClient.swift */; };
+		BBBB8A322EF527C800B3B07E /* ProgressHUD+CircleRotateChase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A122EF527C800B3B07E /* ProgressHUD+CircleRotateChase.swift */; };
+		BBBB8A332EF527C800B3B07E /* AANewProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89F42EF527C800B3B07E /* AANewProfileVC.swift */; };
+		BBBB8A342EF527C800B3B07E /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89EA2EF527C800B3B07E /* HttpRequest.swift */; };
+		BBBB8A352EF527C800B3B07E /* ProgressHUD+CircleRippleSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A112EF527C800B3B07E /* ProgressHUD+CircleRippleSingle.swift */; };
+		BBBB8A362EF527C800B3B07E /* KeyedDecodingContainer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89E62EF527C800B3B07E /* KeyedDecodingContainer+Extension.swift */; };
+		BBBB8A372EF527C800B3B07E /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A042EF527C800B3B07E /* LoginResponse.swift */; };
+		BBBB8A382EF527C800B3B07E /* ProgressHUD+CircleRippleMultiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A102EF527C800B3B07E /* ProgressHUD+CircleRippleMultiple.swift */; };
+		BBBB8A392EF527C800B3B07E /* ProgressHUD+SemiRingRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A192EF527C800B3B07E /* ProgressHUD+SemiRingRotation.swift */; };
+		BBBB8A3A2EF527C800B3B07E /* AccountAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89FF2EF527C800B3B07E /* AccountAPI.swift */; };
+		BBBB8A3B2EF527C800B3B07E /* ProgressHUD+CircleBarSpinFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A0C2EF527C800B3B07E /* ProgressHUD+CircleBarSpinFade.swift */; };
+		BBBB8A3C2EF527C800B3B07E /* ShareAccountInfoQRCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89F12EF527C800B3B07E /* ShareAccountInfoQRCodeVC.swift */; };
+		BBBB8A3D2EF527C800B3B07E /* AdvancedPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89F52EF527C800B3B07E /* AdvancedPopoverViewController.swift */; };
+		BBBB8A3E2EF527C800B3B07E /* ProgressHUD+LiveIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A212EF527C800B3B07E /* ProgressHUD+LiveIcon.swift */; };
+		BBBB8A3F2EF527C800B3B07E /* ProgressHUD+HorizontalBarScaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A152EF527C800B3B07E /* ProgressHUD+HorizontalBarScaling.swift */; };
+		BBBB8A402EF527C800B3B07E /* MoyaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89ED2EF527C800B3B07E /* MoyaConfig.swift */; };
+		BBBB8A412EF527C800B3B07E /* iFBaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89E32EF527C800B3B07E /* iFBaseAPI.swift */; };
+		BBBB8A422EF527C800B3B07E /* AdvancedQRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89FC2EF527C800B3B07E /* AdvancedQRCodeGenerator.swift */; };
+		BBBB8A432EF527C800B3B07E /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89E52EF527C800B3B07E /* HUD.swift */; };
+		BBBB8A442EF527C800B3B07E /* QRCodeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89FB2EF527C800B3B07E /* QRCodeTool.swift */; };
+		BBBB8A452EF527C800B3B07E /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89FE2EF527C800B3B07E /* APIService.swift */; };
+		BBBB8A462EF527C800B3B07E /* ProgressHUD+PacmanProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A172EF527C800B3B07E /* ProgressHUD+PacmanProgress.swift */; };
+		BBBB8A472EF527C800B3B07E /* DeltaChatLinkConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89FA2EF527C800B3B07E /* DeltaChatLinkConverter.swift */; };
+		BBBB8A482EF527C800B3B07E /* AccountInfoPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89F72EF527C800B3B07E /* AccountInfoPopupViewController.swift */; };
+		BBBB8A492EF527C800B3B07E /* ProgressHUD+SquareCircuitSnake.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A1B2EF527C800B3B07E /* ProgressHUD+SquareCircuitSnake.swift */; };
+		BBBB8A4A2EF527C800B3B07E /* ProgressHUD+CirclePulseSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A0F2EF527C800B3B07E /* ProgressHUD+CirclePulseSingle.swift */; };
+		BBBB8A4B2EF527C800B3B07E /* ProgressHUD+DualDotSidestep.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A142EF527C800B3B07E /* ProgressHUD+DualDotSidestep.swift */; };
+		BBBB8A4C2EF527C800B3B07E /* ProgressHUD+QuintupleDotDance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A182EF527C800B3B07E /* ProgressHUD+QuintupleDotDance.swift */; };
+		BBBB8A4D2EF527C800B3B07E /* ProgressHUD+CircleDotSpinFade.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A0D2EF527C800B3B07E /* ProgressHUD+CircleDotSpinFade.swift */; };
+		BBBB8A4E2EF527C800B3B07E /* ProgressHUD+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A082EF527C800B3B07E /* ProgressHUD+ActivityIndicator.swift */; };
+		BBBB8A4F2EF527C800B3B07E /* MoyaLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89EC2EF527C800B3B07E /* MoyaLoggingPlugin.swift */; };
+		BBBB8A502EF527C800B3B07E /* DCBase64AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A032EF527C800B3B07E /* DCBase64AccountModel.swift */; };
+		BBBB8A512EF527C800B3B07E /* ProgressHUD+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A202EF527C800B3B07E /* ProgressHUD+Enums.swift */; };
+		BBBB8A522EF527C800B3B07E /* InstantOnboardingOwnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89F22EF527C800B3B07E /* InstantOnboardingOwnerVC.swift */; };
+		BBBB8A532EF527C800B3B07E /* ProgressHUD+BarSweepToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A0A2EF527C800B3B07E /* ProgressHUD+BarSweepToggle.swift */; };
+		BBBB8A542EF527C800B3B07E /* ProgressHUD+TriangleDotShift.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A1C2EF527C800B3B07E /* ProgressHUD+TriangleDotShift.swift */; };
+		BBBB8A552EF527C800B3B07E /* ContactListOwnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89F62EF527C800B3B07E /* ContactListOwnerVC.swift */; };
+		BBBB8A562EF527C800B3B07E /* SaveFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89E72EF527C800B3B07E /* SaveFiles.swift */; };
+		BBBB8A572EF527C800B3B07E /* ProgressHUD+Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A1F2EF527C800B3B07E /* ProgressHUD+Banner.swift */; };
+		BBBB8A592EF527C800B3B07E /* DocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89FD2EF527C800B3B07E /* DocumentManager.swift */; };
+		BBBB8A5A2EF527C800B3B07E /* ProgressHUD+CircleStrokeSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A132EF527C800B3B07E /* ProgressHUD+CircleStrokeSpin.swift */; };
+		BBBB8A5B2EF527C800B3B07E /* HMNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB89EF2EF527C800B3B07E /* HMNetworkMonitor.swift */; };
+		BBBB8A5C2EF527C800B3B07E /* ProgressHUD+SFSymbolBounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A1A2EF527C800B3B07E /* ProgressHUD+SFSymbolBounce.swift */; };
+		BBBB8A6C2EF52DE100B3B07E /* AAExportAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB8A6B2EF52DE100B3B07E /* AAExportAccountTool.swift */; };
 		D8083AD02D14384F005DCB7D /* UserDefaults+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8083ACF2D14384F005DCB7D /* UserDefaults+Widgets.swift */; };
 		D8083AD12D143868005DCB7D /* UserDefaults+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8083ACF2D14384F005DCB7D /* UserDefaults+Widgets.swift */; };
 		D80F62792B59D1CC00877059 /* DefaultReactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F62782B59D1CC00877059 /* DefaultReactions.swift */; };
@@ -467,7 +520,6 @@
 		64F9EB9F2E117CCF007EE3D9 /* UIView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		7070FB9A2101ECBB000DC258 /* NewGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupController.swift; sourceTree = "<group>"; };
 		70B8882D2091B8550074812E /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
-		7837B63F21E54DC600CDE126 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		785BE16721E247F1003BE98C /* MessageInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInfoViewController.swift; sourceTree = "<group>"; };
 		787D6699229F2237000A7A9D /* libdeltachat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdeltachat.a; path = "deltachat-ios/libraries/deltachat-core-rust/target/universal/debug/libdeltachat.a"; sourceTree = "<group>"; };
 		789E879521D6CB58003ED1C5 /* QrCodeReaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeReaderController.swift; sourceTree = "<group>"; };
@@ -625,6 +677,60 @@
 		B2DF962E2EE328E30037F07F /* TransportListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportListViewController.swift; sourceTree = "<group>"; };
 		B2DF96302EE3368F0037F07F /* TransportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportCell.swift; sourceTree = "<group>"; };
 		B2F899E029F96A67003797D5 /* AllMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllMediaViewController.swift; sourceTree = "<group>"; };
+		BBBB89E32EF527C800B3B07E /* iFBaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iFBaseAPI.swift; sourceTree = "<group>"; };
+		BBBB89E52EF527C800B3B07E /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		BBBB89E62EF527C800B3B07E /* KeyedDecodingContainer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyedDecodingContainer+Extension.swift"; sourceTree = "<group>"; };
+		BBBB89E72EF527C800B3B07E /* SaveFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFiles.swift; sourceTree = "<group>"; };
+		BBBB89EA2EF527C800B3B07E /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
+		BBBB89EB2EF527C800B3B07E /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		BBBB89EC2EF527C800B3B07E /* MoyaLoggingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggingPlugin.swift; sourceTree = "<group>"; };
+		BBBB89ED2EF527C800B3B07E /* MoyaConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaConfig.swift; sourceTree = "<group>"; };
+		BBBB89EF2EF527C800B3B07E /* HMNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMNetworkMonitor.swift; sourceTree = "<group>"; };
+		BBBB89F12EF527C800B3B07E /* ShareAccountInfoQRCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareAccountInfoQRCodeVC.swift; sourceTree = "<group>"; };
+		BBBB89F22EF527C800B3B07E /* InstantOnboardingOwnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantOnboardingOwnerVC.swift; sourceTree = "<group>"; };
+		BBBB89F32EF527C800B3B07E /* InstantOnboardingOwnerVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstantOnboardingOwnerVC.xib; sourceTree = "<group>"; };
+		BBBB89F42EF527C800B3B07E /* AANewProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AANewProfileVC.swift; sourceTree = "<group>"; };
+		BBBB89F52EF527C800B3B07E /* AdvancedPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedPopoverViewController.swift; sourceTree = "<group>"; };
+		BBBB89F62EF527C800B3B07E /* ContactListOwnerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListOwnerVC.swift; sourceTree = "<group>"; };
+		BBBB89F72EF527C800B3B07E /* AccountInfoPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoPopupViewController.swift; sourceTree = "<group>"; };
+		BBBB89F82EF527C800B3B07E /* AccountInfoPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountInfoPopupViewController.xib; sourceTree = "<group>"; };
+		BBBB89FA2EF527C800B3B07E /* DeltaChatLinkConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeltaChatLinkConverter.swift; sourceTree = "<group>"; };
+		BBBB89FB2EF527C800B3B07E /* QRCodeTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeTool.swift; sourceTree = "<group>"; };
+		BBBB89FC2EF527C800B3B07E /* AdvancedQRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedQRCodeGenerator.swift; sourceTree = "<group>"; };
+		BBBB89FD2EF527C800B3B07E /* DocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentManager.swift; sourceTree = "<group>"; };
+		BBBB89FE2EF527C800B3B07E /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		BBBB89FF2EF527C800B3B07E /* AccountAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAPI.swift; sourceTree = "<group>"; };
+		BBBB8A032EF527C800B3B07E /* DCBase64AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCBase64AccountModel.swift; sourceTree = "<group>"; };
+		BBBB8A042EF527C800B3B07E /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		BBBB8A062EF527C800B3B07E /* OwnerChange.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = OwnerChange.md; sourceTree = "<group>"; };
+		BBBB8A082EF527C800B3B07E /* ProgressHUD+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+ActivityIndicator.swift"; sourceTree = "<group>"; };
+		BBBB8A092EF527C800B3B07E /* ProgressHUD+BallVerticalBounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+BallVerticalBounce.swift"; sourceTree = "<group>"; };
+		BBBB8A0A2EF527C800B3B07E /* ProgressHUD+BarSweepToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+BarSweepToggle.swift"; sourceTree = "<group>"; };
+		BBBB8A0B2EF527C800B3B07E /* ProgressHUD+CircleArcDotSpin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+CircleArcDotSpin.swift"; sourceTree = "<group>"; };
+		BBBB8A0C2EF527C800B3B07E /* ProgressHUD+CircleBarSpinFade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+CircleBarSpinFade.swift"; sourceTree = "<group>"; };
+		BBBB8A0D2EF527C800B3B07E /* ProgressHUD+CircleDotSpinFade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+CircleDotSpinFade.swift"; sourceTree = "<group>"; };
+		BBBB8A0E2EF527C800B3B07E /* ProgressHUD+CirclePulseMultiple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+CirclePulseMultiple.swift"; sourceTree = "<group>"; };
+		BBBB8A0F2EF527C800B3B07E /* ProgressHUD+CirclePulseSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+CirclePulseSingle.swift"; sourceTree = "<group>"; };
+		BBBB8A102EF527C800B3B07E /* ProgressHUD+CircleRippleMultiple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+CircleRippleMultiple.swift"; sourceTree = "<group>"; };
+		BBBB8A112EF527C800B3B07E /* ProgressHUD+CircleRippleSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+CircleRippleSingle.swift"; sourceTree = "<group>"; };
+		BBBB8A122EF527C800B3B07E /* ProgressHUD+CircleRotateChase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+CircleRotateChase.swift"; sourceTree = "<group>"; };
+		BBBB8A132EF527C800B3B07E /* ProgressHUD+CircleStrokeSpin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+CircleStrokeSpin.swift"; sourceTree = "<group>"; };
+		BBBB8A142EF527C800B3B07E /* ProgressHUD+DualDotSidestep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+DualDotSidestep.swift"; sourceTree = "<group>"; };
+		BBBB8A152EF527C800B3B07E /* ProgressHUD+HorizontalBarScaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+HorizontalBarScaling.swift"; sourceTree = "<group>"; };
+		BBBB8A162EF527C800B3B07E /* ProgressHUD+HorizontalDotScaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+HorizontalDotScaling.swift"; sourceTree = "<group>"; };
+		BBBB8A172EF527C800B3B07E /* ProgressHUD+PacmanProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+PacmanProgress.swift"; sourceTree = "<group>"; };
+		BBBB8A182EF527C800B3B07E /* ProgressHUD+QuintupleDotDance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+QuintupleDotDance.swift"; sourceTree = "<group>"; };
+		BBBB8A192EF527C800B3B07E /* ProgressHUD+SemiRingRotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+SemiRingRotation.swift"; sourceTree = "<group>"; };
+		BBBB8A1A2EF527C800B3B07E /* ProgressHUD+SFSymbolBounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+SFSymbolBounce.swift"; sourceTree = "<group>"; };
+		BBBB8A1B2EF527C800B3B07E /* ProgressHUD+SquareCircuitSnake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+SquareCircuitSnake.swift"; sourceTree = "<group>"; };
+		BBBB8A1C2EF527C800B3B07E /* ProgressHUD+TriangleDotShift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+TriangleDotShift.swift"; sourceTree = "<group>"; };
+		BBBB8A1E2EF527C800B3B07E /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
+		BBBB8A1F2EF527C800B3B07E /* ProgressHUD+Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+Banner.swift"; sourceTree = "<group>"; };
+		BBBB8A202EF527C800B3B07E /* ProgressHUD+Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+Enums.swift"; sourceTree = "<group>"; };
+		BBBB8A212EF527C800B3B07E /* ProgressHUD+LiveIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+LiveIcon.swift"; sourceTree = "<group>"; };
+		BBBB8A222EF527C800B3B07E /* ProgressHUD+Public.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProgressHUD+Public.swift"; sourceTree = "<group>"; };
+		BBBB8A232EF527C800B3B07E /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		BBBB8A6B2EF52DE100B3B07E /* AAExportAccountTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAExportAccountTool.swift; sourceTree = "<group>"; };
 		BF8DFC4D179F4CF1E83D78C9 /* Pods_DcShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DcShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8083ACF2D14384F005DCB7D /* UserDefaults+Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Widgets.swift"; sourceTree = "<group>"; };
 		D80F62782B59D1CC00877059 /* DefaultReactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultReactions.swift; sourceTree = "<group>"; };
@@ -916,7 +1022,6 @@
 				3022E6C022E8768800763272 /* InfoPlist.strings */,
 				3060119E22DDE24000C1CE6F /* Localizable.strings */,
 				306011B422E5E7FB00C1CE6F /* Localizable.stringsdict */,
-				7837B63F21E54DC600CDE126 /* .swiftlint.yml */,
 				7A9FB1421FB061E2001FEA36 /* deltachat-ios */,
 				30E8F2112447285600CE2C90 /* DcShare */,
 				B2D0E4932B93A4B200791949 /* DcNotificationService */,
@@ -946,6 +1051,8 @@
 		7A9FB1421FB061E2001FEA36 /* deltachat-ios */ = {
 			isa = PBXGroup;
 			children = (
+				BBBB8A072EF527C800B3B07E /* Owner */,
+				BBBB8A252EF527C800B3B07E /* Vendor */,
 				AE57C07E2552BBC0003CFE70 /* Model */,
 				304219D7244072E600516852 /* DC */,
 				AE1988AA23EB3C7600B4CD5F /* Assets */,
@@ -1204,6 +1311,154 @@
 				B2D0E4962B93A4B200791949 /* Info.plist */,
 			);
 			path = DcNotificationService;
+			sourceTree = "<group>";
+		};
+		BBBB89E42EF527C800B3B07E /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB89E32EF527C800B3B07E /* iFBaseAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		BBBB89E82EF527C800B3B07E /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB89E52EF527C800B3B07E /* HUD.swift */,
+				BBBB89E62EF527C800B3B07E /* KeyedDecodingContainer+Extension.swift */,
+				BBBB89E72EF527C800B3B07E /* SaveFiles.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		BBBB89E92EF527C800B3B07E /* MoyaBase */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB89E82EF527C800B3B07E /* Component */,
+			);
+			path = MoyaBase;
+			sourceTree = "<group>";
+		};
+		BBBB89EE2EF527C800B3B07E /* Moya */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB89E42EF527C800B3B07E /* API */,
+				BBBB89E92EF527C800B3B07E /* MoyaBase */,
+				BBBB89EA2EF527C800B3B07E /* HttpRequest.swift */,
+				BBBB89EB2EF527C800B3B07E /* HttpClient.swift */,
+				BBBB89EC2EF527C800B3B07E /* MoyaLoggingPlugin.swift */,
+				BBBB89ED2EF527C800B3B07E /* MoyaConfig.swift */,
+			);
+			path = Moya;
+			sourceTree = "<group>";
+		};
+		BBBB89F02EF527C800B3B07E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB89EE2EF527C800B3B07E /* Moya */,
+				BBBB89EF2EF527C800B3B07E /* HMNetworkMonitor.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		BBBB89F92EF527C800B3B07E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB89F12EF527C800B3B07E /* ShareAccountInfoQRCodeVC.swift */,
+				BBBB89F22EF527C800B3B07E /* InstantOnboardingOwnerVC.swift */,
+				BBBB89F32EF527C800B3B07E /* InstantOnboardingOwnerVC.xib */,
+				BBBB89F42EF527C800B3B07E /* AANewProfileVC.swift */,
+				BBBB89F52EF527C800B3B07E /* AdvancedPopoverViewController.swift */,
+				BBBB89F62EF527C800B3B07E /* ContactListOwnerVC.swift */,
+				BBBB89F72EF527C800B3B07E /* AccountInfoPopupViewController.swift */,
+				BBBB89F82EF527C800B3B07E /* AccountInfoPopupViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		BBBB8A022EF527C800B3B07E /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB89FA2EF527C800B3B07E /* DeltaChatLinkConverter.swift */,
+				BBBB89FB2EF527C800B3B07E /* QRCodeTool.swift */,
+				BBBB89FC2EF527C800B3B07E /* AdvancedQRCodeGenerator.swift */,
+				BBBB89FD2EF527C800B3B07E /* DocumentManager.swift */,
+				BBBB89FE2EF527C800B3B07E /* APIService.swift */,
+				BBBB89FF2EF527C800B3B07E /* AccountAPI.swift */,
+				BBBB8A6B2EF52DE100B3B07E /* AAExportAccountTool.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		BBBB8A052EF527C800B3B07E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB8A032EF527C800B3B07E /* DCBase64AccountModel.swift */,
+				BBBB8A042EF527C800B3B07E /* LoginResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BBBB8A072EF527C800B3B07E /* Owner */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB89F02EF527C800B3B07E /* Network */,
+				BBBB89F92EF527C800B3B07E /* ViewController */,
+				BBBB8A022EF527C800B3B07E /* Tool */,
+				BBBB8A052EF527C800B3B07E /* Model */,
+				BBBB8A062EF527C800B3B07E /* OwnerChange.md */,
+			);
+			path = Owner;
+			sourceTree = "<group>";
+		};
+		BBBB8A1D2EF527C800B3B07E /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB8A082EF527C800B3B07E /* ProgressHUD+ActivityIndicator.swift */,
+				BBBB8A092EF527C800B3B07E /* ProgressHUD+BallVerticalBounce.swift */,
+				BBBB8A0A2EF527C800B3B07E /* ProgressHUD+BarSweepToggle.swift */,
+				BBBB8A0B2EF527C800B3B07E /* ProgressHUD+CircleArcDotSpin.swift */,
+				BBBB8A0C2EF527C800B3B07E /* ProgressHUD+CircleBarSpinFade.swift */,
+				BBBB8A0D2EF527C800B3B07E /* ProgressHUD+CircleDotSpinFade.swift */,
+				BBBB8A0E2EF527C800B3B07E /* ProgressHUD+CirclePulseMultiple.swift */,
+				BBBB8A0F2EF527C800B3B07E /* ProgressHUD+CirclePulseSingle.swift */,
+				BBBB8A102EF527C800B3B07E /* ProgressHUD+CircleRippleMultiple.swift */,
+				BBBB8A112EF527C800B3B07E /* ProgressHUD+CircleRippleSingle.swift */,
+				BBBB8A122EF527C800B3B07E /* ProgressHUD+CircleRotateChase.swift */,
+				BBBB8A132EF527C800B3B07E /* ProgressHUD+CircleStrokeSpin.swift */,
+				BBBB8A142EF527C800B3B07E /* ProgressHUD+DualDotSidestep.swift */,
+				BBBB8A152EF527C800B3B07E /* ProgressHUD+HorizontalBarScaling.swift */,
+				BBBB8A162EF527C800B3B07E /* ProgressHUD+HorizontalDotScaling.swift */,
+				BBBB8A172EF527C800B3B07E /* ProgressHUD+PacmanProgress.swift */,
+				BBBB8A182EF527C800B3B07E /* ProgressHUD+QuintupleDotDance.swift */,
+				BBBB8A192EF527C800B3B07E /* ProgressHUD+SemiRingRotation.swift */,
+				BBBB8A1A2EF527C800B3B07E /* ProgressHUD+SFSymbolBounce.swift */,
+				BBBB8A1B2EF527C800B3B07E /* ProgressHUD+SquareCircuitSnake.swift */,
+				BBBB8A1C2EF527C800B3B07E /* ProgressHUD+TriangleDotShift.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		BBBB8A242EF527C800B3B07E /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB8A1D2EF527C800B3B07E /* Animations */,
+				BBBB8A1E2EF527C800B3B07E /* ProgressHUD.swift */,
+				BBBB8A1F2EF527C800B3B07E /* ProgressHUD+Banner.swift */,
+				BBBB8A202EF527C800B3B07E /* ProgressHUD+Enums.swift */,
+				BBBB8A212EF527C800B3B07E /* ProgressHUD+LiveIcon.swift */,
+				BBBB8A222EF527C800B3B07E /* ProgressHUD+Public.swift */,
+				BBBB8A232EF527C800B3B07E /* ProgressView.swift */,
+			);
+			path = ProgressHUD;
+			sourceTree = "<group>";
+		};
+		BBBB8A252EF527C800B3B07E /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB8A242EF527C800B3B07E /* ProgressHUD */,
+			);
+			path = Vendor;
 			sourceTree = "<group>";
 		};
 		D80F62772B59D1B800877059 /* Send Reaction */ = {
@@ -1504,10 +1759,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7837B64021E54DC600CDE126 /* .swiftlint.yml in Resources */,
 				AE1988AB23EB3C7600B4CD5F /* Assets in Resources */,
 				3022E6BE22E8768800763272 /* InfoPlist.strings in Resources */,
 				B2636B5C2BADE39600F37A0A /* PrivacyInfo.xcprivacy in Resources */,
+				BBBB8A262EF527C800B3B07E /* InstantOnboardingOwnerVC.xib in Resources */,
+				BBBB8A272EF527C800B3B07E /* AccountInfoPopupViewController.xib in Resources */,
+				BBBB8A282EF527C800B3B07E /* OwnerChange.md in Resources */,
 				AE1988A723EB382A00B4CD5F /* Help in Resources */,
 				3060119C22DDE24000C1CE6F /* Localizable.strings in Resources */,
 				7A9FB14E1FB061E2001FEA36 /* LaunchScreen.storyboard in Resources */,
@@ -1597,7 +1854,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "
+";
 		};
 		7837B64621E5532B00CDE126 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1615,7 +1873,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\"\n";
+			shellScript = "
+
+";
 		};
 		CDEA77249E4F2AFAB45DFEA0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1791,6 +2051,7 @@
 				305501742798CDE1008FD5CA /* WebxdcViewController.swift in Sources */,
 				3034929F25752FC800A523D0 /* MediaPreview.swift in Sources */,
 				5F785F6E2CB9344F003FFFB9 /* ReusableCellProtocol.swift in Sources */,
+				BBBB8A6C2EF52DE100B3B07E /* AAExportAccountTool.swift in Sources */,
 				D8C1B0DD2CE7421C00C233A7 /* ShareProxyViewController.swift in Sources */,
 				AE76E5EE242BF2EA003CF461 /* WelcomeViewController.swift in Sources */,
 				3052C60A253F082E007D13EA /* MessageLabelDelegate.swift in Sources */,
@@ -1848,6 +2109,56 @@
 				30FDB72124D838240066C48D /* BaseMessageCell.swift in Sources */,
 				7A451DB01FB1F84900177250 /* AppCoordinator.swift in Sources */,
 				AE38B31822672DFC00EC37A1 /* ActionCell.swift in Sources */,
+				BBBB8A292EF527C800B3B07E /* ProgressHUD+CirclePulseMultiple.swift in Sources */,
+				BBBB8A2A2EF527C800B3B07E /* ProgressHUD+BallVerticalBounce.swift in Sources */,
+				BBBB8A2B2EF527C800B3B07E /* ProgressHUD.swift in Sources */,
+				BBBB8A2C2EF527C800B3B07E /* ProgressHUD+Public.swift in Sources */,
+				BBBB8A2D2EF527C800B3B07E /* ProgressHUD+CircleArcDotSpin.swift in Sources */,
+				BBBB8A2E2EF527C800B3B07E /* ProgressView.swift in Sources */,
+				BBBB8A302EF527C800B3B07E /* ProgressHUD+HorizontalDotScaling.swift in Sources */,
+				BBBB8A312EF527C800B3B07E /* HttpClient.swift in Sources */,
+				BBBB8A322EF527C800B3B07E /* ProgressHUD+CircleRotateChase.swift in Sources */,
+				BBBB8A332EF527C800B3B07E /* AANewProfileVC.swift in Sources */,
+				BBBB8A342EF527C800B3B07E /* HttpRequest.swift in Sources */,
+				BBBB8A352EF527C800B3B07E /* ProgressHUD+CircleRippleSingle.swift in Sources */,
+				BBBB8A362EF527C800B3B07E /* KeyedDecodingContainer+Extension.swift in Sources */,
+				BBBB8A372EF527C800B3B07E /* LoginResponse.swift in Sources */,
+				BBBB8A382EF527C800B3B07E /* ProgressHUD+CircleRippleMultiple.swift in Sources */,
+				BBBB8A392EF527C800B3B07E /* ProgressHUD+SemiRingRotation.swift in Sources */,
+				BBBB8A3A2EF527C800B3B07E /* AccountAPI.swift in Sources */,
+				BBBB8A3B2EF527C800B3B07E /* ProgressHUD+CircleBarSpinFade.swift in Sources */,
+				BBBB8A3C2EF527C800B3B07E /* ShareAccountInfoQRCodeVC.swift in Sources */,
+				BBBB8A3D2EF527C800B3B07E /* AdvancedPopoverViewController.swift in Sources */,
+				BBBB8A3E2EF527C800B3B07E /* ProgressHUD+LiveIcon.swift in Sources */,
+				BBBB8A3F2EF527C800B3B07E /* ProgressHUD+HorizontalBarScaling.swift in Sources */,
+				BBBB8A402EF527C800B3B07E /* MoyaConfig.swift in Sources */,
+				BBBB8A412EF527C800B3B07E /* iFBaseAPI.swift in Sources */,
+				BBBB8A422EF527C800B3B07E /* AdvancedQRCodeGenerator.swift in Sources */,
+				BBBB8A432EF527C800B3B07E /* HUD.swift in Sources */,
+				BBBB8A442EF527C800B3B07E /* QRCodeTool.swift in Sources */,
+				BBBB8A452EF527C800B3B07E /* APIService.swift in Sources */,
+				BBBB8A462EF527C800B3B07E /* ProgressHUD+PacmanProgress.swift in Sources */,
+				BBBB8A472EF527C800B3B07E /* DeltaChatLinkConverter.swift in Sources */,
+				BBBB8A482EF527C800B3B07E /* AccountInfoPopupViewController.swift in Sources */,
+				BBBB8A492EF527C800B3B07E /* ProgressHUD+SquareCircuitSnake.swift in Sources */,
+				BBBB8A4A2EF527C800B3B07E /* ProgressHUD+CirclePulseSingle.swift in Sources */,
+				BBBB8A4B2EF527C800B3B07E /* ProgressHUD+DualDotSidestep.swift in Sources */,
+				BBBB8A4C2EF527C800B3B07E /* ProgressHUD+QuintupleDotDance.swift in Sources */,
+				BBBB8A4D2EF527C800B3B07E /* ProgressHUD+CircleDotSpinFade.swift in Sources */,
+				BBBB8A4E2EF527C800B3B07E /* ProgressHUD+ActivityIndicator.swift in Sources */,
+				BBBB8A4F2EF527C800B3B07E /* MoyaLoggingPlugin.swift in Sources */,
+				BBBB8A502EF527C800B3B07E /* DCBase64AccountModel.swift in Sources */,
+				BBBB8A512EF527C800B3B07E /* ProgressHUD+Enums.swift in Sources */,
+				BBBB8A522EF527C800B3B07E /* InstantOnboardingOwnerVC.swift in Sources */,
+				BBBB8A532EF527C800B3B07E /* ProgressHUD+BarSweepToggle.swift in Sources */,
+				BBBB8A542EF527C800B3B07E /* ProgressHUD+TriangleDotShift.swift in Sources */,
+				BBBB8A552EF527C800B3B07E /* ContactListOwnerVC.swift in Sources */,
+				BBBB8A562EF527C800B3B07E /* SaveFiles.swift in Sources */,
+				BBBB8A572EF527C800B3B07E /* ProgressHUD+Banner.swift in Sources */,
+				BBBB8A592EF527C800B3B07E /* DocumentManager.swift in Sources */,
+				BBBB8A5A2EF527C800B3B07E /* ProgressHUD+CircleStrokeSpin.swift in Sources */,
+				BBBB8A5B2EF527C800B3B07E /* HMNetworkMonitor.swift in Sources */,
+				BBBB8A5C2EF527C800B3B07E /* ProgressHUD+SFSymbolBounce.swift in Sources */,
 				AE9DAF0D22C1215D004C9591 /* EditContactController.swift in Sources */,
 				302D546A2693591700A8B271 /* ChatContactRequestBar.swift in Sources */,
 				305DDD8725DD97BF00974489 /* DynamicFontButton.swift in Sources */,

@@ -15,6 +15,8 @@ internal final class SettingsViewController: UITableViewController {
             self.cells = cells
         }
     }
+    
+    var exportAccountTool:AAExportAccountTool?
 
     private enum CellTags: Int {
         case profile
@@ -27,6 +29,8 @@ internal final class SettingsViewController: UITableViewController {
         case allAppsAndMedia
         case connectivity
         case inviteFriends
+        case exportAccount
+
     }
 
     private var dcContext: DcContext
@@ -124,11 +128,21 @@ internal final class SettingsViewController: UITableViewController {
         cell.accessoryType = .disclosureIndicator
         return cell
     }()
+    
+    
+    private lazy var exportInfoCell: UITableViewCell = {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        cell.tag = CellTags.exportAccount.rawValue
+        cell.textLabel?.text = String.localized("导出账号")
+        cell.imageView?.image = UIImage(systemName: "square.and.arrow.up")
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }()
 
     private lazy var sections: [SectionConfigs] = {
-        var appNameAndVersion = "Delta Chat"
-        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            appNameAndVersion += " v" + appVersion
+        var appNameAndVersion = "AAMail"//CFBundleVersion
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            appNameAndVersion += " v" + appVersion + " build(\(build))"
         }
         let profileSection = SectionConfigs(
             headerTitle: String.localized("pref_profile_info_headline"),
@@ -142,7 +156,7 @@ internal final class SettingsViewController: UITableViewController {
         )
         let helpSection = SectionConfigs(
             footerTitle: appNameAndVersion,
-            cells: [inviteFriendsCell, helpCell]
+            cells: [exportInfoCell,inviteFriendsCell, helpCell]
         )
 
         return [profileSection, preferencesSection, listsSection, helpSection]
@@ -157,6 +171,8 @@ internal final class SettingsViewController: UITableViewController {
         // otherwise, we may miss events and the label is not correct.
         NotificationCenter.default.addObserver(self, selector: #selector(SettingsViewController.handleConnectivityChanged(_:)), name: Event.connectivityChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SettingsViewController.applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        self.exportAccountTool = AAExportAccountTool(dcAccounts: dcAccounts, currentVC: self)
     }
 
     required init?(coder _: NSCoder) {
@@ -214,6 +230,8 @@ internal final class SettingsViewController: UITableViewController {
         case .connectivity: showConnectivity()
         case .selectBackground: selectBackground()
         case .inviteFriends: inviteFriends()
+        case .exportAccount: exportAccountInfo()
+
         }
     }
 
@@ -317,4 +335,11 @@ internal final class SettingsViewController: UITableViewController {
         let invitationText = String.localized(stringID: "invite_friends_text", parameter: inviteLink)
         Utils.share(text: invitationText, parentViewController: self, sourceView: inviteFriendsCell)
     }
+    
+    private func exportAccountInfo() {
+        self.exportAccountTool?.exportAccountInfo()
+        }
+
+  
+
 }

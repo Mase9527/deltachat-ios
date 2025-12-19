@@ -40,10 +40,13 @@ class ContactCellViewModel: AvatarCellViewModel {
     var subtitle: String {
         return contact.email
     }
-
+    @objc func getName() -> NSString {
+        return NSString(string: self.title)
+    }
     var avartarTitle: String {
         return DcUtils.getInitials(inputName: title)
     }
+    var contactId:Int = 0
 
     var titleHighlightIndexes: [Int]
     var subtitleHighlightIndexes: [Int]

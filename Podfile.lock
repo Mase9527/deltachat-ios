@@ -1,7 +1,9 @@
 PODS:
+  - Alamofire (5.10.2)
   - CocoaLumberjack (3.8.5):
     - CocoaLumberjack/Core (= 3.8.5)
   - CocoaLumberjack/Core (3.8.5)
+  - DeviceKit (5.6.0)
   - libwebp (1.3.2):
     - libwebp/demux (= 1.3.2)
     - libwebp/mux (= 1.3.2)
@@ -15,6 +17,10 @@ PODS:
   - libwebp/webp (1.3.2):
     - libwebp/sharpyuv
   - MCEmojiPicker (1.2.3)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
   - ReachabilitySwift (5.2.4)
   - SCSiriWaveformView (1.1.2)
   - SDWebImage (5.20.0):
@@ -26,34 +32,39 @@ PODS:
   - SDWebImageWebPCoder (0.14.6):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
+  - SnapKit (5.7.1)
   - SVGKit (3.0.0):
     - CocoaLumberjack (~> 3.0)
-  - SwiftFormat/CLI (0.55.3)
-  - SwiftLint (0.57.1)
+  - TextFieldEffects (1.6.0)
 
 DEPENDENCIES:
+  - DeviceKit
   - MCEmojiPicker (from `https://github.com/deltachat/MCEmojiPicker`, branch `main`)
+  - Moya
   - ReachabilitySwift
   - SCSiriWaveformView
   - SDWebImage
   - SDWebImageSVGKitPlugin
   - SDWebImageWebPCoder
+  - SnapKit
   - SVGKit
-  - SwiftFormat/CLI
-  - SwiftLint
+  - TextFieldEffects
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - CocoaLumberjack
+    - DeviceKit
     - libwebp
+    - Moya
     - ReachabilitySwift
     - SCSiriWaveformView
     - SDWebImage
     - SDWebImageSVGKitPlugin
     - SDWebImageWebPCoder
+    - SnapKit
     - SVGKit
-    - SwiftFormat
-    - SwiftLint
+    - TextFieldEffects
 
 EXTERNAL SOURCES:
   MCEmojiPicker:
@@ -66,18 +77,21 @@ CHECKOUT OPTIONS:
     :git: https://github.com/deltachat/MCEmojiPicker
 
 SPEC CHECKSUMS:
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   CocoaLumberjack: 6a459bc897d6d80bd1b8c78482ec7ad05dffc3f0
+  DeviceKit: 9f2e0b68984a384f864b0f4e40a54bae43636bd8
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
   MCEmojiPicker: d24f72731881c05143870eefff52f586d493b982
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   SCSiriWaveformView: 016392911fb442c17d6dbad68e666edb13193c02
   SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
-  SwiftFormat: 2f3558ca02842dcd3fd970360d2d4054bd21624a
-  SwiftLint: 92196976e597b9afec5dbe374810103e6c1d9d7c
+  TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: 2da95f11b974320ff49308be31714c4fd2efb4ac
+PODFILE CHECKSUM: 000f6afceee76f1c85f814a1cf4498194ca5fa40
 
 COCOAPODS: 1.16.2

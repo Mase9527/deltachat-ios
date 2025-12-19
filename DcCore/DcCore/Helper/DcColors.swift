@@ -3,6 +3,7 @@ import UIKit
 public struct DcColors {
     private static let white                                  = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     private static let actionCellBackgroundDark               = #colorLiteral(red: 0.1031623408, green: 0.1083367988, blue: 0.1185036376, alpha: 1)
+    public static let text1 = UIColor.init(hexString: "141414")
 
     public static let primary = UIColor.systemBlue
     public static let highlight = UIColor.themeColor(light: UIColor.yellow, dark: UIColor.systemBlue)

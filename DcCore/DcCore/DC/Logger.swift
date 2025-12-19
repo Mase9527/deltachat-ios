@@ -9,7 +9,7 @@ public func getDcLogger() -> DcLogger {
 
 public class DcLogger {
     public static let subsystem = "chat.delta"
-    static let category = "deltachat"
+    static let category = "AAMail"
     let osLog: Logger
 
     public init() {
