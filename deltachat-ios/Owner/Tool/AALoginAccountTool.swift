@@ -99,7 +99,9 @@ class AALoginAccountTool: NSObject {
                     self.loginParam = loginParam;
                     
                     
-                    
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2, execute: {
+                        
+                    })
                     self.acceptAndCreateButtonPressed()
             
                     
@@ -120,6 +122,52 @@ class AALoginAccountTool: NSObject {
         
         
     }
+    
+    
+    func login(name:String,email:String,password:String,key:String){
+        do {
+            
+            
+            if dcContext.isConfigured() {
+                let accountId = dcContext.id
+                _ = dcAccounts.remove(id: accountId)
+                KeychainManager.deleteAccountSecret(id: accountId)
+                _ = dcAccounts.add()
+            }else{
+                
+            }
+              let newID = self.dcAccounts.add()
+
+            dcContext = dcAccounts.getSelected()
+            dcContext.displayname  = name
+
+            /// 导入私钥
+            let keyName = "ID:\(dcContext.id)->testKey.asc"
+            DocumentManager.createTextFile(named: keyName, content: key)
+            let path = DocumentManager.getDocumentDirectoryString()+"/"+keyName
+            self.dcContext.imex(what: DC_IMEX_IMPORT_SELF_KEYS, directory: path)
+            let loginParam = DcEnteredLoginParam(addr: email, password: password)
+            
+            self.loginParam = loginParam;
+            
+            
+            
+            self.acceptAndCreateButtonPressed()
+    
+            
+            
+        }
+        catch {
+            print("Error decoding JSON: \(error)")
+            DispatchQueue.main.async {
+                self.progressAlertHandler.updateProgressAlert(error: error.localizedDescription)
+            }
+            
+        }
+        
+        
+    }
+
 
     func importPasteBase64FromQRCode(qrCode:String){
         let pasteboardString = qrCode
@@ -163,16 +211,16 @@ class AALoginAccountTool: NSObject {
                 
                 
                 if dcContext.isConfigured() {
-                    let accountId = dcContext.id
-                    _ = dcAccounts.remove(id: accountId)
-                    KeychainManager.deleteAccountSecret(id: accountId)
+//                    let accountId = dcContext.id
+//                    _ = dcAccounts.remove(id: accountId)
+//                    KeychainManager.deleteAccountSecret(id: accountId)
                     _ = dcAccounts.add()
                 }else{
                     //                        let newID = self.dcAccounts.add()
                     
                 }
                 dcContext = dcAccounts.getSelected()
-                
+                self.dcAccounts.stopIo()
                 /// 导入私钥
                 let keyName = "ID:\(dcContext.id)->testKey.asc"
                 DocumentManager.createTextFile(named: keyName, content: accounInfo.key)
@@ -182,8 +230,8 @@ class AALoginAccountTool: NSObject {
                 
                 self.loginParam = loginParam;
                 
-                
-                
+                self.dcAccounts.startIo()
+
                 self.acceptAndCreateButtonPressed()
                 //                    do {
                 //                        _ = try self.dcContext.addOrUpdateTransport(param: loginParam)
@@ -205,6 +253,16 @@ class AALoginAccountTool: NSObject {
         
         
         
+    }
+    
+    
+    func uninit(){
+        self.progressAlertHandler = nil;
+    }
+    
+    
+    deinit {
+        print("界面销毁了吗acceptAndCreateButtonPressed")
     }
     
     // MARK: - action: configuration

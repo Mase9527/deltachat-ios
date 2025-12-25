@@ -210,6 +210,11 @@
 		B2F899E129F96A67003797D5 /* AllMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F899E029F96A67003797D5 /* AllMediaViewController.swift */; };
 		BB6AB32B2EF53C020021318E /* efd257ece330a34525667707e617a16.txt in Resources */ = {isa = PBXBuildFile; fileRef = BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */; };
 		BB6AB33B2EF544B30021318E /* AALoginAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */; };
+		BB9D08852EFB899200D4E110 /* AAPublicKeyPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */; };
+		BB9D08872EFB8C0000D4E110 /* AACenterPopupPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */; };
+		BB9D08892EFB91EC00D4E110 /* AALoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */; };
+		BB9D088C2EFB9C6300D4E110 /* RSKPlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D088B2EFB9C6300D4E110 /* RSKPlaceholderTextView.swift */; };
+		BB9D08B82EFBE72400D4E110 /* AAPGPPublicKeyTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08B72EFBE72400D4E110 /* AAPGPPublicKeyTool.swift */; };
 		BBBB8A262EF527C800B3B07E /* InstantOnboardingOwnerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBBB89F32EF527C800B3B07E /* InstantOnboardingOwnerVC.xib */; };
 		BBBB8A272EF527C800B3B07E /* AccountInfoPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBBB89F82EF527C800B3B07E /* AccountInfoPopupViewController.xib */; };
 		BBBB8A282EF527C800B3B07E /* OwnerChange.md in Resources */ = {isa = PBXBuildFile; fileRef = BBBB8A062EF527C800B3B07E /* OwnerChange.md */; };
@@ -681,6 +686,11 @@
 		B2F899E029F96A67003797D5 /* AllMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllMediaViewController.swift; sourceTree = "<group>"; };
 		BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = efd257ece330a34525667707e617a16.txt; sourceTree = "<group>"; };
 		BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginAccountTool.swift; sourceTree = "<group>"; };
+		BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAPublicKeyPopupViewController.swift; sourceTree = "<group>"; };
+		BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AACenterPopupPresentationController.swift; sourceTree = "<group>"; };
+		BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginViewController.swift; sourceTree = "<group>"; };
+		BB9D088B2EFB9C6300D4E110 /* RSKPlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSKPlaceholderTextView.swift; sourceTree = "<group>"; };
+		BB9D08B72EFBE72400D4E110 /* AAPGPPublicKeyTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAPGPPublicKeyTool.swift; sourceTree = "<group>"; };
 		BBBB89E32EF527C800B3B07E /* iFBaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iFBaseAPI.swift; sourceTree = "<group>"; };
 		BBBB89E52EF527C800B3B07E /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		BBBB89E62EF527C800B3B07E /* KeyedDecodingContainer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyedDecodingContainer+Extension.swift"; sourceTree = "<group>"; };
@@ -1317,6 +1327,14 @@
 			path = DcNotificationService;
 			sourceTree = "<group>";
 		};
+		BB9D088A2EFB9C5300D4E110 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				BB9D088B2EFB9C6300D4E110 /* RSKPlaceholderTextView.swift */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
 		BBBB89E42EF527C800B3B07E /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -1376,6 +1394,9 @@
 				BBBB89F62EF527C800B3B07E /* ContactListOwnerVC.swift */,
 				BBBB89F72EF527C800B3B07E /* AccountInfoPopupViewController.swift */,
 				BBBB89F82EF527C800B3B07E /* AccountInfoPopupViewController.xib */,
+				BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */,
+				BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */,
+				BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1391,6 +1412,7 @@
 				BBBB89FF2EF527C800B3B07E /* AccountAPI.swift */,
 				BBBB8A6B2EF52DE100B3B07E /* AAExportAccountTool.swift */,
 				BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */,
+				BB9D08B72EFBE72400D4E110 /* AAPGPPublicKeyTool.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1407,6 +1429,7 @@
 		BBBB8A072EF527C800B3B07E /* Owner */ = {
 			isa = PBXGroup;
 			children = (
+				BB9D088A2EFB9C5300D4E110 /* Vendor */,
 				BBBB89F02EF527C800B3B07E /* Network */,
 				BBBB89F92EF527C800B3B07E /* ViewController */,
 				BBBB8A022EF527C800B3B07E /* Tool */,
@@ -2011,6 +2034,7 @@
 				B26B3BC7236DC3DC008ED35A /* SwitchCell.swift in Sources */,
 				D80F62792B59D1CC00877059 /* DefaultReactions.swift in Sources */,
 				30E348E524F6647D005C93D1 /* FileTextCell.swift in Sources */,
+				BB9D08852EFB899200D4E110 /* AAPublicKeyPopupViewController.swift in Sources */,
 				30238CFD28A5028300EF14AC /* WebxdcGridCell.swift in Sources */,
 				3080A036277DE30100E74565 /* NSMutableAttributedString+Extensions.swift in Sources */,
 				307A82CC25B8D26700748B57 /* ChatEditingBar.swift in Sources */,
@@ -2072,6 +2096,7 @@
 				B2172F3C29C125F2002C289E /* AdvancedViewController.swift in Sources */,
 				AEACE2E51FB32E1900DCDD78 /* Utils.swift in Sources */,
 				3052C60E253F088E007D13EA /* DetectorType.swift in Sources */,
+				BB9D08872EFB8C0000D4E110 /* AACenterPopupPresentationController.swift in Sources */,
 				30349291256441E200A523D0 /* QuotePreview.swift in Sources */,
 				AEC67A1E241FCFE0007DDBE1 /* ChatListViewModel.swift in Sources */,
 				30FDB71F24D8170E0066C48D /* TextMessageCell.swift in Sources */,
@@ -2138,11 +2163,13 @@
 				BBBB8A3C2EF527C800B3B07E /* ShareAccountInfoQRCodeVC.swift in Sources */,
 				BBBB8A3D2EF527C800B3B07E /* AdvancedPopoverViewController.swift in Sources */,
 				BBBB8A3E2EF527C800B3B07E /* ProgressHUD+LiveIcon.swift in Sources */,
+				BB9D08892EFB91EC00D4E110 /* AALoginViewController.swift in Sources */,
 				BBBB8A3F2EF527C800B3B07E /* ProgressHUD+HorizontalBarScaling.swift in Sources */,
 				BBBB8A402EF527C800B3B07E /* MoyaConfig.swift in Sources */,
 				BBBB8A412EF527C800B3B07E /* iFBaseAPI.swift in Sources */,
 				BBBB8A422EF527C800B3B07E /* AdvancedQRCodeGenerator.swift in Sources */,
 				BBBB8A432EF527C800B3B07E /* HUD.swift in Sources */,
+				BB9D088C2EFB9C6300D4E110 /* RSKPlaceholderTextView.swift in Sources */,
 				BBBB8A442EF527C800B3B07E /* QRCodeTool.swift in Sources */,
 				BBBB8A452EF527C800B3B07E /* APIService.swift in Sources */,
 				BBBB8A462EF527C800B3B07E /* ProgressHUD+PacmanProgress.swift in Sources */,
@@ -2159,6 +2186,7 @@
 				BBBB8A512EF527C800B3B07E /* ProgressHUD+Enums.swift in Sources */,
 				BBBB8A522EF527C800B3B07E /* InstantOnboardingOwnerVC.swift in Sources */,
 				BBBB8A532EF527C800B3B07E /* ProgressHUD+BarSweepToggle.swift in Sources */,
+				BB9D08B82EFBE72400D4E110 /* AAPGPPublicKeyTool.swift in Sources */,
 				BBBB8A542EF527C800B3B07E /* ProgressHUD+TriangleDotShift.swift in Sources */,
 				BBBB8A552EF527C800B3B07E /* ContactListOwnerVC.swift in Sources */,
 				BBBB8A562EF527C800B3B07E /* SaveFiles.swift in Sources */,
@@ -2691,6 +2719,7 @@
 					/usr/local/include,
 				);
 				INFOPLIST_FILE = "deltachat-ios/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = AAMail;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2760,6 +2789,7 @@
 					/usr/local/include,
 				);
 				INFOPLIST_FILE = "deltachat-ios/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = AAMail;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

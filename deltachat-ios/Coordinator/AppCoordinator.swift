@@ -10,8 +10,8 @@ class AppCoordinator: NSObject {
     private let dcAccounts: DcAccounts
     // the order below is important as well - and there are two enums, here and at
     // AppStateRestorer (this is error prone and could probably be merged)
-    private let qrTab = 0
-    public  let chatsTab = 1
+    private let qrTab = 1
+    public  let chatsTab = 0
     private let settingsTab = 2
 
     private let appStateRestorer = AppStateRestorer.shared
@@ -24,12 +24,14 @@ class AppCoordinator: NSObject {
 
     // MARK: - tabbar view handling
     lazy var tabBarController: UITabBarController = {
+        let contactListNavController = createContactNavigationController()
+
         let qrNavController = createQrNavigationController()
         let chatsNavController = createChatsNavigationController()
         let settingsNavController = createSettingsNavigationController()
         let tabBarController = UITabBarController()
         tabBarController.delegate = self
-        tabBarController.viewControllers = [qrNavController, chatsNavController, settingsNavController]
+        tabBarController.viewControllers = [ chatsNavController, contactListNavController,settingsNavController]
         tabBarController.tabBar.tintColor = DcColors.primary
         return tabBarController
     }()
@@ -43,10 +45,19 @@ class AppCoordinator: NSObject {
         return nav
     }
 
+    private func createContactNavigationController() -> UINavigationController {
+        let root = ContactListOwnerVC(dcContext: self.dcAccounts.getSelected())
+        let nav = UINavigationController(rootViewController: root)
+        let qrCodeTabImage: UIImage?
+        qrCodeTabImage = UIImage(named: "Contact_Tabbar")
+        nav.tabBarItem = UITabBarItem(title: String.localized("联系人"), image: qrCodeTabImage, tag: qrTab)
+        return nav
+    }
+    
     private func createChatsNavigationController() -> UINavigationController {
         let root = ChatListViewController(dcContext: dcAccounts.getSelected(), dcAccounts: dcAccounts, isArchive: false)
         let nav = UINavigationController(rootViewController: root)
-        let chatTabImage = UIImage(named: "ic_chat")
+        let chatTabImage = UIImage(named: "Chat_Tabbar")
         nav.tabBarItem = UITabBarItem(title: String.localized("pref_chats"), image: chatTabImage, tag: chatsTab)
         return nav
     }
@@ -55,7 +66,7 @@ class AppCoordinator: NSObject {
         let root = SettingsViewController(dcAccounts: dcAccounts)
         let nav = UINavigationController(rootViewController: root)
         let settingsImage: UIImage?
-        settingsImage = UIImage(systemName: "gear")
+        settingsImage = UIImage.init(named: "Setting_Tabbar")
         nav.tabBarItem = UITabBarItem(title: String.localized("menu_settings"), image: settingsImage, tag: settingsTab)
         return nav
     }
@@ -587,8 +598,8 @@ class AppCoordinator: NSObject {
             }
         }
 
-        self.tabBarController.setViewControllers([createQrNavigationController(),
-                                                  createChatsNavigationController(),
+        self.tabBarController.setViewControllers([createChatsNavigationController(),
+                                                  createContactNavigationController(),
                                                   createSettingsNavigationController()], animated: false)
         presentTabBarController()
         NotificationManager.updateBadgeCounters()

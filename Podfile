@@ -19,7 +19,8 @@ target 'deltachat-ios' do
   pod 'TextFieldEffects'
   pod 'Moya'
   pod 'DeviceKit'
-  
+  pod 'ObjectivePGP'
+
 end
 
 target 'DcShare' do

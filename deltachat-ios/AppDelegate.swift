@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // explicitly ignore SIGPIPE to avoid crashes, see https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/CommonPitfalls/CommonPitfalls.html
         // setupCrashReporting() may create an additional handler, but we do not want to rely on that
         signal(SIGPIPE, SIG_IGN)
-
+        AAPGPPublicKeyTool.generatePGPPublicKey(mail: "aaaa@qq.com")
         logger.info("➡️ didFinishLaunchingWithOptions")
         DarwinNotificationCenter.current.addObserver(self, selector: #selector(Self.appRunningQuestion), for: .appRunningQuestion)
         callManager = CallManager.shared

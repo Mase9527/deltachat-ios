@@ -40,6 +40,15 @@ class InstantOnboardingOwnerVC: UIViewController {
     
     var avatorimage:UIImage?
 
+    
+    private var loginImexObserver: NSObjectProtocol?
+
+    
+    private var exportImexObserver: NSObjectProtocol?
+    
+    var uuidFolder:String = ""
+
+    
     private var providerHostURL: URL
     private var qrCodeData: String?
     private lazy var menuButton: UIBarButtonItem = {
@@ -97,6 +106,137 @@ class InstantOnboardingOwnerVC: UIViewController {
 
         navigationItem.setRightBarButtonItems([menuButton], animated: true)
         updateProxyButton()
+        
+        // 点击空白收起键盘
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+
+    }
+    
+    @objc private func handleImportExportProgress(_ notification: Notification) {
+        guard let ui = notification.userInfo, let permille = ui["progress"] as? Int else { return }
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            
+            var statusLineText: String?
+            var hideQrCode = false
+
+            if permille == 0 {
+        
+            } else if permille < 1000 {
+                let percent: Int = permille/10
+                statusLineText = String.localized("transferring") + " \(percent)%"
+                hideQrCode = true
+            } else if permille == 1000 {
+            
+                statusLineText = String.localized("done") + " 😀"
+                
+                let path = "\(DocumentManager.getDocumentDirectoryString())/\(self.uuidFolder)"
+                
+                let url = URL(fileURLWithPath: path)
+                
+               let allFileURLs =  DocumentManager.getAllFilesInDirectory(at: url)
+                
+                print("allFileURLs:\(allFileURLs)")
+                
+                let keyPath = allFileURLs.first { url in
+                    return url.path.contains("private-key") == true
+                }
+                
+                guard let keyPath = keyPath else { return  }
+                
+                let data = try?Data.init(contentsOf: keyPath)
+                
+                guard let data = data else { return  }
+                
+                
+                let privateKeyText = String(data: data, encoding: .utf8)
+                
+                logger.info("privateKeyText:\(privateKeyText)")
+                
+                let testVC = AAPublicKeyPopupViewController(key: privateKeyText ?? "")
+                
+                testVC.copySucessAction = {[weak self] in
+                    
+                    guard let self = self else { return  }
+                    
+                    let domain = "aa1234.com"
+
+                    let address = "\(self.accountTextField.text ?? "")@\(domain)"
+                    
+                    let loginVC = AALoginViewController(mail:address , password: self.pwdTextField.text ?? "",dcContext: self.dcContext,dcAccounts: self.dcAccounts)
+                    if let imexObserver = self.loginImexObserver {
+                        NotificationCenter.default.removeObserver(imexObserver)
+                    }
+                    if let imexObserver = self.exportImexObserver {
+                        NotificationCenter.default.removeObserver(imexObserver)
+                    }
+                    self.navigationController?.pushViewController(loginVC, animated: true)
+                }
+                        self.present(testVC, animated: true)
+                
+                logger.info("开始")
+
+                if dcContext.isConfigured() {
+                    let accountId = dcContext.id
+                    _ = dcAccounts.remove(id: accountId)
+                    KeychainManager.deleteAccountSecret(id: accountId)
+                    _ = dcAccounts.add()
+                    logger.info("开始删除:\(accountId)")
+                }else{
+                    //                        let newID = self.dcAccounts.add()
+                    
+                }
+                
+           
+               
+
+//                self.dcContext.deleteTransport(addr: <#T##String#>)
+              
+            }
+
+            if let statusLineText = statusLineText {
+                
+                print("statusLineText:\(statusLineText)")
+            }
+
+       
+        }
+    }
+
+    
+    @objc private func handleNotification(_ notification: Notification) {
+        guard let ui = notification.userInfo else { return }
+
+        DispatchQueue.main.async { [weak self] in
+
+            guard let self else { return }
+
+            if ui["error"] as? Bool ?? false {
+                DcAccounts.shared.startIo()
+
+                var errorMessage: String = ui["errorMessage"] as? String ?? "ErrString"
+                // override if we need to check for connectiviy issues
+                logger.warning("errorMessage:\(errorMessage)")
+            } else if ui["done"] as? Bool ?? false {
+                DcAccounts.shared.startIo()
+                logger.info("登录成功，开始导出Key")
+                self.uuidFolder = UUID().uuidString;
+             
+                
+                let idName = self.dcContext.id
+                let path = "\(DocumentManager.getDocumentDirectoryString())/\(self.uuidFolder)"
+                self.dcAccounts.stopIo()
+                self.dcContext.imex(what: DC_IMEX_EXPORT_SELF_KEYS, directory:path )
+//                self.updateProgressAlertSuccess(completion: onSuccess)
+            } else {
+                logger.info("登录进度:\(ui["progress"] as? Int)")
+
+//                self.updateProgressAlertValue(value: ui["progress"] as? Int)
+            }
+        }
     }
 
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -124,6 +264,9 @@ class InstantOnboardingOwnerVC: UIViewController {
 //
 //        self.view = contentView
 //    }
+    @objc internal override func dismissKeyboard() {
+        view.endEditing(true)
+    }
 
     override func viewDidLoad() {
         contentView?.nameTextField.becomeFirstResponder()
@@ -158,6 +301,9 @@ class InstantOnboardingOwnerVC: UIViewController {
         self.view.backgroundColor = DcColors.defaultBackgroundColor
         
         self.createButton.backgroundColor = DcColors.primary
+        
+       let key = self.dcContext.createKeypair(email: "aaaa@qq.com")
+        logger.error("key:\(key)")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -255,6 +401,13 @@ class InstantOnboardingOwnerVC: UIViewController {
                       if response.success == true && response.account.isEmpty == false {
                           ProgressHUD.dismiss()
 
+                          self.exportImexObserver = NotificationCenter.default.addObserver(forName: Event.importExportProgress, object: nil, queue: nil) { [weak self] notification in
+                              self?.handleImportExportProgress(notification)
+                          }
+                          
+                          self.loginImexObserver = NotificationCenter.default.addObserver(forName: Event.configurationProgress, object: nil, queue: nil) { [weak self] notification in
+                              self?.handleNotification(notification)
+                          }
                           
                           if self.dcContext.isConfigured() {
                               let accountId = self.dcContext.id
@@ -277,8 +430,9 @@ class InstantOnboardingOwnerVC: UIViewController {
                           parm.smtpServer = "mail.\(domain)";
                           
                           self.loginParam = parm;
-                          
-                          self.acceptOwnewAndCreateButtonPressed()
+                          _ = try? self.dcContext.addOrUpdateTransport(param: parm)
+
+//                          self.acceptOwnewAndCreateButtonPressed()
                           
                       }else if response.error.isEmpty == false && response.success == false{
                           ProgressHUD.failed("\(response.error)",delay: 3)
@@ -301,6 +455,11 @@ class InstantOnboardingOwnerVC: UIViewController {
     }
     @IBAction func didClickOtherCreatButton(_ sender: UIButton) {
         self.showOtherOptions(sender)
+//        let testVC = AAPublicKeyPopupViewController()
+//        self.present(testVC, animated: true)
+        
+//        let testVC = AALoginViewController()
+//        self.navigationController?.pushViewController(testVC, animated: true)
     }
     @objc func textDidChangeNotification(notification: Notification) {
         guard let textField = notification.object as? UITextField,
