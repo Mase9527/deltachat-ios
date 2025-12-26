@@ -18,6 +18,8 @@ class AALoginViewController: UIViewController {
      var dcContext: DcContext
      let dcAccounts: DcAccounts
     
+    var nickName:String
+    
     var loginTool:AALoginAccountTool?
     // 1. 新增顶部 Logo
     private let logoImageView: UIImageView = {
@@ -85,11 +87,12 @@ class AALoginViewController: UIViewController {
         return btn
     }()
     
-    init(mail: String, password: String,dcContext:DcContext,dcAccounts:DcAccounts) {
+    init(mail: String, password: String,nickName:String,dcContext:DcContext,dcAccounts:DcAccounts) {
         self.mail = mail
         self.password = password
         self.dcContext = dcContext
         self.dcAccounts = dcAccounts
+        self.nickName = nickName;
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -192,7 +195,32 @@ class AALoginViewController: UIViewController {
     
     @objc func loginAction() {
        
-        self.loginTool?.login(name: "测试hahha", email: self.emailInput.textField.text ?? "", password: self.passwordInput.textField.text ?? "", key:  self.publicKeyTextView.text ?? "")
+        self.dcAccounts.stopIo()
+
+        /// 导入私钥
+//        let keyName = "ID:\(dcContext.id)->testKey.asc"
+//        DocumentManager.createTextFile(named: keyName, content: self.publicKeyTextView.text)
+//        let path = DocumentManager.getDocumentDirectoryString()+"/"+keyName
+//        self.dcContext.imex(what: DC_IMEX_IMPORT_SELF_KEYS, directory: path)
+//        let loginParam = DcEnteredLoginParam(addr: self.mail, password: password)
+//        
+//        self.loginParam = loginParam;
+//        
+//        self.dcAccounts.startIo()
+//        
+//        do {
+//            
+//            guard let loginParam = self.loginParam else { return  }
+//            
+//            _ = try self.dcContext.addOrUpdateTransport(param: loginParam)
+//            
+//        } catch {
+//            DispatchQueue.main.async {
+//                logger.error(error.localizedDescription)
+//            }
+//        }
+        
+        self.loginTool?.login(name: self.nickName, email: self.emailInput.textField.text ?? "", password: self.passwordInput.textField.text ?? "", key:  self.publicKeyTextView.text ?? "")
     }
 
     deinit {

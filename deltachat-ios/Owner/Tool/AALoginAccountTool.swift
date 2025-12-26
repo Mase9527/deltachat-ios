@@ -8,6 +8,7 @@
 
 import UIKit
 import DcCore
+let domain = "aa1234.com"
 
 class AALoginAccountTool: NSObject {
     private var dcContext: DcContext!
@@ -136,21 +137,24 @@ class AALoginAccountTool: NSObject {
             }else{
                 
             }
-              let newID = self.dcAccounts.add()
+//              let newID = self.dcAccounts.add()
 
             dcContext = dcAccounts.getSelected()
             dcContext.displayname  = name
+            self.dcAccounts.stopIo()
 
             /// 导入私钥
             let keyName = "ID:\(dcContext.id)->testKey.asc"
             DocumentManager.createTextFile(named: keyName, content: key)
             let path = DocumentManager.getDocumentDirectoryString()+"/"+keyName
             self.dcContext.imex(what: DC_IMEX_IMPORT_SELF_KEYS, directory: path)
-            let loginParam = DcEnteredLoginParam(addr: email, password: password)
-            
+            var loginParam = DcEnteredLoginParam(addr: email, password: password)
+            loginParam.imapServer =  "mail.\(domain)"
+            loginParam.smtpServer = "mail.\(domain)";
             self.loginParam = loginParam;
             
-            
+            self.dcAccounts.startIo()
+
             
             self.acceptAndCreateButtonPressed()
     

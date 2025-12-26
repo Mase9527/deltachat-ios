@@ -113,131 +113,8 @@ class InstantOnboardingOwnerVC: UIViewController {
         
 
     }
-    
-    @objc private func handleImportExportProgress(_ notification: Notification) {
-        guard let ui = notification.userInfo, let permille = ui["progress"] as? Int else { return }
-
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            
-            var statusLineText: String?
-            var hideQrCode = false
-
-            if permille == 0 {
-        
-            } else if permille < 1000 {
-                let percent: Int = permille/10
-                statusLineText = String.localized("transferring") + " \(percent)%"
-                hideQrCode = true
-            } else if permille == 1000 {
-            
-                statusLineText = String.localized("done") + " 😀"
-                
-                let path = "\(DocumentManager.getDocumentDirectoryString())/\(self.uuidFolder)"
-                
-                let url = URL(fileURLWithPath: path)
-                
-               let allFileURLs =  DocumentManager.getAllFilesInDirectory(at: url)
-                
-                print("allFileURLs:\(allFileURLs)")
-                
-                let keyPath = allFileURLs.first { url in
-                    return url.path.contains("private-key") == true
-                }
-                
-                guard let keyPath = keyPath else { return  }
-                
-                let data = try?Data.init(contentsOf: keyPath)
-                
-                guard let data = data else { return  }
-                
-                
-                let privateKeyText = String(data: data, encoding: .utf8)
-                
-                logger.info("privateKeyText:\(privateKeyText)")
-                
-                let testVC = AAPublicKeyPopupViewController(key: privateKeyText ?? "")
-                
-                testVC.copySucessAction = {[weak self] in
-                    
-                    guard let self = self else { return  }
-                    
-                    let domain = "aa1234.com"
-
-                    let address = "\(self.accountTextField.text ?? "")@\(domain)"
-                    
-                    let loginVC = AALoginViewController(mail:address , password: self.pwdTextField.text ?? "",dcContext: self.dcContext,dcAccounts: self.dcAccounts)
-                    if let imexObserver = self.loginImexObserver {
-                        NotificationCenter.default.removeObserver(imexObserver)
-                    }
-                    if let imexObserver = self.exportImexObserver {
-                        NotificationCenter.default.removeObserver(imexObserver)
-                    }
-                    self.navigationController?.pushViewController(loginVC, animated: true)
-                }
-                        self.present(testVC, animated: true)
-                
-                logger.info("开始")
-
-                if dcContext.isConfigured() {
-                    let accountId = dcContext.id
-                    _ = dcAccounts.remove(id: accountId)
-                    KeychainManager.deleteAccountSecret(id: accountId)
-                    _ = dcAccounts.add()
-                    logger.info("开始删除:\(accountId)")
-                }else{
-                    //                        let newID = self.dcAccounts.add()
-                    
-                }
-                
-           
-               
-
-//                self.dcContext.deleteTransport(addr: <#T##String#>)
-              
-            }
-
-            if let statusLineText = statusLineText {
-                
-                print("statusLineText:\(statusLineText)")
-            }
-
-       
-        }
-    }
 
     
-    @objc private func handleNotification(_ notification: Notification) {
-        guard let ui = notification.userInfo else { return }
-
-        DispatchQueue.main.async { [weak self] in
-
-            guard let self else { return }
-
-            if ui["error"] as? Bool ?? false {
-                DcAccounts.shared.startIo()
-
-                var errorMessage: String = ui["errorMessage"] as? String ?? "ErrString"
-                // override if we need to check for connectiviy issues
-                logger.warning("errorMessage:\(errorMessage)")
-            } else if ui["done"] as? Bool ?? false {
-                DcAccounts.shared.startIo()
-                logger.info("登录成功，开始导出Key")
-                self.uuidFolder = UUID().uuidString;
-             
-                
-                let idName = self.dcContext.id
-                let path = "\(DocumentManager.getDocumentDirectoryString())/\(self.uuidFolder)"
-                self.dcAccounts.stopIo()
-                self.dcContext.imex(what: DC_IMEX_EXPORT_SELF_KEYS, directory:path )
-//                self.updateProgressAlertSuccess(completion: onSuccess)
-            } else {
-                logger.info("登录进度:\(ui["progress"] as? Int)")
-
-//                self.updateProgressAlertValue(value: ui["progress"] as? Int)
-            }
-        }
-    }
 
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
@@ -396,43 +273,41 @@ class InstantOnboardingOwnerVC: UIViewController {
               case .success(let response):
                   print("登录成功: \(response)")
                   // 保存 token 等操作
-                  
-                  DispatchQueue.main.async {
+                  DispatchQueue.main.async(execute: DispatchWorkItem.init(block: {
                       if response.success == true && response.account.isEmpty == false {
                           ProgressHUD.dismiss()
 
-                          self.exportImexObserver = NotificationCenter.default.addObserver(forName: Event.importExportProgress, object: nil, queue: nil) { [weak self] notification in
-                              self?.handleImportExportProgress(notification)
-                          }
                           
-                          self.loginImexObserver = NotificationCenter.default.addObserver(forName: Event.configurationProgress, object: nil, queue: nil) { [weak self] notification in
-                              self?.handleNotification(notification)
-                          }
                           
-                          if self.dcContext.isConfigured() {
-                              let accountId = self.dcContext.id
-                              _ = self.dcAccounts.remove(id: accountId)
-                              KeychainManager.deleteAccountSecret(id: accountId)
-                              _ = self.dcAccounts.add()
-                          }else{
-//                                                      let newID = self.dcAccounts.add()
+                          let privateKeyText = self.dcContext.createKeypair(email: address)
+                           logger.error("key:\(privateKeyText)")
+                          
+                          
+                          let testVC = AAPublicKeyPopupViewController(key: privateKeyText)
+                          
+                          testVC.copySucessAction = {
                               
+                              
+                              let domain = "aa1234.com"
+
+                              let address = "\(self.accountTextField.text ?? "")@\(domain)"
+                              
+                              let loginVC = AALoginViewController(mail:address , password:self.pwdTextField.text ?? "" ,nickName:self.nameTextField.text ?? "AAMail" ,dcContext: self.dcContext,dcAccounts: self.dcAccounts)
+                       
+                              self.navigationController?.pushViewController(loginVC, animated: true)
                           }
+                        self.present(testVC, animated: true)
+                          
+
                           self.dcContext = self.dcAccounts.getSelected()
                           
                           if let avatorimage = self.avatorimage {
                               AvatarHelper.saveSelfAvatarImage(dcContext: self.dcContext, image: avatorimage)
 
                           }
-//                          self.dcAccounts.di
-                         var parm =  DcEnteredLoginParam.init(addr: address, password: pwd)
-                          parm.imapServer =  "mail.\(domain)"
-                          parm.smtpServer = "mail.\(domain)";
-                          
-                          self.loginParam = parm;
-                          _ = try? self.dcContext.addOrUpdateTransport(param: parm)
 
-//                          self.acceptOwnewAndCreateButtonPressed()
+
+                 //                          self.acceptOwnewAndCreateButtonPressed()
                           
                       }else if response.error.isEmpty == false && response.success == false{
                           ProgressHUD.failed("\(response.error)",delay: 3)
@@ -440,8 +315,8 @@ class InstantOnboardingOwnerVC: UIViewController {
                           ProgressHUD.failed("登录失败",delay: 3)
 
                       }
-                  }
-                  
+                  }))
+                 
                
               case .failure(let error):
                   print("登录失败: \(error.localizedDescription)")
