@@ -119,6 +119,15 @@ class WelcomeViewController: UIViewController {
                 
             }))
             
+            alert.addAction(UIAlertAction(title: String.localized("账号密码登录"), style: .default,handler: { action in
+                
+                let  loginVC = AALoginViewController.init(mail: "", password: "", nickName: "", dcContext: self.dcContext, dcAccounts: self.dcAccounts)
+                loginVC.isLogin = true;
+                self.navigationController?.pushViewController(loginVC, animated: true)
+               
+                
+            }))
+            
             alert.addAction(UIAlertAction(title: String.localized("cancel"), style: .cancel))
             present(alert, animated: true, completion: nil)
         }

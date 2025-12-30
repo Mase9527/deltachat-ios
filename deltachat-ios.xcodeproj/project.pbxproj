@@ -2711,6 +2711,7 @@
 				CODE_SIGN_ENTITLEMENTS = "deltachat-ios/deltachat-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 160;
 				DEVELOPMENT_TEAM = PKB8HJT5QJ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
@@ -2730,6 +2731,7 @@
 					"$(PROJECT_DIR)/deltachat-ios/libraries/deltachat-core-rust/deltachat-ffi",
 					"$(PROJECT_DIR)/deltachat-ios/libraries",
 				);
+				MARKETING_VERSION = 2.11.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-isystem",
@@ -2781,6 +2783,7 @@
 				CODE_SIGN_ENTITLEMENTS = "deltachat-ios/deltachat-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 160;
 				DEVELOPMENT_TEAM = PKB8HJT5QJ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
@@ -2800,6 +2803,7 @@
 					"$(PROJECT_DIR)/deltachat-ios/libraries/deltachat-core-rust/deltachat-ffi",
 					"$(PROJECT_DIR)/deltachat-ios/libraries",
 				);
+				MARKETING_VERSION = 2.11.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-isystem",

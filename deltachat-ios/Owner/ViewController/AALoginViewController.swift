@@ -50,7 +50,9 @@ class AALoginViewController: UIViewController {
     }()
 
     private let emailInput = ModernInputView(title: "电子邮箱", icon: "envelope.fill", placeholder: "example@mail.com")
-    private let passwordInput = ModernInputView(title: "安全密码", icon: "lock.fill", placeholder: "请输入密码", isSecure: true)
+    private let passwordInput = ModernInputView(title: "安全密码", icon: "lock.fill", placeholder: "请输入密码", isSecure: false)
+    
+    var isLogin:Bool = false
     
     private let publicKeyTitle: UILabel = {
         let label = UILabel()
@@ -76,13 +78,28 @@ class AALoginViewController: UIViewController {
         let btn = UIButton(type: .system)
         btn.setTitle("登 录", for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
-        btn.backgroundColor = .systemBlue
+        btn.backgroundColor = DcColors.primary
         btn.setTitleColor(.white, for: .normal)
         btn.layer.cornerRadius = 16
         btn.layer.shadowColor = UIColor.systemBlue.cgColor
         btn.layer.shadowOpacity = 0.3
         btn.layer.shadowOffset = CGSize(width: 0, height: 8)
         btn.layer.shadowRadius = 12
+
+        return btn
+    }()
+    
+    private let resetKeyButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("重新生成Key", for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
+//        btn.backgroundColor = .systemRed
+        btn.setTitleColor(.systemRed, for: .normal)
+//        btn.layer.cornerRadius = 16
+//        btn.layer.shadowColor = UIColor.systemBlue.cgColor
+//        btn.layer.shadowOpacity = 0.3
+//        btn.layer.shadowOffset = CGSize(width: 0, height: 8)
+//        btn.layer.shadowRadius = 12
 
         return btn
     }()
@@ -108,6 +125,9 @@ class AALoginViewController: UIViewController {
         setupKeyboardNotifications()
         self.loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
 
+        self.resetKeyButton.addTarget(self, action: #selector(resetKeyAction), for: .touchUpInside)
+
+        
         self.passwordInput.textField.text = self.password;
         self.emailInput.textField.text = self.mail;
         
@@ -136,6 +156,20 @@ class AALoginViewController: UIViewController {
         stackView.setCustomSpacing(10, after: publicKeyTitle)
         
         contentView.addSubview(stackView)
+        
+        contentView.addSubview(self.resetKeyButton)
+        
+        if self.isLogin == true {
+            self.resetKeyButton.isHidden = false;
+        }else{
+            self.resetKeyButton.isHidden = true;
+        }
+        resetKeyButton.sizeToFit()
+        resetKeyButton.snp.makeConstraints { make in
+            make.trailing.equalTo(passwordInput)
+            make.centerY.equalTo(publicKeyTitle)
+            
+        }
         
         scrollView.snp.makeConstraints { $0.edges.equalToSuperview() }
         contentView.snp.makeConstraints {
@@ -192,6 +226,14 @@ class AALoginViewController: UIViewController {
         self.loginTool?.uninit()
     }
 
+    @objc func resetKeyAction() {
+        
+        if self.emailInput.textField.text?.isEmpty == true {
+            ProgressHUD.failed("请输入邮箱")
+            return
+        }
+        self.publicKeyTextView.text =  self.dcContext.createKeypair(email: self.emailInput.textField.text ?? "")
+    }
     
     @objc func loginAction() {
        
