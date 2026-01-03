@@ -40,6 +40,15 @@ class InstantOnboardingOwnerVC: UIViewController {
     
     var avatorimage:UIImage?
 
+    
+    private var loginImexObserver: NSObjectProtocol?
+
+    
+    private var exportImexObserver: NSObjectProtocol?
+    
+    var uuidFolder:String = ""
+
+    
     private var providerHostURL: URL
     private var qrCodeData: String?
     private lazy var menuButton: UIBarButtonItem = {
@@ -97,7 +106,15 @@ class InstantOnboardingOwnerVC: UIViewController {
 
         navigationItem.setRightBarButtonItems([menuButton], animated: true)
         updateProxyButton()
+        
+        // 点击空白收起键盘
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+
     }
+
+    
 
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
@@ -124,6 +141,9 @@ class InstantOnboardingOwnerVC: UIViewController {
 //
 //        self.view = contentView
 //    }
+    @objc internal override func dismissKeyboard() {
+        view.endEditing(true)
+    }
 
     override func viewDidLoad() {
         contentView?.nameTextField.becomeFirstResponder()
@@ -158,6 +178,9 @@ class InstantOnboardingOwnerVC: UIViewController {
         self.view.backgroundColor = DcColors.defaultBackgroundColor
         
         self.createButton.backgroundColor = DcColors.primary
+        
+       let key = self.dcContext.createKeypair(email: "aaaa@qq.com")
+        logger.error("key:\(key)")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -250,35 +273,41 @@ class InstantOnboardingOwnerVC: UIViewController {
               case .success(let response):
                   print("登录成功: \(response)")
                   // 保存 token 等操作
-                  
-                  DispatchQueue.main.async {
+                  DispatchQueue.main.async(execute: DispatchWorkItem.init(block: {
                       if response.success == true && response.account.isEmpty == false {
                           ProgressHUD.dismiss()
 
                           
-                          if self.dcContext.isConfigured() {
-                              let accountId = self.dcContext.id
-                              _ = self.dcAccounts.remove(id: accountId)
-                              KeychainManager.deleteAccountSecret(id: accountId)
-                              _ = self.dcAccounts.add()
-                          }else{
-//                                                      let newID = self.dcAccounts.add()
+                          
+                          let privateKeyText = self.dcContext.createKeypair(email: address)
+                           logger.error("key:\(privateKeyText)")
+                          
+                          
+                          let testVC = AAPublicKeyPopupViewController(key: privateKeyText)
+                          
+                          testVC.copySucessAction = {
                               
+                              
+                              let domain = "aa1234.com"
+
+                              let address = "\(self.accountTextField.text ?? "")@\(domain)"
+                              
+                              let loginVC = AALoginViewController(mail:address , password:self.pwdTextField.text ?? "" ,nickName:self.nameTextField.text ?? "AAMail" ,dcContext: self.dcContext,dcAccounts: self.dcAccounts)
+                       
+                              self.navigationController?.pushViewController(loginVC, animated: true)
                           }
+                        self.present(testVC, animated: true)
+                          
+
                           self.dcContext = self.dcAccounts.getSelected()
                           
                           if let avatorimage = self.avatorimage {
                               AvatarHelper.saveSelfAvatarImage(dcContext: self.dcContext, image: avatorimage)
 
                           }
-//                          self.dcAccounts.di
-                         var parm =  DcEnteredLoginParam.init(addr: address, password: pwd)
-                          parm.imapServer =  "mail.\(domain)"
-                          parm.smtpServer = "mail.\(domain)";
-                          
-                          self.loginParam = parm;
-                          
-                          self.acceptOwnewAndCreateButtonPressed()
+
+
+                 //                          self.acceptOwnewAndCreateButtonPressed()
                           
                       }else if response.error.isEmpty == false && response.success == false{
                           ProgressHUD.failed("\(response.error)",delay: 3)
@@ -286,8 +315,8 @@ class InstantOnboardingOwnerVC: UIViewController {
                           ProgressHUD.failed("登录失败",delay: 3)
 
                       }
-                  }
-                  
+                  }))
+                 
                
               case .failure(let error):
                   print("登录失败: \(error.localizedDescription)")
@@ -301,6 +330,11 @@ class InstantOnboardingOwnerVC: UIViewController {
     }
     @IBAction func didClickOtherCreatButton(_ sender: UIButton) {
         self.showOtherOptions(sender)
+//        let testVC = AAPublicKeyPopupViewController()
+//        self.present(testVC, animated: true)
+        
+//        let testVC = AALoginViewController()
+//        self.navigationController?.pushViewController(testVC, animated: true)
     }
     @objc func textDidChangeNotification(notification: Notification) {
         guard let textField = notification.object as? UITextField,

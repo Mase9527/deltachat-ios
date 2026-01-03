@@ -70,6 +70,8 @@ class MultilineLabelCell: UITableViewCell {
 }
 
 extension MultilineLabelCell: MessageLabelDelegate {
+    public func didSelectOPENPGP4FPR(_ command: String) {}
+
     public func didSelectAddress(_ addressComponents: [String: String]) {}
 
     public func didSelectDate(_ date: Date) {}

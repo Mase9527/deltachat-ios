@@ -26,6 +26,16 @@ import Foundation
 
 public enum DetectorType: Hashable {
 
+    private static let detailedPattern = """
+       OPENPGP4FPR:([A-Fa-f0-9]{40})#\
+       (a=[^&\\s]+)&\
+       (n=[^&\\s]*)&\
+       (i=[^&\\s]+)&\
+       (s=[^&\\s]+)
+       """
+    
+    static let openPGP4Pattern = "OPENPGP4FPR:[A-Fa-f0-9]{40}(?:#|%23)[^\\s#]+"
+    
     case address
     case date
     case phoneNumber
@@ -37,6 +47,9 @@ public enum DetectorType: Hashable {
     public static var hashtag = DetectorType.custom(try! NSRegularExpression(pattern: "#[a-zA-Z0-9]{4,}", options: []))
     public static var mention = DetectorType.custom(try! NSRegularExpression(pattern: "@[a-zA-Z0-9]{4,}", options: []))
     public static var command = DetectorType.custom(try! NSRegularExpression(pattern: "(?<=\\s|^)/[a-zA-Z0-9_\\-.,$+]{2,}(?=\\s|$)", options: []))
+    
+    public static var OPENPGP4FPR = DetectorType.custom(try! NSRegularExpression(pattern: openPGP4Pattern, options: []))
+
     // swiftlint:enable force_try
 
     internal var textCheckingType: NSTextCheckingResult.CheckingType {

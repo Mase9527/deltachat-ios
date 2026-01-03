@@ -518,6 +518,8 @@ open class MessageLabel: UILabel {
                 handleMention(match)
             case .command:
                 handleCommand(match)
+            case .OPENPGP4FPR:
+                handleOPENPGP4FPR(match)
             default:
                 handleCustom(pattern, match: match)
             }
@@ -558,6 +560,10 @@ open class MessageLabel: UILabel {
         delegate?.didSelectCommand(command)
     }
 
+    private func handleOPENPGP4FPR(_ command: String) {
+        delegate?.didSelectOPENPGP4FPR(command)
+    }
+    
     private func handleCustom(_ pattern: String, match: String) {
         delegate?.didSelectCustom(pattern, match: match)
     }

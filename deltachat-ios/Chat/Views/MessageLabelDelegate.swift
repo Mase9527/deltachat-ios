@@ -81,6 +81,8 @@ public protocol MessageLabelDelegate: AnyObject {
     ///   - pattern: the pattern of the regular expression
     ///   - match: part that match with the regular expression
     func didSelectCustom(_ pattern: String, match: String?)
+    
+    func didSelectOPENPGP4FPR(_ command: String)
 
 }
 

@@ -100,7 +100,7 @@ public class BaseMessageCell: UITableViewCell {
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
         view.font = UIFont.preferredFont(for: .body, weight: .regular)
         view.delegate = self
-        view.enabledDetectors = [.url, .phoneNumber, .command]
+        view.enabledDetectors = [.OPENPGP4FPR,.url, .phoneNumber, .command,.OPENPGP4FPR]
         let attributes = [
             NSAttributedString.Key.foregroundColor: view.tintColor!,
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
@@ -109,6 +109,8 @@ public class BaseMessageCell: UITableViewCell {
         view.label.setAttributes(attributes, detector: .url)
         view.label.setAttributes(attributes, detector: .phoneNumber)
         view.label.setAttributes(attributes, detector: .command)
+        view.label.setAttributes(attributes, detector: .OPENPGP4FPR)
+
         view.isUserInteractionEnabled = true
         view.isAccessibilityElement = false
         return view
@@ -680,6 +682,18 @@ public class BaseMessageCell: UITableViewCell {
 
 // MARK: - MessageLabelDelegate
 extension BaseMessageCell: MessageLabelDelegate {
+    public func didSelectOPENPGP4FPR(_ command: String) {
+        print("command:\(command)")
+        let urlStr = DeltaChatLinkConverter.openPGP4FPRToDeltaChat(command) ?? ""
+//        let urlStr = command
+
+        print("command:\(command)\r\n urlStr\(urlStr)")
+
+        if let url = URL(string: urlStr) {
+            self.didSelectURL(url)
+        }
+    }
+    
     public func didSelectAddress(_ addressComponents: [String: String]) {}
 
     public func didSelectDate(_ date: Date) {}
