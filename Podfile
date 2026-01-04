@@ -19,7 +19,9 @@ target 'deltachat-ios' do
   pod 'TextFieldEffects'
   pod 'Moya'
   pod 'DeviceKit'
-  pod 'ObjectivePGP'
+#  pod 'ObjectivePGP'
+  pod 'QKeyboardEmotionView'
+  pod 'ZLPhotoBrowser'
 
 end
 

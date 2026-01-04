@@ -7,6 +7,8 @@ import DcCore
 import SDWebImage
 import Combine
 import CallKit
+import QKeyboardEmotionView
+import ZLPhotoBrowser
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDropDelegate {
     public let chatId: Int
@@ -32,6 +34,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var searchMessageIds: [Int] = []
     private var searchResultIndex: Int = 0
     private var debounceTimer: Timer?
+    
+    var QkeyboardManager: QKeyboardManager!
+
+    var bottomInputView: QInputBarView!
+    
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -148,28 +155,28 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         return dcContext.getChat(chatId: chatId)
     }()
 
-    private var customInputAccessoryView: UIView? {
-        didSet { reloadInputViews() }
-    }
-    override var inputAccessoryView: UIView? {
-        get { customInputAccessoryView }
-        set { customInputAccessoryView = newValue }
-    }
-
-    override var canBecomeFirstResponder: Bool {
-        if let p = presentedViewController, !p.isBeingDismissed, !(p is UISearchController) {
-            // Don't show inputAccessoryView when anything other than searchController is presented
-            return false
-        } else if navigationController?.topViewController != self {
-            // Don't show inputAccessoryView when not top view controller
-            return false
-        } else if contextMenuVisible {
-            // Don't show inputAccessoryView when context menu is visible
-            return false
-        } else {
-            return dcChat.canSend || dcChat.isContactRequest || tableView.isEditing || presentedViewController is UISearchController
-        }
-    }
+//    private var customInputAccessoryView: UIView? {
+//        didSet { reloadInputViews() }
+//    }
+//    override var inputAccessoryView: UIView? {
+//        get { customInputAccessoryView }
+//        set { customInputAccessoryView = newValue }
+//    }
+//
+//    override var canBecomeFirstResponder: Bool {
+//        if let p = presentedViewController, !p.isBeingDismissed, !(p is UISearchController) {
+//            // Don't show inputAccessoryView when anything other than searchController is presented
+//            return false
+//        } else if navigationController?.topViewController != self {
+//            // Don't show inputAccessoryView when not top view controller
+//            return false
+//        } else if contextMenuVisible {
+//            // Don't show inputAccessoryView when context menu is visible
+//            return false
+//        } else {
+//            return dcChat.canSend || dcChat.isContactRequest || tableView.isEditing || presentedViewController is UISearchController
+//        }
+//    }
 
     private func getMyReactions(messageId: Int) -> [String] {
         return dcContext.getMessageReactions(messageId: messageId)?.reactions.filter { $0.isFromSelf } .map { $0.emoji } ?? []
@@ -225,6 +232,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         view.addSubview(tableView)
         tableView.fillSuperview()
+        initKeyBoard()
 
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
@@ -266,6 +274,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             messageInputBar.isHidden = true
         }
+        
         loadMessages()
     }
 
@@ -273,6 +282,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         configureMessageInputBar()
         draft.parse(draftMsg: dcContext.getDraft(chatId: chatId))
         messageInputBar.inputTextView.text = draft.text
+        self.bottomInputView.inputTextView.text = draft.text
         configureDraftArea(draft: draft, animated: false)
         tableView.dragInteractionEnabled = true
         tableView.dropDelegate = self
@@ -344,7 +354,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         if isInitialViewWillAppear {
             becomeFirstResponder()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.tableView.contentInset.top = max(self.inputAccessoryView?.frame.height ?? 0, self.tableView.safeAreaInsets.bottom)
+//                self.tableView.contentInset.top = max(self.inputAccessoryView?.frame.height ?? 0, self.tableView.safeAreaInsets.bottom)
+                self.tableView.contentInset.top = max((self.bottomInputView?.frame.height ?? 0)+50.0 ?? 0, self.tableView.safeAreaInsets.bottom)
+
                 if let msgId = self.highlightedMsg, self.messageIds.firstIndex(of: msgId) != nil {
                     self.scrollToMessage(msgId: msgId, animated: false)
                     self.highlightedMsg = nil
@@ -622,6 +634,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         lastContextMenuPreviewSnapshot?.removeFromSuperview()
+        QkeyboardManager.hideAllBoardView()
+
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -660,7 +674,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         messageInputBar.onScrollDownButtonPressed = { [weak self] in
             self?.scrollToBottom()
         }
-        inputAccessoryView = messageInputBar
+//        inputAccessoryView = messageInputBar
     }
 
     private func configureDraftArea(draft: DraftModel, animated: Bool = true) {
@@ -675,14 +689,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         draftArea.configure(draft: draft)
         if draft.isEditing {
-            inputAccessoryView = editingBar
+//            inputAccessoryView = editingBar
             messageInputBar.inputTextView.resignFirstResponder()
         } else {
             messageInputBar.setMiddleContentView(messageInputBar.inputTextView, animated: false)
             messageInputBar.setLeftStackViewWidthConstant(to: draft.sendEditRequestFor == nil ? 40 : 0, animated: false)
             messageInputBar.setRightStackViewWidthConstant(to: 40, animated: false)
             messageInputBar.padding = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 12)
-            inputAccessoryView = messageInputBar
+//            inputAccessoryView = messageInputBar
         }
 
         messageInputBar.setStackViewItems([draftArea], forStack: .top, animated: animated)
@@ -1571,6 +1585,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.configureDraftArea(draft: self.draft)
             self.focusInputTextView()
             FileHelper.deleteFileAsync(atPath: url.relativePath)
+            
+            self.sendAttachmentMessage(viewType: self.draft.viewType!, filePath: self.draft.attachment!)
         }
     }
 
@@ -2398,7 +2414,7 @@ extension ChatViewController: MediaPickerDelegate {
     }
 
     func onMediaSelected(mediaPicker: MediaPicker, itemProviders: [NSItemProvider], sendAsFile: Bool) {
-        if itemProviders.count > 1 {
+        if itemProviders.count > 0 {
 
             // send multiple selected item in one go directly
             // (sendAsFile can be ignored as forced to be only a single file at showFilesLibrary()
@@ -2843,5 +2859,363 @@ extension ChatViewController: AppPickerViewControllerDelegate {
         configureDraftArea(draft: draft)
         focusInputTextView()
         FileHelper.deleteFileAsync(atPath: url.relativePath)
+    }
+}
+
+// MARK: - OwnerKeyBoard
+
+//输入条的Delegate回调
+extension ChatViewController: QInputBarViewDelegate {
+    
+    
+    func sendTextMessage(inputText: String) {
+        let text = inputText;
+        let trimmedText = text.replacingOccurrences(of: "\u{FFFC}", with: "", options: .literal, range: nil)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        var doResignFirstResponder = false
+
+        if let sendEditRequestFor = draft.sendEditRequestFor {
+            dcContext.sendEditRequest(msgId: sendEditRequestFor, newText: text)
+            doResignFirstResponder = true
+        } else if let filePath = draft.attachment, let viewType = draft.viewType {
+            switch viewType {
+            case DC_MSG_GIF, DC_MSG_IMAGE, DC_MSG_FILE, DC_MSG_VIDEO, DC_MSG_WEBXDC, DC_MSG_VCARD:
+                self.sendAttachmentMessage(viewType: viewType, filePath: filePath, fileName: draft.draftMsg?.filename, message: trimmedText, quoteMessage: draft.quoteMessage)
+            default:
+                logger.warning("Unsupported viewType for drafted messages.")
+            }
+        }
+        self.sendTextMessage(text: trimmedText, quoteMessage: draft.quoteMessage)
+        
+        bottomInputView.clearInputTextBySend()
+//        else if inputBar.inputTextView.images.isEmpty {
+//            self.sendTextMessage(text: trimmedText, quoteMessage: draft.quoteMessage)
+//        } else {
+//            // only 1 attachment allowed for now, thus it takes the first one
+//            self.sendImage(inputBar.inputTextView.images[0], message: trimmedText)
+//        }
+//        inputBar.inputTextView.text = String()
+//        inputBar.inputTextView.attributedText = nil
+        draft.clear()
+        draftArea.cancel()
+
+//        if doResignFirstResponder {
+//            inputBar.inputTextView.resignFirstResponder()
+//        }
+    }
+    // MARK: NeedOverride
+    func inputBarViewConfiguration() -> QInputBarViewConfiguration {
+        //输入条配置，子类可以重写
+        let recordButton = RecordButton.init(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        recordButton.backgroundColor = .green
+        let configure = QInputBarViewConfiguration.default();
+        configure?.recordCenterView = recordButton
+        return configure!
+    }
+    
+    //注意：如果tableview布局添加了约束，那么ios系统会自己处理tableview高度与导航栏是否透明之间的关系。所以这里的insets.bottom的值需要你的布局不同，做出相对应的改动。我这里演示的是非约束的情况下的处理方式，如果你用约束，请参考ChatXibViewController
+    // MARK: - NeedOverride
+    func navigationBarHeight() -> CGFloat {
+        return navigationController?.navigationBar.isTranslucent ?? false ? 0 : (UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.size.height ?? 0.0))
+    }
+    
+    func initKeyBoard(){
+        // 初始化输入工具条，frame可以先这样临时设置，下面的addBottomInputBarView方法会重置输入条frame
+        // 如果你想要自定义输入条View，请参考TextFieldViewController代码
+        bottomInputView = QInputBarView(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: CGFloat(UIInputBarViewMinHeight)))
+        bottomInputView.setup(with: inputBarViewConfiguration())
+        bottomInputView.delegate = self;
+        
+        //keyboard管理类，用来管理键盘，各大面板的切换
+        QkeyboardManager = QKeyboardManager(viewController: self);
+        QkeyboardManager.dataSource = self;
+        //因为addBottomInputBarView方法会立刻触发delegate，所以这里需要先设置delegate，再addBottomInputBarView
+        QkeyboardManager.delegate = self;
+        //将输入条View添加到ViewController；YES表示输入条平时不显示（比如朋友圈）；NO表示平时也显示（比如聊天）
+        QkeyboardManager.addBottomInputBarView(bottomInputView, belowViewController: false)
+        
+        //把输入框（如果有的话）绑定给管理类
+        QkeyboardManager.bindTextView(bottomInputView.inputTextView)
+        
+        
+        // 1. 创建录音界面
+        let voiceRecordView = VoiceRecordView()
+        voiceRecordView.delegate = self
+        // 2. 创建触发按钮
+        let recordButton = RecordButton()
+        // 3. 配置录音界面
+        voiceRecordView.configure(with: recordButton)
+        // 4. 添加到视图
+        view.addSubview(voiceRecordView)
+        view.addSubview(recordButton)
+        // 5. 设置约束（使用SnapKit）
+        voiceRecordView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        recordButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
+            make.width.height.equalTo(80)
+        }
+    }
+    
+    //点击了系统键盘的发送按钮
+    func inputBarView(_ inputBarView: QInputBarView!, onKeyboardSendClick inputText: String!) {
+        sendTextMessage(inputText: inputText)
+    }
+    
+    //点击+按钮
+    func inputBarView(_ inputBarView: QInputBarView!, onExtendButtonClick extendSwitchButton: UIButton!) {
+        QkeyboardManager.switchToExtendBoardKeyboard()
+    }
+    
+    //点击表情按钮，切换到表情面板
+    func inputBarView(_ inputBarView: QInputBarView!, onEmotionButtonClick emotionSwitchButton: UIButton!) {
+        if (emotionSwitchButton.isSelected) {
+            QkeyboardManager.switchToEmotionBoardKeyboard()
+        } else {
+            bottomInputView.textViewBecomeFirstResponder();
+        }
+    }
+    
+    //在发送文本和语音之间发送改变，voiceSwitchButton.isSelected表示切换到了语音输入模式
+    func inputBarView(_ inputBarView: QInputBarView!, onVoiceSwitchButtonClick voiceSwitchButton: UIButton!) {
+        if (voiceSwitchButton.isSelected) {
+            //切换到了语音输入模式
+            QkeyboardManager.hideAllBoardView()
+        }
+    }
+
+    // 输入框的高度发生了改变（因为输入框里的文字行数变化了），注意这里仅仅是TextView输入框的高度发生了变化的回调；becauseSendText：YES表示是因为调用了clearInputTextBySend去发送文本
+    func inputBarView(_ inputBarView: QInputBarView!, inputTextView: UITextView!, heightDidChange changeValue: CGFloat, becauseSendText: Bool) {
+        //这里要告知Manager类
+        QkeyboardManager.inputTextViewHeightDidChange(becauseSendText)
+    }
+    
+    
+    // 输入框的高度发生了改变（因为添加了回复引用View）
+    func inputBarView(_ inputBarView: QInputBarView!, heightDidChangeBecauseReply changeValue: CGFloat, showReplyView: Bool) {
+        //这里要告知Manager类
+        QkeyboardManager.inputTextViewHeightDidChange(false)
+    }
+    
+    func inputBarView(_ inputBarView: QInputBarView!, textViewDidChange inputTextView: UITextView!) {
+        draft.text = inputTextView.text
+
+    }
+}
+
+//整个BoardView的Delegate回调
+extension ChatViewController: InputBoardDelegate {
+    
+    //整个“输入View”的高度发生变化（整个View包含bar和表情栏或者键盘，但是不包含底部安全区高度）
+    func keyboardManager(_ keyboardManager: QKeyboardManager!, onWholeInputViewHeightDidChange wholeInputViewHeight: CGFloat, reason: WholeInputViewHeightDidChangeReason) {
+        
+//        let alreadyAtBottom :Bool = self.alreadyAtBottom()
+
+        //注意：如果tableview布局添加了约束，那么ios系统会自己处理tableview高度与导航栏是否透明之间的关系。所以这里的insets.bottom的值需要你的布局不同，做出相对应的改动。我这里演示的是非约束的情况下的处理方式，如果你用约束，请参考DiscussViewController
+//        var insets: UIEdgeInsets = .zero
+//        insets.top = 0
+//        insets.bottom = wholeInputViewHeight + 200
+//        //对应聊天界面，随着底部输入框的frame.y的变化，为了保持tableview一直都在输入条的上方，修改tableview的contentInset
+//        tableView.contentInset = insets
+//        tableView.scrollIndicatorInsets = insets
+        
+        // Using superview instead of window here because in iOS 13+ a modal can change
+        // the frame of the vc it is presented over which causes this calculation to be off.
+        let globalTableViewFrame = tableView.convert(tableView.bounds, to: tableView.superview)
+//        let intersection = globalTableViewFrame.intersection(notification.endFrame)
+        let inset = max(wholeInputViewHeight+tableView.safeAreaInsets.bottom, tableView.safeAreaInsets.bottom)
+        // willShow is sometimes called when the keyboard is being hidden or when the kb was
+        // already shown due to interactive dismissal getting canceled.
+        guard tableView.contentInset.top != inset else { return }
+        UIView.animate(withDuration: 0.5, delay: 0) {
+            self.tableView.contentInset.top = inset
+            if self.tableView.contentOffset.y < 30 {
+                // If user is less than 30 away from the bottom, we scroll
+                // the bottom of the content to the top of the keyboard.
+                self.tableView.contentOffset.y -= inset + self.tableView.contentOffset.y
+            }
+        }
+        
+        self.scrollToBottom()
+    }
+}
+
+//整个BoardView的DataSource
+extension ChatViewController: InputBoardDataSource,QExtendBoardViewDelegate {
+    
+    //@return 点加号按钮弹出的拓展面板View，且无需设置frame
+    func keyboardManagerExtendBoardView(_ keyboardManager: QKeyboardManager!) -> UIView! {
+        let boardView = QExtendBoardView()
+        boardView.delegate = self
+        if #available(iOS 11.0, *) {
+            let bundle = Bundle(for: QKeyboardBaseManager.self)
+            boardView.backgroundColor = UIColor(named: "q_input_extend_bg", in: bundle, compatibleWith: nil)
+        } else {
+            boardView.backgroundColor = UIColor(red: (246) / 255.0, green: (246) / 255.0, blue: (246) / 255.0, alpha: 1)
+        }
+
+        let photoItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_pic"), title: "图片")
+        let redItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_pic"), title: "拍摄")
+        let locationItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "文件")
+        let voiceItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "录音")
+
+        boardView.extendBoardItems = [photoItem!, redItem!, locationItem!,voiceItem!]
+        return boardView
+    }
+    
+    //@return 点表情按钮弹出的表情面板View，且无需设置frame
+    func keyboardManagerEmotionBoardView(_ keyboardManager: QKeyboardManager!) -> UIView! {
+        let emotionView = QEmotionBoardView()
+        emotionView.emotions = QEmotionHelper.shared()!.emotionArray;
+        emotionView.delegate = self
+        if #available(iOS 11.0, *) {
+            let bundle = Bundle(for: QKeyboardBaseManager.self)
+            emotionView.backgroundColor = UIColor(named: "q_input_extend_bg", in: bundle, compatibleWith: nil)
+        } else {
+            emotionView.backgroundColor = UIColor(red: (246) / 255.0, green: (246) / 255.0, blue: (246) / 255.0, alpha: 1)
+        }
+        return emotionView
+    }
+    
+    
+    func didSelectExtendBoardItem(_ shareMenuItem: QExtendBoardItemModel!, at index: Int) {
+        if index == 0 {// 图片
+            self.showPhotoVideoLibrary()
+        }else if index == 1{// 拍照
+            self.showZlCamera()
+        }else if index == 2{// 文件
+            self.showFilesLibrary()
+        }else if index == 3{// 文件
+            self.showVoiceMessageRecorder()
+        }
+        
+    }
+    func keyboardManagerEmotionBoardHeight(_ keyboardManager: QKeyboardManager!) -> CGFloat {
+        return 274;
+    }
+    
+    func keyboardManagerExtendBoardHeight(_ keyboardManager: QKeyboardManager!) -> CGFloat {
+        return 174;
+    }
+}
+
+//整个BoardView的DataSource
+extension ChatViewController: QEmotionBoardViewDelegate {
+    
+    /**
+     *  选中表情时的回调
+     *  @param  index   被选中的表情在`emotions`里的索引
+     *  @param  emotion 被选中的表情对应的`QMUIEmotion`对象
+     */
+    func emotionView(_ emotionView: QEmotionBoardView!, didSelect emotion: QEmotion!, at index: Int) {
+        let faceManager = QEmotionHelper.shared()
+        //把😊插入到输入栏
+        bottomInputView.insertEmotionAttributedString(faceManager?.obtainAttributedString(byImageKey: emotion.displayName, font: bottomInputView.inputTextView.font, useCache: false))
+    }
+    
+    // 删除按钮的点击事件回调
+    func emotionViewDidSelectDeleteButton(_ emotionView: QEmotionBoardView!) {
+        if (!bottomInputView.deleteEmotion()){
+            //根据当前的光标，这次点击删除按钮并没有删除表情，那么就删除文字
+            bottomInputView.inputTextView.deleteBackward();
+        }
+    }
+    
+    // 发送按钮的点击事件回调
+    func emotionViewDidSelectSendButton(_ emotionView: QEmotionBoardView!) {
+        sendTextMessage(inputText: bottomInputView.textViewInputNormalText())
+    }
+}
+
+extension ChatViewController{
+    
+    func showZlCamera(){
+        let camera = ZLCustomCamera()
+        camera.takeDoneBlock = { [weak self] image, videoUrl in
+            
+            if let image = image {
+                self?.sendImage(image)
+            }
+            
+            if let videoUrl = videoUrl {
+                self?.onVideoSelected(url: videoUrl as NSURL)
+            }
+
+        }
+        self.showDetailViewController(camera, sender: nil)
+    }
+    func showZLImagePicker() {
+        
+        let topVC = self
+        let ps = ZLPhotoPicker.init()
+         let config = ZLPhotoConfiguration.default()
+         config.allowEditImage = false;
+         config.maxSelectCount = 1;
+         config.allowSelectVideo = false
+        
+        ZLPhotoConfiguration.default()
+//            .editImageConfiguration
+            .editImageConfiguration.tools([.clip]).clipRatios([.circle])
+         ps.selectImageBlock = {[weak self] (result,isOri) in
+             
+             let images = result.map { model in
+                 return model.image
+             }
+
+             if let image = images.first {
+                 self?.sendImage(image)
+
+             }
+
+         }
+
+      
+         ps.showPhotoLibrary(sender: topVC)
+    }
+
+}
+
+extension ChatViewController: VoiceRecordViewDelegate {
+    func voiceRecordViewDidStartRecording(_ view: VoiceRecordView) {
+//        recordButton.setState(.recording)
+//        durationLabel.isHidden = false
+//        instructionsLabel.text = "正在录音...上滑取消"
+    }
+    
+    func voiceRecordViewDidFinishRecording(_ view: VoiceRecordView, audioData: Data, duration: TimeInterval) {
+//        recordButton.setState(.normal)
+//        instructionsLabel.text = "长按按钮开始录音，上滑取消"
+//        durationLabel.text = String(format: "录音时长: %.1f秒", duration)
+//        
+//        // 显示结果
+//        showResultMessage("录音完成\n时长: \(String(format: "%.1f", duration))秒\n大小: \(audioData.count)字节")
+    }
+    
+    func voiceRecordViewDidCancelRecording(_ view: VoiceRecordView) {
+//        recordButton.setState(.normal)
+//        instructionsLabel.text = "长按按钮开始录音，上滑取消"
+//        
+//        // 显示取消提示
+//        let alert = UIAlertController(title: "已取消", message: "录音已取消", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "确定", style: .default))
+//        present(alert, animated: true)
+    }
+    
+    func voiceRecordViewDidRequestPermission(_ view: VoiceRecordView, granted: Bool) {
+        if !granted {
+            let alert = UIAlertController(
+                title: "麦克风权限",
+                message: "需要麦克风权限才能录音",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "设置", style: .default) { _ in
+                guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+                UIApplication.shared.open(settingsURL)
+            })
+            alert.addAction(UIAlertAction(title: "取消", style: .cancel))
+            present(alert, animated: true)
+        }
     }
 }

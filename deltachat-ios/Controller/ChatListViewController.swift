@@ -114,6 +114,7 @@ class ChatListViewController: UITableViewController {
                     self.searchController.searchBar.delegate = self
                 }
                 self.handleChatListUpdate()
+                self.viewModel?.markReadSelectedChats(chatId: 11)//将设备消息标为已读
             }
         }
         // use the same background color as for cells and esp. the first archive-link cell
@@ -152,6 +153,9 @@ class ChatListViewController: UITableViewController {
 
         // update messages - for new messages, do not reuse or modify strings but create new ones.
         // it is not needed to keep all past update messages, however, when deleted, also the strings should be deleted.
+    
+        //MARK: - 删除设备消息
+        /*
         let deviceMsgLabel = "update_2_3_ios"
         if !dcAccounts.isFreshlyAdded(id: dcContext.id) {
             let msg = dcContext.newMessage(viewType: DC_MSG_TEXT)
@@ -181,6 +185,7 @@ class ChatListViewController: UITableViewController {
             +   "- If successful, you'll have the profile duplicated. Only then, delete the encrypted one marked by \"⚠️\""
             dcContext.addDeviceMessage(label: "ios-encrypted-accounts-unsupported7", msg: msg)
         }
+         */
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -369,11 +374,15 @@ class ChatListViewController: UITableViewController {
                 if chatData.chatId == DC_CHAT_ID_ARCHIVED_LINK {
                     return ContactCell.cellHeight * 0.7
                 }
+               
             default:
                 break
             }
         }
+        
+    
         return ContactCell.cellHeight
+
     }
 
     // MARK: - actions
@@ -1158,7 +1167,7 @@ extension ChatListViewController:UIPopoverPresentationControllerDelegate{
         //plus.circle
            let options = [
             PopoverOptionsModel(title: " "+"二维码邀请", image: "AA_QR_Code"),
-            PopoverOptionsModel(title: " "+"添加账号", image: "AA_Add_Account"),
+            PopoverOptionsModel(title: " "+"添加群组", image: "AA_Add_Account"),
             PopoverOptionsModel(title:" "+"扫码同步", image: "AA_Scan_Account"),
 
            ]
@@ -1167,11 +1176,11 @@ extension ChatListViewController:UIPopoverPresentationControllerDelegate{
             if tag == 0 {
                 self?.showPopup()
             }else if tag == 1{
-                let selectedAccountId = self?.dcAccounts.getSelected().id
-                if let selectedAccountId = selectedAccountId {
-                    self?.addAccount(previousAccountId: selectedAccountId)
-                }
-
+//                let selectedAccountId = self?.dcAccounts.getSelected().id
+//                if let selectedAccountId = selectedAccountId {
+//                    self?.addAccount(previousAccountId: selectedAccountId)
+//                }
+                self?.showNewGroupController(createMode: .createGroup)
             }else if tag == 2{
                 self?.addAsImputNewAccount()
 
@@ -1218,6 +1227,12 @@ extension ChatListViewController:UIPopoverPresentationControllerDelegate{
                                       in view: AutoreleasingUnsafeMutablePointer<UIView>) {
          // 可以在这里动态调整弹窗位置
      }
+    
+    // MARK: - coordinator
+    private func showNewGroupController(createMode: NewGroupController.CreateMode) {
+        let newGroupController = NewGroupController(dcContext: dcContext, createMode: createMode)
+        navigationController?.pushViewController(newGroupController, animated: true)
+    }
 }
 // MARK: - QRCodeDelegate
 extension ChatListViewController: QrCodeReaderDelegate {

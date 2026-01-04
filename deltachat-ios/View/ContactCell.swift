@@ -1,5 +1,6 @@
 import UIKit
 import DcCore
+import QKeyboardEmotionView
 
 protocol ContactCellDelegate: AnyObject {
     func onLongTap(at indexPath: IndexPath)
@@ -358,9 +359,19 @@ class ContactCell: UITableViewCell {
                 bottomlineStackView.removeArrangedSubview(unreadMessageCounter)
                 toplineStackView.addArrangedSubview(unreadMessageCounter)
             } else if chatData.unreadMessages > 0 {
-                titleLabel.attributedText = cellViewModel.title.bold(fontSize: titleLabel.font.pointSize)
+                let faceManager = QEmotionHelper.shared()
+                let attributedText = faceManager!.attributedString(byText: cellViewModel.title, font: titleLabel.font)
+                titleLabel.attributedText = cellViewModel.title.boldEmoj(fontSize: titleLabel.font.pointSize, emojStr: attributedText!)
+
+//                titleLabel.attributedText = cellViewModel.title.bold(fontSize: titleLabel.font.pointSize)
             } else {
-                titleLabel.attributedText = cellViewModel.title.boldAt(indexes: cellViewModel.titleHighlightIndexes, fontSize: titleLabel.font.pointSize)
+                
+                let faceManager = QEmotionHelper.shared()
+                let attributedText = faceManager!.attributedString(byText: cellViewModel.title, font: titleLabel.font)
+                
+                titleLabel.attributedText = cellViewModel.title.boldAtEmoj(indexes: cellViewModel.titleHighlightIndexes, fontSize: titleLabel.font.pointSize, emojStr: attributedText!)
+
+//                titleLabel.attributedText = cellViewModel.title.boldAt(indexes: cellViewModel.titleHighlightIndexes, fontSize: titleLabel.font.pointSize)
             }
             if visibility == DC_CHAT_VISIBILITY_PINNED {
                 backgroundColor = DcColors.deaddropBackground
