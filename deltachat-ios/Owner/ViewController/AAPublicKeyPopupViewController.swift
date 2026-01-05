@@ -19,9 +19,18 @@ class AAPublicKeyPopupViewController: UIViewController, UIViewControllerTransiti
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "公钥详情"
+        label.text = "私钥详情"
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
+        return label
+    }()
+    
+    private let detaiLabel: UILabel = {
+        let label = UILabel()
+        label.text = "请保存你的私钥"
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .systemRed
+        label.numberOfLines = 0;
         return label
     }()
 
@@ -51,7 +60,7 @@ class AAPublicKeyPopupViewController: UIViewController, UIViewControllerTransiti
 
     private let copyButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("复制公钥", for: .normal)
+        button.setTitle("复制私钥", for: .normal)
         button.backgroundColor = DcColors.primary
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
@@ -77,6 +86,8 @@ class AAPublicKeyPopupViewController: UIViewController, UIViewControllerTransiti
     private func setupUI() {
         view.addSubview(contentView)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(detaiLabel)
+
         contentView.addSubview(closeButton)
         contentView.addSubview(keyBackgroundView)
         keyBackgroundView.addSubview(keyLabel)
@@ -104,6 +115,12 @@ class AAPublicKeyPopupViewController: UIViewController, UIViewControllerTransiti
             make.left.equalToSuperview().offset(24)
             make.right.equalTo(closeButton.snp.left).offset(-10)
         }
+        
+        detaiLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom, ).offset(5)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalTo(closeButton.snp.left).offset(-10)
+        }
 
         closeButton.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
@@ -112,7 +129,7 @@ class AAPublicKeyPopupViewController: UIViewController, UIViewControllerTransiti
         }
 
         keyBackgroundView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(detaiLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(24)
         }
 

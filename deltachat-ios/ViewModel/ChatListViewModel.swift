@@ -59,6 +59,7 @@ class ChatListViewModel: NSObject {
             gclFlags |= DC_GCL_FOR_FORWARDING
         }
         self.chatList = dcContext.getChatlist(flags: gclFlags, queryString: nil, queryId: 0)
+        
         if notifyListener {
             handleOnChatListUpdate()
         }
@@ -247,6 +248,11 @@ class ChatListViewModel: NSObject {
             dcContext.marknoticedChat(chatId: chatId)
             NotificationManager.removeNotificationsForChat(dcContext: dcContext, chatId: chatId)
         }
+    }
+    
+    func markReadSelectedChats(chatId:Int) {
+        dcContext.marknoticedChat(chatId: chatId)
+        NotificationManager.removeNotificationsForChat(dcContext: dcContext, chatId: chatId)
     }
 
     func deleteChat(chatId: Int) {

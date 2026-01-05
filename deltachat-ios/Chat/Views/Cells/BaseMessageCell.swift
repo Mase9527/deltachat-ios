@@ -1,5 +1,6 @@
 import UIKit
 import DcCore
+import QKeyboardEmotionView
 
 public class BaseMessageCell: UITableViewCell {
 
@@ -100,7 +101,7 @@ public class BaseMessageCell: UITableViewCell {
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
         view.font = UIFont.preferredFont(for: .body, weight: .regular)
         view.delegate = self
-        view.enabledDetectors = [.OPENPGP4FPR,.url, .phoneNumber, .command,.OPENPGP4FPR]
+        view.enabledDetectors = [.OPENPGP4FPR,.url, .phoneNumber, .command,.OPENPGP4FPR,.mention]
         let attributes = [
             NSAttributedString.Key.foregroundColor: view.tintColor!,
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
@@ -110,6 +111,7 @@ public class BaseMessageCell: UITableViewCell {
         view.label.setAttributes(attributes, detector: .phoneNumber)
         view.label.setAttributes(attributes, detector: .command)
         view.label.setAttributes(attributes, detector: .OPENPGP4FPR)
+        view.label.setAttributes(attributes, detector: .mention)
 
         view.isUserInteractionEnabled = true
         view.isAccessibilityElement = false
@@ -568,7 +570,10 @@ public class BaseMessageCell: UITableViewCell {
                 .font: UIFont.systemFont(ofSize: fontSize),
                 .foregroundColor: DcColors.defaultTextColor
             ]
-            let mutableAttributedString = NSMutableAttributedString(string: messageText, attributes: fontAttributes)
+            
+            let faceManager = QEmotionHelper.shared()
+           let mutableAttributedString = faceManager!.attributedString(byText: messageText, font: UIFont.systemFont(ofSize: fontSize))!
+//            let mutableAttributedString = NSMutableAttributedString(string: messageText, attributes: fontAttributes)
 
             if let searchText = searchText {
                 let ranges = messageText.ranges(of: searchText, options: .caseInsensitive)
@@ -713,7 +718,10 @@ extension BaseMessageCell: MessageLabelDelegate {
 
     public func didSelectTransitInformation(_ transitInformation: [String: String]) {}
 
-    public func didSelectMention(_ mention: String) {}
+    public func didSelectMention(_ mention: String) {
+        print("didSelectMention:\(mention)")
+
+    }
 
     public func didSelectHashtag(_ hashtag: String) {}
 

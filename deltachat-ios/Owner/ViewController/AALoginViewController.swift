@@ -56,7 +56,7 @@ class AALoginViewController: UIViewController {
     
     private let publicKeyTitle: UILabel = {
         let label = UILabel()
-        label.text = "公钥 (Public Key)"
+        label.text = "私钥 (Private Key)"
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = .label
         return label

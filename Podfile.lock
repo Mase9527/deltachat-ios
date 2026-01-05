@@ -21,7 +21,7 @@ PODS:
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
-  - ObjectivePGP (1.0)
+  - QKeyboardEmotionView (3.0.2)
   - ReachabilitySwift (5.2.4)
   - SCSiriWaveformView (1.1.2)
   - SDWebImage (5.20.0):
@@ -37,12 +37,15 @@ PODS:
   - SVGKit (3.0.0):
     - CocoaLumberjack (~> 3.0)
   - TextFieldEffects (1.6.0)
+  - ZLPhotoBrowser (4.7.3):
+    - ZLPhotoBrowser/Core (= 4.7.3)
+  - ZLPhotoBrowser/Core (4.7.3)
 
 DEPENDENCIES:
   - DeviceKit
   - MCEmojiPicker (from `https://github.com/deltachat/MCEmojiPicker`, branch `main`)
   - Moya
-  - ObjectivePGP
+  - QKeyboardEmotionView
   - ReachabilitySwift
   - SCSiriWaveformView
   - SDWebImage
@@ -51,6 +54,7 @@ DEPENDENCIES:
   - SnapKit
   - SVGKit
   - TextFieldEffects
+  - ZLPhotoBrowser
 
 SPEC REPOS:
   trunk:
@@ -59,7 +63,7 @@ SPEC REPOS:
     - DeviceKit
     - libwebp
     - Moya
-    - ObjectivePGP
+    - QKeyboardEmotionView
     - ReachabilitySwift
     - SCSiriWaveformView
     - SDWebImage
@@ -68,6 +72,7 @@ SPEC REPOS:
     - SnapKit
     - SVGKit
     - TextFieldEffects
+    - ZLPhotoBrowser
 
 EXTERNAL SOURCES:
   MCEmojiPicker:
@@ -86,7 +91,7 @@ SPEC CHECKSUMS:
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
   MCEmojiPicker: d24f72731881c05143870eefff52f586d493b982
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  ObjectivePGP: 45de572a2e19a91c12e25c42324f05c71783104c
+  QKeyboardEmotionView: 4ded8a0769ff20cf657b49d8310e9c23e1787e5e
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   SCSiriWaveformView: 016392911fb442c17d6dbad68e666edb13193c02
   SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
@@ -95,7 +100,8 @@ SPEC CHECKSUMS:
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
+  ZLPhotoBrowser: d5928f08485c90a0b349a3a1e804e82c83ccf193
 
-PODFILE CHECKSUM: ceb872e5141ee5be4191c071147d287b9549832a
+PODFILE CHECKSUM: 4ceb1f1bbdf962c14c91b8e4019bdf36af736dca
 
 COCOAPODS: 1.16.2

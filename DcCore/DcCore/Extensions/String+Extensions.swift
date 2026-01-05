@@ -56,6 +56,20 @@ public extension String {
         }
         return attributedText
     }
+    
+    func boldAtEmoj(indexes: [Int], fontSize: CGFloat,emojStr:NSMutableAttributedString) -> NSAttributedString {
+//        let attributedText = NSMutableAttributedString(string: self)
+        let attributedText = emojStr
+
+
+        for index in indexes {
+            if index < 0 || count <= index {
+                break
+            }
+            attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: fontSize), range: NSRange(location: index, length: 1))
+        }
+        return attributedText
+    }
 }
 
 extension String? {

@@ -60,6 +60,15 @@ extension String {
         attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: fontSize), range: NSRange(location: 0, length: count - 1))
         return attributedText
     }
+    
+    func boldEmoj(fontSize: CGFloat,emojStr:NSMutableAttributedString) -> NSAttributedString {
+//        let attributedText = NSMutableAttributedString(string: self)
+        let attributedText = emojStr
+
+        
+        attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: fontSize), range: NSRange(location: 0, length: count - 1))
+        return attributedText
+    }
 
     static func timeStringForInterval(_ interval: TimeInterval) -> String {
         let time = NSInteger(interval)
