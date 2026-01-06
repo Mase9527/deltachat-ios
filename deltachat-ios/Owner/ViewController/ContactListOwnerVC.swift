@@ -340,8 +340,14 @@ class ContactListOwnerVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == sectionContacts {
-            let contactId = contactIdByRow(indexPath.row)
+//        if indexPath.section == sectionContacts {
+//            let contactId = contactIdByRow(indexPath.row)
+        
+        let section = indexPath.section
+        let row = indexPath.row
+        let modelList = self.dataSource[section]
+        let contactCellViewModel = modelList[row];
+        let contactId = contactCellViewModel.contactId
 
             let profileAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, completionHandler in
                 guard let self else { return }
@@ -368,9 +374,9 @@ class ContactListOwnerVC: UITableViewController {
             deleteAction.image = Utils.makeImageWithText(image: UIImage(systemName: "trash"), text: String.localized("delete"))
 
             return UISwipeActionsConfiguration(actions: [profileAction, deleteAction])
-        } else {
-            return nil
-        }
+//        } else {
+//            return nil
+//        }
     }
 
     private func contactIdByRow(_ row: Int) -> Int {
