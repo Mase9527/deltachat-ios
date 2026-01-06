@@ -146,11 +146,31 @@ class NewGroupController: UITableViewController, MediaPickerDelegate {
         for contactId in contactIdsForGroup {
             _ = dcContext.addContactToChat(chatId: groupChatId, contactId: contactId)
         }
+        
+        if changeGroupImage == nil {
+            
+            var avatars:[GroupAvatarGenerator.AvatarInfo] = []
+            for contactId in groupContactIds {
+                let contact = dcContext.getContact(id: contactId)
+                let image = contact.profileImage
+            
+               let info = GroupAvatarGenerator.AvatarInfo.init(image: image,placeholderText: contact.displayName,backgroundColor: contact.color)
+
+                avatars.append(info)
+                
+            }
+            
+           let image = GroupAvatarGenerator.generateGroupAvatar(avatars: avatars)
+            changeGroupImage = image
+        }
+        
         if let groupImage = changeGroupImage {
             AvatarHelper.saveChatAvatar(dcContext: dcContext, image: groupImage, for: groupChatId)
         } else if deleteGroupImage {
             AvatarHelper.saveChatAvatar(dcContext: dcContext, image: nil, for: groupChatId)
         }
+        
+     
 
         showGroupChat(chatId: Int(groupChatId))
     }

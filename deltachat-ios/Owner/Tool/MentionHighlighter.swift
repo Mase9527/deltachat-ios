@@ -116,6 +116,15 @@ class MentionDetector {
         // 获取光标前一个字符
         guard cursorPosition > 0 else { return (false, nil, nil) }
         
+        // 将光标位置转换为 String.Index
+              guard let cursorIndex = text.index(
+                  text.startIndex,
+                  offsetBy: cursorPosition,
+                  limitedBy: text.endIndex
+              ) else {
+                  return (false, nil, nil)
+              }
+        
         let index = text.index(text.startIndex, offsetBy: cursorPosition)
         let beforeCursor = String(text[..<index])
         
@@ -219,5 +228,221 @@ class MentionDetector {
         let length = cursorPosition - start
         
         return NSRange(location: start, length: length)
+    }
+    
+   
+}
+
+
+
+
+
+extension MentionDetector {
+    
+    // MARK: - 主删除方法（只删除文本末尾的提及）
+    @discardableResult
+     func deleteMentionInTextView(_ textView: UITextView, range: NSRange) -> Bool {
+        guard let text = textView.text, !text.isEmpty else { return false }
+        
+        let nsText = text as NSString
+        
+        // 情况1：有选中文本
+        if range.length > 0 {
+            let selectedText = nsText.substring(with: range)
+            
+            // 检查选中的文本是否以 @ 开头且在末尾
+            if selectedText.hasPrefix("@") && isAtEndOfText(range: range, in: text) {
+                return deleteCompleteMention(in: textView, range: range)
+            }
+            return false
+        }
+        
+        // 情况2：删除键操作
+        // 检查是否在文本末尾，并且末尾是 @ 提及
+        if isCursorAtEndOfMention(textView: textView, range: range) {
+            if let mentionRange = findMentionAtEnd(in: text) {
+                replaceText(in: textView, range: mentionRange, with: "")
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    // MARK: - 辅助方法：检查是否在文本末尾
+    
+    /// 检查选中范围是否在文本末尾
+    private  func isAtEndOfText(range: NSRange, in text: String) -> Bool {
+        let nsText = text as NSString
+        let textLength = nsText.length
+        
+        // 选中范围的结束位置是否等于文本长度
+        return range.location + range.length == textLength
+    }
+    
+    /// 检查光标是否在提及的末尾
+    private  func isCursorAtEndOfMention(textView: UITextView, range: NSRange) -> Bool {
+        guard let text = textView.text else { return false }
+        let nsText = text as NSString
+        
+        // 光标位置
+        let cursorPosition = range.location
+        
+        // 光标必须在文本末尾
+        guard cursorPosition == nsText.length else { return false }
+        
+        // 向前查找 @
+        for i in stride(from: cursorPosition - 1, through: 0, by: -1) {
+            let char = nsText.substring(with: NSRange(location: i, length: 1))
+            
+            if char == "@" {
+                // 找到 @，检查从 @ 到末尾是否是完整的提及
+                let mentionRange = NSRange(location: i, length: cursorPosition - i)
+                let mentionText = nsText.substring(with: mentionRange)
+                
+                // 验证是否是有效的提及
+                return isValidMention(mentionText)
+            } else if char == " " || char == "\n" {
+                // 遇到空格或换行，说明不在提及中
+                break
+            }
+        }
+        
+        return false
+    }
+    
+    /// 查找文本末尾的提及
+    private  func findMentionAtEnd(in text: String) -> NSRange? {
+        let nsText = text as NSString
+        let textLength = nsText.length
+        
+        guard textLength > 0 else { return nil }
+        
+        // 从末尾向前查找 @
+        var atPosition = -1
+        for i in stride(from: textLength - 1, through: 0, by: -1) {
+            let char = nsText.substring(with: NSRange(location: i, length: 1))
+            
+            if char == "@" {
+                atPosition = i
+                break
+            } else if char == " " || char == "\n" {
+                // 遇到空格或换行，停止查找
+                break
+            }
+        }
+        
+        guard atPosition != -1 else { return nil }
+        
+        // 从 @ 位置向后查找提及结束
+        var mentionEnd = atPosition + 1
+        while mentionEnd < textLength {
+            let char = nsText.substring(with: NSRange(location: mentionEnd, length: 1))
+            if char == " " || char == "\n" || char == "@" {
+                break
+            }
+            mentionEnd += 1
+        }
+        
+        // 检查提及是否一直延伸到文本末尾
+        if mentionEnd == textLength {
+            return NSRange(location: atPosition, length: textLength - atPosition)
+        }
+        
+        return nil
+    }
+    
+    /// 检查是否是有效的提及
+    private  func isValidMention(_ text: String) -> Bool {
+        // 提及必须至少有一个字符跟在 @ 后面
+        guard text.hasPrefix("@"), text.count > 1 else { return false }
+        
+        // 去掉 @ 后的文本
+        let mentionText = String(text.dropFirst())
+        
+        // 检查是否有无效字符（不能有空格或换行）
+        if mentionText.contains(" ") || mentionText.contains("\n") {
+            return false
+        }
+        
+        // 可以添加更多规则
+        // 比如：只允许字母、数字、下划线、中文等
+        let pattern = "^[\\u4e00-\\u9fa5a-zA-Z0-9_-]+$"
+        if let regex = try? NSRegularExpression(pattern: pattern) {
+            let range = NSRange(location: 0, length: mentionText.utf16.count)
+            return regex.firstMatch(in: mentionText, options: [], range: range) != nil
+        }
+        
+        return true
+    }
+    
+    /// 删除完整的提及（选中的是完整提及）
+    private  func deleteCompleteMention(in textView: UITextView, range: NSRange) -> Bool {
+        guard let text = textView.text else { return false }
+        let nsText = text as NSString
+        
+        let selectedText = nsText.substring(with: range)
+        
+        // 检查选中的是否是有效的提及
+        if selectedText.hasPrefix("@") && isValidMention(selectedText) {
+            replaceText(in: textView, range: range, with: "")
+            return true
+        }
+        
+        return false
+    }
+    
+    /// 安全替换文本
+    private  func replaceText(in textView: UITextView, range: NSRange, with replacement: String) {
+        guard let text = textView.text else { return }
+        let nsText = text as NSString
+        
+        if range.location + range.length <= nsText.length {
+            textView.text = nsText.replacingCharacters(in: range, with: replacement)
+            
+            // 移动光标到删除位置
+            let newCursorPosition = range.location
+            textView.selectedRange = NSRange(location: newCursorPosition, length: 0)
+        }
+    }
+    
+    // MARK: - 便捷方法
+    
+    /// 检查文本是否以提及结尾
+     func isEndingWithMention(in text: String) -> Bool {
+        guard !text.isEmpty else { return false }
+        
+        // 使用正则表达式检查
+        let pattern = "@[^\\s@]+$"  // @ 后面跟着非空格非@的字符，一直到结尾
+        let regex = try? NSRegularExpression(pattern: pattern)
+        
+        let range = NSRange(location: 0, length: text.utf16.count)
+        return regex?.firstMatch(in: text, options: [], range: range) != nil
+    }
+    
+    /// 获取文本末尾的提及（如果有）
+     func getMentionAtEnd(of text: String) -> String? {
+        guard !text.isEmpty else { return nil }
+        
+        let nsText = text as NSString
+        
+        if let range = findMentionAtEnd(in: text) {
+            return nsText.substring(with: range)
+        }
+        
+        return nil
+    }
+    
+    /// 删除文本末尾的提及（如果有）
+    @discardableResult
+     func deleteMentionAtEnd(in textView: UITextView) -> Bool {
+        guard let text = textView.text, !text.isEmpty else { return false }
+        
+        if let mentionRange = findMentionAtEnd(in: text) {
+            replaceText(in: textView, range: mentionRange, with: "")
+            return true
+        }
+        
+        return false
     }
 }

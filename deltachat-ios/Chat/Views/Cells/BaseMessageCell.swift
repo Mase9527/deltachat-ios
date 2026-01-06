@@ -101,7 +101,7 @@ public class BaseMessageCell: UITableViewCell {
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
         view.font = UIFont.preferredFont(for: .body, weight: .regular)
         view.delegate = self
-        view.enabledDetectors = [.OPENPGP4FPR,.url, .phoneNumber, .command,.OPENPGP4FPR,.mention]
+        view.enabledDetectors = [.OPENPGP4FPR,.url, .phoneNumber, .command,.OPENPGP4FPR,]
         let attributes = [
             NSAttributedString.Key.foregroundColor: view.tintColor!,
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
@@ -292,11 +292,7 @@ public class BaseMessageCell: UITableViewCell {
         gestureRecognizer.numberOfTapsRequired = 1
         avatarView.addGestureRecognizer(gestureRecognizer)
         
-        
-        let longPressgestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onAvatarLongPress(_:)))
-        longPressgestureRecognizer.minimumPressDuration = 0.1
-
-        avatarView.addGestureRecognizer(longPressgestureRecognizer)
+     
         
 
         let messageLabelGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
@@ -321,6 +317,19 @@ public class BaseMessageCell: UITableViewCell {
 
         NSLayoutConstraint.activate(reactionsViewConstraints)
 
+  
+        
+        let longPressgestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onAvatarLongPress(_:)))
+        longPressgestureRecognizer.minimumPressDuration = 0
+        longPressgestureRecognizer.delaysTouchesBegan = false
+        // 关键配置
+        longPressgestureRecognizer.minimumPressDuration = 0.5
+        longPressgestureRecognizer.delaysTouchesBegan = false
+        longPressgestureRecognizer.cancelsTouchesInView = false
+              
+              // ⚠️ 重要：设置委托来处理冲突
+        longPressgestureRecognizer.delegate = self
+        avatarView.addGestureRecognizer(longPressgestureRecognizer)
     }
 
     @objc
@@ -612,6 +621,8 @@ public class BaseMessageCell: UITableViewCell {
         }
         return nil
     }
+    
+  
 
     public override func accessibilityElementDidBecomeFocused() {
         logger.info("jit-rendering accessibility string")  // jit-rendering is needed as the reactions summary require quite some database calls
@@ -779,3 +790,6 @@ public protocol BaseMessageCellDelegate: AnyObject {
     func gotoOriginal(indexPath: IndexPath)
     func reactionsTapped(indexPath: IndexPath)
 }
+
+
+

@@ -216,6 +216,8 @@
 		BB85EEB92F0B554000EA6723 /* VoiceRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EEB62F0B554000EA6723 /* VoiceRecordController.swift */; };
 		BB85EEBB2F0B60BA00EA6723 /* MentionHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EEBA2F0B60BA00EA6723 /* MentionHighlighter.swift */; };
 		BB85EEBD2F0B95E900EA6723 /* OwnerSendContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EEBC2F0B95E900EA6723 /* OwnerSendContactViewController.swift */; };
+		BB85EECD2F0C998300EA6723 /* ObservableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EECC2F0C998300EA6723 /* ObservableTextView.swift */; };
+		BB85EECF2F0C9C7800EA6723 /* GroupAvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */; };
 		BB9D08852EFB899200D4E110 /* AAPublicKeyPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */; };
 		BB9D08872EFB8C0000D4E110 /* AACenterPopupPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */; };
 		BB9D08892EFB91EC00D4E110 /* AALoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */; };
@@ -700,6 +702,8 @@
 		BB85EEB72F0B554000EA6723 /* VoiceRecordHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordHUD.swift; sourceTree = "<group>"; };
 		BB85EEBA2F0B60BA00EA6723 /* MentionHighlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionHighlighter.swift; sourceTree = "<group>"; };
 		BB85EEBC2F0B95E900EA6723 /* OwnerSendContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerSendContactViewController.swift; sourceTree = "<group>"; };
+		BB85EECC2F0C998300EA6723 /* ObservableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTextView.swift; sourceTree = "<group>"; };
+		BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAvatarGenerator.swift; sourceTree = "<group>"; };
 		BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAPublicKeyPopupViewController.swift; sourceTree = "<group>"; };
 		BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AACenterPopupPresentationController.swift; sourceTree = "<group>"; };
 		BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginViewController.swift; sourceTree = "<group>"; };
@@ -803,8 +807,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		643B44782E0C2BD900AEE026 /* DcTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = DcTests;
 			sourceTree = "<group>";
 		};
@@ -1352,6 +1354,7 @@
 				BB85EE682F0A685E00EA6723 /* VoiceRecordView.swift */,
 				BB85EEB62F0B554000EA6723 /* VoiceRecordController.swift */,
 				BB85EEB72F0B554000EA6723 /* VoiceRecordHUD.swift */,
+				BB85EECC2F0C998300EA6723 /* ObservableTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1444,6 +1447,7 @@
 				BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */,
 				BB9D08B72EFBE72400D4E110 /* AAPGPPublicKeyTool.swift */,
 				BB85EEBA2F0B60BA00EA6723 /* MentionHighlighter.swift */,
+				BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1886,9 +1890,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-deltachat-ios/Pods-deltachat-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-deltachat-ios/Pods-deltachat-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1912,7 +1920,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		7837B64621E5532B00CDE126 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1930,7 +1939,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n\n";
+			shellScript = "
+
+";
 		};
 		CDEA77249E4F2AFAB45DFEA0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2005,6 +2016,7 @@
 				3008CB7424F9436C00E6A617 /* AudioPlayerView.swift in Sources */,
 				3080A01D277DDB8A00E74565 /* InputItem.swift in Sources */,
 				AED62BCE247687E6009E220D /* LocationStreamingIndicator.swift in Sources */,
+				BB85EECF2F0C9C7800EA6723 /* GroupAvatarGenerator.swift in Sources */,
 				30AAD71B2762869600DE3DC1 /* SelectableCell.swift in Sources */,
 				AE9DAF0F22C278C6004C9591 /* ChatTitleView.swift in Sources */,
 				AE4AEE3522B1030D000AA495 /* PreviewController.swift in Sources */,
@@ -2192,6 +2204,7 @@
 				BBBB8A3A2EF527C800B3B07E /* AccountAPI.swift in Sources */,
 				BBBB8A3B2EF527C800B3B07E /* ProgressHUD+CircleBarSpinFade.swift in Sources */,
 				BBBB8A3C2EF527C800B3B07E /* ShareAccountInfoQRCodeVC.swift in Sources */,
+				BB85EECD2F0C998300EA6723 /* ObservableTextView.swift in Sources */,
 				BBBB8A3D2EF527C800B3B07E /* AdvancedPopoverViewController.swift in Sources */,
 				BBBB8A3E2EF527C800B3B07E /* ProgressHUD+LiveIcon.swift in Sources */,
 				BB9D08892EFB91EC00D4E110 /* AALoginViewController.swift in Sources */,
@@ -2742,7 +2755,7 @@
 				CODE_SIGN_ENTITLEMENTS = "deltachat-ios/deltachat-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 160;
+				CURRENT_PROJECT_VERSION = 161;
 				DEVELOPMENT_TEAM = PKB8HJT5QJ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
@@ -2816,7 +2829,7 @@
 				CODE_SIGN_ENTITLEMENTS = "deltachat-ios/deltachat-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 160;
+				CURRENT_PROJECT_VERSION = 161;
 				DEVELOPMENT_TEAM = PKB8HJT5QJ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (

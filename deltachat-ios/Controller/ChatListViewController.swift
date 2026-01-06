@@ -1168,7 +1168,7 @@ extension ChatListViewController:UIPopoverPresentationControllerDelegate{
            let options = [
             PopoverOptionsModel(title: " "+"二维码邀请", image: "AA_QR_Code"),
             PopoverOptionsModel(title: " "+"添加群组", image: "AA_Add_Account"),
-            PopoverOptionsModel(title:" "+"扫码同步", image: "AA_Scan_Account"),
+            PopoverOptionsModel(title:" "+"扫一扫", image: "AA_Scan_Account"),
 
            ]
            let popoverVC = AdvancedPopoverViewController(title: "高级菜单", options: options)

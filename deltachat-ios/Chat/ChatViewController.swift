@@ -284,6 +284,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         draft.parse(draftMsg: dcContext.getDraft(chatId: chatId))
         messageInputBar.inputTextView.text = draft.text
         self.bottomInputView.inputTextView.text = draft.text
+        
         configureDraftArea(draft: draft, animated: false)
         tableView.dragInteractionEnabled = true
         tableView.dropDelegate = self
@@ -716,6 +717,15 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
 
         messageInputBar.setStackViewItems([draftArea], forStack: .top, animated: animated)
+        self.draftArea.frame = .init(0, 0, 200, 50)
+        
+        let hasDraft:Bool = !draft.isEditing && draft.attachment != nil
+
+//        if  draft.isEditing == false {
+//            self.bottomInputView.showReply(self.draftArea, marginTop: 10, marginBottom: 10)
+//        }else{
+//            self.bottomInputView.hideReply()
+//        }
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -1619,6 +1629,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             FileHelper.deleteFileAsync(atPath: url.relativePath)
             
             self.sendAttachmentMessage(viewType: self.draft.viewType!, filePath: self.draft.attachment!)
+            self.draft.clear()
+            self.draftArea.cancel()
         }
     }
 
@@ -2870,7 +2882,8 @@ extension ChatViewController: SendContactViewControllerDelegate,OwnerSendContact
              // 使用 @ 检测器插入联系人
              let result = MentionDetector.shared.insertMention(in: bottomInputView.inputTextView.text, at: cursorPosition, contact: OwnerContact(id: "\(contactId)", name: name))
         bottomInputView.inputTextView.text = result.newText
-             
+    
+        self.draft.text = result.newText;
              // 移动光标
         bottomInputView.inputTextView.selectedRange = NSRange(location: result.newCursorPosition, length: 0)
              
@@ -2952,6 +2965,7 @@ extension ChatViewController: QInputBarViewDelegate {
         
 
         bottomInputView.clearInputTextBySend()
+        bottomInputView.hideReply()
 //        else if inputBar.inputTextView.images.isEmpty {
 //            self.sendTextMessage(text: trimmedText, quoteMessage: draft.quoteMessage)
 //        } else {
@@ -2967,15 +2981,12 @@ extension ChatViewController: QInputBarViewDelegate {
 //            inputBar.inputTextView.resignFirstResponder()
 //        }
     }
-    // MARK: NeedOverride
-    func inputBarViewConfiguration() -> QInputBarViewConfiguration {
-        //输入条配置，子类可以重写
-        let recordButton = RecordButton.init(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-        recordButton.backgroundColor = .green
-        let configure = QInputBarViewConfiguration.default();
-//        configure?.recordCenterView = recordButton
-        return configure!
-    }
+//    // MARK: NeedOverride
+//    func inputBarViewConfiguration() -> QInputBarViewConfiguration {
+//  
+//
+//        return configure!
+//    }
     
     //注意：如果tableview布局添加了约束，那么ios系统会自己处理tableview高度与导航栏是否透明之间的关系。所以这里的insets.bottom的值需要你的布局不同，做出相对应的改动。我这里演示的是非约束的情况下的处理方式，如果你用约束，请参考ChatXibViewController
     // MARK: - NeedOverride
@@ -2984,10 +2995,15 @@ extension ChatViewController: QInputBarViewDelegate {
     }
     
     func initKeyBoard(){
+        
+        let configure = QInputBarViewConfiguration.default();
+    
+      
+        
         // 初始化输入工具条，frame可以先这样临时设置，下面的addBottomInputBarView方法会重置输入条frame
         // 如果你想要自定义输入条View，请参考TextFieldViewController代码
         bottomInputView = QInputBarView(frame: CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: CGFloat(UIInputBarViewMinHeight)))
-        bottomInputView.setup(with: inputBarViewConfiguration())
+        bottomInputView.setup(with: configure)
         bottomInputView.delegate = self;
         
         //keyboard管理类，用来管理键盘，各大面板的切换
@@ -3052,15 +3068,43 @@ extension ChatViewController: QInputBarViewDelegate {
     
     func inputBarView(_ inputBarView: QInputBarView!, textViewDidChange inputTextView: UITextView!) {
         draft.text = inputTextView.text
-
         let cursorPosition = inputTextView.selectedRange.location
-        let atDetector = MentionDetector.init()
+        let atDetector = MentionDetector.shared
               let detection = atDetector.detectMentions(in: inputTextView.text, cursorPosition: cursorPosition)
               
               if detection.shouldShow {
                   // 显示联系人选择器
                   self.showOwnerContactList()
             }
+    }
+    
+    func inputBarView(_ inputBarView: QInputBarView!, textViewDidChange inputTextView: UITextView!, shouldChangeTextIn range: NSRange, replacementText text: String!) -> Bool {
+        
+        if text.isEmpty == true {//是删除
+            let metions = MentionDetector.shared.extractMentions(from: inputTextView.text)
+            
+        print("hhhhh:\(metions)")
+            if let metionOk = metions.last {
+                let didDeleteMention = MentionDetector.shared.deleteMentionInTextView(inputTextView, range: metionOk.range)
+                print("是否删除了提及: \(didDeleteMention)")
+                if didDeleteMention {
+                             // 重新调试
+                    self.draft.clear()
+                    self.draftArea.cancel()
+//                    MentionDetector.shared.debugMentions(in: inputTextView.text)
+                         }
+                
+                return !didDeleteMention
+
+                // 使用静态方法处理智能删除
+//                          return !BasicAtDeleter.deleteMentionInTextView(textView, range: range)
+                          // 如果 deleteMentionInTextView 返回 true，表示已经处理了删除
+                          // 我们需要返回 false 来阻止系统默认的删除行为
+            }
+        }
+ 
+
+        return true
     }
 }
 

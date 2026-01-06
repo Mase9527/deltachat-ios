@@ -8,6 +8,7 @@
 
 import UIKit
 import DcCore
+import IQKeyboardManagerSwift
 
 class InstantOnboardingOwnerVC: UIViewController {
     @IBOutlet weak var avatarButton: UIButton!
@@ -110,11 +111,15 @@ class InstantOnboardingOwnerVC: UIViewController {
         // 点击空白收起键盘
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
+        IQKeyboardManager.shared.keyboardDistance = 50;
+        IQKeyboardManager.shared.isEnabled = true;
 
     }
 
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        IQKeyboardManager.shared.isEnabled = false;
+
+    }
 
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
