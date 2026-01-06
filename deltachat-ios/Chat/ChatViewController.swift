@@ -716,16 +716,17 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 //            inputAccessoryView = messageInputBar
         }
 
-        messageInputBar.setStackViewItems([draftArea], forStack: .top, animated: animated)
+//        messageInputBar.setStackViewItems([draftArea], forStack: .top, animated: animated)
         self.draftArea.frame = .init(0, 0, 200, 50)
         
         let hasDraft:Bool = !draft.isEditing && draft.attachment != nil
 
-//        if  draft.isEditing == false {
-//            self.bottomInputView.showReply(self.draftArea, marginTop: 10, marginBottom: 10)
-//        }else{
-//            self.bottomInputView.hideReply()
-//        }
+        print(draft)
+        if  draft.draftMsg != nil {
+            self.bottomInputView.showReply(self.draftArea, marginTop: 10, marginBottom: 10)
+        }else{
+            self.bottomInputView.hideReply()
+        }
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -2627,6 +2628,8 @@ extension ChatViewController: DraftPreviewDelegate {
             configureDraftArea(draft: draft)
             focusInputTextView()
         }
+        self.bottomInputView.hideReply()
+
     }
 
     func onCancelAttachment() {
@@ -2634,6 +2637,7 @@ extension ChatViewController: DraftPreviewDelegate {
         configureDraftArea(draft: draft)
         evaluateInputBar(draft: draft)
         focusInputTextView()
+        self.bottomInputView.hideReply()
     }
 
     func onAttachmentAdded() {

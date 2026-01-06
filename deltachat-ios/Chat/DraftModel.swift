@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import DcCore
 
-public class DraftModel {
+public class DraftModel:CustomStringConvertible {
     var draftMsg: DcMsg?
     var dcContext: DcContext
     var text: String?
@@ -93,4 +93,10 @@ public class DraftModel {
         sendEditRequestFor = nil
         dcContext.setDraft(chatId: chatId, message: nil)
     }
+    
+    public var description: String {
+        
+        return "canSend:\(self.canSend()) draftMsg:\(String(describing: self.draftMsg)) text:\(self.text) isEditing:\(self.isEditing)"
+    }
+
 }
