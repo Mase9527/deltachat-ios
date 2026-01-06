@@ -291,6 +291,13 @@ public class BaseMessageCell: UITableViewCell {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onAvatarTapped))
         gestureRecognizer.numberOfTapsRequired = 1
         avatarView.addGestureRecognizer(gestureRecognizer)
+        
+        
+        let longPressgestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onAvatarLongPress(_:)))
+        longPressgestureRecognizer.minimumPressDuration = 0.1
+
+        avatarView.addGestureRecognizer(longPressgestureRecognizer)
+        
 
         let messageLabelGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         messageLabelGestureRecognizer.numberOfTapsRequired = 1
@@ -323,6 +330,22 @@ public class BaseMessageCell: UITableViewCell {
         let isHandled = messageLabel.label.handleGesture(touchLocation)
         if !isHandled, let tableView = self.superview as? UITableView, let indexPath = tableView.indexPath(for: self) {
             self.baseDelegate?.textTapped(indexPath: indexPath)
+        }
+    }
+    
+    
+//    @objc func onAvatarLongPress() {
+//        if let tableView = self.superview as? UITableView, let indexPath = tableView.indexPath(for: self) {
+//            baseDelegate?.avatarLongPress(indexPath: indexPath)
+//        }
+//    }
+    
+    @objc private func onAvatarLongPress(_ sender: UILongPressGestureRecognizer) {
+        print("onAvatarLongPress:\(sender.state)")
+        if sender.state == UIGestureRecognizer.State.began,
+           let tableView = self.superview as? UITableView,
+           let indexPath = tableView.indexPath(for: self) {
+            baseDelegate?.avatarLongPress(indexPath: indexPath)
         }
     }
 
@@ -748,6 +771,7 @@ public protocol BaseMessageCellDelegate: AnyObject {
     func urlTapped(url: URL, indexPath: IndexPath) // url is eg. `https://foo.bar`
     func imageTapped(indexPath: IndexPath, previewError: Bool)
     func avatarTapped(indexPath: IndexPath)
+    func avatarLongPress(indexPath: IndexPath)
     func textTapped(indexPath: IndexPath)
     func quoteTapped(indexPath: IndexPath)
     func actionButtonTapped(indexPath: IndexPath)

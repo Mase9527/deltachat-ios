@@ -45,7 +45,9 @@ public enum DetectorType: Hashable {
 
     // swiftlint:disable force_try
     public static var hashtag = DetectorType.custom(try! NSRegularExpression(pattern: "#[a-zA-Z0-9]{4,}", options: []))
-    public static var mention = DetectorType.custom(try! NSRegularExpression(pattern: "@[a-zA-Z0-9]{4,}", options: []))
+//    public static var mention = DetectorType.custom(try! NSRegularExpression(pattern: "@[a-zA-Z0-9]{4,}", options: []))
+    public static var mention = DetectorType.custom(try! NSRegularExpression(pattern: "@[^\\s@]+", options: []))
+
     public static var command = DetectorType.custom(try! NSRegularExpression(pattern: "(?<=\\s|^)/[a-zA-Z0-9_\\-.,$+]{2,}(?=\\s|$)", options: []))
     
     public static var OPENPGP4FPR = DetectorType.custom(try! NSRegularExpression(pattern: openPGP4Pattern, options: []))

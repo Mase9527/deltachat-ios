@@ -38,7 +38,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     var QkeyboardManager: QKeyboardManager!
 
     var bottomInputView: QInputBarView!
-    
+    private var recordController: VoiceRecordController?
+
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -604,7 +605,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell = audioMessageCell
             }
         case DC_MSG_VCARD:
-            cell = dequeueCell(ofType: ContactCardCell.self)
+            
+            if let file = message.file,
+               let vcard = dcContext.parseVcard(path: file)?.first{
+                let atStr = "@\(vcard.displayName)"
+                if message.text?.contains(atStr) == true {
+                    cell = dequeueCell(ofType: TextMessageCell.self)
+
+                }else{
+                    cell = dequeueCell(ofType: ContactCardCell.self)
+
+                }
+            }else{
+                cell = dequeueCell(ofType: ContactCardCell.self)
+
+            }
+            
         default:
             cell = dequeueCell(ofType: TextMessageCell.self)
         }
@@ -1508,6 +1524,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         present(navigationController, animated: true)
     }
+    
+    private func showOwnerContactList() {
+        let contactList = OwnerSendContactViewController(dcContext: dcContext,chatId: self.chatId)
+        contactList.delegate = self
+
+        let navigationController = UINavigationController(rootViewController: contactList)
+        if #available(iOS 15.0, *) {
+            if let sheet = navigationController.sheetPresentationController {
+                sheet.detents = [.large(), .medium()]
+            }
+        }
+
+        present(navigationController, animated: true)
+    }
+    
+    
 
     private func locationStreamingButtonPressed() {
         let isLocationStreaming = dcContext.isSendingLocationsToChat(chatId: chatId)
@@ -2356,6 +2388,16 @@ extension ChatViewController: BaseMessageCellDelegate {
         let message = dcContext.getMessage(id: messageIds[indexPath.row])
         navigationController?.pushViewController(ProfileViewController(dcContext, contactId: message.fromContactId), animated: true)
     }
+    
+    
+    @objc func avatarLongPress(indexPath: IndexPath) {
+        
+        print("长按:\(indexPath)")
+//        let message = dcContext.getMessage(id: messageIds[indexPath.row])
+//        navigationController?.pushViewController(ProfileViewController(dcContext, contactId: message.fromContactId), animated: true)
+    }
+    
+   
 
     @objc func reactionsTapped(indexPath: IndexPath) {
         guard let reactions = dcContext.getMessageReactions(messageId: messageIds[indexPath.row]) else { return }
@@ -2809,11 +2851,30 @@ extension ChatViewController: ChatDropInteractionDelegate {
 
 // MARK: - SendContactViewControllerDelegate
 
-extension ChatViewController: SendContactViewControllerDelegate {
+extension ChatViewController: SendContactViewControllerDelegate,OwnerSendContactViewControllerDelegate {
     func contactSelected(_ viewController: SendContactViewController, contactId: Int) {
         guard let vcardData = dcContext.makeVCard(contactIds: [contactId]),
               let vcardURL = prepareVCardData(vcardData) else { return }
 
+        stageVCard(url: vcardURL)
+    }
+    
+    func contactSelected(_ viewController: OwnerSendContactViewController, contactId: Int,name:String) {
+        guard let vcardData = dcContext.makeVCard(contactIds: [contactId]),
+              let vcardURL = prepareVCardData(vcardData) else { return }
+
+        MentionDetector.shared.currentContact = OwnerContact(id: "\(contactId)", name: name)
+        
+        let cursorPosition = bottomInputView.inputTextView.selectedRange.location
+             
+             // 使用 @ 检测器插入联系人
+             let result = MentionDetector.shared.insertMention(in: bottomInputView.inputTextView.text, at: cursorPosition, contact: OwnerContact(id: "\(contactId)", name: name))
+        bottomInputView.inputTextView.text = result.newText
+             
+             // 移动光标
+        bottomInputView.inputTextView.selectedRange = NSRange(location: result.newCursorPosition, length: 0)
+             
+        
         stageVCard(url: vcardURL)
     }
 
@@ -2884,9 +2945,12 @@ extension ChatViewController: QInputBarViewDelegate {
             default:
                 logger.warning("Unsupported viewType for drafted messages.")
             }
+        }else{
+            self.sendTextMessage(text: trimmedText, quoteMessage: draft.quoteMessage)
+
         }
-        self.sendTextMessage(text: trimmedText, quoteMessage: draft.quoteMessage)
         
+
         bottomInputView.clearInputTextBySend()
 //        else if inputBar.inputTextView.images.isEmpty {
 //            self.sendTextMessage(text: trimmedText, quoteMessage: draft.quoteMessage)
@@ -2909,7 +2973,7 @@ extension ChatViewController: QInputBarViewDelegate {
         let recordButton = RecordButton.init(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
         recordButton.backgroundColor = .green
         let configure = QInputBarViewConfiguration.default();
-        configure?.recordCenterView = recordButton
+//        configure?.recordCenterView = recordButton
         return configure!
     }
     
@@ -2937,26 +3001,13 @@ extension ChatViewController: QInputBarViewDelegate {
         //把输入框（如果有的话）绑定给管理类
         QkeyboardManager.bindTextView(bottomInputView.inputTextView)
         
+        if let recordButton = bottomInputView.recordCenterView as? UIButton {
+            print("recordButton:\(recordButton)")
+            self.setupRecordController(recordButton: recordButton)
+        }
         
-        // 1. 创建录音界面
-        let voiceRecordView = VoiceRecordView()
-        voiceRecordView.delegate = self
-        // 2. 创建触发按钮
-        let recordButton = RecordButton()
-        // 3. 配置录音界面
-        voiceRecordView.configure(with: recordButton)
-        // 4. 添加到视图
-        view.addSubview(voiceRecordView)
-        view.addSubview(recordButton)
-        // 5. 设置约束（使用SnapKit）
-        voiceRecordView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        recordButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
-            make.width.height.equalTo(80)
-        }
+        
+   
     }
     
     //点击了系统键盘的发送按钮
@@ -3002,6 +3053,14 @@ extension ChatViewController: QInputBarViewDelegate {
     func inputBarView(_ inputBarView: QInputBarView!, textViewDidChange inputTextView: UITextView!) {
         draft.text = inputTextView.text
 
+        let cursorPosition = inputTextView.selectedRange.location
+        let atDetector = MentionDetector.init()
+              let detection = atDetector.detectMentions(in: inputTextView.text, cursorPosition: cursorPosition)
+              
+              if detection.shouldShow {
+                  // 显示联系人选择器
+                  self.showOwnerContactList()
+            }
     }
 }
 
@@ -3059,9 +3118,10 @@ extension ChatViewController: InputBoardDataSource,QExtendBoardViewDelegate {
         let photoItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_pic"), title: "图片")
         let redItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_pic"), title: "拍摄")
         let locationItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "文件")
-        let voiceItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "录音")
+//        let voiceItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "录音")
+        let contactItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "联系人")
 
-        boardView.extendBoardItems = [photoItem!, redItem!, locationItem!,voiceItem!]
+        boardView.extendBoardItems = [photoItem!, redItem!, locationItem!]
         return boardView
     }
     
@@ -3088,7 +3148,7 @@ extension ChatViewController: InputBoardDataSource,QExtendBoardViewDelegate {
         }else if index == 2{// 文件
             self.showFilesLibrary()
         }else if index == 3{// 文件
-            self.showVoiceMessageRecorder()
+            self.showContactList()
         }
         
     }
@@ -3177,45 +3237,29 @@ extension ChatViewController{
 
 }
 
-extension ChatViewController: VoiceRecordViewDelegate {
-    func voiceRecordViewDidStartRecording(_ view: VoiceRecordView) {
-//        recordButton.setState(.recording)
-//        durationLabel.isHidden = false
-//        instructionsLabel.text = "正在录音...上滑取消"
+
+
+extension ChatViewController:VoiceRecordControllerDelegate{
+    private func setupRecordController(recordButton:UIButton) {
+        recordController = VoiceRecordController(button: recordButton, maxDuration: 60.0)
+        recordController?.delegate = self
     }
-    
-    func voiceRecordViewDidFinishRecording(_ view: VoiceRecordView, audioData: Data, duration: TimeInterval) {
-//        recordButton.setState(.normal)
-//        instructionsLabel.text = "长按按钮开始录音，上滑取消"
-//        durationLabel.text = String(format: "录音时长: %.1f秒", duration)
-//        
-//        // 显示结果
-//        showResultMessage("录音完成\n时长: \(String(format: "%.1f", duration))秒\n大小: \(audioData.count)字节")
+
+    // MARK: - VoiceRecordControllerDelegate
+    func voiceRecordControllerDidFinish(url: URL, duration: TimeInterval) {
+        print("录音完成，文件路径: \(url), 时长: \(duration)s")
+//        showAlert(title: "录音成功", message: "时长: \(String(format: "%.1f", duration))s")
+        self.onVoiceMessageRecorded(url: url as NSURL)
     }
-    
-    func voiceRecordViewDidCancelRecording(_ view: VoiceRecordView) {
-//        recordButton.setState(.normal)
-//        instructionsLabel.text = "长按按钮开始录音，上滑取消"
-//        
-//        // 显示取消提示
-//        let alert = UIAlertController(title: "已取消", message: "录音已取消", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "确定", style: .default))
-//        present(alert, animated: true)
+
+    func voiceRecordControllerDidFail(error: Error) {
+        print("录音失败: \(error.localizedDescription)")
+        showAlert(title: "录音失败", message: error.localizedDescription)
     }
-    
-    func voiceRecordViewDidRequestPermission(_ view: VoiceRecordView, granted: Bool) {
-        if !granted {
-            let alert = UIAlertController(
-                title: "麦克风权限",
-                message: "需要麦克风权限才能录音",
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "设置", style: .default) { _ in
-                guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
-                UIApplication.shared.open(settingsURL)
-            })
-            alert.addAction(UIAlertAction(title: "取消", style: .cancel))
-            present(alert, animated: true)
-        }
+
+    private func showAlert(title: String, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "好的", style: .default))
+        present(alert, animated: true)
     }
 }

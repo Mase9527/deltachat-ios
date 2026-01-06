@@ -28,7 +28,7 @@ struct ChatCellData {
     let unreadMessages: Int
 }
 
-class ContactCellViewModel: AvatarCellViewModel {
+class ContactCellViewModel: AvatarCellViewModel,CustomStringConvertible {
 
     private let contact: DcContact
     let dcContext: DcContext
@@ -58,6 +58,12 @@ class ContactCellViewModel: AvatarCellViewModel {
         self.contact = dcContext.getContact(id: contactData.contactId)
         self.dcContext = dcContext
     }
+    
+    var description: String {
+        return "Name:\(self.title) contactId:\(contactId)"
+    }
+
+    
 }
 
 class ProfileViewModel: AvatarCellViewModel {
