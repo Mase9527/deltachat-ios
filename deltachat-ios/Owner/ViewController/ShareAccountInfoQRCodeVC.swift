@@ -25,13 +25,14 @@ class ShareAccountInfoQRCodeVC: UIViewController {
     
     var copyButton:UIButton?
     
+    var textView:UITextView = UITextView()
+    
     init(dcContext: DcContext, dcAccounts: DcAccounts,qrCode:String) {
         self.dcContext = dcContext
         self.dcAccounts = dcAccounts
         self.qrCode = qrCode
         super.init(nibName: nil, bundle: nil)
         
-        view.backgroundColor = .white
         hidesBottomBarWhenPushed = true
     }
 
@@ -39,7 +40,7 @@ class ShareAccountInfoQRCodeVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "二维码"
+        self.navigationItem.title = "导出密钥"
         let imageView = UIImageView()
 
         self.view.addSubview(imageView)
@@ -76,7 +77,30 @@ class ShareAccountInfoQRCodeVC: UIViewController {
         self.copyButton = button
         self.view.addSubview(button)
         
+        self.view.addSubview(self.textView)
+        
         button.addTarget(self, action: #selector(copyAction), for: .touchUpInside)
+        
+        self.textView.isEditable = false
+        self.textView.textContainerInset = .init(top: 15, left: 15, bottom: 15, right: 15)
+        self.textView.backgroundColor = .white
+        self.textView.layer.cornerRadius = 15
+        self.textView.clipsToBounds = true
+        self.textView.text = self.qrCode;
+        self.textView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalTo(self.view.snp.topMargin).offset(20)
+            make.height.equalTo(450)
+        }
+        self.copyButton?.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(44)
+            make.width.equalTo(250)
+            make.top.equalTo(self.textView.snp.bottom).offset(25)
+        }
+        
+        self.view.backgroundColor = .systemGroupedBackground
     }
     @objc func copyAction(){
         let textToCopy = self.qrCode
@@ -93,8 +117,8 @@ class ShareAccountInfoQRCodeVC: UIViewController {
         let topSafeArea = view.safeAreaInsets.top
         let frame = CGRectMake((self.view.bounds.width - 300)/2.0, 50+topSafeArea, 300, 300)
         self.imageView?.frame = frame
-        
-        self.copyButton?.frame = CGRect(x: 50, y: (self.imageView?.frame.maxY ?? 0) + 40, width: self.view.bounds.width - 100, height: 40)
+//        
+//        self.copyButton?.frame = CGRect(x: 50, y: (self.imageView?.frame.maxY ?? 0) + 40, width: self.view.bounds.width - 100, height: 40)
     }
 
 

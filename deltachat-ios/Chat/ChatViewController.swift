@@ -722,7 +722,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let hasDraft:Bool = !draft.isEditing && draft.attachment != nil
 
         print(draft)
-        if  draft.draftMsg != nil {
+        if  let draftMsg = draft.draftMsg ,draftMsg.type != DC_MSG_VCARD{
             self.bottomInputView.showReply(self.draftArea, marginTop: 10, marginBottom: 10)
         }else{
             self.bottomInputView.hideReply()
@@ -1489,9 +1489,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     private func showProtectionEnabledDialog() {
         let alert = UIAlertController(title: String.localized("chat_protection_enabled_explanation"), message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: String.localized("learn_more"), style: .default, handler: { [weak self] _ in
-            self?.openHelp(fragment: "#e2ee")
-        }))
+//        alert.addAction(UIAlertAction(title: String.localized("learn_more"), style: .default, handler: { [weak self] _ in
+//            self?.openHelp(fragment: "#e2ee")
+//        }))
         alert.addAction(UIAlertAction(title: String.localized("ok"), style: .default, handler: nil))
         navigationController?.present(alert, animated: true, completion: nil)
     }

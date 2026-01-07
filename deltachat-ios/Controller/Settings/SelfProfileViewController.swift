@@ -45,6 +45,15 @@ class SelfProfileViewController: UITableViewController, MediaPickerDelegate {
         cell.textField.returnKeyType = .default
         return cell
     }()
+    
+    
+    private lazy var qrCodeCell: SelfProfileViewQRCodeCell = {
+        let cell = SelfProfileViewQRCodeCell.init(dcContext: self.dcContext)
+  
+        return cell
+    }()
+    
+    
 
     private lazy var sections: [SectionConfigs] = {
         let nameSection = SectionConfigs(
@@ -52,7 +61,13 @@ class SelfProfileViewController: UITableViewController, MediaPickerDelegate {
             footerTitle: String.localized("pref_who_can_see_profile_explain"),
             cells: [nameCell, avatarSelectionCell, statusCell]
         )
-        return [nameSection]
+        
+        let qrCodeSection = SectionConfigs(
+            headerTitle: "二维码",
+            footerTitle: nil,
+            cells: [qrCodeCell]
+        )
+        return [nameSection,qrCodeSection]
     }()
 
     init(dcAccounts: DcAccounts) {

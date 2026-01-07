@@ -133,7 +133,7 @@ internal final class SettingsViewController: UITableViewController {
     private lazy var exportInfoCell: UITableViewCell = {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         cell.tag = CellTags.exportAccount.rawValue
-        cell.textLabel?.text = String.localized("导出账号")
+        cell.textLabel?.text = String.localized("导出密钥")
         cell.imageView?.image = UIImage(systemName: "square.and.arrow.up")
         cell.accessoryType = .disclosureIndicator
         return cell
@@ -149,7 +149,10 @@ internal final class SettingsViewController: UITableViewController {
             cells: [self.profileCell]
         )
         let preferencesSection = SectionConfigs(
-            cells: [self.chatsAndMediaCell, self.notificationCell, self.selectBackgroundCell, self.addAnotherDeviceCell, self.connectivityCell, self.advancedCell]
+            footerTitle: appNameAndVersion,
+            cells: [self.chatsAndMediaCell, self.notificationCell, self.selectBackgroundCell,exportInfoCell]
+
+//            cells: [self.chatsAndMediaCell, self.notificationCell, self.selectBackgroundCell, self.addAnotherDeviceCell, self.connectivityCell, self.advancedCell]
         )
         let listsSection = SectionConfigs(
             cells: [allAppsAndMediaCell]
@@ -159,7 +162,9 @@ internal final class SettingsViewController: UITableViewController {
             cells: [exportInfoCell,inviteFriendsCell, helpCell]
         )
 
-        return [profileSection, preferencesSection, listsSection, helpSection]
+//        return [profileSection, preferencesSection, listsSection, helpSection]
+        return [profileSection, preferencesSection]
+
     }()
 
     init(dcAccounts: DcAccounts) {
@@ -337,8 +342,14 @@ internal final class SettingsViewController: UITableViewController {
     }
     
     private func exportAccountInfo() {
-        self.exportAccountTool?.exportAccountInfo()
+        
+        Utils.authenticateDeviceOwner(reason: String.localized("导出密钥")) { [weak self] in
+            guard let self else { return }
+            self.exportAccountTool?.exportAccountInfo()
+
         }
+        
+    }
 
   
 

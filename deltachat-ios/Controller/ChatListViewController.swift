@@ -469,6 +469,7 @@ class ChatListViewController: UITableViewController {
             }
         case .profile:
             assertionFailure("CellData type profile not allowed")
+     
         }
 
         assertionFailure("This should never happen")
@@ -534,6 +535,7 @@ class ChatListViewController: UITableViewController {
             }
         case .profile:
             assertionFailure("CellData type profile not allowed")
+       
         }
         tableView.deselectRow(at: indexPath, animated: false)
     }
