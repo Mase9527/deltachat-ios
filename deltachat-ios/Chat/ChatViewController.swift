@@ -2450,6 +2450,7 @@ extension ChatViewController: MediaPickerDelegate {
                     DispatchQueue.main.async { [weak self] in
                         if let url, !progressAlertHandler.cancelled {
                             self?.stageVideo(url: (url as NSURL))
+                            
                             progressAlertHandler.updateProgressAlertSuccess()
                         } else if let error {
                             progressAlertHandler.updateProgressAlert(error: error.localizedDescription)
@@ -2873,6 +2874,7 @@ extension ChatViewController: SendContactViewControllerDelegate,OwnerSendContact
               let vcardURL = prepareVCardData(vcardData) else { return }
 
         stageVCard(url: vcardURL)
+        self.sendTextMessage(inputText: "")
     }
     
     func contactSelected(_ viewController: OwnerSendContactViewController, contactId: Int,name:String) {
@@ -3169,7 +3171,7 @@ extension ChatViewController: InputBoardDataSource,QExtendBoardViewDelegate {
 //        let voiceItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "录音")
         let contactItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "联系人")
 
-        boardView.extendBoardItems = [photoItem!, redItem!, locationItem!]
+        boardView.extendBoardItems = [photoItem!, redItem!, locationItem!,contactItem!]
         return boardView
     }
     
@@ -3248,7 +3250,29 @@ extension ChatViewController{
             }
             
             if let videoUrl = videoUrl {
-                self?.onVideoSelected(url: videoUrl as NSURL)
+                
+                guard let self = self else { return  }
+                DispatchQueue.main.async {
+                    let url = videoUrl as URL
+                    let progressAlertHandler = ProgressAlertHandler()
+                    progressAlertHandler.dataSource = self
+                    progressAlertHandler.showProgressAlert(title: nil, dcContext: self.dcContext)
+                    DispatchQueue.global().async {
+                        url.convertToMp4(completionHandler: { [weak self] url, error in
+                            DispatchQueue.main.async { [weak self] in
+                                if let url, !progressAlertHandler.cancelled {
+//                                    self?.stageVideo(url: (url as NSURL))
+                                    
+                                    self?.sendVideo(url: url)
+                                    
+                                    progressAlertHandler.updateProgressAlertSuccess()
+                                } else if let error {
+                                    progressAlertHandler.updateProgressAlert(error: error.localizedDescription)
+                                }
+                            }
+                        })
+                    }
+                }
             }
 
         }

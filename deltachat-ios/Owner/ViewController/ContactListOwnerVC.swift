@@ -130,7 +130,9 @@ class ContactListOwnerVC: UITableViewController {
     }
     
     @objc private func handleContactsChanged(_ notification: Notification) {
-        self.refreshContact()
+        DispatchQueue.main.async {
+            self.refreshContact()
+        }
     }
     func configureData(contacts:[ContactCellViewModel])  {
         //1、初始化一个索引，根据不同国家语言，会初始化出不同的索引，中文的是“A~Z,#”,供27个，其他语言，自己试试吧。只看得懂中文

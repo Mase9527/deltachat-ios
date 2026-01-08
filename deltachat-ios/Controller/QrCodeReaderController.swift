@@ -1,6 +1,7 @@
 import AVFoundation
 import UIKit
 import DcCore
+import ZLPhotoBrowser
 
 class QrCodeReaderController: UIViewController {
 
@@ -209,11 +210,48 @@ class QrCodeReaderController: UIViewController {
                 self?.openHelp(fragment: "#multiclient")
             })
         }
+        actions.append(UIAction(title: String.localized("相册"), image: UIImage(systemName: "photo.circle")) { [weak self] _ in
+            self?.showZLImagePicker()
+        })
         return UIMenu(children: actions)
     }
 
     @objc func onCancelPressed() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func showZLImagePicker() {
+        
+        let topVC = self
+        let ps = ZLPhotoPicker.init()
+         let config = ZLPhotoConfiguration.default()
+         config.allowEditImage = false;
+         config.maxSelectCount = 1;
+         config.allowSelectVideo = false
+        
+        ZLPhotoConfiguration.default()
+//            .editImageConfiguration
+            .editImageConfiguration.tools([.clip]).clipRatios([.circle])
+         ps.selectImageBlock = {[weak self] (result,isOri) in
+             
+             let images = result.map { model in
+                 return model.image
+             }
+
+             if let image = images.first {
+               
+                let qrCodes = LegacyQRCodeScanner.detectQRCodeWithCoreImage(from: image)
+                 if let qrCode = qrCodes.first {
+                     self?.delegate?.handleQrCode(qrCode)
+
+                 }
+
+             }
+
+         }
+
+      
+         ps.showPhotoLibrary(sender: topVC)
     }
 }
 

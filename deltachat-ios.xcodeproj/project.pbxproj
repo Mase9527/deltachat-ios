@@ -219,6 +219,7 @@
 		BB85EECD2F0C998300EA6723 /* ObservableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EECC2F0C998300EA6723 /* ObservableTextView.swift */; };
 		BB85EECF2F0C9C7800EA6723 /* GroupAvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */; };
 		BB85EF092F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EF082F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift */; };
+		BB85EF302F0F521000EA6723 /* LegacyQRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EF2F2F0F521000EA6723 /* LegacyQRCodeScanner.swift */; };
 		BB9D08852EFB899200D4E110 /* AAPublicKeyPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */; };
 		BB9D08872EFB8C0000D4E110 /* AACenterPopupPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */; };
 		BB9D08892EFB91EC00D4E110 /* AALoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */; };
@@ -706,6 +707,7 @@
 		BB85EECC2F0C998300EA6723 /* ObservableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTextView.swift; sourceTree = "<group>"; };
 		BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAvatarGenerator.swift; sourceTree = "<group>"; };
 		BB85EF082F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfProfileViewQRCodeCell.swift; sourceTree = "<group>"; };
+		BB85EF2F2F0F521000EA6723 /* LegacyQRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyQRCodeScanner.swift; sourceTree = "<group>"; };
 		BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAPublicKeyPopupViewController.swift; sourceTree = "<group>"; };
 		BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AACenterPopupPresentationController.swift; sourceTree = "<group>"; };
 		BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginViewController.swift; sourceTree = "<group>"; };
@@ -1451,6 +1453,7 @@
 				BB9D08B72EFBE72400D4E110 /* AAPGPPublicKeyTool.swift */,
 				BB85EEBA2F0B60BA00EA6723 /* MentionHighlighter.swift */,
 				BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */,
+				BB85EF2F2F0F521000EA6723 /* LegacyQRCodeScanner.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2217,6 +2220,7 @@
 				BBBB8A422EF527C800B3B07E /* AdvancedQRCodeGenerator.swift in Sources */,
 				BBBB8A432EF527C800B3B07E /* HUD.swift in Sources */,
 				BB9D088C2EFB9C6300D4E110 /* RSKPlaceholderTextView.swift in Sources */,
+				BB85EF302F0F521000EA6723 /* LegacyQRCodeScanner.swift in Sources */,
 				BBBB8A442EF527C800B3B07E /* QRCodeTool.swift in Sources */,
 				BB85EF092F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift in Sources */,
 				BBBB8A452EF527C800B3B07E /* APIService.swift in Sources */,
