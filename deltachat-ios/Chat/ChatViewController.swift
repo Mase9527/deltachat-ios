@@ -151,6 +151,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     private weak var lastContextMenuPreviewSnapshot: UIView?
 
     private let titleView = ChatTitleView()
+    
+    var showCall:Bool = false
 
     private lazy var dcChat: DcChat = {
         return dcContext.getChat(chatId: chatId)
@@ -939,9 +941,18 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let button = UIBarButtonItem(image: UIImage(systemName: "phone"), style: .plain, target: self, action: #selector(callPressed))
                     rightBarButtonItems.append(button)
                 }
+                
+                if !dcChat.isMultiUser && dcChat.canSend ,
+                   let dcContact, dcContact.isKeyContact {
+                    self.showCall = true
+                }else{
+                    self.showCall = false
+                }
+                
             } else {
                 let button = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchPressed))
                 rightBarButtonItems.append(button)
+                self.showCall = false
             }
             
             navigationItem.rightBarButtonItems = rightBarButtonItems
@@ -3165,13 +3176,21 @@ extension ChatViewController: InputBoardDataSource,QExtendBoardViewDelegate {
             boardView.backgroundColor = UIColor(red: (246) / 255.0, green: (246) / 255.0, blue: (246) / 255.0, alpha: 1)
         }
 
-        let photoItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_pic"), title: "图片")
-        let redItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_pic"), title: "拍摄")
-        let locationItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "文件")
+        let photoItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "Chat_Picture"), title: "图片")
+        let redItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "Chat_camera"), title: "拍摄")
+        let locationItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "Chat_File"), title: "文件")
 //        let voiceItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "录音")
-        let contactItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "联系人")
+        let contactItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "Chat_contact"), title: "联系人")
+        let callItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "Chat_Video"), title: "视频聊天")
+        
+        var list:[QExtendBoardItemModel] = [photoItem!, redItem!, locationItem!,contactItem!]
 
-        boardView.extendBoardItems = [photoItem!, redItem!, locationItem!,contactItem!]
+            if self.showCall {
+                list.append(callItem!)
+            }
+        
+
+        boardView.extendBoardItems = list
         return boardView
     }
     
@@ -3199,6 +3218,8 @@ extension ChatViewController: InputBoardDataSource,QExtendBoardViewDelegate {
             self.showFilesLibrary()
         }else if index == 3{// 文件
             self.showContactList()
+        }else if index == 4{// 文件
+            self.callPressed()
         }
         
     }
@@ -3207,6 +3228,11 @@ extension ChatViewController: InputBoardDataSource,QExtendBoardViewDelegate {
     }
     
     func keyboardManagerExtendBoardHeight(_ keyboardManager: QKeyboardManager!) -> CGFloat {
+        
+        if self.showCall {
+            return 274;
+
+        }
         return 174;
     }
 }
