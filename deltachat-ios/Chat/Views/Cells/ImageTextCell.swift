@@ -172,8 +172,8 @@ class ImageTextCell: BaseMessageCell, ReusableCell {
             imageHeightConstraint = self.contentImageView.heightAnchor.constraint(lessThanOrEqualToConstant: squareSize)
             imageWidthConstraint = self.contentImageView.widthAnchor.constraint(lessThanOrEqualToConstant: squareSize)
         } else {
-//            height = height/4.0
-//            width = width/4.0
+//            height = height/2.0
+//            width = width/2.0
             // show image in aspect ratio for landscape images
             if orientation.isLandscape && height > UIScreen.main.bounds.height * 5 / 8 {
                 // shrink landscape image in landscape device orientation if image height is too big

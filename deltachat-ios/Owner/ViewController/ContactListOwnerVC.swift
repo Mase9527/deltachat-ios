@@ -18,6 +18,13 @@ struct ContactOwnerModel {
     var id:Int
 }
 
+
+/*
+ 
+ guard let contact, contact.lastSeen != 0, !isSavedMessages, !isDeviceChat else { return nil }
+ return String.localizedStringWithFormat(String.localized("last_seen_relative"), DateUtils.getExtendedAbsTimeSpanString(timeStamp: Double(contact.lastSeen)))
+ 
+ */
 class ContactListOwnerVC: UITableViewController {
     private let dcContext: DcContext
 
@@ -100,7 +107,18 @@ class ContactListOwnerVC: UITableViewController {
 
         super.init(style: .plain)
         self.tableView.backgroundColor = DcColors.defaultBackgroundColor
-        
+        self.refreshContact()
+    
+       
+        NotificationCenter.default.addObserver(self, selector: #selector(handleContactsChanged), name: Event.contactsChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleContactsChanged), name: Event.connectivityChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleContactsChanged), name: Event.incomingMessage, object: nil)
+
+//        hidesBottomBarWhenPushed = true
+    }
+
+    func refreshContact(){
+        self.contactIds = dcContext.getContacts(flags: DC_GCL_ADD_SELF)
         var modelList:[ContactCellViewModel] = []
         
         for (index,id) in self.contactIds.enumerated() {
@@ -109,10 +127,13 @@ class ContactListOwnerVC: UITableViewController {
             modelList.append(model)
         }
         self.configureData(contacts: modelList)
-       
-//        hidesBottomBarWhenPushed = true
     }
-
+    
+    @objc private func handleContactsChanged(_ notification: Notification) {
+        DispatchQueue.main.async {
+            self.refreshContact()
+        }
+    }
     func configureData(contacts:[ContactCellViewModel])  {
         //1、初始化一个索引，根据不同国家语言，会初始化出不同的索引，中文的是“A~Z,#”,供27个，其他语言，自己试试吧。只看得懂中文
         let collation = UILocalizedIndexedCollation.current();
@@ -249,7 +270,7 @@ class ContactListOwnerVC: UITableViewController {
         guard let contactCell = tableView.dequeueReusableCell(withIdentifier: ContactCell.reuseIdentifier, for: indexPath) as? ContactCell else { fatalError("ContactCell expected") }
 
 //        let contactCellViewModel = self.contactViewModelBy(row: indexPath.row)
-        contactCell.updateCell(cellViewModel: contactCellViewModel)
+        contactCell.updateOwnerCell(cellViewModel: contactCellViewModel)
         contactCell.backgroundColor = DcColors.defaultBackgroundColor
         contactCell.contentView.backgroundColor = DcColors.defaultBackgroundColor
         return contactCell

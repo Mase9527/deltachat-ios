@@ -415,6 +415,9 @@ class ContactCell: UITableViewCell {
                                 isLocationStreaming: false,
                                 isContactRequest: false,
                                 isArchiveLink: false)
+   
+           
+            
         case .profile:
             let contact = cellViewModel.dcContext.getContact(id: Int(DC_CONTACT_ID_SELF))
             titleLabel.text = cellViewModel.title
@@ -442,4 +445,125 @@ class ContactCell: UITableViewCell {
             + (timeLabel.text != nil ? ((timeLabel.text ?? "")+"\n") : "")
             + (subtitleLabel.text != nil ? ((subtitleLabel.text ?? "")+"\n") : "")
     }
+    
+    
+    func updateOwnerCell(cellViewModel: AvatarCellViewModel) {
+
+        // subtitle
+        subtitleLabel.attributedText = cellViewModel.subtitle.boldAt(indexes: cellViewModel.subtitleHighlightIndexes, fontSize: subtitleLabel.font.pointSize)
+        var unreadMessages = 0
+        var isContactRequest = false
+        var isArchived = false
+
+        switch cellViewModel.type {
+        case .chat(let chatData):
+            let chat = cellViewModel.dcContext.getChat(chatId: chatData.chatId)
+            unreadMessages = chatData.unreadMessages
+            isContactRequest = chat.isContactRequest
+            let visibility = chat.visibility
+            isArchived = visibility == DC_CHAT_VISIBILITY_ARCHIVED
+            // text bold if chat contains unread messages - otherwise hightlight search results if needed
+            if chatData.chatId == DC_CHAT_ID_ARCHIVED_LINK {
+                titleLabel.text = cellViewModel.title
+                // for archived links, move unread counter to top line (bottom line is not used)
+                // this hack is also the reason we do not reuse the archive-link together with the normal chats
+                bottomlineStackView.removeArrangedSubview(unreadMessageCounter)
+                toplineStackView.addArrangedSubview(unreadMessageCounter)
+            } else if chatData.unreadMessages > 0 {
+                let faceManager = QEmotionHelper.shared()
+                let attributedText = faceManager!.attributedString(byText: cellViewModel.title, font: titleLabel.font)
+                titleLabel.attributedText = cellViewModel.title.boldEmoj(fontSize: titleLabel.font.pointSize, emojStr: attributedText!)
+
+//                titleLabel.attributedText = cellViewModel.title.bold(fontSize: titleLabel.font.pointSize)
+            } else {
+                
+                let faceManager = QEmotionHelper.shared()
+                let attributedText = faceManager!.attributedString(byText: cellViewModel.title, font: titleLabel.font)
+                
+                titleLabel.attributedText = cellViewModel.title.boldAtEmoj(indexes: cellViewModel.titleHighlightIndexes, fontSize: titleLabel.font.pointSize, emojStr: attributedText!)
+
+//                titleLabel.attributedText = cellViewModel.title.boldAt(indexes: cellViewModel.titleHighlightIndexes, fontSize: titleLabel.font.pointSize)
+            }
+            if visibility == DC_CHAT_VISIBILITY_PINNED {
+                backgroundColor = DcColors.deaddropBackground
+            } else {
+                backgroundColor = DcColors.contactCellBackgroundColor
+            }
+            if let img = chat.profileImage {
+                resetBackupImage()
+                setImage(img)
+            } else {
+                setBackupImage(name: chat.name, color: chat.color)
+            }
+            let recentlySeen = DcUtils.showRecentlySeen(context: cellViewModel.dcContext, chat: chat)
+            avatar.setRecentlySeen(recentlySeen)
+            setTimeLabel(chatData.summary.timestamp)
+            setStatusIndicators(unreadCount: chatData.unreadMessages,
+                                status: chatData.summary.state,
+                                visibility: visibility,
+                                isLocationStreaming: chat.isSendingLocations,
+                                isChatMuted: chat.isMuted,
+                                isAccountMuted: cellViewModel.dcContext.isMuted(),
+                                isContactRequest: isContactRequest,
+                                isArchiveLink: chatData.chatId == DC_CHAT_ID_ARCHIVED_LINK)
+
+        case .contact(let contactData):
+            let contact = cellViewModel.dcContext.getContact(id: contactData.contactId)
+            titleLabel.attributedText = cellViewModel.title.boldAt(indexes: cellViewModel.titleHighlightIndexes, fontSize: titleLabel.font.pointSize)
+
+            if let profileImage = contact.profileImage {
+                avatar.setImage(profileImage)
+            } else {
+                avatar.setName(cellViewModel.title)
+                avatar.setColor(contact.color)
+            }
+            avatar.setRecentlySeen(contact.wasSeenRecently)
+            setTimeLabel(0)
+            setStatusIndicators(unreadCount: 0,
+                                status: 0,
+                                visibility: 0,
+                                isLocationStreaming: false,
+                                isContactRequest: false,
+                                isArchiveLink: false)
+            
+            if  contact.lastSeen != 0 {
+                subtitleLabel.isHidden = false
+
+              let timeStr =  String.localizedStringWithFormat(String.localized("last_seen_relative"), DateUtils.getExtendedAbsTimeSpanString(timeStamp: Double(contact.lastSeen)))
+                subtitleLabel.text = timeStr;
+            }else{
+                subtitleLabel.isHidden = true
+
+            }
+            
+ 
+            
+        case .profile:
+            let contact = cellViewModel.dcContext.getContact(id: Int(DC_CONTACT_ID_SELF))
+            titleLabel.text = cellViewModel.title
+            subtitleLabel.text = cellViewModel.subtitle
+            if let profileImage = contact.profileImage {
+                avatar.setImage(profileImage)
+            } else {
+                avatar.setName(cellViewModel.title)
+                avatar.setColor(contact.color)
+            }
+            avatar.setRecentlySeen(false)
+            setTimeLabel(0)
+            setStatusIndicators(unreadCount: 0,
+                                status: 0,
+                                visibility: 0,
+                                isLocationStreaming: false,
+                                isContactRequest: false,
+                                isArchiveLink: false)
+        }
+
+        accessibilityLabel = (titleLabel.text != nil ? ((titleLabel.text ?? "")+"\n") : "")
+            + (isContactRequest ? (String.localized("chat_request_label")+"\n") : "")
+            + (isArchived ? (String.localized("chat_archived_label")+"\n") : "")
+            + (unreadMessages > 0 ? (String.localized(stringID: "n_messages", parameter: unreadMessages)+"\n") : "")
+            + (timeLabel.text != nil ? ((timeLabel.text ?? "")+"\n") : "")
+            + (subtitleLabel.text != nil ? ((subtitleLabel.text ?? "")+"\n") : "")
+    }
+
 }

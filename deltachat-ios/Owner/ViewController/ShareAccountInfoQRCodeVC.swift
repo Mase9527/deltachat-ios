@@ -22,16 +22,22 @@ class ShareAccountInfoQRCodeVC: UIViewController {
     var  imageView:UIImageView?
     
     var qrCode:String = ""
-    
+    var key:String = ""
+
     var copyButton:UIButton?
     
-    init(dcContext: DcContext, dcAccounts: DcAccounts,qrCode:String) {
+    var textView:UITextView = UITextView()
+    
+    var textContentView:UIView = UIView()
+
+    init(dcContext: DcContext, dcAccounts: DcAccounts,qrCode:String,key:String) {
         self.dcContext = dcContext
         self.dcAccounts = dcAccounts
         self.qrCode = qrCode
+        self.key = key
+
         super.init(nibName: nil, bundle: nil)
         
-        view.backgroundColor = .white
         hidesBottomBarWhenPushed = true
     }
 
@@ -39,7 +45,7 @@ class ShareAccountInfoQRCodeVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "二维码"
+        self.navigationItem.title = "导出密钥"
         let imageView = UIImageView()
 
         self.view.addSubview(imageView)
@@ -56,7 +62,7 @@ class ShareAccountInfoQRCodeVC: UIViewController {
       
         )
 
-        let qrCode = AdvancedQRCodeGenerator.generateQRCode(from: self.qrCode, config: config)
+        let qrCode = AdvancedQRCodeGenerator.generateQRCode(from: self.key, config: config)
         
        imageView.image = qrCode
         imageView.contentMode = .scaleAspectFit
@@ -76,7 +82,55 @@ class ShareAccountInfoQRCodeVC: UIViewController {
         self.copyButton = button
         self.view.addSubview(button)
         
+        self.view.addSubview(self.textView)
+        
+        
+        self.view.addSubview(self.textContentView)
+        
+        
+        let label = UILabel()
+        label.text = self.key
+        label.numberOfLines = 0;
+        label.font = .systemFont(ofSize: 15)
+        self.textContentView.backgroundColor = .white
+        self.textContentView.layer.cornerRadius = 15
+        self.textContentView.clipsToBounds = true
+        
+        self.textContentView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalTo(self.view.snp.topMargin).offset(20)
+          
+        }
+        
+        self.textContentView.addSubview(label)
+        
+        label.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(15)
+        }
+
         button.addTarget(self, action: #selector(copyAction), for: .touchUpInside)
+        self.textView.isHidden = true
+        self.textView.isEditable = false
+        self.textView.textContainerInset = .init(top: 15, left: 15, bottom: 15, right: 15)
+        self.textView.backgroundColor = .white
+        self.textView.layer.cornerRadius = 15
+        self.textView.clipsToBounds = true
+        self.textView.text = self.key;
+        self.textView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalTo(self.view.snp.topMargin).offset(20)
+            make.height.equalTo(450)
+        }
+        self.copyButton?.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(44)
+            make.width.equalTo(250)
+            make.top.equalTo(self.textContentView.snp.bottom).offset(25)
+        }
+        
+        self.view.backgroundColor = .systemGroupedBackground
     }
     @objc func copyAction(){
         let textToCopy = self.qrCode
@@ -93,8 +147,8 @@ class ShareAccountInfoQRCodeVC: UIViewController {
         let topSafeArea = view.safeAreaInsets.top
         let frame = CGRectMake((self.view.bounds.width - 300)/2.0, 50+topSafeArea, 300, 300)
         self.imageView?.frame = frame
-        
-        self.copyButton?.frame = CGRect(x: 50, y: (self.imageView?.frame.maxY ?? 0) + 40, width: self.view.bounds.width - 100, height: 40)
+//        
+//        self.copyButton?.frame = CGRect(x: 50, y: (self.imageView?.frame.maxY ?? 0) + 40, width: self.view.bounds.width - 100, height: 40)
     }
 
 

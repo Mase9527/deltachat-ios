@@ -59,6 +59,8 @@ class ContactCellViewModel: AvatarCellViewModel,CustomStringConvertible {
         self.dcContext = dcContext
     }
     
+
+    
     var description: String {
         return "Name:\(self.title) contactId:\(contactId)"
     }
@@ -155,4 +157,6 @@ extension ContactCellViewModel {
         )
         return viewModel
     }
+    
+
 }

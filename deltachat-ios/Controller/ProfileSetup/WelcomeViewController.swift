@@ -104,13 +104,12 @@ class WelcomeViewController: UIViewController {
         self.newVC.onLogIn = { [weak self] in
             guard let self else { return }
             let alert = UIAlertController(title: String.localized("onboarding_alternative_logins"), message: nil, preferredStyle: .safeActionSheet)
-            alert.addAction(UIAlertAction(title: String.localized("multidevice_receiver_title"), style: .default, handler: addAsSecondDevice(_:)))
+//            alert.addAction(UIAlertAction(title: String.localized("multidevice_receiver_title"), style: .default, handler: addAsSecondDevice(_:)))
             alert.addAction(UIAlertAction(title: String.localized("import_backup_title"), style: .default, handler: restoreBackup(_:)))
             
-            alert.addAction(UIAlertAction(title: String.localized("扫码登录"), style: .default,handler:  {action in
-//                self.loginTool.im
-                self.addAsImputNewAccount(action)
-            }))
+//            alert.addAction(UIAlertAction(title: String.localized("扫码登录"), style: .default,handler:  {action in
+//                self.addAsImputNewAccount(action)
+//            }))
             
             alert.addAction(UIAlertAction(title: String.localized("剪切板登录"), style: .default,handler: { action in
                 

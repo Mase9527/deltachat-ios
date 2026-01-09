@@ -93,7 +93,7 @@ class AAExportAccountTool: NSObject {
                    
                         // 假设你有一个String对象，你想将其复制到剪贴板
                         
-                        let vc = ShareAccountInfoQRCodeVC.init(dcContext: self.dcContext, dcAccounts: self.dcAccounts,qrCode: base64String)
+                        let vc = ShareAccountInfoQRCodeVC.init(dcContext: self.dcContext, dcAccounts: self.dcAccounts,qrCode: base64String, key: privateKeyText ?? "")
 //                        vc.qrCode = base64String
                         self.currentVC?.navigationController?.pushViewController(vc, animated: true)
 //                        let textToCopy = base64String

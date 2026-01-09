@@ -74,6 +74,7 @@ class ProfileSwitchViewController: UITableViewController {
             let selectedAccountId = dcAccounts.getSelected().id
             cell.updateCell(selectedAccount: selectedAccountId,
                             dcContext: dcAccounts.get(id: accountIds[indexPath.row]))
+            cell.menuButton.menu = self.createMenu(indexPath: indexPath)
             return cell
         }
         return addAccountCell
@@ -107,6 +108,20 @@ class ProfileSwitchViewController: UITableViewController {
                 return UIMenu(children: children)
             }
         )
+    }
+    
+    func createMenu(indexPath: IndexPath)->UIMenu{
+        let dcContext = dcAccounts.get(id: accountIds[indexPath.row])
+        let muteTitle = dcContext.isMuted() ? "menu_unmute" : "menu_mute"
+        let muteImage = dcContext.isMuted() ? "speaker.wave.2" : "speaker.slash"
+        
+        let children: [UIMenuElement] = [
+            UIAction.menuAction(localizationKey: muteTitle, systemImageName: muteImage, with: indexPath, action: toggleMute),
+            UIAction.menuAction(localizationKey: "profile_tag", systemImageName: "tag", with: indexPath, action: setProfileTag),
+            UIAction.menuAction(localizationKey: "move_to_top", systemImageName: "arrow.up", with: indexPath, action: moveToTop),
+            UIAction.menuAction(localizationKey: "delete", attributes: [.destructive], systemImageName: "trash", with: indexPath, action: deleteAccount),
+        ]
+        return UIMenu(children: children)
     }
 
     func toggleMute(at indexPath: IndexPath) {
@@ -224,6 +239,8 @@ class ProfileSwitchViewController: UITableViewController {
     }
 }
 
+typealias EditAccountAction = ()->()
+
 class AccountCell: UITableViewCell {
 
     static let reuseIdentifier = "accountCell_reuse_identifier"
@@ -234,6 +251,8 @@ class AccountCell: UITableViewCell {
         }
         return 54
     }
+    
+    var editAction:EditAccountAction?
 
     private lazy var accountAvatar: InitialsBadge = {
         let avatar = InitialsBadge(size: 37)
@@ -285,6 +304,23 @@ class AccountCell: UITableViewCell {
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
+    
+ 
+    
+    lazy var checkbutton: UIButton = {
+        let checkbutton = UIButton(type: .custom)
+        checkbutton.setImage(UIImage.init(systemName: "checkmark"), for: .normal)
+        checkbutton.isUserInteractionEnabled = false
+        return checkbutton
+    }()
+    
+    lazy var menuButton: UIButton = {
+        let menuButton = UIButton(type: .custom)
+        menuButton.setImage(UIImage.init(systemName: "highlighter"), for: .normal)
+//        menuButton.addTarget(self, action: #selector(editActionButton), for: .touchUpInside)
+        menuButton.showsMenuAsPrimaryAction = true
+        return menuButton
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -299,6 +335,7 @@ class AccountCell: UITableViewCell {
         contentView.addSubview(accountAvatar)
         contentView.addSubview(mutedIndicator)
         contentView.addSubview(labelStackView)
+//        contentView.addSubview(rightStackView)
         let margins = contentView.layoutMarginsGuide
         contentView.addConstraints([
             accountAvatar.constraintCenterYTo(contentView),
@@ -310,6 +347,25 @@ class AccountCell: UITableViewCell {
             labelStackView.constraintAlignBottomToAnchor(margins.bottomAnchor),
             labelStackView.constraintAlignTrailingToAnchor(margins.trailingAnchor, paddingTrailing: 32, priority: .defaultHigh),
         ])
+        
+        let view = UIView()
+        view.addSubview(menuButton)
+        view.addSubview(checkbutton)
+        
+        menuButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.equalToSuperview()
+            make.width.equalTo(40)
+        }
+        
+        checkbutton.snp.makeConstraints { make in
+            make.trailing.equalTo(self.menuButton.snp.leading).offset(0)
+            make.centerY.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+        view.frame = .init(0, 0, 80, 44)
+        self.accessoryView = view
     }
 
     func updateCell(selectedAccount: Int, dcContext: DcContext) {
@@ -352,7 +408,10 @@ class AccountCell: UITableViewCell {
             tagLabel.isHidden = true
         }
 
-        accessoryType = selectedAccount == accountId ? .checkmark : .none
+//        accessoryType = selectedAccount == accountId ? .checkmark : .none
+        
+        let hide = selectedAccount == accountId ? false:true
+        self.checkbutton.isHidden = hide
     }
 
     override func prepareForReuse() {
@@ -360,5 +419,11 @@ class AccountCell: UITableViewCell {
         accountAvatar.reset()
         accountName.text = nil
         accountId = -1
+    }
+    
+    @objc func editActionButton(){
+        if let action = self.editAction {
+            action()
+        }
     }
 }

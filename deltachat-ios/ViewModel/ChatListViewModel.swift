@@ -158,6 +158,7 @@ class ChatListViewModel: NSObject {
             return nil
         case .profile:
             return nil
+      
         }
     }
 

@@ -151,6 +151,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     private weak var lastContextMenuPreviewSnapshot: UIView?
 
     private let titleView = ChatTitleView()
+    
+    var showCall:Bool = false
 
     private lazy var dcChat: DcChat = {
         return dcContext.getChat(chatId: chatId)
@@ -722,8 +724,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let hasDraft:Bool = !draft.isEditing && draft.attachment != nil
 
         print(draft)
-        if  draft.draftMsg != nil {
+        if  let draftMsg = draft.draftMsg ,draftMsg.type != DC_MSG_VCARD{
             self.bottomInputView.showReply(self.draftArea, marginTop: 10, marginBottom: 10)
+            
+            self.draftArea.snp.makeConstraints { make in
+                make.width.lessThanOrEqualTo(self.view.snp.width)
+            }
         }else{
             self.bottomInputView.hideReply()
         }
@@ -939,9 +945,18 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let button = UIBarButtonItem(image: UIImage(systemName: "phone"), style: .plain, target: self, action: #selector(callPressed))
                     rightBarButtonItems.append(button)
                 }
+                
+                if !dcChat.isMultiUser && dcChat.canSend ,
+                   let dcContact, dcContact.isKeyContact {
+                    self.showCall = true
+                }else{
+                    self.showCall = false
+                }
+                
             } else {
                 let button = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchPressed))
                 rightBarButtonItems.append(button)
+                self.showCall = false
             }
             
             navigationItem.rightBarButtonItems = rightBarButtonItems
@@ -1489,9 +1504,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     private func showProtectionEnabledDialog() {
         let alert = UIAlertController(title: String.localized("chat_protection_enabled_explanation"), message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: String.localized("learn_more"), style: .default, handler: { [weak self] _ in
-            self?.openHelp(fragment: "#e2ee")
-        }))
+//        alert.addAction(UIAlertAction(title: String.localized("learn_more"), style: .default, handler: { [weak self] _ in
+//            self?.openHelp(fragment: "#e2ee")
+//        }))
         alert.addAction(UIAlertAction(title: String.localized("ok"), style: .default, handler: nil))
         navigationController?.present(alert, animated: true, completion: nil)
     }
@@ -2450,6 +2465,7 @@ extension ChatViewController: MediaPickerDelegate {
                     DispatchQueue.main.async { [weak self] in
                         if let url, !progressAlertHandler.cancelled {
                             self?.stageVideo(url: (url as NSURL))
+                            
                             progressAlertHandler.updateProgressAlertSuccess()
                         } else if let error {
                             progressAlertHandler.updateProgressAlert(error: error.localizedDescription)
@@ -2873,6 +2889,7 @@ extension ChatViewController: SendContactViewControllerDelegate,OwnerSendContact
               let vcardURL = prepareVCardData(vcardData) else { return }
 
         stageVCard(url: vcardURL)
+        self.sendTextMessage(inputText: "")
     }
     
     func contactSelected(_ viewController: OwnerSendContactViewController, contactId: Int,name:String) {
@@ -3163,13 +3180,21 @@ extension ChatViewController: InputBoardDataSource,QExtendBoardViewDelegate {
             boardView.backgroundColor = UIColor(red: (246) / 255.0, green: (246) / 255.0, blue: (246) / 255.0, alpha: 1)
         }
 
-        let photoItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_pic"), title: "图片")
-        let redItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_pic"), title: "拍摄")
-        let locationItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "文件")
+        let photoItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "Chat_Picture"), title: "图片")
+        let redItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "Chat_camera"), title: "拍摄")
+        let locationItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "Chat_File"), title: "文件")
 //        let voiceItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "录音")
-        let contactItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "message_more_poi"), title: "联系人")
+        let contactItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "Chat_contact"), title: "联系人")
+        let callItem = QExtendBoardItemModel(normalIconImage: UIImage(named: "Chat_Video"), title: "视频聊天")
+        
+        var list:[QExtendBoardItemModel] = [photoItem!, redItem!, locationItem!,contactItem!]
 
-        boardView.extendBoardItems = [photoItem!, redItem!, locationItem!]
+            if self.showCall {
+                list.append(callItem!)
+            }
+        
+
+        boardView.extendBoardItems = list
         return boardView
     }
     
@@ -3197,6 +3222,8 @@ extension ChatViewController: InputBoardDataSource,QExtendBoardViewDelegate {
             self.showFilesLibrary()
         }else if index == 3{// 文件
             self.showContactList()
+        }else if index == 4{// 文件
+            self.callPressed()
         }
         
     }
@@ -3205,6 +3232,11 @@ extension ChatViewController: InputBoardDataSource,QExtendBoardViewDelegate {
     }
     
     func keyboardManagerExtendBoardHeight(_ keyboardManager: QKeyboardManager!) -> CGFloat {
+        
+        if self.showCall {
+            return 274;
+
+        }
         return 174;
     }
 }
@@ -3248,7 +3280,29 @@ extension ChatViewController{
             }
             
             if let videoUrl = videoUrl {
-                self?.onVideoSelected(url: videoUrl as NSURL)
+                
+                guard let self = self else { return  }
+                DispatchQueue.main.async {
+                    let url = videoUrl as URL
+                    let progressAlertHandler = ProgressAlertHandler()
+                    progressAlertHandler.dataSource = self
+                    progressAlertHandler.showProgressAlert(title: nil, dcContext: self.dcContext)
+                    DispatchQueue.global().async {
+                        url.convertToMp4(completionHandler: { [weak self] url, error in
+                            DispatchQueue.main.async { [weak self] in
+                                if let url, !progressAlertHandler.cancelled {
+//                                    self?.stageVideo(url: (url as NSURL))
+                                    
+                                    self?.sendVideo(url: url)
+                                    
+                                    progressAlertHandler.updateProgressAlertSuccess()
+                                } else if let error {
+                                    progressAlertHandler.updateProgressAlert(error: error.localizedDescription)
+                                }
+                            }
+                        })
+                    }
+                }
             }
 
         }

@@ -45,6 +45,45 @@ class SelfProfileViewController: UITableViewController, MediaPickerDelegate {
         cell.textField.returnKeyType = .default
         return cell
     }()
+    
+    
+    private lazy var qrCodeCell: SelfProfileViewQRCodeCell = {
+        let cell = SelfProfileViewQRCodeCell.init(dcContext: self.dcContext)
+  
+        return cell
+    }()
+    
+    private lazy var emailCell: UITableViewCell = {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = "邮箱"
+        cell.detailTextLabel?.text = dcContext.addr
+        return cell
+    }()
+    
+    
+    private lazy var urlCell: UITableViewCell = {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = "邀请链接"
+        cell.detailTextLabel?.text = dcContext.addr
+        cell.detailTextLabel?.numberOfLines = 0
+        
+        
+        //https://i.delta.chat/#4FFB4C27CB3F331E230906A4695F2D5A7CFB0F3F&i=syvSY3ZE5QQiclHFclZbLqfK&s=1czY70uZNpvXwpUSrzIytgGD&a=iosdeveloper%40aa1234.com&n=iOS%E5%BC%80%E5%8F%91
+        if let inviteLink = Utils.getInviteLink(context: dcContext, chatId: 0) {
+            let url = DeltaChatLinkConverter.deltaChatToOpenPGP4FPR(inviteLink) ?? inviteLink
+            cell.detailTextLabel?.text = url
+
+        }
+        let button = UIButton(type: .custom)
+        button.setTitle("复制", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.sizeToFit()
+        button.addTarget(self, action: #selector(didClickCopyButton), for: .touchUpInside)
+        cell.accessoryView = button
+//        cell.
+        return cell
+    }()
+    
 
     private lazy var sections: [SectionConfigs] = {
         let nameSection = SectionConfigs(
@@ -52,7 +91,19 @@ class SelfProfileViewController: UITableViewController, MediaPickerDelegate {
             footerTitle: String.localized("pref_who_can_see_profile_explain"),
             cells: [nameCell, avatarSelectionCell, statusCell]
         )
-        return [nameSection]
+        let accountSection = SectionConfigs(
+            headerTitle: "账号信息",
+            footerTitle: nil,
+            cells: [emailCell,urlCell]
+        )
+        
+        
+        let qrCodeSection = SectionConfigs(
+            headerTitle: "二维码",
+            footerTitle: nil,
+            cells: [qrCodeCell]
+        )
+        return [nameSection,accountSection,qrCodeSection]
     }()
 
     init(dcAccounts: DcAccounts) {
@@ -107,6 +158,16 @@ class SelfProfileViewController: UITableViewController, MediaPickerDelegate {
     // MARK: - Notifications
     @objc func textDidChange(notification: Notification) {
         validateFields()
+    }
+    
+    @objc func didClickCopyButton() {
+        
+        let inviteLink = Utils.getInviteLink(context: dcContext, chatId: 0)
+        let url = DeltaChatLinkConverter.deltaChatToOpenPGP4FPR(inviteLink ?? "") ?? inviteLink
+
+        guard let urlStr = url, let inviteLinkURL = URL(string: urlStr) else { return }
+        UIPasteboard.general.string = urlStr;
+        ProgressHUD.succeed("复制成功")
     }
 
     // MARK: - actions

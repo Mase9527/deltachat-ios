@@ -218,6 +218,9 @@
 		BB85EEBD2F0B95E900EA6723 /* OwnerSendContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EEBC2F0B95E900EA6723 /* OwnerSendContactViewController.swift */; };
 		BB85EECD2F0C998300EA6723 /* ObservableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EECC2F0C998300EA6723 /* ObservableTextView.swift */; };
 		BB85EECF2F0C9C7800EA6723 /* GroupAvatarGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */; };
+		BB85EF092F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EF082F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift */; };
+		BB85EF302F0F521000EA6723 /* LegacyQRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EF2F2F0F521000EA6723 /* LegacyQRCodeScanner.swift */; };
+		BB85F1662F10DE8700EA6723 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85F1652F10DE8700EA6723 /* AddFriendViewController.swift */; };
 		BB9D08852EFB899200D4E110 /* AAPublicKeyPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */; };
 		BB9D08872EFB8C0000D4E110 /* AACenterPopupPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */; };
 		BB9D08892EFB91EC00D4E110 /* AALoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */; };
@@ -704,6 +707,9 @@
 		BB85EEBC2F0B95E900EA6723 /* OwnerSendContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerSendContactViewController.swift; sourceTree = "<group>"; };
 		BB85EECC2F0C998300EA6723 /* ObservableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTextView.swift; sourceTree = "<group>"; };
 		BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAvatarGenerator.swift; sourceTree = "<group>"; };
+		BB85EF082F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfProfileViewQRCodeCell.swift; sourceTree = "<group>"; };
+		BB85EF2F2F0F521000EA6723 /* LegacyQRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyQRCodeScanner.swift; sourceTree = "<group>"; };
+		BB85F1652F10DE8700EA6723 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAPublicKeyPopupViewController.swift; sourceTree = "<group>"; };
 		BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AACenterPopupPresentationController.swift; sourceTree = "<group>"; };
 		BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginViewController.swift; sourceTree = "<group>"; };
@@ -1357,6 +1363,7 @@
 				BB85EEB62F0B554000EA6723 /* VoiceRecordController.swift */,
 				BB85EEB72F0B554000EA6723 /* VoiceRecordHUD.swift */,
 				BB85EECC2F0C998300EA6723 /* ObservableTextView.swift */,
+				BB85EF082F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1432,6 +1439,7 @@
 				BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */,
 				BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */,
 				BB85EEBC2F0B95E900EA6723 /* OwnerSendContactViewController.swift */,
+				BB85F1652F10DE8700EA6723 /* AddFriendViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1450,6 +1458,7 @@
 				BB9D08B72EFBE72400D4E110 /* AAPGPPublicKeyTool.swift */,
 				BB85EEBA2F0B60BA00EA6723 /* MentionHighlighter.swift */,
 				BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */,
+				BB85EF2F2F0F521000EA6723 /* LegacyQRCodeScanner.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2118,6 +2127,7 @@
 				305501742798CDE1008FD5CA /* WebxdcViewController.swift in Sources */,
 				3034929F25752FC800A523D0 /* MediaPreview.swift in Sources */,
 				5F785F6E2CB9344F003FFFB9 /* ReusableCellProtocol.swift in Sources */,
+				BB85F1662F10DE8700EA6723 /* AddFriendViewController.swift in Sources */,
 				BBBB8A6C2EF52DE100B3B07E /* AAExportAccountTool.swift in Sources */,
 				D8C1B0DD2CE7421C00C233A7 /* ShareProxyViewController.swift in Sources */,
 				AE76E5EE242BF2EA003CF461 /* WelcomeViewController.swift in Sources */,
@@ -2209,7 +2219,9 @@
 				BBBB8A422EF527C800B3B07E /* AdvancedQRCodeGenerator.swift in Sources */,
 				BBBB8A432EF527C800B3B07E /* HUD.swift in Sources */,
 				BB9D088C2EFB9C6300D4E110 /* RSKPlaceholderTextView.swift in Sources */,
+				BB85EF302F0F521000EA6723 /* LegacyQRCodeScanner.swift in Sources */,
 				BBBB8A442EF527C800B3B07E /* QRCodeTool.swift in Sources */,
+				BB85EF092F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift in Sources */,
 				BBBB8A452EF527C800B3B07E /* APIService.swift in Sources */,
 				BBBB8A462EF527C800B3B07E /* ProgressHUD+PacmanProgress.swift in Sources */,
 				BBBB8A472EF527C800B3B07E /* DeltaChatLinkConverter.swift in Sources */,
@@ -2750,7 +2762,7 @@
 				CODE_SIGN_ENTITLEMENTS = "deltachat-ios/deltachat-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 161;
+				CURRENT_PROJECT_VERSION = 162;
 				DEVELOPMENT_TEAM = PKB8HJT5QJ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
@@ -2824,7 +2836,7 @@
 				CODE_SIGN_ENTITLEMENTS = "deltachat-ios/deltachat-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 161;
+				CURRENT_PROJECT_VERSION = 162;
 				DEVELOPMENT_TEAM = PKB8HJT5QJ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
