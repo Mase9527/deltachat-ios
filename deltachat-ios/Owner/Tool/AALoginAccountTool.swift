@@ -150,8 +150,18 @@ class AALoginAccountTool: NSObject {
             self.dcContext.imex(what: DC_IMEX_IMPORT_SELF_KEYS, directory: path)
             var loginParam = DcEnteredLoginParam(addr: email, password: password)
             let domaimEmail = self.extractDomainFromEmailWithRegex(email)
-            loginParam.imapServer =  "mail.\(domaimEmail)"
-            loginParam.smtpServer = "mail.\(domaimEmail)";
+            
+            if domaimEmail == "aa1234.com" {
+                loginParam.imapServer =  "mail.\(domaimEmail)"
+                loginParam.smtpServer = "mail.\(domaimEmail)";
+            }else{
+                loginParam.certificateChecks = "automatic"
+                loginParam.imapSecurity = "automatic"
+                loginParam.smtpSecurity = "automatic"
+            }
+        
+            
+        
             self.loginParam = loginParam;
             
             self.dcAccounts.startIo()

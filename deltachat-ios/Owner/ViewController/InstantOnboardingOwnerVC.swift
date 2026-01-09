@@ -410,14 +410,13 @@ class InstantOnboardingOwnerVC: UIViewController {
         let manualAccountSetup = UIAlertAction(title: String.localized("manual_account_setup_option"), style: .default) { _ in
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-
-//                let accountSetupController = AccountSetupController(dcAccounts: self.dcAccounts, editView: false)
-//                accountSetupController.onLoginSuccess = {
-//                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-//                        appDelegate.reloadDcContext()
-//                    }
-//                }
-//                self.navigationController?.pushViewController(accountSetupController, animated: true)
+                let accountSetupController = EditTransportViewController(dcAccounts: self.dcAccounts)
+                accountSetupController.onLoginSuccess = {
+                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                        appDelegate.reloadDcContext()
+                    }
+                }
+                self.navigationController?.pushViewController(accountSetupController, animated: true)
             }
         }
 
