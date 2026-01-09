@@ -800,11 +800,11 @@ public class DcContext {
     }
     
     public func createKeypair(email: String) -> String {
-        if let cString = dc_create_keypair(self.contextPointer,email) {
-            let swiftString = String(cString: cString)
-            dc_str_unref(cString)
-            return swiftString
-        }
+//        if let cString = dc_create_keypair(self.contextPointer,email) {
+//            let swiftString = String(cString: cString)
+//            dc_str_unref(cString)
+//            return swiftString
+//        }
         return "ErrGetMsgInfo"
     }
 }

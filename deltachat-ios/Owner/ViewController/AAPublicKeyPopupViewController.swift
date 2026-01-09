@@ -117,7 +117,7 @@ class AAPublicKeyPopupViewController: UIViewController, UIViewControllerTransiti
         }
         
         detaiLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom, ).offset(5)
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.left.equalToSuperview().offset(24)
             make.right.equalTo(closeButton.snp.left).offset(-10)
         }
