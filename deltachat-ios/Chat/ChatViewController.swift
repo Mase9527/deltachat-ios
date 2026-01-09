@@ -726,6 +726,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         print(draft)
         if  let draftMsg = draft.draftMsg ,draftMsg.type != DC_MSG_VCARD{
             self.bottomInputView.showReply(self.draftArea, marginTop: 10, marginBottom: 10)
+            
+            self.draftArea.snp.makeConstraints { make in
+                make.width.lessThanOrEqualTo(self.view.snp.width)
+            }
         }else{
             self.bottomInputView.hideReply()
         }

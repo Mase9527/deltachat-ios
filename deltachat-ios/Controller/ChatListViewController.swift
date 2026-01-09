@@ -1168,7 +1168,7 @@ extension ChatListViewController:UIPopoverPresentationControllerDelegate{
     @objc private func showAdvancedPopover(_ sender: UIButton) {
         //plus.circle
            let options = [
-            PopoverOptionsModel(title: " "+"二维码邀请", image: "AA_QR_Code"),
+            PopoverOptionsModel(title: " "+"添加好友", image: "AA_Add_Account"),
             PopoverOptionsModel(title: " "+"添加群组", image: "AA_Add_Account"),
             PopoverOptionsModel(title:" "+"扫一扫", image: "AA_Scan_Account"),
 
@@ -1176,7 +1176,12 @@ extension ChatListViewController:UIPopoverPresentationControllerDelegate{
            let popoverVC = AdvancedPopoverViewController(title: "高级菜单", options: options)
         popoverVC.callback = { [weak self] tag in
             if tag == 0 {
-                self?.showPopup()
+                
+                if let dcContext = self?.dcContext {
+                    let vc = AddFriendViewController(dcContext: dcContext)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+         
             }else if tag == 1{
 //                let selectedAccountId = self?.dcAccounts.getSelected().id
 //                if let selectedAccountId = selectedAccountId {

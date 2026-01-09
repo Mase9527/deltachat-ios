@@ -149,8 +149,9 @@ class AALoginAccountTool: NSObject {
             let path = DocumentManager.getDocumentDirectoryString()+"/"+keyName
             self.dcContext.imex(what: DC_IMEX_IMPORT_SELF_KEYS, directory: path)
             var loginParam = DcEnteredLoginParam(addr: email, password: password)
-            loginParam.imapServer =  "mail.\(domain)"
-            loginParam.smtpServer = "mail.\(domain)";
+            let domaimEmail = self.extractDomainFromEmailWithRegex(email)
+            loginParam.imapServer =  "mail.\(domaimEmail)"
+            loginParam.smtpServer = "mail.\(domaimEmail)";
             self.loginParam = loginParam;
             
             self.dcAccounts.startIo()
@@ -304,5 +305,27 @@ class AALoginAccountTool: NSObject {
             appDelegate.reloadDcContext()
             appDelegate.prepopulateWidget()
         }
+    }
+}
+
+extension AALoginAccountTool{
+    func extractDomainFromEmailWithRegex(_ email: String) -> String {
+        // 正则表达式匹配邮箱格式并提取域名
+        let pattern = "@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})"
+        
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: [])
+            let nsRange = NSRange(email.startIndex..., in: email)
+            
+            if let match = regex.firstMatch(in: email, options: [], range: nsRange) {
+                if let domainRange = Range(match.range(at: 1), in: email) {
+                    return String(email[domainRange])
+                }
+            }
+        } catch {
+            print("正则表达式错误: \(error)")
+        }
+        
+        return domain
     }
 }
