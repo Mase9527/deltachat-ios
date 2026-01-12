@@ -60,6 +60,13 @@ class SelfProfileViewController: UITableViewController, MediaPickerDelegate {
         return cell
     }()
     
+    private lazy var backEmailCell: UITableViewCell = {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = "备份邮箱"
+        cell.detailTextLabel?.text = ""
+        return cell
+    }()
+    
     
     private lazy var urlCell: UITableViewCell = {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
@@ -128,6 +135,47 @@ class SelfProfileViewController: UITableViewController, MediaPickerDelegate {
         navigationItem.rightBarButtonItem = doneButton
         navigationItem.leftBarButtonItem = cancelButton
         validateFields()
+        
+        if let addr = dcContext.addr {
+            let api = iFBaseAPI.getRecoveryEmail(main_email: addr)
+            HttpClient.shareInstance.request(target: api) {[weak self] data in
+                
+                guard let self = self else { return  }
+                
+                let decoder = JSONDecoder()
+                let result = try? decoder.decode(RecoveryEmailModel.self, from: data)
+                
+                if let result = result,result.success == true,result.recovery_email.isEmpty == false{
+                    
+                    let nameSection = SectionConfigs(
+                        headerTitle: nil,
+                        footerTitle: String.localized("pref_who_can_see_profile_explain"),
+                        cells: [nameCell, avatarSelectionCell, statusCell]
+                    )
+                    backEmailCell.detailTextLabel?.text = result.recovery_email
+                    let accountSection = SectionConfigs(
+                        headerTitle: "账号信息",
+                        footerTitle: nil,
+                        cells: [emailCell,backEmailCell,urlCell]
+                    )
+                    
+                    
+                    let qrCodeSection = SectionConfigs(
+                        headerTitle: "二维码",
+                        footerTitle: nil,
+                        cells: [qrCodeCell]
+                    )
+                    let sectionList = [nameSection,accountSection,qrCodeSection]
+                    self.sections = sectionList
+                    self.tableView.reloadData()
+                    
+                }
+                
+             
+            }
+
+        }
+        
     }
 
     func validateFields() {

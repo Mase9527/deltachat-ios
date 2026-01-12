@@ -30,6 +30,9 @@ class InstantOnboardingOwnerVC: UIViewController {
     private let dcAccounts: DcAccounts
     var loginParam:DcEnteredLoginParam?
 
+    
+    lazy var registerVC = RegisterViewController(dcAccounts: self.dcAccounts)
+
     private var qrCodeReader: QrCodeReaderController?
     private var securityScopedResource: NSURL?
     private lazy var canCancel: Bool = {
@@ -184,14 +187,19 @@ class InstantOnboardingOwnerVC: UIViewController {
         
         self.createButton.backgroundColor = DcColors.primary
         
-       let key = self.dcContext.createKeypair(email: "aaaa@qq.com")
-        logger.error("key:\(key)")
+    
+        self.addChild(self.registerVC)
+        self.view.addSubview(self.registerVC.view)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         updateMenuButtons()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.registerVC.view.frame = self.view.bounds
     }
 
     override func viewWillDisappear(_ animated: Bool) {

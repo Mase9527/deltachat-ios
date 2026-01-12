@@ -232,7 +232,8 @@ class AALoginViewController: UIViewController {
             ProgressHUD.failed("请输入邮箱")
             return
         }
-        self.publicKeyTextView.text =  self.dcContext.createKeypair(email: self.emailInput.textField.text ?? "")
+        
+        self.showResetAlert()
     }
     
     @objc func loginAction() {
@@ -268,6 +269,20 @@ class AALoginViewController: UIViewController {
     deinit {
         print("界面销毁了吗AALoinig")
     }
+    
+    // MARK: - Logic Actions
+        @objc private func showResetAlert() {
+            let alert = UIAlertController(title: "提示",
+                                          message: "重置秘钥则成为一个全新独立账号，与旧秘钥互不相关",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "确定", style: .destructive, handler: { _ in
+                print("执行重置秘钥逻辑")
+                self.publicKeyTextView.text =  self.dcContext.createKeypair(email: self.emailInput.textField.text ?? "")
+
+            }))
+            alert.addAction(UIAlertAction(title: "取消", style: .cancel))
+            present(alert, animated: true)
+        }
 }
 
 // ModernInputView 保持不变...

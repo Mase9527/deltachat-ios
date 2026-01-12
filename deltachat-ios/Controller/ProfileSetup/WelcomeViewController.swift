@@ -16,6 +16,7 @@ class WelcomeViewController: UIViewController {
 
     var newVC = AANewProfileVC()
 
+    
     var loginTool:AALoginAccountTool?
     var progressAlertHandler: ProgressAlertHandler
 
@@ -92,6 +93,8 @@ class WelcomeViewController: UIViewController {
         self.addChild(self.newVC)
         
         self.view.addSubview(self.newVC.view)
+ 
+        
         
         let title = String.localized(canCancel ? "add_account" : "welcome_desktop")
         let button = UIButton(type: .custom)
@@ -111,12 +114,12 @@ class WelcomeViewController: UIViewController {
 //                self.addAsImputNewAccount(action)
 //            }))
             
-            alert.addAction(UIAlertAction(title: String.localized("剪切板登录"), style: .default,handler: { action in
-                
-
-                self.loginTool?.importPasteBase64()
-                
-            }))
+//            alert.addAction(UIAlertAction(title: String.localized("剪切板登录"), style: .default,handler: { action in
+//                
+//
+//                self.loginTool?.importPasteBase64()
+//                
+//            }))
             
             alert.addAction(UIAlertAction(title: String.localized("账号密码登录"), style: .default,handler: { action in
                 
@@ -126,6 +129,8 @@ class WelcomeViewController: UIViewController {
                
                 
             }))
+            
+
             
             alert.addAction(UIAlertAction(title: String.localized("cancel"), style: .cancel))
             present(alert, animated: true, completion: nil)
@@ -142,6 +147,7 @@ class WelcomeViewController: UIViewController {
         super.viewDidLayoutSubviews()
         welcomeView.minContainerHeight = view.frame.height - view.safeAreaInsets.top
         self.newVC.view.frame = self.view.bounds
+
 
     }
 

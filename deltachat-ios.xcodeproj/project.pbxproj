@@ -221,6 +221,8 @@
 		BB85EF092F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EF082F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift */; };
 		BB85EF302F0F521000EA6723 /* LegacyQRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EF2F2F0F521000EA6723 /* LegacyQRCodeScanner.swift */; };
 		BB85F1662F10DE8700EA6723 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85F1652F10DE8700EA6723 /* AddFriendViewController.swift */; };
+		BB85F18A2F1484B800EA6723 /* BindRecoveryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85F1892F1484B700EA6723 /* BindRecoveryModel.swift */; };
+		BB85F18C2F1492C200EA6723 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85F18B2F1492C200EA6723 /* RegisterViewController.swift */; };
 		BB9D08852EFB899200D4E110 /* AAPublicKeyPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */; };
 		BB9D08872EFB8C0000D4E110 /* AACenterPopupPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */; };
 		BB9D08892EFB91EC00D4E110 /* AALoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */; };
@@ -710,6 +712,8 @@
 		BB85EF082F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfProfileViewQRCodeCell.swift; sourceTree = "<group>"; };
 		BB85EF2F2F0F521000EA6723 /* LegacyQRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyQRCodeScanner.swift; sourceTree = "<group>"; };
 		BB85F1652F10DE8700EA6723 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
+		BB85F1892F1484B700EA6723 /* BindRecoveryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindRecoveryModel.swift; sourceTree = "<group>"; };
+		BB85F18B2F1492C200EA6723 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAPublicKeyPopupViewController.swift; sourceTree = "<group>"; };
 		BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AACenterPopupPresentationController.swift; sourceTree = "<group>"; };
 		BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginViewController.swift; sourceTree = "<group>"; };
@@ -813,8 +817,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		643B44782E0C2BD900AEE026 /* DcTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = DcTests;
 			sourceTree = "<group>";
 		};
@@ -1440,6 +1442,7 @@
 				BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */,
 				BB85EEBC2F0B95E900EA6723 /* OwnerSendContactViewController.swift */,
 				BB85F1652F10DE8700EA6723 /* AddFriendViewController.swift */,
+				BB85F18B2F1492C200EA6723 /* RegisterViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1468,6 +1471,7 @@
 			children = (
 				BBBB8A032EF527C800B3B07E /* DCBase64AccountModel.swift */,
 				BBBB8A042EF527C800B3B07E /* LoginResponse.swift */,
+				BB85F1892F1484B700EA6723 /* BindRecoveryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1901,9 +1905,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-deltachat-ios/Pods-deltachat-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-deltachat-ios/Pods-deltachat-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1927,7 +1935,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		7837B64621E5532B00CDE126 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1945,7 +1954,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n\n";
+			shellScript = "
+
+";
 		};
 		CDEA77249E4F2AFAB45DFEA0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2037,6 +2048,7 @@
 				5F4945AB2D315E7000DCD50A /* UIPasteboard.swift in Sources */,
 				3080A022277DE09900E74565 /* InputTextView.swift in Sources */,
 				30734326249A280B00BF9AD1 /* MediaQualityViewController.swift in Sources */,
+				BB85F18A2F1484B800EA6723 /* BindRecoveryModel.swift in Sources */,
 				646896662E00416100E965B3 /* CallViewController.swift in Sources */,
 				3080A01C277DDB8A00E74565 /* InputBarAccessoryViewDelegate.swift in Sources */,
 				D89C456D2D0AF6A8005B1491 /* WidgetEntry.swift in Sources */,
@@ -2185,6 +2197,7 @@
 				BB6AB33B2EF544B30021318E /* AALoginAccountTool.swift in Sources */,
 				30238CFF28A5554C00EF14AC /* FileHelper.swift in Sources */,
 				D8A072A02BED0FD8001A4C7C /* InstantOnboardingView.swift in Sources */,
+				BB85F18C2F1492C200EA6723 /* RegisterViewController.swift in Sources */,
 				AE851AD0227DF50900ED86F0 /* ProfileViewController.swift in Sources */,
 				D8083AD02D14384F005DCB7D /* UserDefaults+Widgets.swift in Sources */,
 				30FDB72124D838240066C48D /* BaseMessageCell.swift in Sources */,

@@ -113,13 +113,13 @@ public class HttpRequest {
             //解析出错后，直接返回data
             if response.statusCode == 200 {
                 do {
-                    let jsonData =   try JSONSerialization.jsonObject(with: response.data as Data, options: .mutableContainers) as! Dictionary<String, Any>
-                    let dataRes = jsonData["data"] as Any;
-                    guard  let jsonDataData = try? JSONSerialization.data(withJSONObject: dataRes, options: []) else{
-                        return
-                    }
-                    success(jsonDataData)
-                    print(jsonData)
+//                    let jsonData =   try JSONSerialization.jsonObject(with: response.data as Data, options: .mutableContainers) as! Dictionary<String, Any>
+//                    let dataRes = jsonData["data"] as Any;
+//                    guard  let jsonDataData = try? JSONSerialization.data(withJSONObject: dataRes, options: []) else{
+//                        return
+//                    }
+                    success(response.data)
+                    print(response.data)
                 } catch {
                     print(error)
                 }
@@ -129,6 +129,15 @@ public class HttpRequest {
             return
         }
         
+        if model.success {
+//            SaveFiles.save(path: target.path, data: jsonDataData)
+           success(response.data)
+        }else{
+            failureHandle(failure: failure, stateCode: model.generalCode, message: model.error)
+
+        }
+        
+        /*
 
         //状态码：后台会规定数据正确的状态码，未登录的状态码等，可以统一处理。
         switch (model.generalCode) {
@@ -187,6 +196,7 @@ public class HttpRequest {
             //其他错误
             failureHandle(failure: failure, stateCode: model.generalCode, message: model.generalMessage)
         }
+         */
     }
     
 

@@ -26,7 +26,8 @@ struct BaseModel: Decodable {
     var code: Int
     var data: Content
     var message:String
-    
+    var success:Bool
+    var error:String
     struct Content: Decodable {
         var message: String
     }
