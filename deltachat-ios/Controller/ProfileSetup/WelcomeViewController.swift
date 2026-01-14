@@ -16,6 +16,7 @@ class WelcomeViewController: UIViewController {
 
     var newVC = AANewProfileVC()
 
+    lazy var logInVC = LoginViewController(dcContext: self.dcContext, dcAccounts: self.dcAccounts)
     
     var loginTool:AALoginAccountTool?
     var progressAlertHandler: ProgressAlertHandler
@@ -95,6 +96,10 @@ class WelcomeViewController: UIViewController {
         self.view.addSubview(self.newVC.view)
  
         
+        self.addChild(self.logInVC)
+        
+        self.view.addSubview(self.logInVC.view)
+        
         
         let title = String.localized(canCancel ? "add_account" : "welcome_desktop")
         let button = UIButton(type: .custom)
@@ -148,6 +153,9 @@ class WelcomeViewController: UIViewController {
         welcomeView.minContainerHeight = view.frame.height - view.safeAreaInsets.top
         self.newVC.view.frame = self.view.bounds
 
+        self.logInVC.view.frame = self.view.bounds
+
+        
 
     }
 

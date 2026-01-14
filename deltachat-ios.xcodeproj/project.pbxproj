@@ -208,6 +208,10 @@
 		B2DF962F2EE328E30037F07F /* TransportListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DF962E2EE328E30037F07F /* TransportListViewController.swift */; };
 		B2DF96312EE3368F0037F07F /* TransportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DF96302EE3368F0037F07F /* TransportCell.swift */; };
 		B2F899E129F96A67003797D5 /* AllMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F899E029F96A67003797D5 /* AllMediaViewController.swift */; };
+		BB2CF9CA2F176AE800E2AA4D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9C92F176AE800E2AA4D /* LoginViewController.swift */; };
+		BB2CF9CC2F176CC700E2AA4D /* KeyInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9CB2F176CC700E2AA4D /* KeyInputViewController.swift */; };
+		BB2CF9CE2F1773BE00E2AA4D /* RegisterMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9CD2F1773BE00E2AA4D /* RegisterMailViewController.swift */; };
+		BB2CF9D02F177F4500E2AA4D /* LongImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9CF2F177F4500E2AA4D /* LongImageViewController.swift */; };
 		BB6AB32B2EF53C020021318E /* efd257ece330a34525667707e617a16.txt in Resources */ = {isa = PBXBuildFile; fileRef = BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */; };
 		BB6AB33B2EF544B30021318E /* AALoginAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */; };
 		BB85EE552F0A4E1800EA6723 /* QEmotionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BB85EE542F0A4E1800EA6723 /* QEmotionTool.m */; };
@@ -697,6 +701,10 @@
 		B2DF962E2EE328E30037F07F /* TransportListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportListViewController.swift; sourceTree = "<group>"; };
 		B2DF96302EE3368F0037F07F /* TransportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportCell.swift; sourceTree = "<group>"; };
 		B2F899E029F96A67003797D5 /* AllMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllMediaViewController.swift; sourceTree = "<group>"; };
+		BB2CF9C92F176AE800E2AA4D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BB2CF9CB2F176CC700E2AA4D /* KeyInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyInputViewController.swift; sourceTree = "<group>"; };
+		BB2CF9CD2F1773BE00E2AA4D /* RegisterMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMailViewController.swift; sourceTree = "<group>"; };
+		BB2CF9CF2F177F4500E2AA4D /* LongImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongImageViewController.swift; sourceTree = "<group>"; };
 		BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = efd257ece330a34525667707e617a16.txt; sourceTree = "<group>"; };
 		BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginAccountTool.swift; sourceTree = "<group>"; };
 		BB85EE522F0A4DAA00EA6723 /* deltachat-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "deltachat-ios-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1443,6 +1451,10 @@
 				BB85EEBC2F0B95E900EA6723 /* OwnerSendContactViewController.swift */,
 				BB85F1652F10DE8700EA6723 /* AddFriendViewController.swift */,
 				BB85F18B2F1492C200EA6723 /* RegisterViewController.swift */,
+				BB2CF9C92F176AE800E2AA4D /* LoginViewController.swift */,
+				BB2CF9CB2F176CC700E2AA4D /* KeyInputViewController.swift */,
+				BB2CF9CD2F1773BE00E2AA4D /* RegisterMailViewController.swift */,
+				BB2CF9CF2F177F4500E2AA4D /* LongImageViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2058,6 +2070,7 @@
 				AE18F294228C602A0007B1BE /* SecuritySettingsViewController.swift in Sources */,
 				30C2BFFE27032375005505DA /* ChatSearchAccessoryBar.swift in Sources */,
 				B2DF962F2EE328E30037F07F /* TransportListViewController.swift in Sources */,
+				BB2CF9D02F177F4500E2AA4D /* LongImageViewController.swift in Sources */,
 				AE39D323249CFC1A007346A1 /* FilesViewController.swift in Sources */,
 				AE8DD451249D1DFB009A4BC1 /* DocumentGalleryFileCell.swift in Sources */,
 				D8CDEFE22C087D1000146773 /* ContactCardView.swift in Sources */,
@@ -2129,6 +2142,7 @@
 				30EF7308252F6A3300E2C54A /* PaddingTextView.swift in Sources */,
 				D8C19DCE2C1B456700B32F6D /* SendContactViewController.swift in Sources */,
 				30E348E124F53772005C93D1 /* ImageTextCell.swift in Sources */,
+				BB2CF9CC2F176CC700E2AA4D /* KeyInputViewController.swift in Sources */,
 				D8FB04002B4F0CF100A355F8 /* EmojiView.swift in Sources */,
 				3008CB7624F95B6D00E6A617 /* AudioController.swift in Sources */,
 				3080A035277DE30100E74565 /* String+Extensions.swift in Sources */,
@@ -2201,6 +2215,7 @@
 				AE851AD0227DF50900ED86F0 /* ProfileViewController.swift in Sources */,
 				D8083AD02D14384F005DCB7D /* UserDefaults+Widgets.swift in Sources */,
 				30FDB72124D838240066C48D /* BaseMessageCell.swift in Sources */,
+				BB2CF9CA2F176AE800E2AA4D /* LoginViewController.swift in Sources */,
 				7A451DB01FB1F84900177250 /* AppCoordinator.swift in Sources */,
 				AE38B31822672DFC00EC37A1 /* ActionCell.swift in Sources */,
 				BBBB8A292EF527C800B3B07E /* ProgressHUD+CirclePulseMultiple.swift in Sources */,
@@ -2238,6 +2253,7 @@
 				BBBB8A452EF527C800B3B07E /* APIService.swift in Sources */,
 				BBBB8A462EF527C800B3B07E /* ProgressHUD+PacmanProgress.swift in Sources */,
 				BBBB8A472EF527C800B3B07E /* DeltaChatLinkConverter.swift in Sources */,
+				BB2CF9CE2F1773BE00E2AA4D /* RegisterMailViewController.swift in Sources */,
 				BBBB8A482EF527C800B3B07E /* AccountInfoPopupViewController.swift in Sources */,
 				BBBB8A492EF527C800B3B07E /* ProgressHUD+SquareCircuitSnake.swift in Sources */,
 				BBBB8A4A2EF527C800B3B07E /* ProgressHUD+CirclePulseSingle.swift in Sources */,
