@@ -46,7 +46,18 @@ class WelcomeViewController: UIViewController {
     }()
 
     private lazy var cancelButton: UIBarButtonItem = {
-        return UIBarButtonItem(title: String.localized("cancel"), style: .plain, target: self, action: #selector(cancelAccountCreation))
+        
+//        let button = UIButton(type: .custom)
+//        button.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+//        button.setImage(, for: .normal)
+//        let item = UIBarButtonItem.init(image: UIImage(named: "AA_back")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(cancelAccountCreation))
+        
+//        let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium)
+        
+        let item = UIBarButtonItem.init(image: UIImage.init(systemName: "xmark.circle.fill",withConfiguration: nil), style: .plain, target: self, action: #selector(cancelAccountCreation))
+        item.tintColor = .white
+        return item
+//        return UIBarButtonItem(title: String.localized("cancel"), style: .plain, target: self, action: #selector(cancelAccountCreation))
     }()
 
     private lazy var mediaPicker: MediaPicker? = {
