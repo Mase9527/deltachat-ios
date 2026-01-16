@@ -212,6 +212,11 @@
 		BB2CF9CC2F176CC700E2AA4D /* KeyInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9CB2F176CC700E2AA4D /* KeyInputViewController.swift */; };
 		BB2CF9CE2F1773BE00E2AA4D /* RegisterMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9CD2F1773BE00E2AA4D /* RegisterMailViewController.swift */; };
 		BB2CF9D02F177F4500E2AA4D /* LongImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9CF2F177F4500E2AA4D /* LongImageViewController.swift */; };
+		BB2CF9FB2F19C37700E2AA4D /* AALoginMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9FA2F19C37700E2AA4D /* AALoginMainVC.swift */; };
+		BB2CF9FD2F19D3E200E2AA4D /* SecretKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9FC2F19D3E200E2AA4D /* SecretKeyViewController.swift */; };
+		BB2CF9FF2F19E47400E2AA4D /* ResetKeyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9FE2F19E47400E2AA4D /* ResetKeyAlertViewController.swift */; };
+		BB2CFA012F19EBF700E2AA4D /* AABaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CFA002F19EBF700E2AA4D /* AABaseViewController.swift */; };
+		BB2CFA032F19ED0300E2AA4D /* AABaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CFA022F19ED0300E2AA4D /* AABaseNavigationController.swift */; };
 		BB6AB32B2EF53C020021318E /* efd257ece330a34525667707e617a16.txt in Resources */ = {isa = PBXBuildFile; fileRef = BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */; };
 		BB6AB33B2EF544B30021318E /* AALoginAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */; };
 		BB85EE552F0A4E1800EA6723 /* QEmotionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BB85EE542F0A4E1800EA6723 /* QEmotionTool.m */; };
@@ -705,6 +710,11 @@
 		BB2CF9CB2F176CC700E2AA4D /* KeyInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyInputViewController.swift; sourceTree = "<group>"; };
 		BB2CF9CD2F1773BE00E2AA4D /* RegisterMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMailViewController.swift; sourceTree = "<group>"; };
 		BB2CF9CF2F177F4500E2AA4D /* LongImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongImageViewController.swift; sourceTree = "<group>"; };
+		BB2CF9FA2F19C37700E2AA4D /* AALoginMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginMainVC.swift; sourceTree = "<group>"; };
+		BB2CF9FC2F19D3E200E2AA4D /* SecretKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretKeyViewController.swift; sourceTree = "<group>"; };
+		BB2CF9FE2F19E47400E2AA4D /* ResetKeyAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetKeyAlertViewController.swift; sourceTree = "<group>"; };
+		BB2CFA002F19EBF700E2AA4D /* AABaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AABaseViewController.swift; sourceTree = "<group>"; };
+		BB2CFA022F19ED0300E2AA4D /* AABaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AABaseNavigationController.swift; sourceTree = "<group>"; };
 		BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = efd257ece330a34525667707e617a16.txt; sourceTree = "<group>"; };
 		BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginAccountTool.swift; sourceTree = "<group>"; };
 		BB85EE522F0A4DAA00EA6723 /* deltachat-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "deltachat-ios-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1455,6 +1465,11 @@
 				BB2CF9CB2F176CC700E2AA4D /* KeyInputViewController.swift */,
 				BB2CF9CD2F1773BE00E2AA4D /* RegisterMailViewController.swift */,
 				BB2CF9CF2F177F4500E2AA4D /* LongImageViewController.swift */,
+				BB2CF9FA2F19C37700E2AA4D /* AALoginMainVC.swift */,
+				BB2CF9FC2F19D3E200E2AA4D /* SecretKeyViewController.swift */,
+				BB2CF9FE2F19E47400E2AA4D /* ResetKeyAlertViewController.swift */,
+				BB2CFA002F19EBF700E2AA4D /* AABaseViewController.swift */,
+				BB2CFA022F19ED0300E2AA4D /* AABaseNavigationController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2083,6 +2098,7 @@
 				302E1BB4252B5AB4008F4264 /* PlayButtonView.swift in Sources */,
 				303492AD2577CAC300A523D0 /* FileView.swift in Sources */,
 				7AE0A5491FC42F65005ECB4B /* NewChatViewController.swift in Sources */,
+				BB2CF9FF2F19E47400E2AA4D /* ResetKeyAlertViewController.swift in Sources */,
 				AE77838F23E4276D0093EABD /* ContactCellViewModel.swift in Sources */,
 				B20462E62440C99600367A57 /* AutodelOptionsViewController.swift in Sources */,
 				B23977F52D7BA351006290CE /* CallManager.swift in Sources */,
@@ -2104,6 +2120,7 @@
 				BB85EEBB2F0B60BA00EA6723 /* MentionHighlighter.swift in Sources */,
 				30E348E524F6647D005C93D1 /* FileTextCell.swift in Sources */,
 				BB9D08852EFB899200D4E110 /* AAPublicKeyPopupViewController.swift in Sources */,
+				BB2CF9FB2F19C37700E2AA4D /* AALoginMainVC.swift in Sources */,
 				30238CFD28A5028300EF14AC /* WebxdcGridCell.swift in Sources */,
 				3080A036277DE30100E74565 /* NSMutableAttributedString+Extensions.swift in Sources */,
 				307A82CC25B8D26700748B57 /* ChatEditingBar.swift in Sources */,
@@ -2135,6 +2152,7 @@
 				64F9EBA02E117CD8007EE3D9 /* UIView+Animations.swift in Sources */,
 				B2C42570265C325C00B95377 /* MultilineLabelCell.swift in Sources */,
 				AEF53BD5248904BF00D309C1 /* GalleryTimeLabel.swift in Sources */,
+				BB2CFA032F19ED0300E2AA4D /* AABaseNavigationController.swift in Sources */,
 				AEE6EC482283045D00EDC689 /* SelfProfileViewController.swift in Sources */,
 				B206C2AB2B7B8088003ACBE6 /* MapViewController.swift in Sources */,
 				30653081254358B10093E196 /* QuoteView.swift in Sources */,
@@ -2239,6 +2257,7 @@
 				BBBB8A3C2EF527C800B3B07E /* ShareAccountInfoQRCodeVC.swift in Sources */,
 				BB85EECD2F0C998300EA6723 /* ObservableTextView.swift in Sources */,
 				BBBB8A3D2EF527C800B3B07E /* AdvancedPopoverViewController.swift in Sources */,
+				BB2CFA012F19EBF700E2AA4D /* AABaseViewController.swift in Sources */,
 				BBBB8A3E2EF527C800B3B07E /* ProgressHUD+LiveIcon.swift in Sources */,
 				BB9D08892EFB91EC00D4E110 /* AALoginViewController.swift in Sources */,
 				BBBB8A3F2EF527C800B3B07E /* ProgressHUD+HorizontalBarScaling.swift in Sources */,
@@ -2247,6 +2266,7 @@
 				BBBB8A422EF527C800B3B07E /* AdvancedQRCodeGenerator.swift in Sources */,
 				BBBB8A432EF527C800B3B07E /* HUD.swift in Sources */,
 				BB9D088C2EFB9C6300D4E110 /* RSKPlaceholderTextView.swift in Sources */,
+				BB2CF9FD2F19D3E200E2AA4D /* SecretKeyViewController.swift in Sources */,
 				BB85EF302F0F521000EA6723 /* LegacyQRCodeScanner.swift in Sources */,
 				BBBB8A442EF527C800B3B07E /* QRCodeTool.swift in Sources */,
 				BB85EF092F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift in Sources */,
@@ -2791,7 +2811,7 @@
 				CODE_SIGN_ENTITLEMENTS = "deltachat-ios/deltachat-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 162;
+				CURRENT_PROJECT_VERSION = 170;
 				DEVELOPMENT_TEAM = PKB8HJT5QJ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
@@ -2865,7 +2885,7 @@
 				CODE_SIGN_ENTITLEMENTS = "deltachat-ios/deltachat-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 162;
+				CURRENT_PROJECT_VERSION = 170;
 				DEVELOPMENT_TEAM = PKB8HJT5QJ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (

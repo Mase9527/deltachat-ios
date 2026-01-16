@@ -12,21 +12,21 @@ import UIKit
 import SnapKit
 import DcCore
 
-class LongImageViewController: UIViewController {
+class LongImageViewController: AABaseViewController {
 
     private let scrollView = UIScrollView()
     private let imageView = UIImageView()
     
-    let imageName:String
-
+   let provider: MailProvider
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        displayImage(named: imageName) // 替换为你的图片名
+        displayImage(named: provider.longImageName) // 替换为你的图片名
     }
     
-    init(imageName: String) {
-        self.imageName = imageName
+    init(provider: MailProvider) {
+        self.provider = provider
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -62,7 +62,7 @@ class LongImageViewController: UIViewController {
         let leftView = UIView()
         let logo = UIImageView(image: UIImage(named: "dc_logo")) // 替换为你的猫咪图标
         let titleLabel = UILabel()
-        titleLabel.text = "AAmail"
+        titleLabel.text = provider.name
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         
         leftView.addSubview(logo)

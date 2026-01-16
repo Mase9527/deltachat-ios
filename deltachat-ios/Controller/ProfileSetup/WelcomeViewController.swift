@@ -16,7 +16,7 @@ class WelcomeViewController: UIViewController {
 
     var newVC = AANewProfileVC()
 
-    lazy var logInVC = LoginViewController(dcContext: self.dcContext, dcAccounts: self.dcAccounts)
+    lazy var logInVC = AALoginMainVC(dcContext: self.dcContext, dcAccounts: self.dcAccounts)
     
     var loginTool:AALoginAccountTool?
     var progressAlertHandler: ProgressAlertHandler
@@ -101,13 +101,16 @@ class WelcomeViewController: UIViewController {
         self.view.addSubview(self.logInVC.view)
         
         
-        let title = String.localized(canCancel ? "add_account" : "welcome_desktop")
-        let button = UIButton(type: .custom)
-        button.setTitle(" "+title, for: .normal)
-        button.setImage(UIImage(named: "AA_Top_Logo"), for: .normal)
-        button.sizeToFit()
-        button.setTitleColor(DcColors.text1, for: .normal)
-        self.navigationItem.titleView = button
+//        let title = String.localized(canCancel ? "add_account" : "welcome_desktop")
+//        let button = UIButton(type: .custom)
+//        button.setTitle(" "+title, for: .normal)
+//        button.setImage(UIImage(named: "AA_Top_Logo"), for: .normal)
+//        button.sizeToFit()
+//        button.setTitleColor(DcColors.text1, for: .normal)
+//        self.navigationItem.titleView = button
+        
+        self.navigationItem.titleView = UIView()
+
         
         self.newVC.onLogIn = { [weak self] in
             guard let self else { return }

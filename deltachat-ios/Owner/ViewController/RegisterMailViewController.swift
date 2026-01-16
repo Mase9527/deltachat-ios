@@ -12,11 +12,11 @@ import DcCore
 
 struct MailProvider {
     let name: String
-    let url: String
+    let longImageName: String
     let logoName: String
 }
 
-class RegisterMailViewController: UIViewController {
+class RegisterMailViewController: AABaseViewController {
 
     // MARK: - UI Components
     private let scrollView = UIScrollView()
@@ -170,12 +170,12 @@ class RegisterMailViewController: UIViewController {
         subLabel.textColor = .gray
         subLabel.font = .systemFont(ofSize: 14)
         
-        let sohu = MailProvider(name: "搜狐闪电邮箱", url: "mail.sohu.com", logoName: "sohu_logo")
+        let sohu = MailProvider(name: "搜狐闪电邮箱", longImageName: "souhu_guide", logoName: "sohu_logo")
             let sohuItem = createListItem(provider: sohu) { [weak self] in
                 self?.navigateToDetail(for: sohu)
             }
             
-            let qq = MailProvider(name: "QQ邮箱", url: "mail.qq.com", logoName: "qq_logo")
+            let qq = MailProvider(name: "QQ邮箱", longImageName: "qq_guide", logoName: "qq_logo")
             let qqItem = createListItem(provider: qq) { [weak self] in
                 self?.navigateToDetail(for: qq)
             }
@@ -310,7 +310,7 @@ class RegisterMailViewController: UIViewController {
         nameLabel.font = .systemFont(ofSize: 15, weight: .medium)
         
         let subLabel = UILabel()
-        subLabel.text = provider.url
+//        subLabel.text = provider.url
         subLabel.font = .systemFont(ofSize: 12)
         subLabel.textColor = .systemBlue
         
@@ -371,10 +371,10 @@ class RegisterMailViewController: UIViewController {
     // 跳转逻辑
     private func navigateToDetail(for provider: MailProvider) {
         print("跳转到 \(provider.name) 的详情页")
-        let detailVC = LongImageViewController.init(imageName: "qq_guide")
+        let detailVC = LongImageViewController.init(provider: provider)
         self.navigationController?.pushViewController(detailVC, animated: true)
         // 示例：跳转到一个 WebView 或自定义详情页
-        // let detailVC = MailDetailViewController(provider: provider)
-        // self.navigationController?.pushViewController(detailVC, animated: true)
+//         let detailVC = AALoginMainVC()
+//         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

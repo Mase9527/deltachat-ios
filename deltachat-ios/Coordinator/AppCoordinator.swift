@@ -18,7 +18,27 @@ class AppCoordinator: NSObject {
 
     // MARK: - login view handling
     private lazy var loginNavController: UINavigationController = {
-        let nav = UINavigationController() // we change the root, therefore do not set on implicit creation
+        let nav = AABaseNavigationController() // we change the root, therefore do not set on implicit creation
+        let backImage = UIImage(named: "AA_back")?.withRenderingMode(.alwaysOriginal)
+        nav.navigationBar.backIndicatorImage = backImage
+        nav.navigationBar.backIndicatorTransitionMaskImage = backImage
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground() // 保持你要求的沉浸式（背景透明）
+        appearance.setBackIndicatorImage(backImage, transitionMaskImage: backImage)
+        // --- 核心：彻底去掉文字 ---
+        // 通过将文字颜色设为透明，并设置一个空标题
+        let backButtonAppearance = UIBarButtonItemAppearance()
+        backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+        appearance.backButtonAppearance = backButtonAppearance
+        
+        // --- 应用配置 ---
+        nav.navigationBar.standardAppearance = appearance
+        nav.navigationBar.scrollEdgeAppearance = appearance
+        nav.navigationBar.compactAppearance = appearance
+        
+        
+//        nav.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         return nav
     }()
 
@@ -38,7 +58,7 @@ class AppCoordinator: NSObject {
 
     private func createQrNavigationController() -> UINavigationController {
         let root = QrPageController(dcAccounts: dcAccounts)
-        let nav = UINavigationController(rootViewController: root)
+        let nav = AABaseNavigationController(rootViewController: root)
         let qrCodeTabImage: UIImage?
         qrCodeTabImage = UIImage(systemName: "qrcode")
         nav.tabBarItem = UITabBarItem(title: String.localized("qr_code"), image: qrCodeTabImage, tag: qrTab)
@@ -47,7 +67,7 @@ class AppCoordinator: NSObject {
 
     private func createContactNavigationController() -> UINavigationController {
         let root = ContactListOwnerVC(dcContext: self.dcAccounts.getSelected())
-        let nav = UINavigationController(rootViewController: root)
+        let nav = AABaseNavigationController(rootViewController: root)
         let qrCodeTabImage: UIImage?
         qrCodeTabImage = UIImage(named: "Contact_Tabbar")
         nav.tabBarItem = UITabBarItem(title: String.localized("联系人"), image: qrCodeTabImage, tag: qrTab)
@@ -56,7 +76,7 @@ class AppCoordinator: NSObject {
     
     private func createChatsNavigationController() -> UINavigationController {
         let root = ChatListViewController(dcContext: dcAccounts.getSelected(), dcAccounts: dcAccounts, isArchive: false)
-        let nav = UINavigationController(rootViewController: root)
+        let nav = AABaseNavigationController(rootViewController: root)
         let chatTabImage = UIImage(named: "Chat_Tabbar")
         nav.tabBarItem = UITabBarItem(title: String.localized("pref_chats"), image: chatTabImage, tag: chatsTab)
         return nav
@@ -64,7 +84,7 @@ class AppCoordinator: NSObject {
 
     private func createSettingsNavigationController() -> UINavigationController {
         let root = SettingsViewController(dcAccounts: dcAccounts)
-        let nav = UINavigationController(rootViewController: root)
+        let nav = AABaseNavigationController(rootViewController: root)
         let settingsImage: UIImage?
         settingsImage = UIImage.init(named: "Setting_Tabbar")
         nav.tabBarItem = UITabBarItem(title: String.localized("menu_settings"), image: settingsImage, tag: settingsTab)
