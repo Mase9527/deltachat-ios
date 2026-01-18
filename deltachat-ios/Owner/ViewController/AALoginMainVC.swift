@@ -103,8 +103,8 @@ class AALoginMainVC: UIViewController {
         IQKeyboardManager.shared.keyboardDistance = 50;
         IQKeyboardManager.shared.isEnabled = true;
         
-        (accountField.viewWithTag(100) as? UITextField)?.text = "plm@aa1234.com"
-        (passwordField.viewWithTag(100) as? UITextField)?.text = "plm"
+//        (accountField.viewWithTag(100) as? UITextField)?.text = "plm@aa1234.com"
+//        (passwordField.viewWithTag(100) as? UITextField)?.text = "plm"
 
     }
 
@@ -236,6 +236,13 @@ class AALoginMainVC: UIViewController {
     }
 
     @objc private func handleRegisterTap(gesture: UITapGestureRecognizer) {
+        
+        
+//        let successVC = KeySuccessViewController()
+//        self.present(successVC, animated: true)
+//        
+//        return
+        
         let text = registerLabel.text ?? ""
         let signupRange = (text as NSString).range(of: "创建新账号")
         

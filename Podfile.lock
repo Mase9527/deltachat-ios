@@ -1,10 +1,10 @@
 PODS:
-  - Alamofire (5.10.2)
-  - CocoaLumberjack (3.8.5):
-    - CocoaLumberjack/Core (= 3.8.5)
-  - CocoaLumberjack/Core (3.8.5)
-  - DeviceKit (5.6.0)
-  - IQKeyboardCore (1.0.5)
+  - Alamofire (5.11.0)
+  - CocoaLumberjack (3.9.0):
+    - CocoaLumberjack/Core (= 3.9.0)
+  - CocoaLumberjack/Core (3.9.0)
+  - DeviceKit (5.7.0)
+  - IQKeyboardCore (1.0.8)
   - IQKeyboardManagerSwift (8.0.1):
     - IQKeyboardManagerSwift/Appearance (= 8.0.1)
     - IQKeyboardManagerSwift/Core (= 8.0.1)
@@ -27,8 +27,8 @@ PODS:
   - IQKeyboardManagerSwift/Resign (8.0.1):
     - IQKeyboardManagerSwift/Core
   - IQKeyboardNotification (1.0.6)
-  - IQKeyboardReturnManager (1.0.4):
-    - IQKeyboardCore (= 1.0.5)
+  - IQKeyboardReturnManager (1.0.6):
+    - IQKeyboardCore
   - IQKeyboardToolbar (1.1.3):
     - IQKeyboardToolbar/Core (= 1.1.3)
   - IQKeyboardToolbar/Core (1.1.3):
@@ -42,17 +42,17 @@ PODS:
     - IQKeyboardCore
   - IQTextView (1.0.5):
     - IQKeyboardToolbar/Placeholderable
-  - libwebp (1.3.2):
-    - libwebp/demux (= 1.3.2)
-    - libwebp/mux (= 1.3.2)
-    - libwebp/sharpyuv (= 1.3.2)
-    - libwebp/webp (= 1.3.2)
-  - libwebp/demux (1.3.2):
+  - libwebp (1.5.0):
+    - libwebp/demux (= 1.5.0)
+    - libwebp/mux (= 1.5.0)
+    - libwebp/sharpyuv (= 1.5.0)
+    - libwebp/webp (= 1.5.0)
+  - libwebp/demux (1.5.0):
     - libwebp/webp
-  - libwebp/mux (1.3.2):
+  - libwebp/mux (1.5.0):
     - libwebp/demux
-  - libwebp/sharpyuv (1.3.2)
-  - libwebp/webp (1.3.2):
+  - libwebp/sharpyuv (1.5.0)
+  - libwebp/webp (1.5.0):
     - libwebp/sharpyuv
   - MCEmojiPicker (1.2.3)
   - Moya (15.0.0):
@@ -62,13 +62,13 @@ PODS:
   - QKeyboardEmotionView (3.0.2)
   - ReachabilitySwift (5.2.4)
   - SCSiriWaveformView (1.1.2)
-  - SDWebImage (5.20.0):
-    - SDWebImage/Core (= 5.20.0)
-  - SDWebImage/Core (5.20.0)
+  - SDWebImage (5.21.5):
+    - SDWebImage/Core (= 5.21.5)
+  - SDWebImage/Core (5.21.5)
   - SDWebImageSVGKitPlugin (1.4.0):
     - SDWebImage/Core (~> 5.10)
     - SVGKit (~> 3.0)
-  - SDWebImageWebPCoder (0.14.6):
+  - SDWebImageWebPCoder (0.15.0):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
   - SnapKit (5.7.1)
@@ -137,26 +137,26 @@ CHECKOUT OPTIONS:
     :git: "git@github.com:Mase9527/QKeyboardEmotionView.git"
 
 SPEC CHECKSUMS:
-  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
-  CocoaLumberjack: 6a459bc897d6d80bd1b8c78482ec7ad05dffc3f0
-  DeviceKit: 9f2e0b68984a384f864b0f4e40a54bae43636bd8
-  IQKeyboardCore: 28c8bf3bcd8ba5aa1570b318cbc4da94b861711e
+  Alamofire: bd5e7b23a1a750975288482c1831d71e74415f86
+  CocoaLumberjack: 5644158777912b7de7469fa881f8a3f259c2512a
+  DeviceKit: d1a956e25b957efb60a87bfe70be4e00ef36846d
+  IQKeyboardCore: 8652977ec919cf5351aa2977fedd1a6546476fbc
   IQKeyboardManagerSwift: 835fc9c6e4732398113406d84900ad2e8f141218
   IQKeyboardNotification: eb4910401f5a0e68f97e71c62f8a0c5b7e9d535c
-  IQKeyboardReturnManager: 972be48528ce9e7508ab3ab15ac7efac803f17f5
+  IQKeyboardReturnManager: fcbf51fc68d7536fc1fbcca5231c4e82576b12ac
   IQKeyboardToolbar: 9fe900f8e7def414be4025af0ca098df764d4fe3
   IQKeyboardToolbarManager: c8a575e8b5fffe5873d0e75312244498a0759473
   IQTextInputViewNotification: 3b9fb27a16e7ee8958cc9092cfb07a1a9e1fd559
   IQTextView: ae13b4922f22e6f027f62c557d9f4f236b19d5c7
-  libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
+  libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   MCEmojiPicker: d24f72731881c05143870eefff52f586d493b982
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   QKeyboardEmotionView: 4ded8a0769ff20cf657b49d8310e9c23e1787e5e
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   SCSiriWaveformView: 016392911fb442c17d6dbad68e666edb13193c02
-  SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
+  SDWebImage: e9c98383c7572d713c1a0d7dd2783b10599b9838
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
-  SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
+  SDWebImageWebPCoder: 0e06e365080397465cc73a7a9b472d8a3bd0f377
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796

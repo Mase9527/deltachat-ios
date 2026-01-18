@@ -232,6 +232,11 @@
 		BB85F1662F10DE8700EA6723 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85F1652F10DE8700EA6723 /* AddFriendViewController.swift */; };
 		BB85F18A2F1484B800EA6723 /* BindRecoveryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85F1892F1484B700EA6723 /* BindRecoveryModel.swift */; };
 		BB85F18C2F1492C200EA6723 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85F18B2F1492C200EA6723 /* RegisterViewController.swift */; };
+		BB8C145B2F1CAD8800354ED2 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8C145A2F1CAD8800354ED2 /* CreateAccountViewController.swift */; };
+		BB8C145D2F1CB63B00354ED2 /* BindEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8C145C2F1CB63B00354ED2 /* BindEmailViewController.swift */; };
+		BB8C145F2F1CC20E00354ED2 /* KeySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8C145E2F1CC20E00354ED2 /* KeySuccessViewController.swift */; };
+		BB8C14612F1CCD9F00354ED2 /* OwnerSelfProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8C14602F1CCD9F00354ED2 /* OwnerSelfProfileViewController.swift */; };
+		BB8C14632F1CFA5600354ED2 /* ChangeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8C14622F1CFA5600354ED2 /* ChangeNameViewController.swift */; };
 		BB9D08852EFB899200D4E110 /* AAPublicKeyPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */; };
 		BB9D08872EFB8C0000D4E110 /* AACenterPopupPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */; };
 		BB9D08892EFB91EC00D4E110 /* AALoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */; };
@@ -732,6 +737,11 @@
 		BB85F1652F10DE8700EA6723 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		BB85F1892F1484B700EA6723 /* BindRecoveryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindRecoveryModel.swift; sourceTree = "<group>"; };
 		BB85F18B2F1492C200EA6723 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		BB8C145A2F1CAD8800354ED2 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		BB8C145C2F1CB63B00354ED2 /* BindEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindEmailViewController.swift; sourceTree = "<group>"; };
+		BB8C145E2F1CC20E00354ED2 /* KeySuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySuccessViewController.swift; sourceTree = "<group>"; };
+		BB8C14602F1CCD9F00354ED2 /* OwnerSelfProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerSelfProfileViewController.swift; sourceTree = "<group>"; };
+		BB8C14622F1CFA5600354ED2 /* ChangeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNameViewController.swift; sourceTree = "<group>"; };
 		BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAPublicKeyPopupViewController.swift; sourceTree = "<group>"; };
 		BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AACenterPopupPresentationController.swift; sourceTree = "<group>"; };
 		BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginViewController.swift; sourceTree = "<group>"; };
@@ -1470,6 +1480,11 @@
 				BB2CF9FE2F19E47400E2AA4D /* ResetKeyAlertViewController.swift */,
 				BB2CFA002F19EBF700E2AA4D /* AABaseViewController.swift */,
 				BB2CFA022F19ED0300E2AA4D /* AABaseNavigationController.swift */,
+				BB8C145A2F1CAD8800354ED2 /* CreateAccountViewController.swift */,
+				BB8C145C2F1CB63B00354ED2 /* BindEmailViewController.swift */,
+				BB8C145E2F1CC20E00354ED2 /* KeySuccessViewController.swift */,
+				BB8C14602F1CCD9F00354ED2 /* OwnerSelfProfileViewController.swift */,
+				BB8C14622F1CFA5600354ED2 /* ChangeNameViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2081,11 +2096,14 @@
 				D89C456D2D0AF6A8005B1491 /* WidgetEntry.swift in Sources */,
 				30FDB70524D1C1000066C48D /* ChatViewController.swift in Sources */,
 				3080A013277DDABA00E74565 /* KeyboardNotification.swift in Sources */,
+				BB8C145B2F1CAD8800354ED2 /* CreateAccountViewController.swift in Sources */,
+				BB8C145D2F1CB63B00354ED2 /* BindEmailViewController.swift in Sources */,
 				AE52EA20229EB9F000C586C9 /* EditGroupViewController.swift in Sources */,
 				AE18F294228C602A0007B1BE /* SecuritySettingsViewController.swift in Sources */,
 				30C2BFFE27032375005505DA /* ChatSearchAccessoryBar.swift in Sources */,
 				B2DF962F2EE328E30037F07F /* TransportListViewController.swift in Sources */,
 				BB2CF9D02F177F4500E2AA4D /* LongImageViewController.swift in Sources */,
+				BB8C14632F1CFA5600354ED2 /* ChangeNameViewController.swift in Sources */,
 				AE39D323249CFC1A007346A1 /* FilesViewController.swift in Sources */,
 				AE8DD451249D1DFB009A4BC1 /* DocumentGalleryFileCell.swift in Sources */,
 				D8CDEFE22C087D1000146773 /* ContactCardView.swift in Sources */,
@@ -2093,6 +2111,7 @@
 				B21005DB23383664004C70C5 /* EmailOptionsViewController.swift in Sources */,
 				AEC67A1C241CE9E4007DDBE1 /* AppStateRestorer.swift in Sources */,
 				BB85EEB82F0B554000EA6723 /* VoiceRecordHUD.swift in Sources */,
+				BB8C145F2F1CC20E00354ED2 /* KeySuccessViewController.swift in Sources */,
 				BB85EEB92F0B554000EA6723 /* VoiceRecordController.swift in Sources */,
 				3008CB7224F93EB900E6A617 /* AudioMessageCell.swift in Sources */,
 				302E1BB4252B5AB4008F4264 /* PlayButtonView.swift in Sources */,
@@ -2157,6 +2176,7 @@
 				B206C2AB2B7B8088003ACBE6 /* MapViewController.swift in Sources */,
 				30653081254358B10093E196 /* QuoteView.swift in Sources */,
 				3067AAC62667F3FE00525036 /* ImageFormat.swift in Sources */,
+				BB8C14612F1CCD9F00354ED2 /* OwnerSelfProfileViewController.swift in Sources */,
 				30EF7308252F6A3300E2C54A /* PaddingTextView.swift in Sources */,
 				D8C19DCE2C1B456700B32F6D /* SendContactViewController.swift in Sources */,
 				30E348E124F53772005C93D1 /* ImageTextCell.swift in Sources */,

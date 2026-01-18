@@ -1,19 +1,48 @@
 //
-//  ResetKeyAlertViewController.swift
+//  KeySuccessViewController.swift
 //  deltachat-ios
 //
-//  Created by Gongyonghui on 2026/1/16.
+//  Created by gongyonghui on 2026/1/18.
 //  Copyright © 2026 merlinux GmbH. All rights reserved.
 //
 
 import UIKit
+
+import UIKit
 import SnapKit
 
-typealias ResetKeyAlertAction = ()->(Void)
+import UIKit
+import SnapKit
 
-class ResetKeyAlertViewController: UIViewController {
+class CenterAlertPresentationController: UIPresentationController {
     
+    private lazy var dimmingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        return view
+    }()
     
+    // 强制系统使用 Auto Layout 计算位置
+    override func containerViewWillLayoutSubviews() {
+        super.containerViewWillLayoutSubviews()
+        
+        containerView?.insertSubview(dimmingView, at: 0)
+        dimmingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        // 关键：在这里强制 presentedView 居中并确定宽度
+        // 这样它的高度就会由内部的 SnapKit 约束自动撑开
+        presentedView?.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+    }
+}
+
+class KeySuccessViewController: UIViewController {
+    
+    var key:String
     var resetAction:ResetKeyAlertAction?
     // MARK: - UI Components
     private let containerView: UIView = {
@@ -33,11 +62,11 @@ class ResetKeyAlertViewController: UIViewController {
         return btn
     }()
     
-    private let alertIcon = UIImageView(image: UIImage(named: "key_reset_warrning")) // 替换为你的三角形警告图
+    private let alertIcon = UIImageView(image: UIImage(named: "key_Copy_Sucess")) // 替换为你的三角形警告图
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "重置秘钥"
+        label.text = "秘钥生成成功，请妥善保管"
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.textAlignment = .center
         return label
@@ -45,27 +74,27 @@ class ResetKeyAlertViewController: UIViewController {
     
     private let messageLabel: UILabel = {
         let label = UILabel()
-        label.text = "重置秘钥则成为一个全新的独立账号，与旧秘钥互不关联"
-        label.font = .systemFont(ofSize: 18,weight: .bold)
-        label.textColor = .systemGray
-        label.numberOfLines = 0
+        label.text = "重置秘钥则成为一个全新的独立账号，与旧秘钥互不关联重置秘钥则成为一个全新的独立账号，与旧秘钥互不关联重置秘钥则成为一个全新的独立账号，与旧秘钥互不关联重置秘钥则成为一个全新的独立账号，与旧秘钥互不关联重置秘钥则成为一个全新的独立账号，与旧秘钥互不关联重置秘钥则成为一个全新的独立账号，与旧秘钥互不关联重置秘钥则成为一个全新的独立账号，与旧秘钥互不关联重置秘钥则成为一个全新的独立账号，与旧秘钥互不关联"
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = .lightGray
+        label.numberOfLines = 5
         label.textAlignment = .center
         return label
     }()
     
     private let confirmButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("确定", for: .normal)
+        btn.setTitle("复制秘钥", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        btn.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
         btn.backgroundColor = .systemOrange
         btn.layer.cornerRadius = 26
         return btn
     }()
     
-    init(resetAction: ResetKeyAlertAction? = nil) {
+    init(key:String, resetAction: ResetKeyAlertAction? = nil) {
         self.resetAction = resetAction
-        
+        self.key = key
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .custom
         self.transitioningDelegate = self
@@ -80,9 +109,7 @@ class ResetKeyAlertViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
-        
-//        self.modalPresentationStyle = .custom
-//        self.transitioningDelegate = self
+        self.messageLabel.text = key
     }
     
     private func setupUI() {
@@ -131,20 +158,30 @@ class ResetKeyAlertViewController: UIViewController {
         }
     }
     
-    @objc private func dismissSelf() { dismiss(animated: true) }
+    @objc private func dismissSelf() {
+//        dismiss(animated: true)
+        dismiss(animated: true) {[weak self] in
+            guard let self = self else {return}
+            guard let resetAction = resetAction else { return  }
+            resetAction()
+        }
+    }
     
     @objc private func handleConfirm() {
         print("确认重置")
+        UIPasteboard.general.string = key
+        dismiss(animated: true) {[weak self] in
+            guard let self = self else {return}
+            guard let resetAction = resetAction else { return  }
+            resetAction()
+        }
         
-        dismiss(animated: true)
-        
-        guard let resetAction = resetAction else { return  }
-        resetAction()
+    
     }
 }
-
-// MARK: - Transitioning Delegate
-extension ResetKeyAlertViewController: UIViewControllerTransitioningDelegate {
+    
+// MARK: - 转场代理
+extension KeySuccessViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return AACenterPopupPresentationController(presentedViewController: presented, presenting: presenting)
     }

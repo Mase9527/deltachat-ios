@@ -363,8 +363,13 @@ class RegisterMailViewController: AABaseViewController {
     }
     
     @objc func goToRegiserAction(){
-        let registerVC = RegisterViewController(dcAccounts: self.dcAccounts)
-        self.navigationController?.pushViewController(registerVC, animated: true)
+        
+
+//        let registerVC = RegisterViewController(dcAccounts: self.dcAccounts)
+//        self.navigationController?.pushViewController(registerVC, animated: true)
+        
+        let creatVC = CreateAccountViewController(dcAccounts: self.dcAccounts)
+        self.navigationController?.pushViewController(creatVC, animated: true)
 
     }
     

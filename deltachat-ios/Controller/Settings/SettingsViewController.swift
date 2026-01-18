@@ -290,8 +290,12 @@ internal final class SettingsViewController: UITableViewController {
 
     // MARK: - coordinator
     private func showEditSettingsController() {
-        let editController = SelfProfileViewController(dcAccounts: dcAccounts)
-        navigationController?.pushViewController(editController, animated: true)
+        
+        let editVC = OwnerSelfProfileViewController(dcAccounts:dcAccounts )
+        navigationController?.pushViewController(editVC, animated: true)
+
+//        let editController = SelfProfileViewController(dcAccounts: dcAccounts)
+//        navigationController?.pushViewController(editController, animated: true)
     }
 
     private func showChatsAndMedia() {

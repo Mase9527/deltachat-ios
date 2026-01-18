@@ -269,8 +269,7 @@ class SecretKeyViewController: AABaseViewController {
         @objc private func showResetAlert() {
             
             let alertVC = ResetKeyAlertViewController()
-                alertVC.modalPresentationStyle = .custom
-                alertVC.transitioningDelegate = alertVC
+             
                 self.present(alertVC, animated: true)
             
             alertVC.resetAction = {[weak self] in
