@@ -237,6 +237,7 @@
 		BB8C145F2F1CC20E00354ED2 /* KeySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8C145E2F1CC20E00354ED2 /* KeySuccessViewController.swift */; };
 		BB8C14612F1CCD9F00354ED2 /* OwnerSelfProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8C14602F1CCD9F00354ED2 /* OwnerSelfProfileViewController.swift */; };
 		BB8C14632F1CFA5600354ED2 /* ChangeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8C14622F1CFA5600354ED2 /* ChangeNameViewController.swift */; };
+		BB8C14732F1FA7CC00354ED2 /* PGPVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8C14722F1FA7CC00354ED2 /* PGPVerifier.swift */; };
 		BB9D08852EFB899200D4E110 /* AAPublicKeyPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */; };
 		BB9D08872EFB8C0000D4E110 /* AACenterPopupPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */; };
 		BB9D08892EFB91EC00D4E110 /* AALoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */; };
@@ -742,6 +743,7 @@
 		BB8C145E2F1CC20E00354ED2 /* KeySuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySuccessViewController.swift; sourceTree = "<group>"; };
 		BB8C14602F1CCD9F00354ED2 /* OwnerSelfProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerSelfProfileViewController.swift; sourceTree = "<group>"; };
 		BB8C14622F1CFA5600354ED2 /* ChangeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNameViewController.swift; sourceTree = "<group>"; };
+		BB8C14722F1FA7CC00354ED2 /* PGPVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PGPVerifier.swift; sourceTree = "<group>"; };
 		BB9D08842EFB899200D4E110 /* AAPublicKeyPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAPublicKeyPopupViewController.swift; sourceTree = "<group>"; };
 		BB9D08862EFB8C0000D4E110 /* AACenterPopupPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AACenterPopupPresentationController.swift; sourceTree = "<group>"; };
 		BB9D08882EFB91EC00D4E110 /* AALoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginViewController.swift; sourceTree = "<group>"; };
@@ -1504,6 +1506,7 @@
 				BB85EEBA2F0B60BA00EA6723 /* MentionHighlighter.swift */,
 				BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */,
 				BB85EF2F2F0F521000EA6723 /* LegacyQRCodeScanner.swift */,
+				BB8C14722F1FA7CC00354ED2 /* PGPVerifier.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1947,13 +1950,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-deltachat-ios/Pods-deltachat-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-deltachat-ios/Pods-deltachat-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2212,6 +2211,7 @@
 				AEC67A1E241FCFE0007DDBE1 /* ChatListViewModel.swift in Sources */,
 				30FDB71F24D8170E0066C48D /* TextMessageCell.swift in Sources */,
 				3080A00F277DDA4C00E74565 /* InputBarAccessoryView.swift in Sources */,
+				BB8C14732F1FA7CC00354ED2 /* PGPVerifier.swift in Sources */,
 				B2CDA6322CCDB3080024763F /* MuteDialog.swift in Sources */,
 				3080A014277DDABA00E74565 /* KeyboardManager.swift in Sources */,
 				D8E426D82D423FCF0078C735 /* DownloadingActivityView.swift in Sources */,

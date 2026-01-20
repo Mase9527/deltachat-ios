@@ -131,6 +131,11 @@ class ShareAccountInfoQRCodeVC: UIViewController {
         }
         
         self.view.backgroundColor = .systemGroupedBackground
+        
+       let ok = PGPVerifier.verifyEmail("poi@aa1234.com", inKey: self.key)
+        
+        print("PGPVerifier:\(ok)")
+        
     }
     @objc func copyAction(){
         let textToCopy = self.qrCode

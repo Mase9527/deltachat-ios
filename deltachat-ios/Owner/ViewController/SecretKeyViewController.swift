@@ -260,6 +260,13 @@ class SecretKeyViewController: AABaseViewController {
             return
         }
         
+        let ok = PGPVerifier.verifyEmail(self.mail, inKey: self.textView.text ?? "")
+
+        if ok == false {
+            ProgressHUD.failed("密钥与账号不匹配")
+            return
+        }
+        
         self.dcAccounts.stopIo()
 
         self.loginTool?.login(name: "", email: self.mail, password: self.password, key:  self.textView.text ?? "")

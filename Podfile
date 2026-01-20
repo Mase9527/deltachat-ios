@@ -22,6 +22,7 @@ target 'deltachat-ios' do
   pod 'QKeyboardEmotionView',:git => 'git@github.com:Mase9527/QKeyboardEmotionView.git', :branch => 'master'
   pod 'ZLPhotoBrowser'
   pod 'IQKeyboardManagerSwift'
+  pod 'ObjectivePGP'
 
 end
 
