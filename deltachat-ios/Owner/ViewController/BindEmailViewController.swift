@@ -261,7 +261,7 @@ class BindEmailViewController: UIViewController {
        let api = iFBaseAPI.createAccount(domain: domain, address: address, password: pwd)
        
         let apiBing = iFBaseAPI.bindRecoveryVerify(token: tokenModel.token, code: code)
-        
+        ProgressHUD.animate("注册中...")
         HttpClient.shareInstance.request(target: api) { data in
             
             let decoder = JSONDecoder()
@@ -302,7 +302,7 @@ class BindEmailViewController: UIViewController {
                 }else if result?.success == false{
                     ProgressHUD.failed("\(String(describing: result?.error))",delay: 3)
                 }else{
-                    ProgressHUD.failed("登录失败",delay: 3)
+                    ProgressHUD.failed("注册失败",delay: 3)
 
                 }
             }))
@@ -311,7 +311,12 @@ class BindEmailViewController: UIViewController {
         
 
         }failure: { code, msg in
-            ProgressHUD.failed("登录失败",delay: 3)
+            
+            if msg.contains("1062") {
+                ProgressHUD.failed("账号已存在",delay: 3)
+            }else{
+                ProgressHUD.failed(msg,delay: 3)
+            }
 
 
         }

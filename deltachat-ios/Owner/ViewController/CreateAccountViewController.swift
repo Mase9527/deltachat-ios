@@ -110,7 +110,7 @@ class CreateAccountViewController: UIViewController {
         self.otherServerButton.addTarget(self, action: #selector(showOtherOptions), for: .touchUpInside)
         
         
-//        self.accountInput.textField.text = "pkdoskjki"
+//        self.accountInput.textField.text = "plm"
 //        self.passwordInput.textField.text = "123"
 //        self.confirmInput.textField.text = "123"
     }
@@ -285,9 +285,49 @@ class CreateAccountViewController: UIViewController {
             ProgressHUD.failed("两次输入的密码不一致")
         }
         
+        
+        let api = iFBaseAPI.checkEmail(address: email)
+        ProgressHUD.animate("")
+
+        
+        struct AACheckEmailModel:Codable{
+            var exists:Bool
+            var success:Bool
+            var error:String?
+        }
+        HttpClient.shareInstance.request(target: api) {[weak self] data in
+            
+            
+            guard let self = self else { return}
+            let decoder = JSONDecoder()
+            let result = try? decoder.decode(AACheckEmailModel.self, from: data)
+            
+            
+            DispatchQueue.main.async(execute: DispatchWorkItem.init(block: {
+                if result?.success == true && result?.exists == false {
+                    ProgressHUD.dismiss()
+
+                            let bindEmailVC = BindEmailViewController(dcAccounts: self.dcAccounts,email: email,password: password)
+                            self.navigationController?.pushViewController(bindEmailVC, animated: true)
+                    
+                }else if result?.success == true && result?.exists == true {
+                    ProgressHUD.failed("账号已存在",delay: 3)
+                }else if result?.success == false{
+                    ProgressHUD.failed("\(String(describing: result?.error))",delay: 3)
+                }else{
+                    ProgressHUD.failed("注册失败",delay: 3)
+
+                }
+            }))
+            
+            
+        } failure: { code, msg in
+            ProgressHUD.failed("\(String(describing: msg))",delay: 3)
+
+        }
+
     
-        let bindEmailVC = BindEmailViewController(dcAccounts: self.dcAccounts,email: email,password: password)
-        self.navigationController?.pushViewController(bindEmailVC, animated: true)
+
 
     }
 
