@@ -693,6 +693,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         messageInputBar.onScrollDownButtonPressed = { [weak self] in
             self?.scrollToBottom()
         }
+        
+        self.bottomInputView.addSubview(bar)
+        bar.backgroundColor = .white
+        bar.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
 //        inputAccessoryView = messageInputBar
     }
 
