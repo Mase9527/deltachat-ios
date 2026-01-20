@@ -138,7 +138,7 @@ class ShareAccountInfoQRCodeVC: UIViewController {
         
     }
     @objc func copyAction(){
-        let textToCopy = self.qrCode
+        let textToCopy = self.key
         // 获取系统剪贴板
         let pasteboard = UIPasteboard.general
         // 将文本设置到剪贴板
