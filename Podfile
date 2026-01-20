@@ -1,4 +1,6 @@
+
 platform :ios, '13.0'
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 use_frameworks!
 
 # ignore all warnings from all dependencies

@@ -20,6 +20,9 @@ enum  iFBaseAPI {
     case resetPasswordVerify(token:String,code:String,password:String)
 
     case getRecoveryEmail(main_email:String)
+    
+    case checkEmail(address:String)
+
 
 
 }
@@ -49,6 +52,8 @@ extension iFBaseAPI: TargetType {
 
         case .getRecoveryEmail:
             return "/get-recovery-email"
+        case .checkEmail:
+            return "check-email-exists"
         default: return ""
         }
     }
@@ -89,6 +94,9 @@ extension iFBaseAPI: TargetType {
             params["password"] = password
         case let .getRecoveryEmail(main_email):
             params["main_email"] = main_email
+        case let .checkEmail(address):
+            params["address"] = address
+
         default:
             return .requestPlain
         }
