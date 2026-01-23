@@ -69,7 +69,10 @@ public class DraftArea: UIView, InputItem {
     public func setupSubviews() {
         addSubview(mainContentView)
         backgroundColor = DcColors.defaultTransparentBackgroundColor
-        mainContentView.fillSuperview()
+//        mainContentView.fillSuperview()
+        mainContentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
     public func configure(draft: DraftModel) {

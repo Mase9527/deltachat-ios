@@ -12,7 +12,7 @@ import ZLPhotoBrowser
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDropDelegate {
     public let chatId: Int
-
+    private var quickSendView: AAQuickScreenshotView?
     private var dcContext: DcContext
     private var messageIds: [Int] = []
     private var isVisibleToUser: Bool = false
@@ -725,16 +725,16 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
 
 //        messageInputBar.setStackViewItems([draftArea], forStack: .top, animated: animated)
-        self.draftArea.frame = .init(0, 0, 200, 50)
+        self.draftArea.frame = .init(0, 0, UIScreen.main.bounds.size.width, 40)
         
         let hasDraft:Bool = !draft.isEditing && draft.attachment != nil
 
         print(draft)
         if  let draftMsg = draft.draftMsg ,draftMsg.type != DC_MSG_VCARD{
-            self.bottomInputView.showReply(self.draftArea, marginTop: 10, marginBottom: 10)
+            self.bottomInputView.showReply(self.draftArea, marginTop: 0, marginBottom: 0)
             
             self.draftArea.snp.makeConstraints { make in
-                make.width.lessThanOrEqualTo(self.view.snp.width)
+                make.width.equalTo(self.view.snp.width)
             }
         }else{
             self.bottomInputView.hideReply()
@@ -2491,7 +2491,7 @@ extension ChatViewController: MediaPickerDelegate {
     }
 
     func onMediaSelected(mediaPicker: MediaPicker, itemProviders: [NSItemProvider], sendAsFile: Bool) {
-        if itemProviders.count > 0 {
+        if itemProviders.count > 1 {
 
             // send multiple selected item in one go directly
             // (sendAsFile can be ignored as forced to be only a single file at showFilesLibrary()
@@ -2550,6 +2550,7 @@ extension ChatViewController: MediaPickerDelegate {
                             var copyURL = URL.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
                             copyURL = FileHelper.copyIfPossible(src: url, dest: copyURL)
                             self?.stageDocument(url: copyURL as NSURL)
+                            
                         } else if let error {
                             self?.logAndAlert(error: error.localizedDescription)
                         }
@@ -2563,7 +2564,8 @@ extension ChatViewController: MediaPickerDelegate {
                 progressAlertHandler.showProgressAlert(title: nil, dcContext: self.dcContext)
                 itemProvider.loadCompressedVideo { [weak self] url, error in
                     if let url, !progressAlertHandler.cancelled {
-                        self?.stageVideo(url: (url as NSURL))
+//                        self?.stageVideo(url: (url as NSURL))
+                        self?.sendVideo(url: (url))
                         progressAlertHandler.updateProgressAlertSuccess()
                     } else if let error {
                         progressAlertHandler.updateProgressAlert(error: error.localizedDescription)
@@ -2572,7 +2574,8 @@ extension ChatViewController: MediaPickerDelegate {
             } else if itemProvider.canLoadImage() {
                 itemProvider.loadImage { [weak self] image, error in
                     if let image {
-                        self?.stageImage(image)
+//                        self?.stageImage(image)
+                        self?.sendImage(image)
                     } else if let error {
                         self?.logAndAlert(error: error.localizedDescription)
                     }
@@ -3061,6 +3064,12 @@ extension ChatViewController: QInputBarViewDelegate {
     //点击+按钮
     func inputBarView(_ inputBarView: QInputBarView!, onExtendButtonClick extendSwitchButton: UIButton!) {
         QkeyboardManager.switchToExtendBoardKeyboard()
+        
+        // 1. 检查单例中是否有 5 秒内的截图记录
+                guard let image = AAScreenshotManager.shared.lastScreenshot else {
+                    return
+                }
+        showQuickScreenshotPanel(with: image)
     }
     
     //点击表情按钮，切换到表情面板
@@ -3370,4 +3379,65 @@ extension ChatViewController:VoiceRecordControllerDelegate{
         alert.addAction(UIAlertAction(title: "好的", style: .default))
         present(alert, animated: true)
     }
+    
+    private func showQuickScreenshotPanel(with image: UIImage) {
+        if quickSendView != nil { return }
+        
+        let panel = AAQuickScreenshotView()
+        panel.configure(with: image)
+        panel.alpha = 0
+        
+        // 逻辑回调
+        panel.onImageSelected = { [weak self] selectedImage in
+            print("发送图片")
+            self?.dismissQuickPanel()
+            AAScreenshotManager.shared.clearCache()
+            self?.sendImage(selectedImage)
+        }
+        
+        panel.onCloseTapped = { [weak self] in
+            self?.dismissQuickPanel()
+            AAScreenshotManager.shared.clearCache() // 用户主动关掉，通常也视为不再需要
+        }
+        
+        self.view.addSubview(panel)
+        self.quickSendView = panel
+        
+        // 使用 SnapKit 确定在输入栏上方的位置
+        panel.snp.makeConstraints { make in
+//            make.width.equalTo(110)
+//            make.height.equalTo(230)
+            make.width.equalTo(150) // 缩窄宽度
+            make.trailing.equalToSuperview().offset(-20)
+            // 假设 inputBar 是你的聊天输入框
+            make.bottom.equalTo(self.bottomInputView.snp.top).offset(0)
+        }
+        
+        // 强制布局以便动画生效
+        self.view.layoutIfNeeded()
+        
+        // 弹出动画
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+            panel.alpha = 1
+            panel.snp.updateConstraints { make in
+                make.bottom.equalTo(self.bottomInputView.snp.top).offset(-15) // 向上浮动一点
+            }
+            self.view.layoutIfNeeded()
+        }
+        
+        // 5秒后自动清除
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [weak self] in
+            self?.dismissQuickPanel()
+        }
+    }
+    
+    private func dismissQuickPanel() {
+            guard let panel = quickSendView else { return }
+            UIView.animate(withDuration: 0.3, animations: {
+                panel.alpha = 0
+            }) { _ in
+                panel.removeFromSuperview()
+                self.quickSendView = nil
+            }
+        }
 }

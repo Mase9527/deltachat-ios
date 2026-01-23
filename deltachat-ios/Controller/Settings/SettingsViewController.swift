@@ -43,6 +43,15 @@ internal final class SettingsViewController: UITableViewController {
         cell.updateCell(cellViewModel: cellViewModel)
         cell.tag = CellTags.profile.rawValue
         cell.accessoryType = .disclosureIndicator
+        
+        let imageView = UIImageView(image: UIImage.init(systemName: "qrcode"))
+       
+        cell.contentView.addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.size.equalTo(40)
+            make.trailing.equalToSuperview().offset(-5)
+            make.centerY.equalToSuperview()
+        }
         return cell
     }()
 
@@ -150,7 +159,7 @@ internal final class SettingsViewController: UITableViewController {
         )
         let preferencesSection = SectionConfigs(
             footerTitle: appNameAndVersion,
-            cells: [self.chatsAndMediaCell, self.notificationCell, self.selectBackgroundCell,exportInfoCell]
+            cells: [self.chatsAndMediaCell, self.notificationCell, self.selectBackgroundCell,exportInfoCell,self.advancedCell]
 
 //            cells: [self.chatsAndMediaCell, self.notificationCell, self.selectBackgroundCell, self.addAnotherDeviceCell, self.connectivityCell, self.advancedCell]
         )
@@ -195,6 +204,11 @@ internal final class SettingsViewController: UITableViewController {
         super.viewWillAppear(animated)
         notificationCell.detailTextLabel?.text = " " // nil does not reserve space for the warning calculated in background
         updateCells()
+        
+//        // 这会返回一个包含账号完整元数据的字符串，其中包含多设备公钥链
+//         let info = dcContext.getContactEncrInfo(contactId: 1)
+//            print("全设备加密元数据: \(info)")
+        
     }
 
     // MARK: - UITableViewDelegate + UITableViewDatasource

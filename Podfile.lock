@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.11.0)
+  - Alamofire (5.10.2)
   - CocoaLumberjack (3.9.0):
     - CocoaLumberjack/Core (= 3.9.0)
   - CocoaLumberjack/Core (3.9.0)
@@ -59,12 +59,13 @@ PODS:
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
+  - ObjectivePGP (1.0)
   - QKeyboardEmotionView (3.0.2)
   - ReachabilitySwift (5.2.4)
   - SCSiriWaveformView (1.1.2)
-  - SDWebImage (5.21.5):
-    - SDWebImage/Core (= 5.21.5)
-  - SDWebImage/Core (5.21.5)
+  - SDWebImage (5.21.4):
+    - SDWebImage/Core (= 5.21.4)
+  - SDWebImage/Core (5.21.4)
   - SDWebImageSVGKitPlugin (1.4.0):
     - SDWebImage/Core (~> 5.10)
     - SVGKit (~> 3.0)
@@ -84,6 +85,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - MCEmojiPicker (from `https://github.com/deltachat/MCEmojiPicker`, branch `main`)
   - Moya
+  - ObjectivePGP
   - "QKeyboardEmotionView (from `git@github.com:Mase9527/QKeyboardEmotionView.git`, branch `master`)"
   - ReachabilitySwift
   - SCSiriWaveformView
@@ -96,7 +98,7 @@ DEPENDENCIES:
   - ZLPhotoBrowser
 
 SPEC REPOS:
-  trunk:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Alamofire
     - CocoaLumberjack
     - DeviceKit
@@ -110,6 +112,7 @@ SPEC REPOS:
     - IQTextView
     - libwebp
     - Moya
+    - ObjectivePGP
     - ReachabilitySwift
     - SCSiriWaveformView
     - SDWebImage
@@ -137,7 +140,7 @@ CHECKOUT OPTIONS:
     :git: "git@github.com:Mase9527/QKeyboardEmotionView.git"
 
 SPEC CHECKSUMS:
-  Alamofire: bd5e7b23a1a750975288482c1831d71e74415f86
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   CocoaLumberjack: 5644158777912b7de7469fa881f8a3f259c2512a
   DeviceKit: d1a956e25b957efb60a87bfe70be4e00ef36846d
   IQKeyboardCore: 8652977ec919cf5351aa2977fedd1a6546476fbc
@@ -151,10 +154,11 @@ SPEC CHECKSUMS:
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   MCEmojiPicker: d24f72731881c05143870eefff52f586d493b982
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  ObjectivePGP: 45de572a2e19a91c12e25c42324f05c71783104c
   QKeyboardEmotionView: 4ded8a0769ff20cf657b49d8310e9c23e1787e5e
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   SCSiriWaveformView: 016392911fb442c17d6dbad68e666edb13193c02
-  SDWebImage: e9c98383c7572d713c1a0d7dd2783b10599b9838
+  SDWebImage: d0184764be51240d49c761c37f53dd017e1ccaaf
   SDWebImageSVGKitPlugin: 7542dd07c344ec3415ded0461a1161a6f087e0c9
   SDWebImageWebPCoder: 0e06e365080397465cc73a7a9b472d8a3bd0f377
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
@@ -162,6 +166,6 @@ SPEC CHECKSUMS:
   TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
   ZLPhotoBrowser: d5928f08485c90a0b349a3a1e804e82c83ccf193
 
-PODFILE CHECKSUM: d2ee06b0c84b4a495e500afa36087b482a366ea6
+PODFILE CHECKSUM: f9bf54444e4c602e9610e3ae1e1d4dca0656eb8c
 
 COCOAPODS: 1.16.2

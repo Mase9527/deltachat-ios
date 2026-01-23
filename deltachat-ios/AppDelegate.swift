@@ -79,6 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.launchOptions = launchOptions
         continueDidFinishLaunchingWithOptions()
         QEmotionTool.emotionConfigure()
+        AAScreenshotManager.shared.startListening()
         return true
     }
 

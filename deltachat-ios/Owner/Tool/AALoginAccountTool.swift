@@ -314,6 +314,9 @@ class AALoginAccountTool: NSObject {
             appDelegate.registerForNotifications()
             appDelegate.reloadDcContext()
             appDelegate.prepopulateWidget()
+            /// 登录的时候默认开启多设备模式
+            self.dcContext.setConfigBool("bcc_self", true)
+
         }
     }
 }

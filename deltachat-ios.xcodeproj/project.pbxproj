@@ -219,6 +219,8 @@
 		BB2CFA032F19ED0300E2AA4D /* AABaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CFA022F19ED0300E2AA4D /* AABaseNavigationController.swift */; };
 		BB6AB32B2EF53C020021318E /* efd257ece330a34525667707e617a16.txt in Resources */ = {isa = PBXBuildFile; fileRef = BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */; };
 		BB6AB33B2EF544B30021318E /* AALoginAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */; };
+		BB754B232F236BA900C212D1 /* AAScreenshotManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B222F236BA900C212D1 /* AAScreenshotManager.swift */; };
+		BB754B252F236C2500C212D1 /* AAQuickScreenshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B242F236C2500C212D1 /* AAQuickScreenshotView.swift */; };
 		BB85EE552F0A4E1800EA6723 /* QEmotionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BB85EE542F0A4E1800EA6723 /* QEmotionTool.m */; };
 		BB85EE692F0A685E00EA6723 /* VoiceRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EE682F0A685E00EA6723 /* VoiceRecordView.swift */; };
 		BB85EEB82F0B554000EA6723 /* VoiceRecordHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EEB72F0B554000EA6723 /* VoiceRecordHUD.swift */; };
@@ -723,6 +725,8 @@
 		BB2CFA022F19ED0300E2AA4D /* AABaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AABaseNavigationController.swift; sourceTree = "<group>"; };
 		BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = efd257ece330a34525667707e617a16.txt; sourceTree = "<group>"; };
 		BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginAccountTool.swift; sourceTree = "<group>"; };
+		BB754B222F236BA900C212D1 /* AAScreenshotManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAScreenshotManager.swift; sourceTree = "<group>"; };
+		BB754B242F236C2500C212D1 /* AAQuickScreenshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAQuickScreenshotView.swift; sourceTree = "<group>"; };
 		BB85EE522F0A4DAA00EA6723 /* deltachat-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "deltachat-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB85EE532F0A4E1800EA6723 /* QEmotionTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QEmotionTool.h; sourceTree = "<group>"; };
 		BB85EE542F0A4E1800EA6723 /* QEmotionTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QEmotionTool.m; sourceTree = "<group>"; };
@@ -847,8 +851,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		643B44782E0C2BD900AEE026 /* DcTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = DcTests;
 			sourceTree = "<group>";
 		};
@@ -1398,6 +1400,7 @@
 				BB85EEB72F0B554000EA6723 /* VoiceRecordHUD.swift */,
 				BB85EECC2F0C998300EA6723 /* ObservableTextView.swift */,
 				BB85EF082F0DE78300EA6723 /* SelfProfileViewQRCodeCell.swift */,
+				BB754B242F236C2500C212D1 /* AAQuickScreenshotView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1509,6 +1512,7 @@
 				BB85EECE2F0C9C7800EA6723 /* GroupAvatarGenerator.swift */,
 				BB85EF2F2F0F521000EA6723 /* LegacyQRCodeScanner.swift */,
 				BB8C14722F1FA7CC00354ED2 /* PGPVerifier.swift */,
+				BB754B222F236BA900C212D1 /* AAScreenshotManager.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1952,9 +1956,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-deltachat-ios/Pods-deltachat-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-deltachat-ios/Pods-deltachat-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1978,7 +1986,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		7837B64621E5532B00CDE126 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1996,7 +2005,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n\n";
+			shellScript = "
+
+";
 		};
 		CDEA77249E4F2AFAB45DFEA0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2099,6 +2110,7 @@
 				AE52EA20229EB9F000C586C9 /* EditGroupViewController.swift in Sources */,
 				AE18F294228C602A0007B1BE /* SecuritySettingsViewController.swift in Sources */,
 				30C2BFFE27032375005505DA /* ChatSearchAccessoryBar.swift in Sources */,
+				BB754B232F236BA900C212D1 /* AAScreenshotManager.swift in Sources */,
 				B2DF962F2EE328E30037F07F /* TransportListViewController.swift in Sources */,
 				BB2CF9D02F177F4500E2AA4D /* LongImageViewController.swift in Sources */,
 				BB8C14632F1CFA5600354ED2 /* ChangeNameViewController.swift in Sources */,
@@ -2200,6 +2212,7 @@
 				21D6C941260623F500D0755A /* NotificationManager.swift in Sources */,
 				3080A023277DE09900E74565 /* SeparatorLine.swift in Sources */,
 				D85DF9802C5250E200A01408 /* ProgressAlertHandler.swift in Sources */,
+				BB754B252F236C2500C212D1 /* AAQuickScreenshotView.swift in Sources */,
 				302B84C72396770B001C261F /* RelayHelper.swift in Sources */,
 				B2172F3C29C125F2002C289E /* AdvancedViewController.swift in Sources */,
 				AEACE2E51FB32E1900DCDD78 /* Utils.swift in Sources */,
