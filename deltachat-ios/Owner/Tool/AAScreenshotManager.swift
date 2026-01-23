@@ -12,6 +12,9 @@ class AAScreenshotManager: NSObject {
         // 1. 监听应用内截图通知
         NotificationCenter.default.addObserver(self, selector: #selector(didTakeScreenshot), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
         
+        // 2. 监听 App 回到前台（处理在后台时的拍照/截图）
+                NotificationCenter.default.addObserver(self, selector: #selector(handleAction), name: UIApplication.willEnterForegroundNotification, object: nil)
+        
         // 2. 监听相册变化（核心：处理应用外截图）
         PHPhotoLibrary.shared().register(self)
     }
@@ -20,6 +23,20 @@ class AAScreenshotManager: NSObject {
         handleNewPhoto()
     }
 
+    @objc private func handleAction() {
+            self.handleNewPhoto()
+        }
+    
+//    // 相册变化回调
+//        func photoLibraryDidChange(_ changeInstance: PHChange) {
+//            // 当用户拍完照回到 App 时，这里会被触发
+//            DispatchQueue.main.async {
+//                self.fetchAndNotify()
+//            }
+//        }
+    
+
+    
     private func handleNewPhoto() {
         // 延迟获取，确保系统已写入相册
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -43,8 +60,14 @@ class AAScreenshotManager: NSObject {
         let result = PHAsset.fetchAssets(with: .image, options: options)
         guard let asset = result.firstObject else { return }
         
-        // 校验是否是最近 10 秒内生成的图，防止误触旧图
-        if abs(asset.creationDate?.timeIntervalSinceNow ?? -100) > 10 { return }
+        // --- 关键优化点 ---
+            // 1. 扩大范围：不再检查 .photoScreenshot，所有图片类型都接受
+            // 2. 时间校验：只处理 15 秒内产生的图片（拍照存盘比截图稍慢，时间稍微放宽）
+            let timeInterval = abs(asset.creationDate?.timeIntervalSinceNow ?? -100)
+            if timeInterval > 15 {
+                print("图片太旧了，不触发提示")
+                return
+            }
 
         let manager = PHImageManager.default()
         let requestOptions = PHImageRequestOptions()
