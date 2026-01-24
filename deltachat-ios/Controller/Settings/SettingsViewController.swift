@@ -48,10 +48,20 @@ internal final class SettingsViewController: UITableViewController {
        
         cell.contentView.addSubview(imageView)
         imageView.snp.makeConstraints { make in
-            make.size.equalTo(40)
+            make.size.equalTo(30)
             make.trailing.equalToSuperview().offset(-5)
             make.centerY.equalToSuperview()
         }
+        // 2. 防止被拉伸 (Hugging Priority)
+        // 优先级越高，越不容易被拉伸
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
+        imageView.setContentHuggingPriority(.required, for: .vertical)
+
+        // 3. 防止被压缩 (Compression Resistance Priority)
+        // 优先级越高，越不容易被压缩
+        imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        imageView.setContentCompressionResistancePriority(.required, for: .vertical)
+        cell.verticalStackView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -35).isActive = true
         return cell
     }()
 

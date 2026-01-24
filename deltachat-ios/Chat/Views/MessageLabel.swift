@@ -22,6 +22,13 @@
  SOFTWARE.
  */
 
+//extension NSAttributedString.Key {
+//    static let mention = NSAttributedString.Key("mention_user_id")
+//}
+extension NSAttributedString.Key {
+    static public let mention = NSAttributedString.Key("mention_user_id")
+}
+
 import UIKit
 
 open class MessageLabel: UILabel {
@@ -359,6 +366,25 @@ open class MessageLabel: UILabel {
         guard enabledDetectors.contains(.url) else {
             return matches
         }
+        
+        
+        // --- 新增：识别由 setXMLText 注入的 .mention 属性 ---
+            if enabledDetectors.contains(.mention) {
+                text.enumerateAttribute(NSAttributedString.Key.mention, in: range, options: []) { value, range, _ in
+                    if let uin = value as? String {
+                        // 这里利用正则的 checkingResult 作为载体，因为你的 setRangesForDetectors 接受它
+                        // 或者我们可以直接手动向 rangesForDetectors 插入数据
+                        let matchString = text.attributedSubstring(from: range).string
+                        
+                        // 我们手动将这个范围加入到 rangesForDetectors
+                        // 为了兼容你已有的架构，我们可以创建一个通用的处理方式
+                        var ranges = self.rangesForDetectors[.mention] ?? []
+                        let tuple: (NSRange, NewMessageTextCheckingType) = (range, .custom(pattern: "mention", match: uin))
+                        ranges.append(tuple)
+                        self.rangesForDetectors.updateValue(ranges, forKey: .mention)
+                    }
+                }
+            }
 
         // Enumerate NSAttributedString NSLinks and append ranges
         var results: [NSTextCheckingResult] = matches
@@ -577,4 +603,40 @@ internal enum NewMessageTextCheckingType {
     case link(URL?)
     case transitInfoComponents([NSTextCheckingKey: String]?)
     case custom(pattern: String, match: String?)
+}
+
+
+extension MessageLabel {
+    /// 解析带有 <mention> 标签的富文本并显示
+    public func setXMLText(_ input: NSAttributedString) ->NSAttributedString {
+        let pattern = "<mention uin=\"([^\"]+)\">([^<]+)</mention>"
+        let regex = try? NSRegularExpression(pattern: pattern, options: [])
+        
+        // 1. 复制一份原始属性，用于操作
+        let mutableResult = NSMutableAttributedString(attributedString: input)
+        let xmlString = mutableResult.string as NSString
+        
+        // 2. 从后往前匹配（防止替换后 Range 偏移）
+        let matches = regex?.matches(in: mutableResult.string, options: [], range: NSRange(location: 0, length: xmlString.length)) ?? []
+        
+        for match in matches.reversed() {
+            let fullRange = match.range
+            let uin = xmlString.substring(with: match.range(at: 1))
+            let name = xmlString.substring(with: match.range(at: 2))
+            
+            // 3. 构造替换后的带属性文本
+            // 保留该位置原有的属性（如字体），并叠加 .mention 和 颜色
+            var mentionAttrs = mutableResult.attributes(at: fullRange.location, effectiveRange: nil)
+            mentionAttrs[.mention] = uin
+            mentionAttrs[.foregroundColor] = self.mentionAttributes[.foregroundColor] ?? UIColor.blue
+            
+            let mentionReplacement = NSAttributedString(string: name, attributes: mentionAttrs)
+            
+            // 4. 执行替换：将 <mention...>@张三</mention> 替换为 @张三
+            mutableResult.replaceCharacters(in: fullRange, with: mentionReplacement)
+        }
+        
+        // 5. 触发 MessageLabel 的 didSet 逻辑
+        return  mutableResult
+    }
 }

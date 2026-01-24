@@ -287,7 +287,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         configureMessageInputBar()
         draft.parse(draftMsg: dcContext.getDraft(chatId: chatId))
         messageInputBar.inputTextView.text = draft.text
-        self.bottomInputView.inputTextView.text = draft.text
+//        self.bottomInputView.inputTextView.text = draft.text
+        
+        MentionDetector.shared.importFrom(xmlString: draft.text ?? "", textView: self.bottomInputView.inputTextView)
         
         configureDraftArea(draft: draft, animated: false)
         tableView.dragInteractionEnabled = true
@@ -387,6 +389,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         handleUserVisibility(isVisible: true)
         messageInputBar.backgroundView.backgroundColor = DcColors.defaultTransparentBackgroundColor
+        
+        AAScreenshotManager.shared.handleAction()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -737,6 +741,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             self.draftArea.snp.makeConstraints { make in
                 make.width.equalTo(self.view.snp.width)
+                make.height.equalTo(40)
             }
         }else{
             self.bottomInputView.hideReply()
@@ -2295,7 +2300,7 @@ extension ChatViewController {
                 stringsToCopy.append("\(msgSummary)")
             }
         }
-        UIPasteboard.general.string = stringsToCopy
+        UIPasteboard.general.string = MentionDetector.shared.stripMentionTags(from: stringsToCopy)
     }
 
     func copyImagesToClipboard(ids: [Int]) {
@@ -2907,17 +2912,20 @@ extension ChatViewController: SendContactViewControllerDelegate,OwnerSendContact
         guard let vcardData = dcContext.makeVCard(contactIds: [contactId]),
               let vcardURL = prepareVCardData(vcardData) else { return }
 
-        MentionDetector.shared.currentContact = OwnerContact(id: "\(contactId)", name: name)
+        let contact = self.dcContext.getContact(id: contactId)
+        MentionDetector.shared.insertMention(userName: name, userId: contact.email, textView: bottomInputView.inputTextView)
         
-        let cursorPosition = bottomInputView.inputTextView.selectedRange.location
-             
-             // 使用 @ 检测器插入联系人
-             let result = MentionDetector.shared.insertMention(in: bottomInputView.inputTextView.text, at: cursorPosition, contact: OwnerContact(id: "\(contactId)", name: name))
-        bottomInputView.inputTextView.text = result.newText
-    
-        self.draft.text = result.newText;
-             // 移动光标
-        bottomInputView.inputTextView.selectedRange = NSRange(location: result.newCursorPosition, length: 0)
+//        MentionDetector.shared.currentContact = OwnerContact(id: "\(contactId)", name: name)
+//        
+//        let cursorPosition = bottomInputView.inputTextView.selectedRange.location
+//             
+//             // 使用 @ 检测器插入联系人
+//             let result = MentionDetector.shared.insertMention(in: bottomInputView.inputTextView.text, at: cursorPosition, contact: OwnerContact(id: "\(contactId)", name: name))
+//        bottomInputView.inputTextView.text = result.newText
+//    
+//        self.draft.text = result.newText;
+//             // 移动光标
+//        bottomInputView.inputTextView.selectedRange = NSRange(location: result.newCursorPosition, length: 0)
              
         
         stageVCard(url: vcardURL)
@@ -3060,6 +3068,7 @@ extension ChatViewController: QInputBarViewDelegate {
     
     //点击了系统键盘的发送按钮
     func inputBarView(_ inputBarView: QInputBarView!, onKeyboardSendClick inputText: String!) {
+        let text = MentionDetector.shared.getExportString(textView: inputBarView.inputTextView)
         sendTextMessage(inputText: inputText)
     }
     
@@ -3106,39 +3115,90 @@ extension ChatViewController: QInputBarViewDelegate {
     
     func inputBarView(_ inputBarView: QInputBarView!, textViewDidChange inputTextView: UITextView!) {
         draft.text = inputTextView.text
-        let cursorPosition = inputTextView.selectedRange.location
-        let atDetector = MentionDetector.shared
-              let detection = atDetector.detectMentions(in: inputTextView.text, cursorPosition: cursorPosition)
-              
-              if detection.shouldShow {
-                  // 显示联系人选择器
-                  self.showOwnerContactList()
-            }
+//        draft.text = MentionDetector.shared.getExportString(textView: inputTextView)
+
+        let textView = inputTextView!
+
+        guard let selectedRange = textView.selectedTextRange else { return }
+                let offset = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+                let content = textView.text ?? ""
+                let nsContent = content as NSString
+                
+                // 安全检查：offset 与 utf16 长度匹配
+                guard offset > 0 && offset <= content.utf16.count else { return }
+                
+                let lastChar = nsContent.substring(with: NSRange(location: offset - 1, length: 1))
+                
+                if lastChar == "@" {
+                    if offset == 1 {
+                        showOwnerContactList()
+                    } else if offset >= 2 {
+                        // 检查 @ 前的一个字符是否为空白符
+                        let prevChar = nsContent.substring(with: NSRange(location: offset - 2, length: 1))
+                        if CharacterSet.whitespacesAndNewlines.contains(prevChar.unicodeScalars.first!) {
+                            showOwnerContactList()
+                        }
+                    }
+                }
+        
+        
+//        let content = textView.text ?? ""
+//            guard let selectedRange = textView.selectedTextRange else { return }
+//            let offset = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+//            
+//            // 转换为 Swift String 索引
+//            let index = content.index(content.startIndex, offsetBy: offset)
+//            
+//            // 获取当前光标位置之前的子串
+//            let prefix = content[..<index]
+//            
+//            // 判断结尾是否为 @ 且符合触发规则
+//            if prefix.hasSuffix("@") {
+//                if prefix.count == 1 {
+//                    // 开头就是 @
+//                    showOwnerContactList()
+//                } else {
+//                    // 检查 @ 前面那个字符
+//                    let secondToLastIndex = prefix.index(prefix.endIndex, offsetBy: -2)
+//                    let charBeforeAt = prefix[secondToLastIndex]
+//                    
+//                    if charBeforeAt.isWhitespace || charBeforeAt.isNewline {
+//                        showOwnerContactList()
+//                    }
+//                }
+//            }
+        
+        
+//        let atDetector = MentionDetector.shared
+//
+//              let detection = atDetector.detectMentions(in: inputTextView.text, cursorPosition: cursorPosition)
+//              
+//              if detection.shouldShow {
+//                  // 显示联系人选择器
+//                  self.showOwnerContactList()
+//            }
     }
     
     func inputBarView(_ inputBarView: QInputBarView!, textViewDidChange inputTextView: UITextView!, shouldChangeTextIn range: NSRange, replacementText text: String!) -> Bool {
         
         if text.isEmpty == true {//是删除
-            let metions = MentionDetector.shared.extractMentions(from: inputTextView.text)
             
-        print("hhhhh:\(metions)")
-            if let metionOk = metions.last {
-                let didDeleteMention = MentionDetector.shared.deleteMentionInTextView(inputTextView, range: metionOk.range)
-                print("是否删除了提及: \(didDeleteMention)")
-                if didDeleteMention {
-                             // 重新调试
-                    self.draft.clear()
-                    self.draftArea.cancel()
-//                    MentionDetector.shared.debugMentions(in: inputTextView.text)
-                         }
-                
-                return !didDeleteMention
-
-                // 使用静态方法处理智能删除
-//                          return !BasicAtDeleter.deleteMentionInTextView(textView, range: range)
-                          // 如果 deleteMentionInTextView 返回 true，表示已经处理了删除
-                          // 我们需要返回 false 来阻止系统默认的删除行为
-            }
+          return  MentionDetector.shared.textView(inputTextView, shouldChangeTextIn: range, replacementText: text)
+//            let metions = MentionDetector.shared.extractMentions(from: inputTextView.text)
+//            
+//             print("hhhhh:\(metions)")
+//            if let metionOk = metions.last {
+//                let didDeleteMention = MentionDetector.shared.deleteMentionInTextView(inputTextView, range: metionOk.range)
+//                print("是否删除了提及: \(didDeleteMention)")
+//                if didDeleteMention {
+//                             // 重新调试
+//                    self.draft.clear()
+//                    self.draftArea.cancel()
+//                }
+//                
+//                return !didDeleteMention
+//
+//            }
         }
  
 

@@ -101,7 +101,7 @@ public class BaseMessageCell: UITableViewCell {
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
         view.font = UIFont.preferredFont(for: .body, weight: .regular)
         view.delegate = self
-        view.enabledDetectors = [.OPENPGP4FPR,.url, .phoneNumber, .command,.OPENPGP4FPR,]
+        view.enabledDetectors = [.OPENPGP4FPR,.url, .phoneNumber, .command,.OPENPGP4FPR,.mention]
         let attributes = [
             NSAttributedString.Key.foregroundColor: view.tintColor!,
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
@@ -543,7 +543,7 @@ public class BaseMessageCell: UITableViewCell {
 
         if let quoteText = msg.quoteText {
             quoteView.isHidden = false
-            quoteView.quote.text = quoteText
+            quoteView.quote.text = MentionDetector.shared.stripMentionTags(from:quoteText)
 
             if let quoteMsg = msg.quoteMessage {
                 let isWebxdc = quoteMsg.type == DC_MSG_WEBXDC
@@ -566,7 +566,9 @@ public class BaseMessageCell: UITableViewCell {
             quoteView.isHidden = true
         }
 
-        messageLabel.attributedText = getFormattedText(messageText: msg.text, searchText: searchText, highlight: highlight)
+        let attributedText = getFormattedText(messageText: msg.text, searchText: searchText, highlight: highlight)
+        
+        messageLabel.attributedText = MentionDetector.shared.parseXMLToMention(attributedText ?? NSAttributedString(string: ""), mentionAttributes: [:])
         messageLabel.delegate = self
 
         if let reactions = dcContext.getMessageReactions(messageId: msg.id) {

@@ -23,7 +23,7 @@ class AAScreenshotManager: NSObject {
         handleNewPhoto()
     }
 
-    @objc private func handleAction() {
+    @objc  func handleAction() {
             self.handleNewPhoto()
         }
     
@@ -63,11 +63,11 @@ class AAScreenshotManager: NSObject {
         // --- 关键优化点 ---
             // 1. 扩大范围：不再检查 .photoScreenshot，所有图片类型都接受
             // 2. 时间校验：只处理 15 秒内产生的图片（拍照存盘比截图稍慢，时间稍微放宽）
-            let timeInterval = abs(asset.creationDate?.timeIntervalSinceNow ?? -100)
-            if timeInterval > 15 {
-                print("图片太旧了，不触发提示")
-                return
-            }
+//            let timeInterval = abs(asset.creationDate?.timeIntervalSinceNow ?? -100)
+//            if timeInterval > 15 {
+//                print("图片太旧了，不触发提示")
+//                return
+//            }
 
         let manager = PHImageManager.default()
         let requestOptions = PHImageRequestOptions()

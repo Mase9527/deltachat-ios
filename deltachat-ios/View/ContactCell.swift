@@ -8,6 +8,8 @@ protocol ContactCellDelegate: AnyObject {
 
 class ContactCell: UITableViewCell {
 
+    let verticalStackView = UIStackView()
+
     static let reuseIdentifier = "contact_cell_reuse_identifier"
     static var cellHeight: CGFloat {
         let textHeight = UIFont.preferredFont(forTextStyle: .headline).pointSize + UIFont.preferredFont(forTextStyle: .subheadline).pointSize + 24
@@ -226,7 +228,6 @@ class ContactCell: UITableViewCell {
         deliveryStatusIndicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
         deliveryStatusIndicator.widthAnchor.constraint(equalToConstant: 20).isActive = true
 
-        let verticalStackView = UIStackView()
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         verticalStackView.clipsToBounds = true
 
@@ -339,7 +340,9 @@ class ContactCell: UITableViewCell {
     func updateCell(cellViewModel: AvatarCellViewModel) {
 
         // subtitle
-        subtitleLabel.attributedText = cellViewModel.subtitle.boldAt(indexes: cellViewModel.subtitleHighlightIndexes, fontSize: subtitleLabel.font.pointSize)
+        
+        let arrt = cellViewModel.subtitle.boldAt(indexes: cellViewModel.subtitleHighlightIndexes, fontSize: subtitleLabel.font.pointSize)
+        subtitleLabel.attributedText = MentionDetector.shared.parseXMLToMention(arrt, mentionAttributes: [:])
         var unreadMessages = 0
         var isContactRequest = false
         var isArchived = false

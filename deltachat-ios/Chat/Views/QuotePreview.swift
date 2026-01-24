@@ -29,13 +29,17 @@ public class QuotePreview: DraftPreview {
         if !draft.isEditing, let sendEditRequestFor = draft.sendEditRequestFor {
             quoteView.senderTitle.text = String.localized("edit_message")
             quoteView.senderTitle.textColor = DcColors.unknownSender
-            quoteView.quote.text = draft.dcContext.getMessage(id: sendEditRequestFor).text
+            
+            let text = MentionDetector.shared.stripMentionTags(from: draft.dcContext.getMessage(id: sendEditRequestFor).text ?? "")
+            quoteView.quote.text = text
+            
+            
             quoteView.setImagePreview(nil)
             quoteView.citeBar.backgroundColor = DcColors.unknownSender
             isHidden = false
         } else if !draft.isEditing,
            let quoteText = draft.quoteText {
-            quoteView.quote.text = quoteText
+            quoteView.quote.text = MentionDetector.shared.stripMentionTags(from: quoteText)
             compactView = draft.attachment != nil
             calculateQuoteHeight(compactView: compactView)
             if let quoteMessage = draft.quoteMessage {
