@@ -221,6 +221,7 @@
 		BB6AB33B2EF544B30021318E /* AALoginAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */; };
 		BB754B232F236BA900C212D1 /* AAScreenshotManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B222F236BA900C212D1 /* AAScreenshotManager.swift */; };
 		BB754B252F236C2500C212D1 /* AAQuickScreenshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B242F236C2500C212D1 /* AAQuickScreenshotView.swift */; };
+		BB754B552F24A13100C212D1 /* AAMailChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B542F24A13100C212D1 /* AAMailChatListViewController.swift */; };
 		BB85EE552F0A4E1800EA6723 /* QEmotionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BB85EE542F0A4E1800EA6723 /* QEmotionTool.m */; };
 		BB85EE692F0A685E00EA6723 /* VoiceRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EE682F0A685E00EA6723 /* VoiceRecordView.swift */; };
 		BB85EEB82F0B554000EA6723 /* VoiceRecordHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EEB72F0B554000EA6723 /* VoiceRecordHUD.swift */; };
@@ -727,6 +728,7 @@
 		BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginAccountTool.swift; sourceTree = "<group>"; };
 		BB754B222F236BA900C212D1 /* AAScreenshotManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAScreenshotManager.swift; sourceTree = "<group>"; };
 		BB754B242F236C2500C212D1 /* AAQuickScreenshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAQuickScreenshotView.swift; sourceTree = "<group>"; };
+		BB754B542F24A13100C212D1 /* AAMailChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAMailChatListViewController.swift; sourceTree = "<group>"; };
 		BB85EE522F0A4DAA00EA6723 /* deltachat-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "deltachat-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB85EE532F0A4E1800EA6723 /* QEmotionTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QEmotionTool.h; sourceTree = "<group>"; };
 		BB85EE542F0A4E1800EA6723 /* QEmotionTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QEmotionTool.m; sourceTree = "<group>"; };
@@ -1492,6 +1494,7 @@
 				BB8C145E2F1CC20E00354ED2 /* KeySuccessViewController.swift */,
 				BB8C14602F1CCD9F00354ED2 /* OwnerSelfProfileViewController.swift */,
 				BB8C14622F1CFA5600354ED2 /* ChangeNameViewController.swift */,
+				BB754B542F24A13100C212D1 /* AAMailChatListViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2086,6 +2089,7 @@
 				30AAD71B2762869600DE3DC1 /* SelectableCell.swift in Sources */,
 				AE9DAF0F22C278C6004C9591 /* ChatTitleView.swift in Sources */,
 				AE4AEE3522B1030D000AA495 /* PreviewController.swift in Sources */,
+				BB754B552F24A13100C212D1 /* AAMailChatListViewController.swift in Sources */,
 				D84AED272B566C0700D753F6 /* ReactionsOverviewTableViewCell.swift in Sources */,
 				7070FB9B2101ECBB000DC258 /* NewGroupController.swift in Sources */,
 				3080A037277DE30100E74565 /* UITextView+Extensions.swift in Sources */,

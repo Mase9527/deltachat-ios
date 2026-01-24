@@ -60,6 +60,8 @@ class ChatListViewModel: NSObject {
         }
         self.chatList = dcContext.getChatlist(flags: gclFlags, queryString: nil, queryId: 0)
         
+        
+        
         if notifyListener {
             handleOnChatListUpdate()
         }

@@ -14,6 +14,7 @@ class AppCoordinator: NSObject {
     public  let chatsTab = 0
     private let settingsTab = 2
 
+
     private let appStateRestorer = AppStateRestorer.shared
 
     // MARK: - login view handling
@@ -49,6 +50,7 @@ class AppCoordinator: NSObject {
         let qrNavController = createQrNavigationController()
         let chatsNavController = createChatsNavigationController()
         let settingsNavController = createSettingsNavigationController()
+
         let tabBarController = UITabBarController()
         tabBarController.delegate = self
         tabBarController.viewControllers = [ chatsNavController, contactListNavController,settingsNavController]
@@ -82,6 +84,9 @@ class AppCoordinator: NSObject {
         return nav
     }
 
+    
+
+    
     private func createSettingsNavigationController() -> UINavigationController {
         let root = SettingsViewController(dcAccounts: dcAccounts)
         let nav = AABaseNavigationController(rootViewController: root)

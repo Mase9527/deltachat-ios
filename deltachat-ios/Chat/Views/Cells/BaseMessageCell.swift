@@ -101,7 +101,7 @@ public class BaseMessageCell: UITableViewCell {
         view.setContentHuggingPriority(.defaultLow, for: .vertical)
         view.font = UIFont.preferredFont(for: .body, weight: .regular)
         view.delegate = self
-        view.enabledDetectors = [.OPENPGP4FPR,.url, .phoneNumber, .command,.OPENPGP4FPR,.mention]
+        view.enabledDetectors = [.OPENPGP4FPR,.url, .phoneNumber, .command,.OPENPGP4FPR,]
         let attributes = [
             NSAttributedString.Key.foregroundColor: view.tintColor!,
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
