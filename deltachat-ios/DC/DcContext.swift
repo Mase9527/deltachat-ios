@@ -222,6 +222,15 @@ public class DcContext {
         logger.info("⏰ getChatlist: \(diff) s")
         return chatlist
     }
+    
+    public func getUnencryptedChatlist(flags: Int32, queryString: String?, queryId: Int) -> DcChatlist {
+        let start = CFAbsoluteTimeGetCurrent()
+        let chatlistPointer = dc_get_unencryptedChatlist(contextPointer, flags, queryString, UInt32(queryId))
+        let chatlist = DcChatlist(chatListPointer: chatlistPointer)
+        let diff = CFAbsoluteTimeGetCurrent() - start
+        logger.info("⏰ getUnencryptedChatlist: \(diff) s")
+        return chatlist
+    }
 
     public func sendMsgSync(chatId: Int, msg: DcMsg) {
         dc_send_msg_sync(contextPointer, UInt32(chatId), msg.messagePointer)
@@ -791,6 +800,17 @@ public class DcContext {
     public func getStorageUsageReportString() -> String {
         do {
             if let data = try DcAccounts.shared.blockingCall(method: "get_storage_usage_report_string", params: [id as AnyObject]) {
+                return try JSONDecoder().decode(JsonrpcStringResult.self, from: data).result
+            }
+        } catch {
+            logger.error(error.localizedDescription)
+        }
+        return "ErrUsageReport"
+    }
+    
+    public func getSelfKeyHistoryString() -> String {
+        do {
+            if let data = try DcAccounts.shared.blockingCall(method: "select_self_key_history", params: [id as AnyObject]) {
                 return try JSONDecoder().decode(JsonrpcStringResult.self, from: data).result
             }
         } catch {

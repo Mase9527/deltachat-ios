@@ -10,9 +10,11 @@ class AppCoordinator: NSObject {
     private let dcAccounts: DcAccounts
     // the order below is important as well - and there are two enums, here and at
     // AppStateRestorer (this is error prone and could probably be merged)
-    private let qrTab = 1
-    public  let chatsTab = 0
-    private let settingsTab = 2
+    private let qrTab = 2
+    public  let chatsTab = 1
+    private let settingsTab = 3
+    private let mailChatsTab = 0
+
 
 
     private let appStateRestorer = AppStateRestorer.shared
@@ -49,11 +51,13 @@ class AppCoordinator: NSObject {
 
         let qrNavController = createQrNavigationController()
         let chatsNavController = createChatsNavigationController()
+        let mailChatsNavController = createMailChatsNavigationController()
+
         let settingsNavController = createSettingsNavigationController()
 
         let tabBarController = UITabBarController()
         tabBarController.delegate = self
-        tabBarController.viewControllers = [ chatsNavController, contactListNavController,settingsNavController]
+        tabBarController.viewControllers = [ mailChatsNavController,chatsNavController,contactListNavController,settingsNavController]
         tabBarController.tabBar.tintColor = DcColors.primary
         return tabBarController
     }()
@@ -84,6 +88,13 @@ class AppCoordinator: NSObject {
         return nav
     }
 
+    private func createMailChatsNavigationController() -> UINavigationController {
+        let root = AAMailChatListViewController(dcContext: dcAccounts.getSelected(), dcAccounts: dcAccounts, isArchive: false)
+        let nav = AABaseNavigationController(rootViewController: root)
+        let chatTabImage = UIImage(systemName: "envelope")
+        nav.tabBarItem = UITabBarItem(title: String.localized("邮件"), image: chatTabImage, tag: mailChatsTab)
+        return nav
+    }
     
 
     
@@ -296,10 +307,10 @@ class AppCoordinator: NSObject {
 
     func handleMailtoURL(_ url: URL, askToChat: Bool = true) -> Bool {
         if RelayHelper.shared.parseMailtoUrl(url) {
-            showTab(index: chatsTab)
+            showTab(index: mailChatsTab)
             if let rootController = self.tabBarController.selectedViewController as? UINavigationController {
                 rootController.popToRootViewController(animated: false)
-                if let controller = rootController.viewControllers.first as? ChatListViewController {
+                if let controller = rootController.viewControllers.first as? AAMailChatListViewController {
                     controller.handleMailto(askToChat: askToChat)
                     return true
                 }
@@ -623,7 +634,9 @@ class AppCoordinator: NSObject {
             }
         }
 
-        self.tabBarController.setViewControllers([createChatsNavigationController(),
+        self.tabBarController.setViewControllers([
+            createMailChatsNavigationController(),
+            createChatsNavigationController(),
                                                   createContactNavigationController(),
                                                   createSettingsNavigationController()], animated: false)
         presentTabBarController()

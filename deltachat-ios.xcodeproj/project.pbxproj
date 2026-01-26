@@ -222,6 +222,7 @@
 		BB754B232F236BA900C212D1 /* AAScreenshotManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B222F236BA900C212D1 /* AAScreenshotManager.swift */; };
 		BB754B252F236C2500C212D1 /* AAQuickScreenshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B242F236C2500C212D1 /* AAQuickScreenshotView.swift */; };
 		BB754B552F24A13100C212D1 /* AAMailChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B542F24A13100C212D1 /* AAMailChatListViewController.swift */; };
+		BB754B652F26F68C00C212D1 /* MailChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B642F26F68C00C212D1 /* MailChatListViewModel.swift */; };
 		BB85EE552F0A4E1800EA6723 /* QEmotionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BB85EE542F0A4E1800EA6723 /* QEmotionTool.m */; };
 		BB85EE692F0A685E00EA6723 /* VoiceRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EE682F0A685E00EA6723 /* VoiceRecordView.swift */; };
 		BB85EEB82F0B554000EA6723 /* VoiceRecordHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB85EEB72F0B554000EA6723 /* VoiceRecordHUD.swift */; };
@@ -729,6 +730,7 @@
 		BB754B222F236BA900C212D1 /* AAScreenshotManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAScreenshotManager.swift; sourceTree = "<group>"; };
 		BB754B242F236C2500C212D1 /* AAQuickScreenshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAQuickScreenshotView.swift; sourceTree = "<group>"; };
 		BB754B542F24A13100C212D1 /* AAMailChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAMailChatListViewController.swift; sourceTree = "<group>"; };
+		BB754B642F26F68C00C212D1 /* MailChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailChatListViewModel.swift; sourceTree = "<group>"; };
 		BB85EE522F0A4DAA00EA6723 /* deltachat-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "deltachat-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB85EE532F0A4E1800EA6723 /* QEmotionTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QEmotionTool.h; sourceTree = "<group>"; };
 		BB85EE542F0A4E1800EA6723 /* QEmotionTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QEmotionTool.m; sourceTree = "<group>"; };
@@ -1526,6 +1528,7 @@
 				BBBB8A032EF527C800B3B07E /* DCBase64AccountModel.swift */,
 				BBBB8A042EF527C800B3B07E /* LoginResponse.swift */,
 				BB85F1892F1484B700EA6723 /* BindRecoveryModel.swift */,
+				BB754B642F26F68C00C212D1 /* MailChatListViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2205,6 +2208,7 @@
 				305501742798CDE1008FD5CA /* WebxdcViewController.swift in Sources */,
 				3034929F25752FC800A523D0 /* MediaPreview.swift in Sources */,
 				5F785F6E2CB9344F003FFFB9 /* ReusableCellProtocol.swift in Sources */,
+				BB754B652F26F68C00C212D1 /* MailChatListViewModel.swift in Sources */,
 				BB85F1662F10DE8700EA6723 /* AddFriendViewController.swift in Sources */,
 				BBBB8A6C2EF52DE100B3B07E /* AAExportAccountTool.swift in Sources */,
 				D8C1B0DD2CE7421C00C233A7 /* ShareProxyViewController.swift in Sources */,

@@ -136,6 +136,11 @@ class ShareAccountInfoQRCodeVC: UIViewController {
         
         print("PGPVerifier:\(ok)")
         
+      let str =  self.dcContext.getSelfKeyHistoryString()
+        
+        print("getSelfKeyHistoryString:\(str)")
+
+        
     }
     @objc func copyAction(){
         let textToCopy = self.key

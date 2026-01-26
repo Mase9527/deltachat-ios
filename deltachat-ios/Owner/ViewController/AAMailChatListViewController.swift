@@ -14,7 +14,7 @@ import DcCore
 
 
 class AAMailChatListViewController: UITableViewController {
-    var viewModel: ChatListViewModel?
+    var viewModel: MailChatListViewModel?
     let dcContext: DcContext
     internal let dcAccounts: DcAccounts
     var isArchive: Bool
@@ -112,7 +112,7 @@ class AAMailChatListViewController: UITableViewController {
         hidesBottomBarWhenPushed = isArchive
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let self else { return }
-            self.viewModel = ChatListViewModel(dcContext: self.dcContext, isArchive: isArchive)
+            self.viewModel = MailChatListViewModel(dcContext: self.dcContext, isArchive: isArchive)
             self.viewModel?.onChatListUpdate = self.handleChatListUpdate
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
@@ -820,7 +820,7 @@ class AAMailChatListViewController: UITableViewController {
             }
             updateMarkReadButton()
         } else {
-            titleView.text = DcUtils.getConnectivityString(dcContext: dcContext, connectedString: String.localized("pref_chats"))
+            titleView.text = DcUtils.getConnectivityString(dcContext: dcContext, connectedString: String.localized("邮件"))
             if !handleMultiSelectionTitle() {
                 navigationItem.setLeftBarButton(accountButton, animated: false)
                 updateAccountButton()
