@@ -508,11 +508,14 @@ class ContactListOwnerVC: UITableViewController {
     
         
         
-        if let nav = tabBarController?.viewControllers?.first as? UINavigationController,let chatlistViewController = nav.viewControllers.first as? ChatListViewController{
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return  }
+        
+        if let nav = tabBarController?.viewControllers?[appDelegate.appCoordinator.chatsTab] as? UINavigationController,let chatlistViewController = nav.viewControllers.first as? ChatListViewController{
             let chatViewController = ChatViewController(dcContext: dcContext, chatId: chatId)
             chatlistViewController.backButtonUpdateableDataSource = chatViewController
-            self.navigationController?.pushViewController(chatViewController, animated: true)
-//            nav.setViewControllers([chatlistViewController, chatViewController], animated: true)
+//            self.navigationController?.pushViewController(chatViewController, animated: true)
+            nav.setViewControllers([chatlistViewController, chatViewController], animated: true)
+            appDelegate.appCoordinator.showTab(index: appDelegate.appCoordinator.chatsTab)
 //            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 //                appDelegate.appCoordinator.showTab(index: 0)
 //            }

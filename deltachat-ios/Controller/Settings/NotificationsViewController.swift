@@ -14,6 +14,8 @@ internal final class NotificationsViewController: UITableViewController {
     private enum CellTags: Int {
         case defaultTagValue = 0
         case systemSettings
+        case appSettings
+
     }
 
     private var dcContext: DcContext
@@ -58,6 +60,13 @@ internal final class NotificationsViewController: UITableViewController {
         cell.textLabel?.text = String.localized("system_settings")
         return cell
     }()
+    
+    private lazy var appSettingsCell: ActionCell = {
+        let cell = ActionCell()
+        cell.tag = CellTags.appSettings.rawValue
+        cell.textLabel?.text = String.localized("APP设置")
+        return cell
+    }()
 
     private lazy var sections: [SectionConfigs] = {
         let notificationsSection = SectionConfigs(
@@ -73,8 +82,15 @@ internal final class NotificationsViewController: UITableViewController {
         let systemSettingsSection = SectionConfigs(
             headerTitle: nil,
             footerTitle: String.localized("system_settings_notify_explain_ios"),
-            cells: [systemSettingsCell]
+            cells: [systemSettingsCell,appSettingsCell]
         )
+        
+        let appSettingsSection = SectionConfigs(
+            headerTitle: nil,
+            footerTitle: String.localized(""),
+            cells: [appSettingsCell]
+        )
+        
         return [notificationsSection, mentionsSection, systemSettingsSection]
     }()
 
@@ -152,6 +168,10 @@ internal final class NotificationsViewController: UITableViewController {
             if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
             }
+        case .appSettings:
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(settingsURL)
+            break
         case .defaultTagValue:
             break
         }

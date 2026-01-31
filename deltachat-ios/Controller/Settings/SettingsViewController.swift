@@ -328,26 +328,7 @@ internal final class SettingsViewController: UITableViewController {
 
     private func showNotificationsViewController() {
         
-        let backgroundRefreshStatus = UIApplication.shared.backgroundRefreshStatus
-
-        if backgroundRefreshStatus != .available {
-            
-            NotificationManager.notificationEnabledInSystem { [weak self] enabled in
-                
-                guard let self = self else { return  }
-                if enabled == true {// 系统通知已开启
-                    guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
-                    UIApplication.shared.open(settingsURL)
-                    return
-                }else{
-                    navigationController?.pushViewController(NotificationsViewController(dcAccounts: dcAccounts), animated: true)
-
-                }
-                
-            }
-            
-         
-        }
+  
         navigationController?.pushViewController(NotificationsViewController(dcAccounts: dcAccounts), animated: true)
     }
 

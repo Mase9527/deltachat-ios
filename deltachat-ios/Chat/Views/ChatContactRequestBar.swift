@@ -121,4 +121,8 @@ public class ChatContactRequestBar: UIView, InputItem {
     public override var intrinsicContentSize: CGSize {
         return CGSize(width: super.intrinsicContentSize.width, height: infoText == nil ? 44 : 110)
     }
+    
+    func updateTitle(){
+        self.acceptButton.setTitle("回复", for: .normal)
+    }
 }

@@ -691,6 +691,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         bar.delegate = self
         bar.translatesAutoresizingMaskIntoConstraints = false
         messageInputBar.setMiddleContentView(bar, animated: false)
+        
+        if self.dcChat.isEncrypted == false {
+            bar.updateTitle()
+        }
 
         messageInputBar.setLeftStackViewWidthConstant(to: 0, animated: false)
         messageInputBar.setRightStackViewWidthConstant(to: 0, animated: false)
@@ -1632,14 +1636,20 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     private func focusInputTextView() {
-        if !messageInputBar.inputTextView.isFirstResponder {
+        
+        if !bottomInputView.inputTextView.isFirstResponder {
             becomeFirstResponder()
-            messageInputBar.inputTextView.becomeFirstResponder()
-        } else if UIAccessibility.isVoiceOverRunning {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
-                UIAccessibility.post(notification: .layoutChanged, argument: self?.messageInputBar.inputTextView)
-            })
+            bottomInputView.inputTextView.becomeFirstResponder()
         }
+        
+//        if !messageInputBar.inputTextView.isFirstResponder {
+//            becomeFirstResponder()
+//            messageInputBar.inputTextView.becomeFirstResponder()
+//        } else if UIAccessibility.isVoiceOverRunning {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+//                UIAccessibility.post(notification: .layoutChanged, argument: self?.messageInputBar.inputTextView)
+//            })
+//        }
     }
 
     private func stageVCard(url: URL) {
@@ -1788,6 +1798,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         draft.sendEditRequestFor = message.id
         configureDraftArea(draft: draft)
         messageInputBar.inputTextView.text = message.text
+        bottomInputView.inputTextView.text = message.text
         focusInputTextView()
     }
 
