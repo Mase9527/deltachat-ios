@@ -169,7 +169,7 @@ internal final class SettingsViewController: UITableViewController {
         )
         let preferencesSection = SectionConfigs(
             footerTitle: appNameAndVersion,
-            cells: [self.chatsAndMediaCell, self.notificationCell, self.selectBackgroundCell,exportInfoCell,self.advancedCell]
+            cells: [self.chatsAndMediaCell, self.notificationCell, self.selectBackgroundCell,exportInfoCell]
 
 //            cells: [self.chatsAndMediaCell, self.notificationCell, self.selectBackgroundCell, self.addAnotherDeviceCell, self.connectivityCell, self.advancedCell]
         )
