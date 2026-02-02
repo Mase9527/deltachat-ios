@@ -169,18 +169,18 @@ class OwnerSelfProfileViewController: UIViewController,MediaPickerDelegate {
                 let decoder = JSONDecoder()
                 let result = try? decoder.decode(RecoveryEmailModel.self, from: data)
                 
-                if let result = result,result.success == true,result.recovery_email.isEmpty == false{
-                    
-                    self.backEmailItem.updateText(text: result.recovery_email)
-                    self.backEmailItem.isHidden = false
-                    self.line2.isHidden = false
-                    
-                }else{
-                    self.backEmailItem.isHidden = true
-                    self.line2.isHidden = true
-
-
-                }
+//                if let result = result,result.success == true,result.recovery_email.isEmpty == false{
+//                    
+//                    self.backEmailItem.updateText(text: result.recovery_email)
+//                    self.backEmailItem.isHidden = false
+//                    self.line2.isHidden = false
+//                    
+//                }else{
+//                    self.backEmailItem.isHidden = true
+//                    self.line2.isHidden = true
+//
+//
+//                }
                 
              
             }
@@ -521,6 +521,14 @@ class OwnerSelfProfileViewController: UIViewController,MediaPickerDelegate {
             make.width.equalTo(qrImageView.snp.height) // 保持正方形
             make.width.equalToSuperview().multipliedBy(0.65) // 占卡片宽度的 65%
         }
+        
+        let spaceView = UIImageView(image: UIImage(named: "AA_logo_bottom"))
+//        spaceView.backgroundColor = .systemGreen
+        spaceView.contentMode = .scaleAspectFit
+        mainStackView.addArrangedSubview(spaceView)
+//        spaceView.snp.makeConstraints { make in
+//            make.height.equalTo(50)
+//        }
     }
     
     private func createSectionTitle(title: String, icon: String) -> UIView {
