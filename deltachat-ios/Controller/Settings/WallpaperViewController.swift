@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import DcCore
+import ZLPhotoBrowser
 
 class WallpaperViewController: UIViewController, MediaPickerDelegate {
 
@@ -130,7 +131,8 @@ class WallpaperViewController: UIViewController, MediaPickerDelegate {
     }
 
     @objc private func onSelectBackgroundImage() {
-        mediaPicker.showGallery(allowCropping: true)
+//        mediaPicker.showGallery(allowCropping: true)
+        self.changeAvatar()
     }
 
     @objc private func onDefaultSelected() {
@@ -150,5 +152,39 @@ class WallpaperViewController: UIViewController, MediaPickerDelegate {
         } else {
             logger.error("failed to save background image")
         }
+    }
+    
+    /// 修改头像
+    func changeAvatar() {
+         let ps = ZLPhotoPicker()
+         let config = ZLPhotoConfiguration.default()
+         config.allowEditImage = true;
+         config.maxSelectCount = 1;
+         config.allowSelectVideo = false
+        config.editAfterSelectThumbnailImage = true
+        config.showSelectBtnWhenSingleSelect = false
+    
+//            .editImageConfiguration
+//        config.editImageConfiguration.tools([.clip]).clipRatios([.circle])
+        config.editImageConfiguration.tools = [.clip]
+        config.editImageConfiguration.clipRatios = [.wh9x16]
+        config.editImageConfiguration.showClipDirectlyIfOnlyHasClipTool = true
+
+         ps.selectImageBlock = {[weak self] (result,isOri) in
+             
+             let images = result.map { model in
+                 return model.image
+             }
+             
+             if let image = images.first {
+                 self?.onImageSelected(image: image)
+
+             }
+
+       
+
+         }
+
+         ps.showPhotoLibrary(sender: self)
     }
 }

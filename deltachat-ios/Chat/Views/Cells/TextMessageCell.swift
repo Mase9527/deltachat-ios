@@ -42,7 +42,7 @@ class TextMessageCell: BaseMessageCell, ReusableCell {
         func colorMentionInText(
            text: NSAttributedString,
            mention: String,
-           color: UIColor = UIColor.systemBlue
+           color: UIColor = UIColor.label
        ) -> NSAttributedString {
            // 将普通字符串转换为 NSAttributedString
            let attributedString = NSMutableAttributedString.init(attributedString: text)
