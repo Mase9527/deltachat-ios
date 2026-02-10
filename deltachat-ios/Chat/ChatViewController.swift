@@ -976,6 +976,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.showCall = false
             }
             
+            if RegionManager.shared.isMainlandChina == true {
+                self.showCall = false
+            }
+            
             navigationItem.rightBarButtonItems = rightBarButtonItems
         }
     }

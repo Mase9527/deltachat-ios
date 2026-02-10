@@ -22,8 +22,9 @@ enum  iFBaseAPI {
     case getRecoveryEmail(main_email:String)
     
     case checkEmail(address:String)
-
-
+    
+    case deleteAccountRequest(main_email:String)
+    case deleteAccountVerify(token:String,code:String)
 
 }
 
@@ -54,6 +55,10 @@ extension iFBaseAPI: TargetType {
             return "/get-recovery-email"
         case .checkEmail:
             return "check-email-exists"
+        case .deleteAccountRequest:
+            return "/delete-account-request"
+        case .deleteAccountVerify:
+            return "/delete-account-verify"
         default: return ""
         }
     }
@@ -96,6 +101,11 @@ extension iFBaseAPI: TargetType {
             params["main_email"] = main_email
         case let .checkEmail(address):
             params["address"] = address
+        case let .deleteAccountRequest(main_email):
+            params["main_email"] = main_email
+        case let .deleteAccountVerify(token, code):
+            params["token"] = token
+            params["code"] = code
 
         default:
             return .requestPlain

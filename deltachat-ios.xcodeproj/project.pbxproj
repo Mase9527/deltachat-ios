@@ -217,8 +217,10 @@
 		BB2CF9FF2F19E47400E2AA4D /* ResetKeyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CF9FE2F19E47400E2AA4D /* ResetKeyAlertViewController.swift */; };
 		BB2CFA012F19EBF700E2AA4D /* AABaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CFA002F19EBF700E2AA4D /* AABaseViewController.swift */; };
 		BB2CFA032F19ED0300E2AA4D /* AABaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2CFA022F19ED0300E2AA4D /* AABaseNavigationController.swift */; };
+		BB33A59E2F3979F10036760E /* RegionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB33A59D2F3979F10036760E /* RegionManager.swift */; };
 		BB6AB32B2EF53C020021318E /* efd257ece330a34525667707e617a16.txt in Resources */ = {isa = PBXBuildFile; fileRef = BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */; };
 		BB6AB33B2EF544B30021318E /* AALoginAccountTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */; };
+		BB6D8FD42F3ABF3C008E6599 /* DeleteAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6D8FD32F3ABF3C008E6599 /* DeleteAccountViewController.swift */; };
 		BB754B232F236BA900C212D1 /* AAScreenshotManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B222F236BA900C212D1 /* AAScreenshotManager.swift */; };
 		BB754B252F236C2500C212D1 /* AAQuickScreenshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B242F236C2500C212D1 /* AAQuickScreenshotView.swift */; };
 		BB754B552F24A13100C212D1 /* AAMailChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB754B542F24A13100C212D1 /* AAMailChatListViewController.swift */; };
@@ -725,8 +727,10 @@
 		BB2CF9FE2F19E47400E2AA4D /* ResetKeyAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetKeyAlertViewController.swift; sourceTree = "<group>"; };
 		BB2CFA002F19EBF700E2AA4D /* AABaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AABaseViewController.swift; sourceTree = "<group>"; };
 		BB2CFA022F19ED0300E2AA4D /* AABaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AABaseNavigationController.swift; sourceTree = "<group>"; };
+		BB33A59D2F3979F10036760E /* RegionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionManager.swift; sourceTree = "<group>"; };
 		BB6AB32A2EF53C020021318E /* efd257ece330a34525667707e617a16.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = efd257ece330a34525667707e617a16.txt; sourceTree = "<group>"; };
 		BB6AB33A2EF544B30021318E /* AALoginAccountTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AALoginAccountTool.swift; sourceTree = "<group>"; };
+		BB6D8FD32F3ABF3C008E6599 /* DeleteAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewController.swift; sourceTree = "<group>"; };
 		BB754B222F236BA900C212D1 /* AAScreenshotManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAScreenshotManager.swift; sourceTree = "<group>"; };
 		BB754B242F236C2500C212D1 /* AAQuickScreenshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAQuickScreenshotView.swift; sourceTree = "<group>"; };
 		BB754B542F24A13100C212D1 /* AAMailChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAMailChatListViewController.swift; sourceTree = "<group>"; };
@@ -1497,6 +1501,7 @@
 				BB8C14602F1CCD9F00354ED2 /* OwnerSelfProfileViewController.swift */,
 				BB8C14622F1CFA5600354ED2 /* ChangeNameViewController.swift */,
 				BB754B542F24A13100C212D1 /* AAMailChatListViewController.swift */,
+				BB6D8FD32F3ABF3C008E6599 /* DeleteAccountViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1504,6 +1509,7 @@
 		BBBB8A022EF527C800B3B07E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				BB33A59D2F3979F10036760E /* RegionManager.swift */,
 				BBBB89FA2EF527C800B3B07E /* DeltaChatLinkConverter.swift */,
 				BBBB89FB2EF527C800B3B07E /* QRCodeTool.swift */,
 				BBBB89FC2EF527C800B3B07E /* AdvancedQRCodeGenerator.swift */,
@@ -2126,6 +2132,7 @@
 				D8CDEFE22C087D1000146773 /* ContactCardView.swift in Sources */,
 				3095A351237DD1F700AB07F7 /* MediaPicker.swift in Sources */,
 				B21005DB23383664004C70C5 /* EmailOptionsViewController.swift in Sources */,
+				BB33A59E2F3979F10036760E /* RegionManager.swift in Sources */,
 				AEC67A1C241CE9E4007DDBE1 /* AppStateRestorer.swift in Sources */,
 				BB85EEB82F0B554000EA6723 /* VoiceRecordHUD.swift in Sources */,
 				BB8C145F2F1CC20E00354ED2 /* KeySuccessViewController.swift in Sources */,
@@ -2204,6 +2211,7 @@
 				5F153E9A2CC38BAA00871ABE /* GiveBackMyFirstResponder.swift in Sources */,
 				302B84CE2397F6CD001C261F /* URL+Extension.swift in Sources */,
 				7A9FB1441FB061E2001FEA36 /* AppDelegate.swift in Sources */,
+				BB6D8FD42F3ABF3C008E6599 /* DeleteAccountViewController.swift in Sources */,
 				30C7D5EE28F47E620078D24C /* MessageCounter.swift in Sources */,
 				305501742798CDE1008FD5CA /* WebxdcViewController.swift in Sources */,
 				3034929F25752FC800A523D0 /* MediaPreview.swift in Sources */,
@@ -2907,10 +2915,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.deltachat-ios.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "deltachat-ios/deltachat-ios-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -2981,9 +2993,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.deltachat-ios.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "deltachat-ios/deltachat-ios-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

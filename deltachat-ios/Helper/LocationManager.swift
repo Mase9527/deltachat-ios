@@ -17,7 +17,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager = CLLocationManager()
         locationManager.distanceFilter = 25
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.allowsBackgroundLocationUpdates = true
+//        locationManager.allowsBackgroundLocationUpdates = true
         locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.activityType = CLActivityType.fitness
         super.init()

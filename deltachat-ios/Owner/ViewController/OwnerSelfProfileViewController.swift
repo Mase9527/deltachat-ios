@@ -16,6 +16,7 @@ class OwnerSelfProfileViewController: UIViewController,MediaPickerDelegate {
 
     
     private let dcContext: DcContext
+    private let dcAccounts: DcAccounts
     
     var signatureView:SignatureSectionView!
     
@@ -32,6 +33,7 @@ class OwnerSelfProfileViewController: UIViewController,MediaPickerDelegate {
     
     
     init(dcAccounts: DcAccounts) {
+        self.dcAccounts = dcAccounts
         self.dcContext = dcAccounts.getSelected()
         super.init(nibName: nil, bundle: nil)
         hidesBottomBarWhenPushed = true
@@ -202,6 +204,7 @@ class OwnerSelfProfileViewController: UIViewController,MediaPickerDelegate {
         setupSignatureSection()
         setupAccountInfoSection()
         setupQRCodeSection()
+        setupDeleteAccountSection()
         
         setupTapToDismiss()
         let tap = UITapGestureRecognizer.init()
@@ -522,13 +525,49 @@ class OwnerSelfProfileViewController: UIViewController,MediaPickerDelegate {
             make.width.equalToSuperview().multipliedBy(0.65) // 占卡片宽度的 65%
         }
         
+
+//        spaceView.snp.makeConstraints { make in
+//            make.height.equalTo(50)
+//        }
+    }
+
+    private func setupDeleteAccountSection() {
+        // 1. 间距
+//        let spacer = UIView()
+//        mainStackView.addArrangedSubview(spacer)
+//        spacer.snp.makeConstraints { make in make.height.equalTo(1) }
+        
+        // 2. 注销按钮
+        let deleteButton = UIButton(type: .system)
+        deleteButton.setTitle("注销账号", for: .normal)
+        deleteButton.setTitleColor(.systemRed, for: .normal)
+        deleteButton.backgroundColor = .white
+        deleteButton.layer.cornerRadius = 20
+        deleteButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        
+        // Shadow
+        deleteButton.layer.shadowColor = UIColor.black.cgColor
+        deleteButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        deleteButton.layer.shadowOpacity = 0.1
+        deleteButton.layer.shadowRadius = 10
+        
+        deleteButton.addTarget(self, action: #selector(didTapDeleteAccount), for: .touchUpInside)
+        
+        mainStackView.addArrangedSubview(deleteButton)
+        
+        deleteButton.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
+        
         let spaceView = UIImageView(image: UIImage(named: "AA_logo_bottom"))
 //        spaceView.backgroundColor = .systemGreen
         spaceView.contentMode = .scaleAspectFit
         mainStackView.addArrangedSubview(spaceView)
-//        spaceView.snp.makeConstraints { make in
-//            make.height.equalTo(50)
-//        }
+    }
+    
+    @objc private func didTapDeleteAccount() {
+        let vc = DeleteAccountViewController(dcAccounts: self.dcAccounts)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func createSectionTitle(title: String, icon: String) -> UIView {

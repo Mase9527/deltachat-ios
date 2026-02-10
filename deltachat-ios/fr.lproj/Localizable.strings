@@ -1,5 +1,5 @@
 // common strings without special context
-"app_name" = "Delta Chat";
+"app_name" = "AAmail";
 "ok" = "OK";
 "cancel" = "Annuler";
 "clear_search" = "Effacer la recherche";
@@ -52,7 +52,7 @@
 "mute" = "Sourdine";
 "muted" = "Muet";
 "ephemeral_messages" = "Messages éphémères";
-"ephemeral_messages_hint" = "Ces paramètres s\'appliquent à tous les participants utilisant Delta Chat; ils peuvent copier, enregistrer et faire suivre des messages ou utiliser un autre client de e-mail.";
+"ephemeral_messages_hint" = "Ces paramètres s\'appliquent à tous les participants utilisant AAmail; ils peuvent copier, enregistrer et faire suivre des messages ou utiliser un autre client de e-mail.";
 "save" = "Sauvegarder";
 "chat" = "Discussion";
 "media" = "Média";
@@ -228,7 +228,7 @@
 "share_invite_link_explain" = "Tous les utilisateurs disposant du lien peuvent voir votre profil et démarrer une discussion avec vous. Ne le partagez qu\'à des personnes en qui vous avez confiance.";
 "invite_friends" = "Inviter des amis";
 // %1$s is replaced by the user's invitation link ("https://i.delta.chat/...")
-"invite_friends_text" = "Contactez-moi sur Delta Chat:\n%1$@";
+"invite_friends_text" = "Contactez-moi sur AAmail:\n%1$@";
 "menu_copy_selection_to_clipboard" = "Copier la sélection";
 "menu_copy_link_to_clipboard" = "Copier le lien";
 "menu_copy_text_to_clipboard" = "Copier le texte";
@@ -284,7 +284,7 @@
 "title_share_location" = "Partager la position avec tous les membres du groupe";
 "device_talk" = "Messages de l\'appareil";
 "device_talk_subtitle" = "Messages générés localement";
-"device_talk_explain" = "Les messages dans cette discussion sont générés localement par votre application Delta Chat. Cela vous permet de recevoir des informations concernant les mises à jour et problèmes rencontrés à l\'utilisation.";
+"device_talk_explain" = "Les messages dans cette discussion sont générés localement par votre application AAmail. Cela vous permet de recevoir des informations concernant les mises à jour et problèmes rencontrés à l\'utilisation.";
 "device_talk_welcome_message2" = "Gardez contact !\n\n🙌 Cliquez sur « code QR » sur la page d\'accueil des deux appareils. Sélectionnez « Scanner le code QR » sur un des appareils et positionnez les deux appareils l\'un vers l\'autre\n\n🌍 Si vous n\'êtes pas dans la même pièce, vous pouvez scanner le code QR pendant un appel vidéo ou partager un lien d\'invitation à partir de « Scanner le code QR »\n\n Profitez ensuite de votre expérience de messagerie sur le plus grand réseau décentralisé du monde : les emails. Contrairement aux autres applications populaires, tout cela se fait sans contrôle centralisé, suivi ou revente de vos données, celles de vos amis, collègues ou famille à de grandes entreprises.";
 "edit_contact" = "Mettre à jour le contact";
 // Verb "to pin", making something sticky, not a noun or abbreviation for "pin number".
@@ -301,7 +301,7 @@
 // Menu item beside an app/chat that adds an icon to the system's home screen. If the user taps that icon, the app/chat is opened directly.
 "add_to_home_screen" = "Ajouter à l\'écran d\'accueil";
 "donate" = "Faire un don";
-"donate_device_msg" = "❤️ On dirait que vous aimez bien Delta Chat!\n\nMerci de considérer une donation à Delta Chat afin d\'assurer qu\'il reste libre et gratuit pour tout le monde.\n\nBien que Delta Chat est gratuit à l\'utilisation et un logiciel libre, le développer coûte de l\'argent. Aidez-nous à garder Delta Chat indépendent et le rendre encore plus incroyable dans le future.\n\nhttps://delta.chat/donate";
+"donate_device_msg" = "❤️ On dirait que vous aimez bien AAmail!\n\nMerci de considérer une donation à AAmail afin d\'assurer qu\'il reste libre et gratuit pour tout le monde.\n\nBien que AAmail est gratuit à l\'utilisation et un logiciel libre, le développer coûte de l\'argent. Aidez-nous à garder AAmail indépendent et le rendre encore plus incroyable dans le future.\n\nhttps://delta.chat/donate";
 "mute_for_one_hour" = "Désactiver pour 1 heure";
 "mute_for_eight_hours" = "Désactiver pour 8 heures";
 "mute_for_one_day" = "Désactiver pour 1 jour";
@@ -352,7 +352,7 @@
 "chat_camera_unavailable" = "Caméra indisponible.";
 "chat_unable_to_record_audio" = "Impossible d\'enregistrer le son.";
 // The placeholder will be replaced by the name of the recipient in a one-to-one chat.
-"chat_new_one_to_one_hint" = "Envoyez un message. Il n\'y a pas de problème si %1$@ n\'utilise pas Delta Chat.";
+"chat_new_one_to_one_hint" = "Envoyez un message. Il n\'y a pas de problème si %1$@ n\'utilise pas AAmail.";
 // consider keeping the term "channel" as in WhatsApp or Telegram
 "chat_new_channel_hint" = "Les canaux sont un outil parmi d\'autres pour diffuser vos communications.";
 "chat_new_group_hint" = "Les autres participants ne verront ce groupe qu\'après que vous avez envoyé un premier message.";
@@ -453,15 +453,15 @@
 "multidevice_title" = "Ajouter un deuxième appareil";
 "multidevice_same_network_hint" = "Vérifiez que les deux appareils sont bien connectés au même Wi-Fi ou réseau.";
 "multidevice_this_creates_a_qr_code" = "Crée un code QR que vous pouvez scanner avec le deuxième appareil pour copier le compte.";
-"multidevice_install_dc_on_other_device" = "Installer Delta Chat sur votre autre appareil (https://get.delta.chat)";
+"multidevice_install_dc_on_other_device" = "Installer AAmail sur votre autre appareil (https://get.delta.chat)";
 // "I Already Have a Profile / Add as Second Device” should be the same text as defined by the keys onboarding_alternative_logins and multidevice_receiver_title
-"multidevice_tap_scan_on_other_device" = "Lancez Delta Chat, appuyez sur \"Ajouter comme deuxième appareil\" et scannez le code affiché ici.";
+"multidevice_tap_scan_on_other_device" = "Lancez AAmail, appuyez sur \"Ajouter comme deuxième appareil\" et scannez le code affiché ici.";
 // Shown inside a "QR code card" with very limited space; please formulate the text as short as possible therefore. The placeholder will be replaced by the profile name eg. "Scan to set up second device for Alice"
 "multidevice_qr_subtitle" = "Scanner pour configurer un deuxième appareil pour %1$@";
 "multidevice_receiver_title" = "Ajouter comme deuxième appareil";
 "multidevice_open_settings_on_other_device" = "Sur le premier appareil, allez dans \"Paramètres / Ajouter un deuxième appareil\" et scannez le code qui s\'affiche";
 "multidevice_receiver_scanning_ask" = "Copier le compte de l\'autre appareil sur celui-ci ?";
-"multidevice_receiver_needs_update" = "Le profil que vous voulez importer vient d\'une version plus récente de Delta Chat.\n\nPour continuer la mise en place d\'un second appareil, veuillez mettre à jour Delta Chat.";
+"multidevice_receiver_needs_update" = "Le profil que vous voulez importer vient d\'une version plus récente de AAmail.\n\nPour continuer la mise en place d\'un second appareil, veuillez mettre à jour AAmail.";
 "multidevice_abort" = "Abandonner la configuration du deuxième appareil ?";
 "multidevice_abort_will_invalidate_copied_qr" = "Révoque le code QR copié dans le presse-papiers.";
 "multidevice_transfer_done_devicemsg" = "ℹ️ Compte transféré sur votre deuxième appareil.";
@@ -695,8 +695,8 @@
 "pref_edit_profile" = "Édition du profil";
 "disable_imap_idle" = "Désactiver IMAP IDLE";
 "disable_imap_idle_explain" = "N\'utilisez pas d\'extension IMAP IDLE, même si elle est prise en charge par votre serveur, car elle provoque des retards dans la récupération des messages. Activez cette option uniquement pour effectuer des tests.";
-"send_stats_to_devs" = "Envoyer les statistiques aux développeurs Delta Chat";
-"stats_msg_body" = "La pièce jointe contient des statistiques d\'usage anonymisés, qui nous aide à améliorer Delta Chat. Merci !";
+"send_stats_to_devs" = "Envoyer les statistiques aux développeurs AAmail";
+"stats_msg_body" = "La pièce jointe contient des statistiques d\'usage anonymisés, qui nous aide à améliorer AAmail. Merci !";
 // Emoji picker and categories
 "emoji_search_results" = "Résultats de la recherche";
 "emoji_not_found" = "Pas d\'emoji trouvé";
@@ -724,9 +724,9 @@
 // %1$d will be replaced by the number of messages, you can assume plural/lots here. %2$s will be replaced by a timespan option.
 "autodel_device_ask" = "Voulez-vous supprimer %1$d messages maintenant ainsi que tous les nouveaux futurs messages reçus « %2$@ » ?\n\n• Cela inclut tous les fichiers multimédia\n\n• Les messages seront effacés qu\'ils aient été vus ou non\n\n• Les « Messages sauvegardés » seront préservés de la suppression locale";
 // %1$d will be replaced by the number of messages, you can assume plural/lots here. %2$s will be replaced by a timespan option.
-"autodel_server_ask" = "Voulez-vous supprimer %1$d messages maintenant ainsi que tous les futurs nouveaux messages reçus « %2$@ » ?\n\n⚠️ Cela inclut les courriels, les fichiers multimédia et les « Messages sauvegardés » dans tous les répertoires du serveur\n\n⚠️ N\'utilisez pas cette fonction si vous utilisez d\'autres clients de messagerie électronique en plus de Delta Chat";
+"autodel_server_ask" = "Voulez-vous supprimer %1$d messages maintenant ainsi que tous les futurs nouveaux messages reçus « %2$@ » ?\n\n⚠️ Cela inclut les courriels, les fichiers multimédia et les « Messages sauvegardés » dans tous les répertoires du serveur\n\n⚠️ N\'utilisez pas cette fonction si vous utilisez d\'autres clients de messagerie électronique en plus de AAmail";
 // shown below enabled autodel_server-option, should be a summary of autodel_server_ask and remind about the impact
-"autodel_server_enabled_hint" = "Cela inclus les courriels, médias et les « Messages sauvegardés » dans tous les répertoires du serveur. N\'utilisez pas cette fonction si vous voulez garder les données sur le serveur ou si vous utilisez d\'autres clients de messagerie électronique en plus de Delta Chat.";
+"autodel_server_enabled_hint" = "Cela inclus les courriels, médias et les « Messages sauvegardés » dans tous les répertoires du serveur. N\'utilisez pas cette fonction si vous voulez garder les données sur le serveur ou si vous utilisez d\'autres clients de messagerie électronique en plus de AAmail.";
 "autodel_server_warn_multi_device_title" = "Activer la suppression immédiate";
 "autodel_server_warn_multi_device" = "Si vous activez la suppression immédiate, vous ne pourrez pas utiliser plusieurs appareils sur ce profil.";
 "autodel_confirm" = "J\'ai compris, supprimer tous ces messages";
@@ -823,7 +823,7 @@
 "devicemsg_storage_exceeding" = "⚠️ Bientôt plus d\'espace de stockage chez votre fournisseur, %1$@%% utilisés.\n\nVous ne serez peut-être plus en mesure de recevoir des messages quand votre espace de stockage sera plein.\n\n👉 Veuillez vérifier si vous avez d\'anciens éléments à supprimer directement sur l\'interface web de votre fournisseur et envisagez d\'activer \"Paramètres / Supprimer les anciens messages\". Vous pouvez vérifier à tout moment le volume d\'espace de stockage en cours d\'utilisation depuis \"Paramètres / Connectivité\".";
 // %1%s will be replaced by date and time in some human-readable format
 "devicemsg_bad_time" = "⚠️ L\'heure ou la date de votre appareil semble erronée (%1$@).\n\nRéglez votre horloge ⏰🔧 pour que vos messages soient bien reçus.";
-"devicemsg_update_reminder" = "⚠️ Votre version de Delta Chat semble obsolète.\n\nCela risque de créer des dysfonctionnements parce que vos contacts utilisent des versions plus récentes - en plus, vous ratez les nouvelles fonctionnalités 😳\n Rendez-vous sur https://get.delta.chat ou sur votre magasin d\'applications pour effectuer la mise à jour !";
+"devicemsg_update_reminder" = "⚠️ Votre version de AAmail semble obsolète.\n\nCela risque de créer des dysfonctionnements parce que vos contacts utilisent des versions plus récentes - en plus, vous ratez les nouvelles fonctionnalités 😳\n Rendez-vous sur https://get.delta.chat ou sur votre magasin d\'applications pour effectuer la mise à jour !";
 // Some options as "Add Second Device" or "Backup" may require the system PIN/Fingerprint/Gesture/Etc. to be entered in a system dialog. This hint is added to the system dialog, below a title as "Add Second Device" or "Backup".
 "enter_system_secret_to_continue" = "Déverrouillez votre appareil pour continuer";
 // qr code stuff
@@ -908,7 +908,7 @@
 "perm_explain_access_to_mic_denied" = "Pour envoyer des messages audio, aller dans les paramètres de l\'application, sélectionner \"Autorisations\" et autoriser \"Microphone\".";
 "perm_explain_access_to_storage_denied" = "Pour recevoir ou envoyer des fichiers, aller dans les Paramètres de l\'application, sélectionner \"Autorisations\" et autoriser \"Stockage\".";
 "perm_explain_access_to_location_denied" = "Pour joindre une position, aller au menu paramètres de l\'application, sélectionnez \"Autorisations\" et activez \"Position\".";
-"perm_explain_access_to_notifications_denied" = "Pour recevoir les notifications, accédez à \"Paramètres système / Applications / Delta Chat\" et activez les \"Notifications\".";
+"perm_explain_access_to_notifications_denied" = "Pour recevoir les notifications, accédez à \"Paramètres système / Applications / AAmail\" et activez les \"Notifications\".";
 // ImageEditorHud
 "ImageEditorHud_draw_anywhere_to_blur" = "Dessinez n\'importe où pour flouter";
 "ImageEditorHud_add_text" = "Ajouter du texte";
@@ -919,9 +919,9 @@
 "ImageEditorHud_flip" = "Tourner";
 "ImageEditorHud_rotate" = "Pivoter";
 // strings introduced on desktop. we want to share strings between the os, in general, please do not add generic strings here
-"about_offical_app_desktop" = "Ceci est l\'application de bureau Delta Chat officielle.";
+"about_offical_app_desktop" = "Ceci est l\'application de bureau AAmail officielle.";
 "about_licensed_under_desktop" = "Ce logiciel est sous licence GNU GPL version 3 et le code source est disponible sur GitHub.";
-"welcome_desktop" = "Bienvenue sur Delta Chat";
+"welcome_desktop" = "Bienvenue sur AAmail";
 "global_menu_preferences_language_desktop" = "Choisissez la langue...";
 "global_menu_file_desktop" = "Fichier";
 "global_menu_file_quit_desktop" = "Quitter";
@@ -936,11 +936,11 @@
 "global_menu_view_developer_desktop" = "Développeur";
 "global_menu_view_developer_tools_desktop" = "Outils de développement";
 "global_menu_help_desktop" = "Aide";
-"delta_chat_homepage" = "Page d\'accueil de Delta Chat";
+"delta_chat_homepage" = "Page d\'accueil de AAmail";
 "contribute" = "Contribuer";
 "global_menu_help_report_desktop" = "Signaler un problème";
-"global_menu_help_about_desktop" = "À propos de Delta Chat";
-"global_menu_file_open_desktop" = "Ouvrir Delta Chat";
+"global_menu_help_about_desktop" = "À propos de AAmail";
+"global_menu_file_open_desktop" = "Ouvrir AAmail";
 "global_menu_minimize_to_tray" = "Minimiser";
 "no_chat_selected_suggestion_desktop" = "Sélectionner une discussion ou en créer une nouvelle";
 "write_message_desktop" = "Écrire un message";
@@ -959,7 +959,7 @@
 "message_detail_received_desktop" = "reçu";
 "menu.view.developer.open.log.folder" = "Ouvrir le dossier Journal";
 "menu.view.developer.open.current.log.file" = "Ouvrir le fichier Journal courant";
-"explain_desktop_minimized_disabled_tray_pref" = "L\'icône système ne peut pas être enlevé car Delta Chat a été démarré avec l\'option --minimized.";
+"explain_desktop_minimized_disabled_tray_pref" = "L\'icône système ne peut pas être enlevé car AAmail a été démarré avec l\'option --minimized.";
 "no_spellcheck_suggestions_found" = "Aucune propositions de correction trouvées.";
 "show_window" = "Afficher la fenêtre";
 // title of the "keybindings" dialog (for the keybindings names as such, where possible the normal command strings are used)
@@ -996,7 +996,7 @@
 "import_device_contacts" = "Importer les contacts de l\'appareil";
 "import_device_contacts_hint" = "Pour discuter avec des contacts de votre appareils, ouvrez les paramètre et activez \"Contacts\".";
 // iOS notification settings
-"disabled_in_dc" = "Désactivé dans Delta Chat";
+"disabled_in_dc" = "Désactivé dans AAmail";
 "disabled_in_system_settings" = "Désactivé dans les paramètres système";
 "bg_app_refresh_disabled" = "Le \"rafraîchissement des applications en arrière-plan\" est désactivé dans les paramètres du système.";
 "notifications_avg_minutes" = "Toutes les %1$d minutes en moyenne";
@@ -1012,9 +1012,9 @@
 "pref_background_notifications" = "Utiliser une connexion en arrière plan";
 "pref_background_notifications_explain" = "Requiert la désactivation des optimisations de battterie, utilisez cette option si les notifications sont en retard.";
 "pref_reliable_service" = "Forcer une connexion en arrière plan";
-"pref_background_notifications_rationale" = "Pour maintenir une connexion à votre serveur de courriel et recevoir les messages en arrière-plan, ignorez l\'optimisation de la batterie à l\'étape suivante.\n\nDelta Chat utilise peu de ressources et prend garde à ne pas vider votre batterie.";
+"pref_background_notifications_rationale" = "Pour maintenir une connexion à votre serveur de courriel et recevoir les messages en arrière-plan, ignorez l\'optimisation de la batterie à l\'étape suivante.\n\nAAmail utilise peu de ressources et prend garde à ne pas vider votre batterie.";
 // disabling "Reliable service" will hide a the maybe annoying permanent-notification with the drawback that new-message-notifications get potentially unreliable
 "perm_enable_bg_reminder_title" = "Touchez ici pour recevoir des messages pendant que DeltaChat est en arrière-plan.";
-"perm_enable_bg_already_done" = "Vous avez déjà autorisé Delta Chat à recevoir des messages en arrière plan.\n\nSi vous ne les recevez toujours pas en arrière plan, vérifiez les paramètres de votre système.";
+"perm_enable_bg_already_done" = "Vous avez déjà autorisé AAmail à recevoir des messages en arrière plan.\n\nSi vous ne les recevez toujours pas en arrière plan, vérifiez les paramètres de votre système.";
 // device messages for updates
-"update_2_0" = "Quoi de neuf?\n\n💯 Le chiffrement de bout-en-bout est maintenant fiable et péreint. 🔒Fini les cadenas !\n\n✉️ Les mails sans chiffrement de bout-en-bout sont maintenant marqués par une icône de mail \n\n😻 Nouvelle fenêtre de profil améliorée pour tous les contactsn\n🔲 Un nouveau button pour l\'accès rapide aux applis utilisés dans une discussion\n\n❤️ Merci de considérer à faire une donation afin que nous restions indépendents et continuons à améliorer Delta Chat: %1$@";
+"update_2_0" = "Quoi de neuf?\n\n💯 Le chiffrement de bout-en-bout est maintenant fiable et péreint. 🔒Fini les cadenas !\n\n✉️ Les mails sans chiffrement de bout-en-bout sont maintenant marqués par une icône de mail \n\n😻 Nouvelle fenêtre de profil améliorée pour tous les contactsn\n🔲 Un nouveau button pour l\'accès rapide aux applis utilisés dans une discussion\n\n❤️ Merci de considérer à faire une donation afin que nous restions indépendents et continuons à améliorer AAmail: %1$@";

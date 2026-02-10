@@ -1,6 +1,6 @@
-NSCameraUsageDescription = "Delta Chat користи вашу камеру за снимање и слање фотографија и видео записа и за очитавање бар-кôда.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Delta Chat захтева дозволу за дељење вашег положаја током периода у коме сте омогућили дељење положаја.";
-NSLocationWhenInUseUsageDescription = "Delta Chat захтева дозволу за дељење вашег положаја током периода у коме сте омогућили дељење положаја.";
-NSMicrophoneUsageDescription = "Delta Chat користи микрофон да снима и шаље звучне поруке и видео записе са звуком.";
-NSPhotoLibraryUsageDescription = "Delta Chat ће вам дозволити да изаберете које од слика из вашег фото албума желите да пошаљете.";
-NSPhotoLibraryAddUsageDescription = "Delta Chat жели да сними слике у ваш фото албум.";
+NSCameraUsageDescription = "AAmail користи вашу камеру за снимање и слање фотографија и видео записа и за очитавање бар-кôда.";
+NSLocationAlwaysAndWhenInUseUsageDescription = "AAmail захтева дозволу за дељење вашег положаја током периода у коме сте омогућили дељење положаја.";
+NSLocationWhenInUseUsageDescription = "AAmail захтева дозволу за дељење вашег положаја током периода у коме сте омогућили дељење положаја.";
+NSMicrophoneUsageDescription = "AAmail користи микрофон да снима и шаље звучне поруке и видео записе са звуком.";
+NSPhotoLibraryUsageDescription = "AAmail ће вам дозволити да изаберете које од слика из вашег фото албума желите да пошаљете.";
+NSPhotoLibraryAddUsageDescription = "AAmail жели да сними слике у ваш фото албум.";

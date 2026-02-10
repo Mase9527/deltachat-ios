@@ -1,5 +1,5 @@
 // common strings without special context
-"app_name" = "Delta Chat";
+"app_name" = "AAmail";
 "ok" = "Ados";
 "cancel" = "Utzi";
 "clear_search" = "Garbitu bilaketa";
@@ -251,7 +251,7 @@
 "title_share_location" = "Partekatu kokalekua taldeko kide guztiak";
 "device_talk" = "Gailuaren mezuak";
 "device_talk_subtitle" = "Lokalki sortutako mezuak";
-"device_talk_explain" = "Txat honetako mezuak zure Delta Chat aplikazioak sortu ditu lokalki. Egileek aplikazioaren eguneraketei buruz eta erabileran arazoei buruz informatzeko erabiltzen dute.";
+"device_talk_explain" = "Txat honetako mezuak zure AAmail aplikazioak sortu ditu lokalki. Egileek aplikazioaren eguneraketei buruz eta erabileran arazoei buruz informatzeko erabiltzen dute.";
 "edit_contact" = "Editatu kontaktua";
 // Verb "to pin", making something sticky, not a noun or abbreviation for "pin number".
 "pin_chat" = "Finkatu txata";
@@ -289,7 +289,7 @@
 "chat_please_enter_message" = "Idatzi mezu bat.";
 "chat_camera_unavailable" = "Kamera ez dago eskuragarri.";
 "chat_unable_to_record_audio" = "Ezin izan da audioa grabatu.";
-"chat_new_group_hint" = "Idatzi lehen mezua, besteek taldera erantzutea baimenduz\n\n• Ez du axola denek ez badute Delta Chat erabiltzen.\n\n• Lehen mezua bidaltzeko denbora bat behar daiteke.";
+"chat_new_group_hint" = "Idatzi lehen mezua, besteek taldera erantzutea baimenduz\n\n• Ez du axola denek ez badute AAmail erabiltzen.\n\n• Lehen mezua bidaltzeko denbora bat behar daiteke.";
 "chat_record_slide_to_cancel" = "Irristatu ezeztatzeko";
 "chat_record_explain" = "Sakatu eta mantendu ahots-mezu bat grabatzeko, askatu bidaltzeko.";
 "chat_no_chats_yet_title" = "Sarrera-ontzi hutsa.\nSakatu \"+\" txat berria hasteko.";
@@ -498,12 +498,12 @@
 // permissions
 "perm_required_title" = "Baimena behar da";
 "perm_continue" = "Jarraitu";
-"perm_explain_access_to_camera_denied" = "Delta Chat-ek kamerara sarbidea behar du argazkiak edo bideoak ateratzeko, baina behin betiko ukatu zaio. Joan aplikazioaren ezarpen menura, hautatu \"Baimenak\" eta gaitu \"Kamera\".";
+"perm_explain_access_to_camera_denied" = "AAmail-ek kamerara sarbidea behar du argazkiak edo bideoak ateratzeko, baina behin betiko ukatu zaio. Joan aplikazioaren ezarpen menura, hautatu \"Baimenak\" eta gaitu \"Kamera\".";
 // give the user an idea where to find the "Microphone" option. the hint is only shown if access was initially denied by the user. pick up wordings really used on the systems, but do not be overly precise: things shift around often and there are too many system we support to track every detail and click path
-"perm_explain_access_to_mic_denied" = "Delta Chat-ek mikrofonoa erabiltzeko baimena behar du ahots-mezuak bidali ahal izateko, baina behin betiko ukatu zaio. Joan aplikazioaren ezarpenetara, hautatu \"Baimenak\" eta gaitu \"Mikrofonoa\".";
-"perm_explain_access_to_storage_denied" = "Delta Chat-ek biltegiratze baimena behar du argazkiak, bideoak edo audioa erantsi edo esportatzeko, baina behin betiko ukatu zaio. Joan aplikazioaren ezarpen menura, hautatu \"baimenak\", eta gaitu \"Biltegiratzea\"";
-"perm_explain_access_to_location_denied" = "Delta Chat-ek kokaleku aatzitzeko baimena behar du kokalekua eransteko, baina behin betiko ukatu zaio. Joan aplikazioaren ezarpen menura, hautatu \"baimenak\", eta gaitu \"Kokalekua\".";
-"welcome_desktop" = "Ongi etorri Delta Chat-era";
+"perm_explain_access_to_mic_denied" = "AAmail-ek mikrofonoa erabiltzeko baimena behar du ahots-mezuak bidali ahal izateko, baina behin betiko ukatu zaio. Joan aplikazioaren ezarpenetara, hautatu \"Baimenak\" eta gaitu \"Mikrofonoa\".";
+"perm_explain_access_to_storage_denied" = "AAmail-ek biltegiratze baimena behar du argazkiak, bideoak edo audioa erantsi edo esportatzeko, baina behin betiko ukatu zaio. Joan aplikazioaren ezarpen menura, hautatu \"baimenak\", eta gaitu \"Biltegiratzea\"";
+"perm_explain_access_to_location_denied" = "AAmail-ek kokaleku aatzitzeko baimena behar du kokalekua eransteko, baina behin betiko ukatu zaio. Joan aplikazioaren ezarpen menura, hautatu \"baimenak\", eta gaitu \"Kokalekua\".";
+"welcome_desktop" = "Ongi etorri AAmail-era";
 "global_menu_preferences_language_desktop" = "Hautatu hizkuntza...";
 "global_menu_file_desktop" = "Fitxategia";
 "global_menu_file_quit_desktop" = "Irten";
@@ -519,7 +519,7 @@
 "global_menu_view_developer_tools_desktop" = "Garatzaile-tresnak";
 "global_menu_help_desktop" = "Laguntza";
 "global_menu_help_report_desktop" = "Eman arazo baten berri";
-"global_menu_help_about_desktop" = "Delta Chat-i buruz";
+"global_menu_help_about_desktop" = "AAmail-i buruz";
 "no_chat_selected_suggestion_desktop" = "Hautatu txat bat edo sortu txat berri bat";
 "write_message_desktop" = "Idatzi mezu bat";
 "encryption_info_title_desktop" = "Zifratzeari buruzko informazioa";
@@ -546,5 +546,5 @@
 "a11y_background_preview_label" = "Atzealdearen aurrebista";
 // iOS permissions, copy from "deltachat-ios/Info.plist", which is used on missing translations in "deltachat-ios/LANG.lproj/InfoPlist.strings"
 // disabling "Reliable service" will hide a the maybe annoying permanent-notification with the drawback that new-message-notifications get potentially unreliable
-"perm_enable_bg_reminder_title" = "Sakatu hemen mezuak jasotzeko Delta Chat bigarren planoan dagoenean.";
-"perm_enable_bg_already_done" = "Dagoeneko baimendu diozu Delta Chat aplikazioari bigarren planoan mezuak jasotzea,\n\nOraindik ere mezuak heltzen ez badira, egiaztatu ere zure sistemaren ezarpenak.";
+"perm_enable_bg_reminder_title" = "Sakatu hemen mezuak jasotzeko AAmail bigarren planoan dagoenean.";
+"perm_enable_bg_already_done" = "Dagoeneko baimendu diozu AAmail aplikazioari bigarren planoan mezuak jasotzea,\n\nOraindik ere mezuak heltzen ez badira, egiaztatu ere zure sistemaren ezarpenak.";

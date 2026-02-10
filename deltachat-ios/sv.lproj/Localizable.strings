@@ -1,5 +1,5 @@
 // common strings without special context
-"app_name" = "Delta Chat";
+"app_name" = "AAmail";
 "ok" = "OK";
 "cancel" = "Avbryt";
 "clear_search" = "Rensa sök";
@@ -40,7 +40,7 @@
 "unarchive" = "Avarkivera";
 "mute" = "Tyst";
 "ephemeral_messages" = "Försvinnande meddelanden";
-"ephemeral_messages_hint" = "Dessa inställningar tillämpas för alla deltagare som använder Delta Chat. De kan dock kopiera, spara och vidarebefordra meddelanden eller använda andra e-postklienter.";
+"ephemeral_messages_hint" = "Dessa inställningar tillämpas för alla deltagare som använder AAmail. De kan dock kopiera, spara och vidarebefordra meddelanden eller använda andra e-postklienter.";
 "save" = "Spara";
 "chat" = "Chatt";
 "media" = "Media";
@@ -186,7 +186,7 @@
 "share_invite_link" = "Dela inbjudningslänk";
 "invite_friends" = "Bjud in vänner";
 // %1$s is replaced by the user's invitation link ("https://i.delta.chat/...")
-"invite_friends_text" = "Kontakta mig på Delta Chat:\n%1$@";
+"invite_friends_text" = "Kontakta mig på AAmail:\n%1$@";
 "menu_copy_selection_to_clipboard" = "Kopiera urval";
 "menu_copy_link_to_clipboard" = "Kopiera länk";
 "menu_copy_text_to_clipboard" = "Kopiera text";
@@ -236,7 +236,7 @@
 "title_share_location" = "Dela plats med alla gruppmedlemmar";
 "device_talk" = "Enhetsmeddelanden";
 "device_talk_subtitle" = "Lokalt genererade meddelanden";
-"device_talk_explain" = "Meddelanden i denna chatt är lokalt genererade av din Delta Chat-app. Dess skapare använder den för att informera om app-uppdateringar och problem vid användning.";
+"device_talk_explain" = "Meddelanden i denna chatt är lokalt genererade av din AAmail-app. Dess skapare använder den för att informera om app-uppdateringar och problem vid användning.";
 "device_talk_welcome_message2" = "Ta kontakt!\n\n🙌 Tryck på \"QR-kod\" på huvudskärmen på båda enheterna. Välj \"Skanna QR-kod\" på en enhet och rikta den mot den andra\n\n🌍 Om du inte är i samma rum kan du skanna via videosamtal eller dela en inbjudningslänk från \"Skanna QR-kod\"\n\nEfter det: Njut av din meddelandeupplevelse via det största decentraliserade nätverket som någonsin har funnits. E-post! Och i motsats till andra populära appar, utan central kontroll eller spårning eller att sälja ut dig, vänner, kollegor eller familj till stora organisationer.";
 "edit_contact" = "Redigera kontakt";
 // Verb "to pin", making something sticky, not a noun or abbreviation for "pin number".
@@ -286,7 +286,7 @@
 "chat_unable_to_record_audio" = "Det går inte att spela in ljud.";
 // The placeholder will be replaced by the name of the recipient in a one-to-one chat.
 "chat_new_one_to_one_hint" = "Skicka ett meddelande till %1$@.";
-"chat_new_group_hint" = "Komponera det första meddelandet, så att andra kan svara inom denna grupp.\n\n• Det är okej om inte alla medlemmar använder Delta Chat.\n\n• Det kan ta en stund innan det första meddelandet levereras.";
+"chat_new_group_hint" = "Komponera det första meddelandet, så att andra kan svara inom denna grupp.\n\n• Det är okej om inte alla medlemmar använder AAmail.\n\n• Det kan ta en stund innan det första meddelandet levereras.";
 "chat_record_slide_to_cancel" = "Svep för att avbryta";
 "chat_record_explain" = "Tryck och håll ner för att spela in ett röstmeddelande, släpp för att skicka.";
 "chat_no_chats_yet_title" = "Tom inkorg.\nTryck på \"+\" för att starta en ny chatt.";
@@ -377,9 +377,9 @@
 "multidevice_title" = "Lägg till en andra enhet";
 "multidevice_same_network_hint" = "Tillse att bägge enheterna är på samma WiFi eller nätverk";
 "multidevice_this_creates_a_qr_code" = "Detta skapar en QR-kod som den andra enheten kan skanna för att kopiera profilen.";
-"multidevice_install_dc_on_other_device" = "Installera Delta Chat på din andra enhet (https://get.delta.chat)";
+"multidevice_install_dc_on_other_device" = "Installera AAmail på din andra enhet (https://get.delta.chat)";
 // "I Already Have a Profile / Add as Second Device” should be the same text as defined by the keys onboarding_alternative_logins and multidevice_receiver_title
-"multidevice_tap_scan_on_other_device" = "Starta Delta Chat, tryck på \"Jag har redan en profil / Lägg till som andra enhet\" och skanna koden som visas här.";
+"multidevice_tap_scan_on_other_device" = "Starta AAmail, tryck på \"Jag har redan en profil / Lägg till som andra enhet\" och skanna koden som visas här.";
 // Shown inside a "QR code card" with very limited space; please formulate the text as short as possible therefore. The placeholder will be replaced by the profile name eg. "Scan to set up second device for Alice"
 "multidevice_qr_subtitle" = "Skanna för att ställa in en andra enhet för %1$@";
 "multidevice_receiver_title" = "Lägg till som andra enhet";
@@ -582,7 +582,7 @@
 "pref_edit_profile" = "Redigera profil";
 "disable_imap_idle" = "Avaktivera IMAP IDLE";
 "disable_imap_idle_explain" = "Använd inte IMAP IDLE-tillägget även om servern stöder det. Om du aktiverar det här alternativet kommer hämtningen av meddelanden att fördröjas, aktivera det endast för testning.";
-"send_stats_to_devs" = "Skicka statistik till Delta Chats utvecklare";
+"send_stats_to_devs" = "Skicka statistik till AAmails utvecklare";
 // Emoji picker and categories
 "emoji_search_results" = "Sökresultat";
 "emoji_not_found" = "Inga emoji hittades";
@@ -610,9 +610,9 @@
 // %1$d will be replaced by the number of messages, you can assume plural/lots here. %2$s will be replaced by a timespan option.
 "autodel_device_ask" = "Vill du ta bort %1$d meddelanden nu och alla kommande meddelanden \"%2$@\" i framtiden?\n\n• Detta inkluderar all mediafiler.\n\n• Meddelanden kommer att tas bort oavsett om de har lästs eller inte.\n\n• \"Sparade meddelanden\" undantas från lokal borttagning.";
 // %1$d will be replaced by the number of messages, you can assume plural/lots here. %2$s will be replaced by a timespan option.
-"autodel_server_ask" = "Vill du ta bort %1$d meddelanden nu och alla nyligen hämtade meddelanden \"%2$@\" i framtiden?\n\n⚠️ Detta inkluderar e-post, media och \"Sparade meddelanden\" i alla servermappar\n\n⚠️ Använd inte den här funktionen om du vill behålla data på servern\n\n⚠️ Använd inte den här funktionen om du använder andra e-postklienter än Delta Chat";
+"autodel_server_ask" = "Vill du ta bort %1$d meddelanden nu och alla nyligen hämtade meddelanden \"%2$@\" i framtiden?\n\n⚠️ Detta inkluderar e-post, media och \"Sparade meddelanden\" i alla servermappar\n\n⚠️ Använd inte den här funktionen om du vill behålla data på servern\n\n⚠️ Använd inte den här funktionen om du använder andra e-postklienter än AAmail";
 // shown below enabled autodel_server-option, should be a summary of autodel_server_ask and remind about the impact
-"autodel_server_enabled_hint" = "Detta inkluderar e-post, media och \"Sparade meddelanden\" i alla servermappar. Använd inte den här funktionen om du vill spara data på servern eller om du använder andra e-postklienter än Delta Chat.";
+"autodel_server_enabled_hint" = "Detta inkluderar e-post, media och \"Sparade meddelanden\" i alla servermappar. Använd inte den här funktionen om du vill spara data på servern eller om du använder andra e-postklienter än AAmail.";
 "autodel_server_warn_multi_device_title" = "Slå på direktborttagning";
 "autodel_server_warn_multi_device" = "Om du aktiverar direktborttagning kan du inte använda flera enheter på den här profilen.";
 "autodel_confirm" = "Jag förstår! Ta bort alla dessa meddelanden.";
@@ -700,7 +700,7 @@
 "devicemsg_storage_exceeding" = "⚠️ Din leverantörs lagringsutrymme är snart slut: %1$@%% är redan använt.\n\nDu kanske inte kan ta emot meddelanden om lagringsutrymmet är fullt.\n\n👉 Kontrollera om du kan radera gammal data i leverantörens webbgränssnitt och överväg att aktivera \"Inställningar / Chattar och media / Ta bort gamla meddelanden\". Du kan kontrollera din aktuella lagringsanvändning när som helst under \"Inställningar / Anslutning\".";
 // %1%s will be replaced by date and time in some human-readable format
 "devicemsg_bad_time" = "⚠️ Datum eller tid på din enhet verkar vara felaktigt (%1$@).\n\nJustera din klocka ⏰🔧 för att säkerställa att dina meddelanden tas emot korrekt.";
-"devicemsg_update_reminder" = "⚠️ Din Delta Chat-version kan vara föråldrad.\n\nDetta kan orsaka problem eftersom dina chattpartners använder nyare versioner - och du saknar de senaste funktionerna 😳\nSök efter uppdateringar på https://get.delta.chat eller i din appbutik.";
+"devicemsg_update_reminder" = "⚠️ Din AAmail-version kan vara föråldrad.\n\nDetta kan orsaka problem eftersom dina chattpartners använder nyare versioner - och du saknar de senaste funktionerna 😳\nSök efter uppdateringar på https://get.delta.chat eller i din appbutik.";
 // Some options as "Add Second Device" or "Backup" may require the system PIN/Fingerprint/Gesture/Etc. to be entered in a system dialog. This hint is added to the system dialog, below a title as "Add Second Device" or "Backup".
 "enter_system_secret_to_continue" = "Lås upp för att fortsätta";
 // qr code stuff
@@ -779,7 +779,7 @@
 "perm_explain_access_to_mic_denied" = "Gå till programinställningarna och aktivera \"Mikrofon\" under \"Behörighet\", för att skicka röstmeddelanden.";
 "perm_explain_access_to_storage_denied" = "Gå till programinställningarna och aktivera \"Lagring\" under \"Behörighet\", för att ta emot eller skicka filer.";
 "perm_explain_access_to_location_denied" = "Gå till programinställningarna och aktivera \"Plats\" under \"Behörighet\", för att bifoga en plats.";
-"perm_explain_access_to_notifications_denied" = "För att få meddelanden, gå till \"Systeminställningar / Appar / Delta Chat\" och aktivera \"Meddelanden\".";
+"perm_explain_access_to_notifications_denied" = "För att få meddelanden, gå till \"Systeminställningar / Appar / AAmail\" och aktivera \"Meddelanden\".";
 // ImageEditorHud
 "ImageEditorHud_draw_anywhere_to_blur" = "Rita var som helst för att smeta ut";
 "ImageEditorHud_add_text" = "Lägg till text";
@@ -790,9 +790,9 @@
 "ImageEditorHud_flip" = "Vänd";
 "ImageEditorHud_rotate" = "Rotera";
 // strings introduced on desktop. we want to share strings between the os, in general, please do not add generic strings here
-"about_offical_app_desktop" = "Detta är den officiella Delta Chat skrivbordsappen.";
+"about_offical_app_desktop" = "Detta är den officiella AAmail skrivbordsappen.";
 "about_licensed_under_desktop" = "Denna programvara är licensierad enligt GNU GPL version 3 och källkoden finns tillgänglig på GitHub.";
-"welcome_desktop" = "Välkommen till Delta Chat";
+"welcome_desktop" = "Välkommen till AAmail";
 "global_menu_preferences_language_desktop" = "Språk";
 "global_menu_file_desktop" = "Arkiv";
 "global_menu_file_quit_desktop" = "Avsluta";
@@ -808,8 +808,8 @@
 "global_menu_view_developer_tools_desktop" = "Utvecklingsverktyg";
 "global_menu_help_desktop" = "Hjälp";
 "global_menu_help_report_desktop" = "Rapportera ett ärende";
-"global_menu_help_about_desktop" = "Om Delta Chat";
-"global_menu_file_open_desktop" = "Öppna Delta Chat";
+"global_menu_help_about_desktop" = "Om AAmail";
+"global_menu_file_open_desktop" = "Öppna AAmail";
 "global_menu_minimize_to_tray" = "Minimera";
 "no_chat_selected_suggestion_desktop" = "Välj en chatt eller skapa en ny";
 "write_message_desktop" = "Skriv ett meddelande";
@@ -826,7 +826,7 @@
 "message_detail_received_desktop" = "mottaget";
 "menu.view.developer.open.log.folder" = "Öppna loggmappen";
 "menu.view.developer.open.current.log.file" = "Öppna aktuell loggfil";
-"explain_desktop_minimized_disabled_tray_pref" = "Systemfältsikonen kan inte inaktiveras eftersom Delta Chat startades med alternativet --minimized.";
+"explain_desktop_minimized_disabled_tray_pref" = "Systemfältsikonen kan inte inaktiveras eftersom AAmail startades med alternativet --minimized.";
 "no_spellcheck_suggestions_found" = "Inga stavningsförslag hittades.";
 "show_window" = "Visa fönster";
 // title of the "keybindings" dialog (for the keybindings names as such, where possible the normal command strings are used)
@@ -863,7 +863,7 @@
 "import_device_contacts" = "Importera enhetens kontakter";
 "import_device_contacts_hint" = "Om du vill chatta med kontakter från din enhet öppnar du Inställningar och aktiverar \"Kontakter\".";
 // iOS notification settings
-"disabled_in_dc" = "Inaktiverad i Delta Chat";
+"disabled_in_dc" = "Inaktiverad i AAmail";
 "disabled_in_system_settings" = "Inaktiverad i systeminställningarna";
 "bg_app_refresh_disabled" = "\"Appuppdatering i bakgrunden\" inaktiverad i systeminställningarna";
 "notifications_avg_minutes" = "I genomsnitt var %1$d minut";
@@ -876,7 +876,7 @@
 "pref_background_notifications_explain" = "Kräver ignorerade batterioptimeringar, använd om aviseringar inte kommer i tid";
 "pref_reliable_service" = "Tvinga fram bakgrundsanslutning";
 "pref_reliable_service_explain" = "Orsakar en permanent avisering";
-"pref_background_notifications_rationale" = "För att behålla anslutningen till din e-postserver och fortsätta ta emot meddelanden i bakgrunden, behöver du skippa batterioptimeringen i nästa steg.\n\nDelta Chat använder små resurser och ser till att inte dra ur ditt batteri.";
+"pref_background_notifications_rationale" = "För att behålla anslutningen till din e-postserver och fortsätta ta emot meddelanden i bakgrunden, behöver du skippa batterioptimeringen i nästa steg.\n\nAAmail använder små resurser och ser till att inte dra ur ditt batteri.";
 // disabling "Reliable service" will hide a the maybe annoying permanent-notification with the drawback that new-message-notifications get potentially unreliable
-"perm_enable_bg_reminder_title" = "Tryck här för att ta emot meddelanden medan Delta Chat är i bakgrunden.";
-"perm_enable_bg_already_done" = "Du har redan gett Delta Chatt tillstånd att ta emot meddelanden i bakgrunden.\n\nKontrollera dina systeminställningar också, om det fortfarande inte kommer några meddelanden i bakgrunden.";
+"perm_enable_bg_reminder_title" = "Tryck här för att ta emot meddelanden medan AAmail är i bakgrunden.";
+"perm_enable_bg_already_done" = "Du har redan gett AAmailt tillstånd att ta emot meddelanden i bakgrunden.\n\nKontrollera dina systeminställningar också, om det fortfarande inte kommer några meddelanden i bakgrunden.";
