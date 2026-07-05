@@ -1057,3 +1057,19 @@
 "backup_successful_explain_ios" = "You can find the backup in the \"AAmail\" folder using the \"Files\" app.\n\nMove the backup out of this folder to keep it when deleting AAmail.";
 "location_denied" = "Location access denied";
 "location_denied_explain_ios" = "In the system settings, enable \"Privacy/Location Services\" and set \"AAmail/Location\" to \"Always\" and \"Precise\".";
+"report" = "Report";
+
+"report_message_title" = "Report Message";
+"report_message_header" = "WHAT IS WRONG WITH THIS MESSAGE?";
+"report_reason_dont_like" = "I don't like it";
+"report_reason_child_abuse" = "Child abuse";
+"report_reason_violence" = "Violence";
+"report_reason_illegal_goods" = "Illegal goods and services";
+"report_reason_illegal_adult_content" = "Illegal adult content";
+"report_reason_personal_data" = "Personal data";
+"report_reason_scam" = "Scam or fraud";
+"report_reason_copyright" = "Copyright";
+"report_reason_spam" = "Spam";
+"report_reason_other" = "Other";
+"report_reason_not_illegal" = "It's not illegal, but must be taken down";
+"report_sucess_tips" = "AAmail moderators will review your report.Thank you!";

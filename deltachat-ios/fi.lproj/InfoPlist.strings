@@ -1,6 +1,0 @@
-NSCameraUsageDescription = "AAmail käyttää kameraa kuvien ja videoiden kuvaamiseen ja lähettämiseen sekä QR-koodien skannaamiseen.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "AAmail tarvitsee oikeuden sijainnin tarkasteluun jakaakseen sijaintisi sallimallasi aikavälillä.";
-NSLocationWhenInUseUsageDescription = "AAmail tarvitsee oikeuden sijainnin tarkasteluun jakaakseen sijaintisi sallimallasi aikavälillä.";
-NSMicrophoneUsageDescription = "AAmail käyttää mikrofonia ääniviestien ja äänellisten videoiden tallentamiseen ja lähettämiseen.";
-NSPhotoLibraryUsageDescription = "AAmail antaa sinun valita, mitkä kuvat kirjastostasi haluat lähettää.";
-NSPhotoLibraryAddUsageDescription = "AAmail haluaa tallentaa kuvia kirjastoosi.";

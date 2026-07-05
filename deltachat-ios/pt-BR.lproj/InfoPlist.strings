@@ -1,6 +1,0 @@
-NSCameraUsageDescription = "AAmail usa sua câmera para tirar e enviar fotos e vídeos e para escanear códigos QR.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "O AAmail precisa da permissão para compartilhar sua localização durante o período de tempo em que você ativou o compartilhamento de localização.";
-NSLocationWhenInUseUsageDescription = "O AAmail precisa de permissão para compartilhar sua localização durante o período em que o compartilhamento de localização estiver ativado.";
-NSMicrophoneUsageDescription = "O AAmail usa seu microfone para gravar e enviar mensagens de voz e vídeos com som.";
-NSPhotoLibraryUsageDescription = "O AAmail permite que você escolha fotos de sua biblioteca para enviar.";
-NSPhotoLibraryAddUsageDescription = "O AAmail deseja salvar imagens em sua biblioteca de fotos.";

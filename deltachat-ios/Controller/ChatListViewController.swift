@@ -150,6 +150,11 @@ class ChatListViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         setupSubviews()
+        
+        if dcAccounts.getSelected().isConfigured() {
+            AAScreenshotManager.shared.startListening()
+        } else {
+        }
 
         // update messages - for new messages, do not reuse or modify strings but create new ones.
         // it is not needed to keep all past update messages, however, when deleted, also the strings should be deleted.

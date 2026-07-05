@@ -2,6 +2,6 @@ NSCameraUsageDescription = "AAmail uses your camera to take and send photos and 
 NSLocationAlwaysAndWhenInUseUsageDescription = "AAmail needs permission to share your location for the timespan you have enabled location sharing.";
 NSLocationWhenInUseUsageDescription = "AAmail needs permission to share your location for the timespan you have enabled location sharing.";
 NSMicrophoneUsageDescription = "AAmail uses your microphone to record and send voice messages and videos with sound.";
-NSPhotoLibraryUsageDescription = "AAmail will let you choose which photos from your library to send.";
+NSPhotoLibraryUsageDescription = "Allows you to send photos in chats and save received images to your library.";
 NSPhotoLibraryAddUsageDescription = "AAmail wants to save images to your photo library.";
 NSFaceIDUsageDescription = "AAmail can use Face ID to protect your local profile, backup creation and second device setup.";

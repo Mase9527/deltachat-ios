@@ -975,3 +975,19 @@
 // disabling "Reliable service" will hide a the maybe annoying permanent-notification with the drawback that new-message-notifications get potentially unreliable
 "perm_enable_bg_reminder_title" = "點擊此處可在 AAmail 處於後台時接收訊息。";
 "perm_enable_bg_already_done" = "您已經允許 AAmail 在後台接收訊息。\n\n如果消息仍未在後台到達，請同時檢查您的系統設定。";
+"report" = "举报";
+
+"report_message_title" = "檢舉訊息";
+"report_message_header" = "這條訊息有什麼問題？";
+"report_reason_dont_like" = "我不喜歡";
+"report_reason_child_abuse" = "虐待兒童";
+"report_reason_violence" = "暴力";
+"report_reason_illegal_goods" = "非法商品和服務";
+"report_reason_illegal_adult_content" = "非法成人內容";
+"report_reason_personal_data" = "個人資料";
+"report_reason_scam" = "詐騙或欺詐";
+"report_reason_copyright" = "版權問題";
+"report_reason_spam" = "垃圾訊息";
+"report_reason_other" = "其他";
+"report_reason_not_illegal" = "雖然不違法，但必須刪除";
+"report_sucess_tips" = "AAmail的管理员将会审核您的举报。非常感谢。";

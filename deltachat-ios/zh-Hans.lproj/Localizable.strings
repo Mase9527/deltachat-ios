@@ -1050,3 +1050,19 @@
 "perm_enable_bg_already_done" = "您已允许 AAmail 在后台接收消息。\n\n若 AAmail 在后台时消息仍未到达，请检查系统设置。";
 // device messages for updates
 "update_2_0" = "新版变化?\n\n💯 端到端加密现在可靠且永久。挂锁图标 🔒 没有了!\n\n✉️ 没有端到端加密的经典电子邮件用字母符号标记l\n\n😻 所有联系人的新的增强的个人资料屏\n\n🔲 新增快速访问聊天中所用应用的按钮\n\n❤️ 请捐赠帮助我们保持独立并继续带来改进: %1$@";
+"report" = "举报";
+
+"report_message_title" = "举报消息";
+"report_message_header" = "这条消息有什么问题？";
+"report_reason_dont_like" = "我不喜欢";
+"report_reason_child_abuse" = "虐待儿童";
+"report_reason_violence" = "暴力";
+"report_reason_illegal_goods" = "非法商品和服务";
+"report_reason_illegal_adult_content" = "非法成人内容";
+"report_reason_personal_data" = "个人数据";
+"report_reason_scam" = "诈骗或欺诈";
+"report_reason_copyright" = "版权问题";
+"report_reason_spam" = "垃圾信息";
+"report_reason_other" = "其他";
+"report_reason_not_illegal" = "虽然不违法，但必须删除";
+"report_sucess_tips" = "AAmail的管理员将会审核您的举报。非常感谢。";

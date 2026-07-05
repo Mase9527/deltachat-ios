@@ -1,7 +1,0 @@
-NSCameraUsageDescription = "AAmail kasutab sinu nutiseadme kaamerat pildistamiseks, videote salvestamiseks ja QR-koodide skaneerimiseks.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "AAmail vajab õigust sinu asukoha jagamiseks nii kaua, kui sul see teenus on sisse lülitatud.";
-NSLocationWhenInUseUsageDescription = "AAmail vajab õigust sinu asukoha jagamiseks nii kaua, kui sul see teenus on sisse lülitatud.";
-NSMicrophoneUsageDescription = "AAmail kasutab sinu nutiseadme mikrofoni häälsõnumite ja videote heliriba salvestamiseks.";
-NSPhotoLibraryUsageDescription = "AAmail võimaldab sul valida fotosid teistele edastamiseks.";
-NSPhotoLibraryAddUsageDescription = "AAmail soovib pilte salvestada sinu fotode kogusse.";
-NSFaceIDUsageDescription = "AAmail võib kasutada Face ID teenust sinu kohaliku profiili kaitsmiseks, varukoopia tegemiseks ja täiendavate seadmete seadistamiseks.";

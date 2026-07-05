@@ -1,7 +1,0 @@
-NSCameraUsageDescription = "AAmail verwendet die Kamera, um Fotos aufzunehmen und zu versenden und um QR-Codes zu scannen.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "AAmail benötigt die Standort-Berechtigung, um deinen Standort für den Zeitraum, in dem du die Standortfreigabe aktiviert hast, zu teilen.";
-NSLocationWhenInUseUsageDescription = "AAmail benötigt die Standort-Berechtigung, um deinen Standort für den Zeitraum, in dem du die Standortfreigabe aktiviert hast, zu teilen.";
-NSMicrophoneUsageDescription = "AAmail verwendet das Mikrofon, um Sprachnachrichten und Videos mit Sound aufzunehmen und zu versenden.";
-NSPhotoLibraryUsageDescription = "AAmail verwendet die Fotos, um dir die Möglichkeit zu geben, diese auszuwählen und zu versenden.";
-NSPhotoLibraryAddUsageDescription = "AAmail möchte Bilder in deiner Fotobibliothek speichern.";
-NSFaceIDUsageDescription = "AAmail kann Face-ID verwenden, um dein lokales Profil, Backups und die Einrichtung eines zweiten Geräts zu schützen.";

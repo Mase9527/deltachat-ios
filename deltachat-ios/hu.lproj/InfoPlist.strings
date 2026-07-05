@@ -1,7 +1,0 @@
-NSCameraUsageDescription = "A AAmail az eszköze kameráját használja fényképek és videók készítésére és küldésére, valamint QR-kódok beolvasására.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "A AAmailnek engedélyre van szüksége ahhoz, hogy megoszthassa az ön tartózkodási helyét arra az időtartamra, amelyre engedélyezte a helyadatok megosztását.";
-NSLocationWhenInUseUsageDescription = "A AAmailnek engedélyre van szüksége ahhoz, hogy megoszthassa az ön tartózkodási helyét arra az időtartamra, amelyre engedélyezte a helyadatok megosztását.";
-NSMicrophoneUsageDescription = "A AAmail az eszköze mikrofonját használja a hangüzenetek és a hangos videók rögzítésére, valamint küldésére.";
-NSPhotoLibraryUsageDescription = "A AAmail segítségével kiválaszthatja, hogy mely fényképeket szeretné elküldeni a könyvtárából.";
-NSPhotoLibraryAddUsageDescription = "A AAmail el akarja menteni a képeket az eszköze fotótárába.";
-NSFaceIDUsageDescription = "A AAmail használhatja az arcfelimerést az Ön helyi profiljának biztonsági mentésének létrehozásához és a második eszköz biztonságos beállításához.";

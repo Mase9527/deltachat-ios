@@ -25,6 +25,7 @@ enum  iFBaseAPI {
     
     case deleteAccountRequest(main_email:String)
     case deleteAccountVerify(token:String,code:String)
+    case reportMessage(message_id: String, text: String, reason: String)
 
 }
 
@@ -59,6 +60,8 @@ extension iFBaseAPI: TargetType {
             return "/delete-account-request"
         case .deleteAccountVerify:
             return "/delete-account-verify"
+        case .reportMessage:
+            return "/report-message"
         default: return ""
         }
     }
@@ -106,6 +109,10 @@ extension iFBaseAPI: TargetType {
         case let .deleteAccountVerify(token, code):
             params["token"] = token
             params["code"] = code
+        case let .reportMessage(message_id, text, reason):
+            params["message_id"] = message_id
+            params["text"] = text
+            params["reason"] = reason
 
         default:
             return .requestPlain

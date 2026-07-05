@@ -1,7 +1,0 @@
-NSCameraUsageDescription = "Geef AAmail toegang tot je camera om foto\'s en video\'s te maken en QR-codes te scannen.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "AAmail heeft het locatietoegangsrecht nodig om je locatie te tonen en delen voor de door jou aangegeven duur.";
-NSLocationWhenInUseUsageDescription = "AAmail heeft het locatietoegangsrecht nodig om je locatie te tonen en delen voor de door jou aangegeven duur.";
-NSMicrophoneUsageDescription = "Geef AAmail toegang tot je microfoon om audio op te nemen voor spraakberichten en video\'s.";
-NSPhotoLibraryUsageDescription = "Geef AAmail toegang tot je foto\'s om afbeeldingen te versturen.";
-NSPhotoLibraryAddUsageDescription = "AAmail wil afbeeldingen opslaan in je fotogalerij.";
-NSFaceIDUsageDescription = "AAmail kan gebruikmaken van Face ID om je account te beveiligen, reservekopieën te maken en secundaire apparaten in te stellen.";

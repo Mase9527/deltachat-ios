@@ -1,7 +1,0 @@
-NSCameraUsageDescription = "AAmail использует вашу камеру для фото- и видеосъёмки, и сканирования QR-кодов.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "AAmail требует разрешения на передачу вашего местоположения в течение того времени, на которое вы включили обмен местоположением.";
-NSLocationWhenInUseUsageDescription = "AAmail требует разрешения на передачу вашего местоположения в течение того времени, на которое вы включили обмен местоположением.";
-NSMicrophoneUsageDescription = "AAmail использует микрофон для записи и отправки голосовых сообщений, а также видео со звуком.";
-NSPhotoLibraryUsageDescription = "AAmail предоставит вам возможность выбирать какие фотографии и из какой галереи отправлять.";
-NSPhotoLibraryAddUsageDescription = "AAmail хочет сохранить изображения в вашей галерее.";
-NSFaceIDUsageDescription = "AAmail поддерживает использование Face ID для защиты локального профиля, создания резервных копий и настройки второго устройства.";

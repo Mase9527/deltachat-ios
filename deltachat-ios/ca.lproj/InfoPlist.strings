@@ -1,7 +1,0 @@
-NSCameraUsageDescription = "AAmail usa la càmera per a fer i enviar fotos i vídeos i per a escanejar codis QR.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "AAmail necessita permisos per a compartir la vostra ubicació durant el temps que heu habilitat la compartició de la ubicació.";
-NSLocationWhenInUseUsageDescription = "AAmail necessita permisos per a compartir la vostra ubicació durant el temps que heu habilitat la compartició de la ubicació.";
-NSMicrophoneUsageDescription = "AAmail usa el vostre micròfon per a enregistrar i enviar missatges de veu i vídeos amb so.";
-NSPhotoLibraryUsageDescription = "AAmail us permetrà triar quines fotos de la biblioteca s\'han d\'enviar.";
-NSPhotoLibraryAddUsageDescription = "AAmail vol desar imatges a la biblioteca de fotografies.";
-NSFaceIDUsageDescription = "AAmail pot usar Face ID per a protegir el vostre perfil local, la creació de còpies de seguretat i la configuració d\'un segon dispositiu.";

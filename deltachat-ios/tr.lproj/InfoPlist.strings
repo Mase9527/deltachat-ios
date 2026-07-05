@@ -1,7 +1,0 @@
-NSCameraUsageDescription = "AAmail, fotoğraflar ve videolar çekmek ve göndermek için ve QR kodlarını taramak için kameranızı kullanır.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Konum paylaşımını etkinleştirdiğiniz zaman aralığında konumunuzu paylaşmak için AAmail\'e izin gerekir.";
-NSLocationWhenInUseUsageDescription = "Konum paylaşımını etkinleştirdiğiniz zaman aralığında konumunuzu paylaşmak için AAmail\'e izin gerekir.";
-NSMicrophoneUsageDescription = "AAmail, sesli iletiler ve sesli videolar kaydetmek ve göndermek için mikrofonunuzu kullanır.";
-NSPhotoLibraryUsageDescription = "AAmail, kitaplığınızdan hangi fotoğrafların gönderileceğini seçmenize izin verir.";
-NSPhotoLibraryAddUsageDescription = "AAmail, görselleri fotoğraf kitaplığınıza kaydetmek istiyor.";
-NSFaceIDUsageDescription = "AAmail; yerel profilinizi korumak, yedek oluşturmak ve ikinci aygıt ayarlaması için Face ID\'yi kullanabilir.";

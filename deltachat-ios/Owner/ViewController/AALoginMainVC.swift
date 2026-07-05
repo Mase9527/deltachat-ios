@@ -159,7 +159,7 @@ class AALoginMainVC: UIViewController {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
+        scrollView.contentInsetAdjustmentBehavior = .never
         // 模拟原图顶部的黄色弧形背景
 //        topBackground.backgroundColor = .systemYellow
 //        topBackground.layer.cornerRadius = 50
@@ -182,9 +182,17 @@ class AALoginMainVC: UIViewController {
             $0.width.equalTo(scrollView.frameLayoutGuide)
             
         }
-        
+        let    isIpad =  UIDevice.current.userInterfaceIdiom == .pad
+
         topBackground.snp.makeConstraints { make in
-            let size = UIScreen.main.bounds.width
+            var size = UIScreen.main.bounds.width
+            
+            if isIpad{
+                size = size * 0.8
+            }else{
+                size = size * 1.0
+
+            }
             make.top.left.right.equalToSuperview()
             make.height.equalTo(size) // 增加高度，确保有足够的空间
         }

@@ -1826,6 +1826,18 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     private func deleteSingle(_ msgId: Int) {
         askToDeleteMessages(ids: [msgId])
     }
+    
+    private func reportInfoToServer(_ msgId: Int) {
+        let reportVC =                                            ReportMessageViewController(msgId: msgId, dcContext: dcContext)
+        let nav = UINavigationController(rootViewController: reportVC)
+        if #available(iOS 15.0, *) {
+            if let sheet = nav.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.prefersGrabberVisible = true
+            }
+        }
+        present(nav, animated: true, completion: nil)
+    }
 
     private func copyTextToClipboard(_ msgId: Int) {
         copyTextToClipboard(ids: [msgId])
@@ -2098,6 +2110,10 @@ extension ChatViewController {
 
                 children.append(
                     UIAction.menuAction(localizationKey: "delete", attributes: [.destructive], systemImageName: "trash", with: messageId, action: deleteSingle)
+                )
+                
+                children.append(
+                    UIAction.menuAction(localizationKey: "report", attributes: [.destructive], systemImageName: "info.circle", with: messageId, action: reportInfoToServer)
                 )
 
                 if dcChat.canSend && message.isFromCurrentSender {
